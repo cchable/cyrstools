@@ -1,0 +1,260 @@
+<XMLDiagram>
+  <TDBADiagramController Locked="0">
+    <Elements>
+      <TDBADiagramObject id="1" propertiesclass="TDiagramMetaTableProperties" objectname="T_ANNEESSCOLAIRES">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="10" top="198" width="200" height="69"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="2" propertiesclass="TDiagramMetaTableProperties" objectname="T_CHAUFEURS">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="234" top="191" width="200" height="83"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="3" propertiesclass="TDiagramMetaTableProperties" objectname="T_DATESPLANNINGS">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="495" top="17" width="200" height="97"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="4" propertiesclass="TDiagramMetaTableProperties" objectname="T_EPHEMERIDES">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="10" top="371" width="200" height="111"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="5" propertiesclass="TDiagramForeignKeyProperties" objectname="T_EPHEMERIDES.INTEG_71">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="80" top="80" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="110" y="430"/>
+                <Point x="110" y="230"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="6" propertiesclass="TDiagramMetaTableProperties" objectname="T_ETAPES">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1167" top="17" width="200" height="97"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="7" propertiesclass="TDiagramMetaTableProperties" objectname="T_GROUPES">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="458" top="191" width="200" height="83"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="8" propertiesclass="TDiagramMetaTableProperties" objectname="T_HEURESPLANNINGS">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="719" top="31" width="200" height="69"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="9" propertiesclass="TDiagramMetaTableProperties" objectname="T_PLANNINGS">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="733" top="186" width="200" height="94"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="10" propertiesclass="TDiagramForeignKeyProperties" objectname="T_PLANNINGS.INTEG_66">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="160" top="160" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="830" y="230"/>
+                <Point x="820" y="70"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="11" propertiesclass="TDiagramForeignKeyProperties" objectname="T_PLANNINGS.INTEG_68">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="176" top="176" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="830" y="230"/>
+                <Point x="600" y="70"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="12" propertiesclass="TDiagramMetaTableProperties" objectname="T_TRAJETS">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1167" top="170" width="200" height="125"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="13" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRAJETS.INTEG_64">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="208" top="208" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1270" y="230"/>
+                <Point x="1270" y="70"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="14" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRAJETS.INTEG_65">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="224" top="224" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1267" y="232"/>
+                <Point x="1267" y="67"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="15" propertiesclass="TDiagramMetaTableProperties" objectname="T_TRANSPORTS">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="526" top="343" width="200" height="167"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="16" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRANSPORTS.INTEG_63">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="256" top="256" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="630" y="430"/>
+                <Point x="330" y="230"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="17" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRANSPORTS.INTEG_69">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="272" top="272" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="630" y="430"/>
+                <Point x="560" y="230"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="18" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRANSPORTS.INTEG_70">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="288" top="288" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="630" y="430"/>
+                <Point x="1270" y="230"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="19" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRANSPORTS.INTEG_72">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="304" top="304" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="630" y="430"/>
+                <Point x="110" y="230"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="20" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRANSPORTS.INTEG_73">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="320" top="320" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="630" y="430"/>
+                <Point x="830" y="230"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="21" propertiesclass="TDiagramMetaTableProperties" objectname="T_TYPESPLANNINGS">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="943" top="31" width="200" height="69"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="22" propertiesclass="TDiagramForeignKeyProperties" objectname="T_PLANNINGS.INTEG_67">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="352" top="352" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="830" y="230"/>
+                <Point x="1040" y="70"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="23" propertiesclass="TDiagramMetaTableProperties" objectname="T_VEHICULES">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="246" top="10" width="200" height="111"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="24" propertiesclass="TDiagramForeignKeyProperties" objectname="T_CHAUFEURS.INTEG_61">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="384" top="384" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="330" y="230"/>
+                <Point x="350" y="70"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="25" propertiesclass="TDiagramForeignKeyProperties" objectname="T_TRANSPORTS.INTEG_62">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="400" top="400" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="630" y="430"/>
+                <Point x="350" y="70"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+    </Elements>
+    <Surface zoom="55,5479452054795" scrollx="0" scrolly="0"/>
+  </TDBADiagramController>
+</XMLDiagram>

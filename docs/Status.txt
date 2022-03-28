@@ -1,0 +1,132 @@
+__________________________________________________________________________________________________________________
+Fait
+  20210805 : modificaiton - update layout pour la version 5 du bootstrap
+
+  20210807 : Element - année scolaire
+              list    : ok
+                ajouter  tri par année
+                  => 20210806 : paginator avec tri
+                20210806 : flashmessenger
+              add     : ok 
+                20210806 : flashmessenger
+              edit    : Ok
+              delete  : ok 
+
+  20210816 : Element - ephemeride
+              list    : Ok
+              add     : Ok
+              edit    : Ok
+              delete  : Ok
+
+  20210816 : Fonction - Mise en place d'un compteur du nombre d'enregistement 
+              zone liste : Ok
+             Function - Mise en place d'un Select pour le nombre de row par page dans le paginator
+              Pas antièrement finalisé
+
+  20210820 : Element - bus
+              list    : Ok
+              add     : Ok
+              edit    : Ok
+              delete  : Ok
+
+  20210820 : Changement - table bus en vehicules
+               ph 1 : nom de la table dans la DB : Ok
+               ph 2 : fichiers PHP               : Ok
+
+  20210820 : Modificaiton - ajout dans la table transport de la Foreign Key ("IDX_VEHICULE")
+
+  20210821 : Ajout - champs Printed dans la table etapes pouir indiquer si l'adresse doit apparaitre dans le planning
+                     (dans le cas d'un transport exceptionnel, l'adresse doit apparaitre en bas du planning)
+             Element - Etape
+              list    : Ok
+              add     : Ok
+              edit    : Ok
+              delete  : Ok
+
+  20210822 : Element - Trajet
+              list    : Ok
+              add     : Ok
+              edit    : Ok
+              delete  : Ok
+
+  20210822 : Element - Groupe
+              list    : OK
+              add     : OK
+              edit    : OK
+              delete  : OK
+
+  20210823 : Fonction - Gestion des float . -> , dans l'index, add et edit phtml
+
+  20210825 : Fonction - zone de recherche dans index.phtml
+                        => zone et bouton de recherche
+                        => bouton pour réinitialiser la recherche 
+                        => mofification du paginator pour gerer le paramètre de recherche
+
+  20210826 : Mofification - Création de la DB avec DEFAULT CHARACTER SET UTF8 COLLATION UNICODE_CI_AI 
+                            pour des "Performing Case Insensitive Searches"
+
+  20210826 : Element - TypePlanning
+              list    : OK
+              add     : OK
+              edit    : OK
+              delete  : OK
+
+  20210827 : Element - DatePlanning
+              list    : OK
+              add     : OK
+              edit    : OK
+              delete  : OK
+
+  20210827 : Element - HeurePlanning
+              list    : OK
+              add     : OK
+              edit    : OK
+              delete  : OK
+
+  20210828 : Element - Planning
+              list    : OK
+              add     : OK
+              edit    : OK
+              delete  : OK
+
+  20210829 : Element - chauffeur
+              list    : OK
+              add     : OK
+              edit    : OK
+              delete  : OK
+  
+  20210916 : Fonction - Mise en place d'un Select pour le nombre de row par page dans le paginator
+              Element - chauffeur     : OK
+              Element - anneescolaire : OK (+recherche)
+              Element - ephemeride    : OK
+              Element - vehicule      : OK (20210923)
+              Element - trajet        : OK (20210924)
+              Element - etape         : OK (20210924)
+              Element - groupe        : OK (20210924)
+              Element - heurepalnning : OK (20210927)
+              Element - datepalnning  : OK (20210927)
+              Element - typepalnning  : OK (20210927)
+              Element - palnning      : OK (20210927)
+ 
+__________________________________________________________________________________________________________________
+En cours
+  Element - Transport
+    list    : 
+    add     : 
+    edit    : 
+    delete  : 
+__________________________________________________________________________________________________________________
+A faire
+  
+__________________________________________________________________________________________________________________  
+A créer
+  Element - Indisponibilite (pour les chauffeurs et les véhicules)
+  Element - Verification (pour les plannings)
+__________________________________________________________________________________________________________________
+A modifier
+  Function - Vérification existance planning
+             Actuellement, double créé, retour formulaire add sans message. Si sauver deuxième fois, message
+  Element - Planning/delete : faire un planningFullTable->findOneById($id) pour récupérer des informations pour les messages
+  Element - Planning/edit-add-form : changer liste de choix en case à cocher/bouton pour encodage plus rapide type et heure
+
+  

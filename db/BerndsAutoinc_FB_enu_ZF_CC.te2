@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<EXPORT>
+<PACKAGE>
+<GUID>{7D07D910-9C68-49A8-8FC6-38C758B267A1}</GUID>
+<ISPACKAGE>1</ISPACKAGE>
+<NAME>BerndsAutoinc_FB</NAME>
+<COMPANY>ds-Datasysteme</COMPANY>
+<AUTHOR>Bernd Harmsen</AUTHOR>
+<VERSION>1.0.4</VERSION>
+</PACKAGE>
+<DESCRIPTION>
+<![CDATA[Generate "Autoinc" functionality for Firebird Databases.
+You can chose on a "per Attribute" basis.
+There is a function to set all PK-Attributes that were no FK to "generate"
+
+- changed by Radim Tkacik
+- changed by Cyril Chable for FB 3
+
+(for DB templates for Firebird - version 1.2)]]>
+</DESCRIPTION>
+<USERTEMPLATES>
+<SERVERS>
+<SERVER>
+<DATABASEID>330</DATABASEID>
+<TEMPLATES>
+<TEMPLATE>
+<NAME>CreateDatabase</NAME>
+<ID>1</ID>
+<GUID>{BB566956-FB60-454B-9491-FAA5F46D14D2}</GUID>
+<CAPTION></CAPTION>
+<PACKAGEGUID>{7D07D910-9C68-49A8-8FC6-38C758B267A1}</PACKAGEGUID>
+<ENABLED>1</ENABLED>
+<LEVEL>3</LEVEL>
+<IDPARENT>0</IDPARENT>
+<VALUE><![CDATA[/*
+Created		%createddate%
+Modified	%modifieddate%
+Project		%projectname%
+Model		%modelname%
+Company		%company%
+Author		%authorname%
+Version		%version%
+Database	%databasetype% 
+*/
+
+@Script(SetQuotes)
+{lbeforescript}
+%beforescript%
+{lDropViewsGener}
+@template(DropViews)
+{lDropProceduresGener}
+@template(DropProcedures)
+{lDropTriggersListGener}
+@template(DropTriggersList)
+@template(DropViewTriggers)
+{ldroptriggerGener}
+@showmessage("Drop triggers")
+@template(droptriggers)
+{lDropIndexGener}
+@template(DropIndexs)
+{lDropTableGener}
+@showmessage("Drop tables")
+@template(DropRefIntegritys)
+@template(droptables)
+{lDropFunctionsGener}
+@template(DropFunctions)
+{lDropDomainGener}
+@showmessage("Drop domains")
+@template(dropdomains)
+{lDropExceptionsGener}
+@template(DropExceptions)
+{ldroptriggerGener and lDropExceptionsTriggerGener}
+@template(DropExcept)
+{lDropGeneratorsGener}
+@template(DropGenerators)
+{lDropBlobFiltersGener}
+@template(DropBlobFilters)
+{lDomainGener}
+@showmessage("Create domains")
+@template(CreateDomains)
+{lFunctionsGener}
+@showmessage("Declare External Functions")
+@template(DeclareFunctions)
+{lTableGener}
+@showmessage("Create tables")
+@template(createtables)
+{lEntityOthers}
+@showmessage("Create tab 'Others' for selected tables")
+@template(CreateTableOthers)
+{lalterkeysgener}
+@showmessage("Create alter keys")
+@template(CreateAlterKeys)
+{lIndexGener}
+@showmessage("Create indexes")
+@template(createindexs)
+{lRefIntegGener}
+@template(refintegritys)
+{lBlobFiltersGener}
+@template(DeclareBlobFilters)
+{lGeneratorsGener}
+@template(CreateGenerators)
+{lExceptionsGener}
+@template(CreateExceptions)
+{lTriggersGener and lExceptionsTriggerGener}
+@template(CreateExcept)
+{lViewsGener}
+@showmessage("Create Views")
+@template(CreateViews)
+{lProceduresGener or lTriggersGener or lTriggersUserGener}
+set term ^;
+{lProceduresGener}
+@showmessage("Create Procedures")
+@template(CreateProcedures)
+{lTriggersGener}
+@showmessage("Create Triggers")
+@template(createtriggers)
+{lTriggersUserGener}
+@template(CreateTriggersList)
+@template(CreateViewTriggers)
+{lProceduresGener or lTriggersGener or lTriggersUserGener}
+set term ;^
+{lRoleGener}
+@showmessage("Roles")
+@template(CreateRole)
+{lUserToRoleGener}
+@ShowMessage("Users permissions to roles")
+@template(GrantUserToRole)
+{lRolePermissGener}
+@ShowMessage("Roles permissions")
+@template(CreateRolePermiss)
+{lUserPermissGener}
+@ShowMessage("Users permissions")
+@template(CreateUserPermiss)
+@template(RevokeUserPermiss)
+{lGenComments}
+@ShowMessage("Create comments")
+@template(CreateTableComments)
+@template(CreateColumnComments)
+@template(CreateDomainComments)
+@template(CreateIndexComments)
+@template(CreateAlterKeyComments)
+{lGenComments and lFkAsConstraint}
+@template(CreateForeignKeyComments)
+{lafterscript}
+%afterscript%
+{true}
+@template(UserTempl)
+{lCreateAutoInc}
+@ShowMessage("Generate 'Autoinc'")
+@ScriptProc(CreateAutoInc,Main)
+]]></VALUE>
+<LANGUAGE>0</LANGUAGE>
+<LANGUAGEWIN>---</LANGUAGEWIN>
+<CATEGORY>2</CATEGORY>
+<MAINSCRIPT>0</MAINSCRIPT>
+<EVENTSCRIPTTYPE>0</EVENTSCRIPTTYPE>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+<AUTHOR></AUTHOR>
+<COMPANY></COMPANY>
+<VERSION></VERSION>
+<CREATED><DATE>9/3/2003</DATE><TIME>17:07:28</TIME></CREATED>
+<MODIFIED><DATE>2/8/2016</DATE><TIME>0:00:00</TIME></MODIFIED>
+</TEMPLATE>
+<TEMPLATE>
+<NAME>CreateAutoInc</NAME>
+<ID>2</ID>
+<GUID>{57FBD3B0-32AA-44F3-B412-041D78E3B4CA}</GUID>
+<CAPTION>CreateAutoInc</CAPTION>
+<PACKAGEGUID>{7D07D910-9C68-49A8-8FC6-38C758B267A1}</PACKAGEGUID>
+<ENABLED>1</ENABLED>
+<LEVEL>3</LEVEL>
+<IDPARENT>0</IDPARENT>
+<VALUE><![CDATA[function Main()
+{
+var a, Attribute;
+var Name , String;
+var qt = Model.qt;
+
+// Über TextStream wird Script generiert
+TextStream.Clear();
+
+// Finde alle Atributte für die Autoinc generiert werden soll
+for (a=0; a<Model.CountAttributes; a++)
+	if ( UserVarToBool(Model.Attributes(a).GetUserVariable('ICreateAttributAutoinc'))==true )
+	{
+		Attribute = Model.Attributes( a );
+		Entity    = Model.GetEntity( Attribute.EntityId );
+		if ( Entity.Generate )
+		{
+			Name = Entity.TableName +'_'+Attribute.ColName
+		
+			if ( Name.length > 28 )
+			{
+				Name = Name.substring(0,28);
+			};
+
+			Log.Writeln( 'Generate Autoinc for '+ Name);
+			
+			//Generator
+			//'CREATE GENERATOR '+qt+'g_'+Name+'_SEQ'+qt+';\n'+
+			TextStream.Writeln(
+			'/* "Autoinc" functionality for '+ Name+'*/ \n'+
+			'CREATE SEQUENCE '+qt+'SEQ_'+Name+qt+';\n'+
+			'SET TERM ^ ;\n'
+			 );
+		
+			//Trigger
+	 		//'  IF (NEW.'+qt+Attribute.ColName+qt+' IS NULL) THEN NEW.'+qt+Attribute.ColName+qt+' = GEN_ID('+qt+'g_'+Name+'_SEQ'+qt+',1); \n'+
+			TextStream.Writeln(
+			'CREATE TRIGGER '+qt+'TR_BI_'+Name+qt+' FOR '+qt+Entity.TableName+qt+'\n'+
+			'ACTIVE BEFORE INSERT POSITION 0\n'+
+			'AS\n'+
+			'BEGIN\n'+
+	 		'  IF (NEW.'+qt+Attribute.ColName+qt+' IS NULL) THEN NEW.'+qt+Attribute.ColName+qt+' = GEN_ID('+qt+'SEQ_'+Name+qt+',1); \n'+
+			'END\n'+
+			'^\n'
+		);
+		
+		//Procedure
+		//'	'+qt+'AUTOINC'+qt+' = GEN_ID('+qt+'SEQ_'+Name+qt+',1);\n'+
+		TextStream.Writeln(
+		'CREATE PROCEDURE '+qt+'P_'+Name+qt+'\n'+
+		'RETURNS (\n'+
+		'    '+qt+'AUTOINC'+qt+' INTEGER)\n'+
+		'AS\n'+
+		'BEGIN  \n'+
+		'	'+qt+'AUTOINC'+qt+' = GEN_ID('+qt+'SEQ_'+Name+qt+',1);\n'+
+		'   SUSPEND;\n'+
+		'END\n'+
+		'^\n'+
+		'SET TERM ; ^\n'
+		);
+		};
+	};
+	
+return( TextStream.Text );
+};
+]]></VALUE>
+<LANGUAGE>1</LANGUAGE>
+<LANGUAGEWIN>---</LANGUAGEWIN>
+<CATEGORY>2</CATEGORY>
+<MAINSCRIPT>0</MAINSCRIPT>
+<EVENTSCRIPTTYPE>0</EVENTSCRIPTTYPE>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+<AUTHOR>Bernd Harmsen</AUTHOR>
+<COMPANY>ds-Datasysteme</COMPANY>
+<VERSION>0.2</VERSION>
+<CREATED><DATE>9/3/2003</DATE><TIME>17:10:34</TIME></CREATED>
+<MODIFIED><DATE>12/3/2003</DATE><TIME>0:00:00</TIME></MODIFIED>
+</TEMPLATE>
+</TEMPLATES>
+</SERVER>
+<SYSTEM>
+<TEMPLATES>
+<TEMPLATE>
+<NAME>SetCreateAttributAutoinc_FB</NAME>
+<ID>1</ID>
+<GUID>{05C10606-6599-4B25-B02E-ABAAEE6F7325}</GUID>
+<CAPTION>SetCreateAttributAutoinc_FB</CAPTION>
+<PACKAGEGUID>{7D07D910-9C68-49A8-8FC6-38C758B267A1}</PACKAGEGUID>
+<ENABLED>1</ENABLED>
+<LEVEL>1</LEVEL>
+<IDPARENT>0</IDPARENT>
+<VALUE><![CDATA[function Main()
+{
+MenuManager.AddMenuItem('&Default Set \'Generate "Autoinc" for this Attribute\' (Firebird)','SetCreateAttributAutoinc_FB','OnSetDefaultAttributAutoincClick');
+}
+
+function OnSetDefaultAttributAutoincClick()
+{
+var e,zaehler;
+var Attribut;
+var Default, Show;
+
+zaehler=0;
+
+if (typeof(Model) == 'undefined')
+  SysUtils.Alert( 'Open or select a Firebird model before reseting fields.' )
+else if (Model.DatabaseId != 330)
+  SysUtils.Alert( 'Unable to reseting fields. This is not an Firebird model.' )
+else if ( SysUtils.Confirm( 'Are you sure you want to set all "Generate "Autoinc" for this Attribute" fields to their defaults?' ) )
+  {
+  //Alle Attribute durchlaufen
+  for (e=0; e<Model.CountAttributes; e++)
+  	{
+  		Attribut = Model.Attributes(e); 
+  		if(Attribut.PK==true && Attribut.FK==false)
+  		{
+  			//Autoinc wenn Attribut ein PK aber kein FK ist
+  			Default=true;
+  		} 
+  		else
+		{
+  			//kein Autoinc
+	  		Default=false;
+		};
+	  	
+		if( Default != UserVarToBool(Attribut.GetUserVariable('ICreateAttributAutoinc')) )
+		{
+			Entity = Model.GetEntity( Attribut.EntityId );
+			if ( SysUtils.Confirm( 'Should I set "Autoinc" for '+Entity.Name+'_'+Attribut.Name+'\n to '+Default+' ?\n ('+Attribut.ICreateAttributAutoinc+'->'+Default+')' ) )
+			{
+				Attribut.SetUserVariable('ICreateAttributAutoinc',Default);
+				zaehler++;
+			};
+		};
+
+	};//end for
+
+  SysUtils.Alert( zaehler+' changes are made' );	
+  };
+};
+]]></VALUE>
+<LANGUAGE>1</LANGUAGE>
+<LANGUAGEWIN>---</LANGUAGEWIN>
+<CATEGORY>5</CATEGORY>
+<MAINSCRIPT>1</MAINSCRIPT>
+<EVENTSCRIPTTYPE>1</EVENTSCRIPTTYPE>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+<AUTHOR>Bernd Harmsen</AUTHOR>
+<COMPANY>ds-Datasysteme</COMPANY>
+<VERSION>0.2</VERSION>
+<CREATED><DATE>9/3/2003</DATE><TIME>17:11:59</TIME></CREATED>
+<MODIFIED><DATE>12/3/2003</DATE><TIME>0:00:00</TIME></MODIFIED>
+</TEMPLATE>
+</TEMPLATES>
+</SYSTEM>
+</SERVERS>
+</USERTEMPLATES>
+<USEREDITORS>
+<SERVERS>
+<SERVER>
+<DATABASEID>330</DATABASEID>
+<USEREDIT>
+<NAME>lCreateAutoInc</NAME>
+<ID>1</ID>
+<GUID>{374695EB-5D6E-47CA-9D78-EF09A9442EB4}</GUID>
+<CAPTION>Create "AutoInc"</CAPTION>
+<PACKAGEGUID>{7D07D910-9C68-49A8-8FC6-38C758B267A1}</PACKAGEGUID>
+<TYPE>1</TYPE>
+<LEVEL>1</LEVEL>
+<DEFAULT>1</DEFAULT>
+<ORD>400</ORD>
+<LENGTH>0</LENGTH>
+<ENABLED>1</ENABLED>
+<ITEMS></ITEMS>
+</USEREDIT>
+<USEREDIT>
+<NAME>ICreateAttributAutoinc</NAME>
+<ID>2</ID>
+<GUID>{BCA287DC-990E-4A26-A369-F0AB33BC27BD}</GUID>
+<CAPTION>Generate "Autoinc" for this Attribut</CAPTION>
+<PACKAGEGUID>{7D07D910-9C68-49A8-8FC6-38C758B267A1}</PACKAGEGUID>
+<TYPE>1</TYPE>
+<LEVEL>3</LEVEL>
+<DEFAULT>0</DEFAULT>
+<ORD>400</ORD>
+<LENGTH>0</LENGTH>
+<ENABLED>1</ENABLED>
+<ITEMS></ITEMS>
+</USEREDIT>
+</SERVER>
+</SERVERS>
+</USEREDITORS>
+</EXPORT>

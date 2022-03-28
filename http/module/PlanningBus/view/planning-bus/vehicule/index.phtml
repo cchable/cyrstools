@@ -1,0 +1,123 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/vehicule/index.phtml
+ *
+ * @purpose   :
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ *
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = 'Liste des véhicules';
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('vehicule');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+  'Planning Transport' => $this->url('planningtransport'),
+  'Véhicules'          => $this->url('vehicule'),
+]);
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+
+$paginator = $this->paginationControl(
+  $this->vehicules,    // Paginator
+  'sliding',           // Style 'all' | 'elastic' | 'sliding' | 'jumping'
+  'partial/paginator', // You can add file extension but helper actually takes care about it  
+  [                    // Parameters 
+    'rowPerPage'     => $this->rowPerPage,
+    'stepRowPerPage' => $this->stepRowPerPage,
+    'search'         => $this->search,
+  ]
+);
+
+
+$formSearch->get('search')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Recherche d'un véhicule par son nom...",
+]);
+
+$formSearch->setAttribute('action', $this->url($this->module, ['action' => 'index']));
+
+$formSearch->prepare();
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+</div>
+<div class="row my-4">
+  <div class="col-sm" aria-label="add item">
+    <a class="btn btn-light btn-outline-primary" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'add']); ?>">
+      <span class="far fa-plus-square" aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="col-sm" aria-label="search item">
+    <?= $this->form()->openTag($this->formSearch) . PHP_EOL; ?>
+    <div class="row">
+      <div class="col">
+        <?= $this->formElement($this->formSearch->get('search')) ?>
+        <?= $this->formElement($this->formSearch->get('csrf')) . PHP_EOL; ?>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-light btn-outline-dark"><span class="fas fa-search"></span></button>
+        <a class="btn btn-light btn-outline-dark" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'index'], ['query' => ['search' => '']]); ?>">
+          <span class="fas fa-recycle" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+    <?= $this->form()->closeTag() ?>  
+  </div>
+</div>
+<?= $paginator; ?>
+<table class="table align-middle table-striped table-hover table-sm">
+  <thead class="table-light">
+    <tr>
+      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Noms</th>
+      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Places</th>
+      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Marques</th>
+      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Modèles</th>
+      <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach ($this->vehicules as $vehicule) : ?>
+    <tr>
+      <td><?= $this->escapeHtml($vehicule->getNom()) ?></td>
+      <td><?= $this->escapeHtml($vehicule->getPlaces()) ?></td>
+      <td><?= $this->escapeHtml($vehicule->getMarque()) ?></td>
+      <td><?= $this->escapeHtml($vehicule->getModele()) ?></td>
+      <td>
+        <a class="btn btn-light btn-outline-success" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'edit', 'id'=>$vehicule->getId()]); ?>">
+          <span class="far fa-edit" aria-hidden="true"></span>
+        </a>
+        <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'delete', 'id'=>$vehicule->getId()]); ?>">
+          <span class="far fa-trash-alt"></span>
+        </a>
+      </td>
+    </tr>
+<?php endforeach; ?>
+  </tbody>
+</table>
+<?= $paginator; ?>
+<script type="text/javascript">
+  function submitformPaginatorNbrPages(value)
+  {
+    
+<?php $query = ($search) ? ['page' => 1, 'search' => $search] : ['page' => 1] ?>
+    var url = "<?= $this->url($this->route, [], ['query' => $query, 'force_canonical' => true]) ?>" + "&rowPerPage=" + value ;
+
+    window.location.replace(url);
+  }
+  
+  function submitformPaginatorPages(value)
+  {
+    
+<?php $query = ($search) ? ['search' => $search] : ['search' => ''] ?>
+    var url = "<?= $this->url($this->route, [], ['query' => $query, 'force_canonical' => true]) ?>" + "&page=" + value ;;
+
+    window.location.replace(url);
+  }
+</script>

@@ -1,0 +1,81 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/planning/edit.phtml
+ *
+ * @purpose   : Année scolaire add
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Modification d'un planning";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('planning');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+  'Planning Transport' => $this->url('planningtransport'),
+  'Plannings'          => $this->url('planning'),
+  'Edition'            => $this->url('planning', ['action'=>'edit']),
+]);
+
+$form->get('IDX_TYPEPLANNING')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Type du planning'
+]);
+$form->get('IDX_TYPEPLANNING')->setValueOptions($typesPlannings);
+
+$form->get('IDX_DATEPLANNING')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Date du planning'
+]);
+$form->get('IDX_DATEPLANNING')->setValueOptions($datesPlannings);
+
+$form->get('IDX_HEUREPLANNING')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Heure du planning'
+]);
+$form->get('IDX_HEUREPLANNING')->setValueOptions($heuresPlannings);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form); ?>      
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('IDX_TYPEPLANNING')); ?>
+        <?= $this->formLabel($form->get('IDX_TYPEPLANNING')); ?>
+        <?= $this->formElementErrors($form->get('IDX_TYPEPLANNING')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('IDX_DATEPLANNING')); ?>
+        <?= $this->formLabel($form->get('IDX_DATEPLANNING')); ?>
+        <?= $this->formElementErrors($form->get('IDX_DATEPLANNING')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('IDX_HEUREPLANNING')); ?>
+        <?= $this->formLabel($form->get('IDX_HEUREPLANNING')); ?>
+        <?= $this->formElementErrors($form->get('IDX_HEUREPLANNING')); ?>              
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <?php //<?= $this->formElement($form->get('submit')) . PHP_EOL; ?>
+      <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>
+  </div>    
+</div>

@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @package   : 
+ *
+ * @purpose   :
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-20 H.P.B
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+// module/Album/view/album/album/delete.phtml:
+
+$title = 'Delete album';
+$url   = $this->url('album', ['action' => 'delete', 'ID' => $ID]);
+
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<p>
+    Are you sure that you want to delete
+    "<?= $this->escapeHtml($album->TITLE) ?>" by
+    "<?= $this->escapeHtml($album->ARTIST) ?>"?
+</p>
+
+<form action="<?= $url ?>" method="post">
+<div class="form-group">
+    <input type="hidden" name="ID" value="<?= (int) $album->ID ?>" />
+    <input type="submit" class="btn btn-danger" name="del" value="Yes" />
+    <input type="submit" class="btn btn-success" name="del" value="No" />
+</div>
+</form>

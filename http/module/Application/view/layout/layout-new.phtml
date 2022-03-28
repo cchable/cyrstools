@@ -1,0 +1,69 @@
+<?php  
+/**
+ * @package   : module/Application/view/layout/layout.phtml
+ *
+ * @purpose   :
+ * 
+ * @var       : Laminas\View\Renderer\PhpRenderer $this
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+?>
+<?= $this->doctype() ?>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<?= $this->headTitle("Cyr's tools")->setSeparator(' - ')->setAutoEscape(false) ?>
+
+		<?= $this->headMeta()
+			->appendName('viewport', 'width=device-width, initial-scale=1.0')
+			->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+		?>
+
+		<!-- Le style -->
+		<?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+			->prependStylesheet($this->basePath('css/style.css'))
+			->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+			->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+		?>
+
+		<!-- Scripts -->
+		<?= $this->headScript() ?>
+	</head>
+	<body>
+		<div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Navigation bar -->
+          <?php
+          // Render the navbar
+          echo $this->mainMenu()->render();
+          ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Breadcrumbs -->
+          <?= $this->pageBreadcrumbs()->render(); ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Page content placeholder -->
+          <?= $this->content; ?>
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <div class="text-center">
+          <p>&copy; 2018 - <?= date('Y') ?> par <img src="/img/LogoSPFBLo_75x41.png" height="28" width="50" alt="Logo SPFB"> SPFB. Tous droits réservés.</p>
+        </div>
+      </footer>
+    </div>
+	
+		<?= $this->inlineScript()
+					->prependFile($this->basePath('js/bootstrap.min.js'))
+					->prependFile($this->basePath('js/jquery-3.5.1.min.js')) ?>
+	</body>
+</html>

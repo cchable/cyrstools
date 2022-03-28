@@ -1,0 +1,47 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/planning/index.phtml
+ *
+ * @purpose   :
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = 'My plannings';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('planning', ['action' => 'add']) ?>">Add new planning</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>&nbsp;</th>
+</tr>
+<?php //foreach ($plannings as $planning) : ?>
+<?php foreach ($this->paginator as $planning) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($planning->TITLE) ?></td>
+        <td><?= $this->escapeHtml($planning->ARTIST) ?></td>
+        <td>
+            <a href="<?= $this->url('planning', ['action' => 'edit', 'ID' => $planning->ID]) ?>">Edit</a>
+            <a href="<?= $this->url('planning', ['action' => 'delete', 'ID' => $planning->ID]) ?>">Delete</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+<?= $this->paginationControl(
+      // The paginator object:
+      $this->paginator,
+      // The scrolling style:
+      'sliding',
+      // The partial to use to render the control:
+      'partial/paginator',
+      // The route to link to when a user clicks a control link:
+      ['route' => 'planning']);
+?>

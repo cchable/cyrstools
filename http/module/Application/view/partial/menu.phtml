@@ -1,0 +1,18 @@
+<?php
+/**
+ * @package   : module/Application/view/partial/menu.phtml
+ *
+ * @purpose   :
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+?>
+<div class="<?= $this->navigation()->menu()->getUlClass() ?>">
+<?php  
+foreach ($this->container as $page) {
+	echo $this->navigation()->menu()->htmlify($page) . '&nbsp;&nbsp;' . PHP_EOL;
+}
+?>
+</div>

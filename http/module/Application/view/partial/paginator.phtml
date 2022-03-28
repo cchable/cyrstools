@@ -1,0 +1,77 @@
+<?php
+/**
+ * @package   : module/Application/view/partial/paginator.phtml
+ *
+ * @purpose   :
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+?>
+<?php if(!isset($search)) $search = ''; ?>
+<?php if ($this->pageCount): ?>
+  <div class="row mb-0 mt-0">
+    <div class="col-sm-auto justify-content-end">Total:</div>
+    <div class="col-sm-1">
+      <input type="text" name="total" class="form-control form-control-sm text-center" value="<?= $totalItemCount; ?>" disabled>
+    </div>
+    <div class="col-sm-auto">
+      <label class="col-form-label col-form-label-sm" for="paginatorrows">Lignes:</label>
+    </div>
+    <div class="col-sm-auto">
+      <select class="form-select form-select-sm" id="paginatornbrpages" required aria-label=".form-select-sm paginator" onchange="submitformPaginatorNbrPages(this.value)">
+      <?php for ($i = 1; $i <= 5; $i++): ?>
+        <option value="<?= $i*$stepRowPerPage ?>" <?= ($i*$stepRowPerPage == $itemCountPerPage) ? 'selected' : ''?>><?= $i*$stepRowPerPage ?></option>
+      <?php endfor ?>
+      </select>
+    </div>
+    <div class="col-sm-auto justify-content-end">
+      <label class="col-form-label col-form-label-sm justify-content-end" for="paginatorpages">Pages:</label>
+    </div>
+    <div class="col-sm-auto">
+      <select class="form-select form-select-sm" name="paginatorpages" id="paginatorpages" required aria-label=".form-select-sm paginator" onchange="submitformPaginatorPages(this.value)">
+      <?php for ($i = 1; $i <= $pageCount; $i++): ?>
+        <option value="<?= $i ?>" <?= ($i == $current) ? 'selected' : ''?>><?= $i ?></option>
+      <?php endfor ?>
+      </select>        
+    </div>    
+    <nav class="col-sm-6" aria-label="Paginator">
+      <ul class="pagination pagination-sm">
+    <?php if (isset($this->previous)): ?><?= PHP_EOL ?>
+        <li class="page-item">
+          <?php $query = ($search) ? ['page' => $this->previous, 'search' => $search, 'rowPerPage' => $itemCountPerPage] : ['page' => $this->previous, 'rowPerPage' => $itemCountPerPage] ?>
+          <a class="page-link" href="<?= $this->url($this->route, [], ['query' => $query]) ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+        </li>
+    <?php else: ?>
+        <li class="page-item disabled">
+          <span class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></span>
+        </li>
+    <?php endif ?>
+    <?php foreach ($this->pagesInRange as $page): ?>
+      <?php if ($page !== $this->current): ?><?= PHP_EOL ?>
+        <li class="page-item">
+          <?php $query = ($search) ? ['page' => $page, 'search' => $search, 'rowPerPage' => $itemCountPerPage] : ['page' => $page, 'rowPerPage' => $itemCountPerPage] ?>
+          <a class="page-link" href="<?= $this->url($this->route, [], ['query' => $query]) ?>"><?= $page ?></a>
+        </li>
+      <?php else: ?><?= PHP_EOL ?>
+        <li class="page-item active">
+          <span class="page-link" aria-current="page"><?= $page ?><span class="visually-hidden">(current)</span></span>
+        </li>
+      <?php endif ?>
+    <?php endforeach ?>
+    <?php if (isset($this->next)): ?><?= PHP_EOL ?>
+        <li class="page-item">
+         <?php $query = ($search) ? ['page' => $this->next, 'search' => $search , 'rowPerPage' => $itemCountPerPage] : ['page' => $this->next, 'rowPerPage' => $itemCountPerPage] ?>
+          <a class="page-link" href="<?= $this->url($this->route, [], ['query' => $query]) ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+        </li>
+    <?php else: ?>
+        <li class="page-item disabled">
+          <span class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></span>
+        </li>
+    <?php endif ?><?= PHP_EOL ?>
+      </ul>
+    </nav>
+  </div>
+<?php endif ?>

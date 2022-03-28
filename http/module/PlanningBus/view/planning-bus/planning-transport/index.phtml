@@ -1,0 +1,32 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning-bus/planning/index.phtml
+ *
+ * @purpose   :
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = 'Planning transport';
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('planning');
+
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+  'Planning Transport' => $this->url('planningtransport'),
+  ]);
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+
+
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+</div>
+<div class="row my-4">
+</div>

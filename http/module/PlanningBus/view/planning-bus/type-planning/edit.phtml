@@ -1,0 +1,57 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/typeplanning/edit.phtml
+ *
+ * @purpose   : TypePlanning edit
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Edition d'un type de planning";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('typeplanning');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+	'Planning Transport' => $this->url('planningtransport'),
+	'Types Plannings'    => $this->url('typeplanning'),
+  'Edition'            => $this->url('typeplanning', ['action'=>'edit']),
+]);
+
+$form->get('NOMTYPEPLANNING')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Nom du type de planning",
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form) . PHP_EOL; ?>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('NOMTYPEPLANNING')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('NOMTYPEPLANNING')); ?>
+        <?= $this->formElementErrors($form->get('NOMTYPEPLANNING')); ?>              
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>
+  </div>    
+</div>

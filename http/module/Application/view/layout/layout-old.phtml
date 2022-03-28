@@ -1,0 +1,73 @@
+<?php  
+/**
+ * @package   : module/Application/view/layout/layout.phtml
+ *
+ * @purpose   :
+ * 
+ * 
+ * @var       : Laminas\View\Renderer\PhpRenderer $this
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ 
+ ** @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+?>
+<?= $this->doctype() ?>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<?= $this->headTitle("Cyr's tools")->setSeparator(' - ')->setAutoEscape(false) ?>
+
+		<?= $this->headMeta()
+			->appendName('viewport', 'width=device-width, initial-scale=1.0')
+			->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+		?>
+
+		<!-- Le style -->
+		<?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+			->prependStylesheet($this->basePath('css/style.css'))
+			->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+			//->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+		?>
+
+		<!-- Scripts -->
+		<?= $this->headScript() ?>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-md navbar-dark mb-4" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<a class="navbar-brand" href="<?= $this->url('home') ?>">
+						<img src="<?= $this->basePath('img/FrancophonesBruxelles-LogoLo.svg')?>" alt="Francophones Bruxelles"> Cyr's Tools
+					</a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<?= $this->navigation('navigation')
+								->menu()
+								->setMinDepth(0)
+								->setMaxDepth(1)
+								->setUlClass('nav navbar-nav')
+								->setPartial('partial/menu')?>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<?= $this->navigation('navigation')
+						->breadcrumbs()
+						->setMinDepth(0)
+						->setPartial('partial/breadcrumb')
+						->setSeparator(' ▶')?>
+			<?= $this->content ?>
+			<hr>
+			<footer>
+				<p>&copy; <?= date('Y') ?> <a href="https://ccf.brussels/">COCOF</a></p>
+			</footer>
+		</div>
+		<?= $this->inlineScript()
+					->prependFile($this->basePath('js/bootstrap.min.js'))
+					->prependFile($this->basePath('js/jquery-3.5.1.min.js')) ?>
+	</body>
+</html>

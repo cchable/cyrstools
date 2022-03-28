@@ -1,0 +1,93 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/vehicule/edit.phtml
+ *
+ * @purpose   : Vehicule edit
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Edition d'un véhicule";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('vehicule');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+	'Planning Transport' => $this->url('planningtransport'),
+	'Véhicules'          => $this->url('vehicule'),
+  'Edition'            => $this->url('vehicule', ['action'=>'edit']),
+]);
+
+$form->get('MARQUEVEHICULE')->setAttributes([
+  'class'=>'form-control', 
+  'placeholder'=>'Marque du véhicule',
+]);
+
+$form->get('MODELEVEHICULE')->setAttributes([
+  'class'=>'form-control', 
+  'placeholder'=>'Modèle du véhicule'
+]);
+
+$form->get('NOMVEHICULE')->setAttributes([
+  'class'=>'form-control', 
+  'placeholder'=>'Nom du véhicule'
+]);
+
+$form->get('PLACESVEHICULE')->setAttributes([
+  'class'=>'form-control', 
+  'placeholder'=>'Places du véhicule'
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+  <!--
+  <p>
+    Modifiez les données suivantes et cliquez sur le bouton <i>Sauver</i>.
+  </p>
+  -->
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form); ?>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('MARQUEVEHICULE')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('MARQUEVEHICULE')); ?>
+        <?= $this->formElementErrors($form->get('MARQUEVEHICULE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('MODELEVEHICULE')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('MODELEVEHICULE')); ?>
+        <?= $this->formElementErrors($form->get('MODELEVEHICULE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('NOMVEHICULE')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('NOMVEHICULE')); ?>
+        <?= $this->formElementErrors($form->get('NOMVEHICULE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('PLACESVEHICULE')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('PLACESVEHICULE')); ?>
+        <?= $this->formElementErrors($form->get('PLACESVEHICULE')); ?>              
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <?php //<?= $this->formElement($form->get('submit')) . PHP_EOL; ?>
+      <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>
+  </div>    
+</div>

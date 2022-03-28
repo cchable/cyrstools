@@ -1,0 +1,67 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/dateplanning/add.phtml
+ *
+ * @purpose   : TypePlanning add
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Ajout d'un date de planning";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('dateplanning');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+  'Planning Transport' => $this->url('planningtransport'),
+  'Dates Plannings'    => $this->url('dateplanning'),
+  'Ajout'              => $this->url('dateplanning', ['action'=>'add']),
+]);
+
+$form->get('DATEDATEPLANNING')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Date du planning",
+]);
+
+$form->get('CODESEMAINEDATEPLANNING')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Code de la semaine",
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form) . PHP_EOL; ?>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('DATEDATEPLANNING')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('DATEDATEPLANNING')); ?>
+        <?= $this->formElementErrors($form->get('DATEDATEPLANNING')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('CODESEMAINEDATEPLANNING')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('CODESEMAINEDATEPLANNING')); ?>
+        <?= $this->formElementErrors($form->get('CODESEMAINEDATEPLANNING')); ?>              
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <button date="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>
+  </div>    
+</div>

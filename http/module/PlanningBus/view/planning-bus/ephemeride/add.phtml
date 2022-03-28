@@ -1,0 +1,94 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/ephemeride/add.phtml
+ *
+ * @purpose   : Année scolaire add
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Ajout d'une éphéméride";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('ephemeride');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+  'Planning Transport' => $this->url('planningtransport'),
+  'Ephémérides'        => $this->url('ephemeride'),
+  'Ajout'              => $this->url('ephemeride', ['action'=>'add']),
+]);
+
+$form->get('IDX_ANNEESCOLAIRE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Année scolaire'
+]);
+$form->get('IDX_ANNEESCOLAIRE')->setValueOptions($anneesScolaires);
+
+$form->get('INTITULEEPHEMERIDE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Intitulé'
+]);
+
+$form->get('DATEDEBUTEPHEMERIDE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Date début'
+]);
+
+$form->get('DATEFINEPHEMERIDE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Date fin'
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+  <!--
+  <p>
+    Remplissez les données suivantes et cliquez sur le bouton <i>Sauver</i>.
+  </p>
+  -->
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form); ?>      
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('IDX_ANNEESCOLAIRE')); ?>
+        <?= $this->formLabel($form->get('IDX_ANNEESCOLAIRE')); ?>
+        <?= $this->formElementErrors($form->get('IDX_ANNEESCOLAIRE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('INTITULEEPHEMERIDE')); ?>
+        <?= $this->formLabel($form->get('INTITULEEPHEMERIDE')); ?>
+        <?= $this->formElementErrors($form->get('INTITULEEPHEMERIDE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('DATEDEBUTEPHEMERIDE')); ?>
+        <?= $this->formLabel($form->get('DATEDEBUTEPHEMERIDE')); ?>
+        <?= $this->formElementErrors($form->get('DATEDEBUTEPHEMERIDE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('DATEFINEPHEMERIDE')); ?>
+        <?= $this->formLabel($form->get('DATEFINEPHEMERIDE')); ?>
+        <?= $this->formElementErrors($form->get('DATEFINEPHEMERIDE')); ?>              
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <?php //<?= $this->formElement($form->get('submit')) . PHP_EOL; ?>
+      <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>
+  </div>    
+</div>

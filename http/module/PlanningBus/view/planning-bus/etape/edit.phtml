@@ -1,0 +1,78 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/etape/edit.phtml
+ *
+ * @purpose   : Etape edit
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Edition d'une étape";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('etape');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+	'Planning Transport' => $this->url('planningtransport'),
+	'Etapes'             => $this->url('etape'),
+  'Edition'            => $this->url('etape', ['action'=>'edit']),
+]);
+
+$form->get('NOMETAPE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Nom de l'étape",
+]);
+
+$form->get('ADRESSEETAPE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Adresse de l'étape"
+]);
+
+$form->get('PRINTEDETAPE')->setAttributes([
+  'class'       => 'form-check-input', 
+  'placeholder' => "Imprimé",
+  'Checked'     => $this->etape->getPrinted(),
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form) . PHP_EOL; ?>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('NOMETAPE')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('NOMETAPE')); ?>
+        <?= $this->formElementErrors($form->get('NOMETAPE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('ADRESSEETAPE')) . PHP_EOL; ?>
+        <?= $this->formLabel($form->get('ADRESSEETAPE')); ?>
+        <?= $this->formElementErrors($form->get('ADRESSEETAPE')); ?>              
+      </div>
+      <div class="form-check form-switch my-2">
+        <?= $this->formLabel($form->get('PRINTEDETAPE')) . PHP_EOL; ?>
+        <?= $this->formElement($form->get('PRINTEDETAPE')); ?>
+        <?= $this->formElementErrors($form->get('PRINTEDETAPE')); ?>              
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>
+  </div>    
+</div>

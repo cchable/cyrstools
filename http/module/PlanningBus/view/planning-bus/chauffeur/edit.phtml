@@ -1,0 +1,71 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/chauffeur/add.phtml
+ *
+ * @purpose   : Année scolaire add
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Modification d'un chauffeur";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('chauffeur');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+  'Planning Transport' => $this->url('planningtransport'),
+  'Chauffeurs'         => $this->url('chauffeur'),
+  'Ajout'              => $this->url('chauffeur', ['action'=>'edit']),
+]);
+
+$form->get('PRENOMCHAUFFEUR')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Prénom'
+]);
+
+$form->get('IDX_VEHICULE')->setAttributes([
+  'class'       => 'form-check-input', 
+  'placeholder' => 'Véhicule'
+]);
+//$form->get('IDX_VEHICULE')->setValueOptions($vehicules);
+$form->get('IDX_VEHICULE')->setLabelAttributes(['class' => 'form-check-label']);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form); ?>      
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('PRENOMCHAUFFEUR')); ?>
+        <?= $this->formLabel($form->get('PRENOMCHAUFFEUR')); ?>
+        <?= $this->formElementErrors($form->get('PRENOMCHAUFFEUR')); ?>              
+      </div>
+      <div class="form-check my-2">
+        <?= $this->formLabel($form->get('IDX_VEHICULE')); ?>
+        <div class="form-check form-switch">
+          <?= $this->formRadio()->setSeparator('</div><div class="form-check form-switch">')->render($form->get('IDX_VEHICULE')); ?>
+        </div>
+        <?= $this->formElementErrors($form->get('IDX_VEHICULE')); ?>
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>
+  </div>    
+</div>

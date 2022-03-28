@@ -1,0 +1,105 @@
+<?php
+/**
+ * @package   : module/Planning/view/planning/trajet/add.phtml
+ *
+ * @purpose   : Année scolaire edit
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-21 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Ajout d'un trajet";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('Ephémérides');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'            => $this->url('home'),
+  'Planning Transport' => $this->url('planningtransport'),
+  'Trajet'             => $this->url('trajet'),
+  'Ajout'              => $this->url('trajet', ['action'=>'add']),
+]);
+
+$form->get('IDX_ETAPEDEPART')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Etaoe départ'
+]);
+$form->get('IDX_ETAPEDEPART')->setValueOptions($etapes);
+
+$form->get('IDX_ETAPEARRIVEE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Etape arrivée'
+]);
+$form->get('IDX_ETAPEARRIVEE')->setValueOptions($etapes);
+
+$form->get('NOMTRAJET')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Nom'
+]);
+
+$form->get('TEMPSTRAJET')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Temps'
+]);
+
+$form->get('KMTRAJET')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Kilometrage'
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
+echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
+echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
+echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
+?>
+<div class="text-center">
+  <h2><?= $this->escapeHtml($title) ?></h2>
+  <!--
+  <p>
+    Remplissez les données suivantes et cliquez sur le bouton <i>Sauver</i>.
+  </p>
+  -->
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <?= $this->form()->openTag($form); ?>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('IDX_ETAPEDEPART')); ?>
+        <?= $this->formLabel($form->get('IDX_ETAPEDEPART')); ?>
+        <?= $this->formElementErrors($form->get('IDX_ETAPEDEPART')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('IDX_ETAPEARRIVEE')); ?>
+        <?= $this->formLabel($form->get('IDX_ETAPEARRIVEE')); ?>
+        <?= $this->formElementErrors($form->get('IDX_ETAPEARRIVEE')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('NOMTRAJET')); ?>
+        <?= $this->formLabel($form->get('NOMTRAJET')); ?>
+        <?= $this->formElementErrors($form->get('NOMTRAJET')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('TEMPSTRAJET')); ?>
+        <?= $this->formLabel($form->get('TEMPSTRAJET')); ?>
+        <?= $this->formElementErrors($form->get('TEMPSTRAJET')); ?>              
+      </div>
+      <div class="form-floating my-2">
+        <?= $this->formElement($form->get('KMTRAJET')); ?>
+        <?= $this->formLabel($form->get('KMTRAJET')); ?>
+        <?= $this->formElementErrors($form->get('KMTRAJET')); ?>              
+      </div>
+      <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <?php //<?= $this->formElement($form->get('submit')) . PHP_EOL; ?>
+      <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+      <?= PHP_EOL; ?>
+    <?= $this->form()->closeTag() . PHP_EOL; ?>  
+  </div>    
+</div>
