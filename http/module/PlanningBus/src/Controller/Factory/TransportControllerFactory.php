@@ -20,6 +20,10 @@ use PlanningBus\Service\TransportManager;
 use PlanningBus\Model\TransportTable;
 use PlanningBus\Model\TransportFullTable;
 
+use PlanningBus\Service\PlanningManager;
+use PlanningBus\Model\PlanningTable;
+use PlanningBus\Model\PlanningFullTable;
+
 
 /*
  * 
@@ -34,12 +38,25 @@ class TransportControllerFactory implements FactoryInterface
     $transportFullTable = $container->get(TransportFullTable::class);
     $transportManager   = $container->get(TransportManager::class);
     
+    $planningTable     = $container->get(PlanningTable::class);
+    $planningFullTable = $container->get(PlanningFullTable::class);
+    $planningManager   = $container->get(PlanningManager::class);
+    
     $config            = $container->get('Config');
     $defaultRowPerPage = $config['paginator']['options']['defaultRowPerPage'];
     $stepRowPerPage    = $config['paginator']['options']['stepRowPerPage'];
     
     $sessionContainer = $container->get('TransportSessionContainer');
     // Instantiate the controller and inject dependencies
-    return new TransportController($transportTable, $transportFullTable, $transportManager, $defaultRowPerPage, $stepRowPerPage, $sessionContainer);
+    return new TransportController(
+            $transportTable, 
+            $transportFullTable, 
+            $transportManager, 
+            $planningTable,
+            $planningFullTable,
+            $planningManager,
+            $defaultRowPerPage, 
+            $stepRowPerPage, 
+            $sessionContainer);
   }
 }

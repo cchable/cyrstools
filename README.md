@@ -1,3 +1,2 @@
-# cyrstools
-Cyr 's Tools
+# Cyr 's Tools
 - planningbus

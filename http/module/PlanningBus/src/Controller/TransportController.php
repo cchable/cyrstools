@@ -24,6 +24,10 @@ use PlanningBus\Model\TransportFullTable;
 use PlanningBus\Form\TransportToExcelForm;
 use PlanningBus\Form\SearchForm;
 
+use PlanningBus\Service\PlanningManager;
+
+use PlanningBus\Model\PlanningTable;
+use PlanningBus\Model\PlanningFullTable;
 
 /*
  * 
@@ -48,6 +52,24 @@ class TransportController extends AbstractActionController
    * @var Plannigbus\Service\TransportManager
    */
   private $transportManager;
+
+  /*
+   * Planning table manager
+   * @var Plannigbus\Model\PlanningTable
+   */
+  private $planningTable;
+  
+  /*
+   * PlanningFull table manager
+   * @var Plannigbus\Model\PlanningTable
+   */
+  private $planningFullTable;
+  
+  /*
+   * Planning manager
+   * @var Plannigbus\Service\PlanningManager
+   */
+  private $planningManager;
   
   /*
    * Application config.
@@ -73,6 +95,9 @@ class TransportController extends AbstractActionController
     TransportTable $transportTable,
     TransportFullTable $transportFullTable,
     TransportManager $transportManager,
+    PlanningTable $planningTable,
+    PlanningFullTable $planningFullTable,
+    PlanningManager $planningManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
