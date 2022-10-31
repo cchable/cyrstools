@@ -221,9 +221,8 @@ class ChauffeurTable
   {
     
     $adapter = $this->tableGateway->getAdapter();
-    $sql    = new Sql($adapter);
-    $select = $sql->select();
-    $select->from($this->tableGateway->getTable());
+    $sql     = $this->tableGateway->getSql();
+    $select  = $sql->select();
     $select->columns(
       [
         'COUNT' => new \Laminas\Db\Sql\Expression("COUNT('')"),
@@ -232,7 +231,7 @@ class ChauffeurTable
     );
     
     $selectString = $sql->buildSqlString($select);
-    $rowset  = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
     
     return $rowset->current();
   }
