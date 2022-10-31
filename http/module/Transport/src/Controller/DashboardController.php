@@ -63,15 +63,15 @@ class DashboardController extends AbstractActionController
 	 */
 	public function __construct(
 		ChauffeurTable    $chauffeurTable,
-		MarqueTable       $marqueTable,
-		TypeVehiculeTable $typeVehiculeTable,
+		//MarqueTable       $marqueTable,
+		//TypeVehiculeTable $typeVehiculeTable,
 		$sessionContainer
     )
 	{
   
     $this->chauffeurTable    = $chauffeurTable;
-    $this->marqueTable       = $marqueTable;
-    $this->typeVehiculeTable = $typeVehiculeTable;
+    //$this->marqueTable       = $marqueTable;
+    //$this->typeVehiculeTable = $typeVehiculeTable;
     $this->sessionContainer  = $sessionContainer;
 	}
 
@@ -83,13 +83,13 @@ class DashboardController extends AbstractActionController
 	{
 
     $numberOfRowsChauffeur    = $this->chauffeurTable->getNumberOfRows();
-    $numberOfRowsMarque       = $this->marqueTable->getNumberOfRows();
-    $numberOfRowsTypeVehicule = $this->typeVehiculeTable->getNumberOfRows();
+    //$numberOfRowsMarque       = $this->marqueTable->getNumberOfRows();
+    //$numberOfRowsTypeVehicule = $this->typeVehiculeTable->getNumberOfRows();
     
     return new ViewModel([
       'numberOfChauffeur'    => $numberOfRowsChauffeur['COUNT'],
-      'numberOfMarque'       => $numberOfRowsMarque['COUNT'],
-      'numberOfTypeVehicule' => $numberOfRowsTypeVehicule['COUNT'],
+      //'numberOfMarque'       => $numberOfRowsMarque['COUNT'],
+      //'numberOfTypeVehicule' => $numberOfRowsTypeVehicule['COUNT'],
     ]); 
   }
 }

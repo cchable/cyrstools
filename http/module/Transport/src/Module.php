@@ -10,7 +10,7 @@
  * @license   : GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-namespace PlanningBus;
+namespace Transport;
 
 use Laminas\Mvc\MvcEvent;
 use Laminas\Mvc\ModuleRouteListener;

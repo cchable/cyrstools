@@ -20,17 +20,17 @@ return [
 	//Router 
 	'router' => [
 		'routes' => [	
-			// Define a new route called "transport"
-			'transport' => [
+			// Define a new route called "dashboard"
+			'dashboard' => [
 				'type'    => Segment::class,
 				'options' => [
-					'route'       => '/transport[/:action[/:ID]]',
+					'route'       => '/dashboard[/:action[/:ID]]',
 					'constraints' => [
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id'     => '[0-9]+',
 					],
 					'defaults' => [
-						'controller' => Controller\PlanningController::class,
+						'controller' => Controller\DashboardController::class,
 						'action'     => 'index',
 					],
 				],
@@ -282,10 +282,10 @@ return [
 	//Controller
   'controllers' => [
     'factories' => [
-/*	
-		Controller\ChauffeurController::class 
-			=> Controller\Factory\ChauffeurControllerFactory::class,
 
+		Controller\DashboardController::class 
+			=> Controller\Factory\DashboardControllerFactory::class,
+/*	
 		Controller\HeurePlanningController::class 
 			=> Controller\Factory\HeurePlanningControllerFactory::class,
 
@@ -326,12 +326,12 @@ return [
 	'service_manager' => [
 		'factories' => [    
 			// Register Models
-/*		  
+	  
 			Model\ChauffeurTable::class
 				=> Model\Factory\ChauffeurTableFactory::class,
 			Model\ChauffeurTableGateway::class
 				=> Model\Factory\ChauffeurTableGatewayFactory::class,
-				
+/*					
 			Model\ChauffeurFullTable::class
 				=> Model\Factory\ChauffeurFullTableFactory::class,
 			Model\ChauffeurFullTableGateway::class
@@ -454,11 +454,10 @@ return [
 	],
 	
 	//View
-/*	
+
 	'view_manager' => [
 		'template_path_stack' => [
-			'planningvehicule' => __DIR__ . '/../view',
+			'transport' => __DIR__ . '/../view',
 		],
 	],
-*/
 ];
