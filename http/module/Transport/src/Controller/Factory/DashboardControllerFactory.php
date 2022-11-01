@@ -18,8 +18,8 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 use Transport\Controller\DashboardController;
 //use Transport\Service\DashboardManager;
 use Transport\Model\ChauffeurTable;
-//use Transport\Model\MarqueTable;
-//use Transport\Model\TypeVehiculeTable;
+use Transport\Model\MarqueTable;
+use Transport\Model\TypeVehiculeTable;
 
 
 /*
@@ -32,8 +32,8 @@ class DashboardControllerFactory implements FactoryInterface
   {
     
     $chauffeurTable     = $container->get(ChauffeurTable::class);
-    //$marqueTable        = $container->get(MarqueTable::class);
-    //$typeVehiculeTable  = $container->get(TypeVehiculeTable::class);
+    $marqueTable        = $container->get(MarqueTable::class);
+    $typeVehiculeTable  = $container->get(TypeVehiculeTable::class);
     //$vehiculeManager = $container->get(VehiculeManager::class);
     
     //$config            = $container->get('Config');
@@ -46,8 +46,8 @@ class DashboardControllerFactory implements FactoryInterface
     //return new VehiculeController($vehiculeTable, $vehiculeManager, $defaultRowPerPage, $stepRowPerPage, $sessionContainer);
     return new DashboardController(
       $chauffeurTable, 
-      //$marqueTable,
-      //s$typeVehiculeTable,
+      $marqueTable,
+      $typeVehiculeTable,
       $sessionContainer
     );
   }

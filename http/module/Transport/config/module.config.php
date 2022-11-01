@@ -324,13 +324,23 @@ return [
 	
 	//Service Manager
 	'service_manager' => [
-		'factories' => [    
+		'factories' => [
+
 			// Register Models
-	  
 			Model\ChauffeurTable::class
 				=> Model\Factory\ChauffeurTableFactory::class,
 			Model\ChauffeurTableGateway::class
 				=> Model\Factory\ChauffeurTableGatewayFactory::class,
+        
+      Model\MarqueTable::class
+				=> Model\Factory\MarqueTableFactory::class,
+			Model\MarqueTableGateway::class
+				=> Model\Factory\MarqueTableGatewayFactory::class,
+        
+      Model\TypeVehiculeTable::class
+				=> Model\Factory\TypeVehiculeTableFactory::class,
+			Model\TypeVehiculeTableGateway::class
+				=> Model\Factory\TypeVehiculeTableGatewayFactory::class,  
 /*					
 			Model\ChauffeurFullTable::class
 				=> Model\Factory\ChauffeurFullTableFactory::class,

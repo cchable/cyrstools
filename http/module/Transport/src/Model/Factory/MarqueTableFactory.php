@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Service/Factory/ChauffeurTableFactory.php
+ * @package   : module/Transport/src/Service/Factory/MarqueTableFactory.php
  *
  * @purpose   : This is the factory class for MarqueTable service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).

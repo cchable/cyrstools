@@ -37,6 +37,6 @@ class TypeVehiculeTableGatewayFactory implements FactoryInterface
     $dbAdapter = $container->get('Transport\Db\ReadWriteAdapter');
     $resultSetPrototype = new ResultSet();
     $resultSetPrototype->setArrayObjectPrototype(new TypeVehicule());
-    return new TableGateway('T_MARQUES', $dbAdapter, null, $resultSetPrototype);
+    return new TableGateway('T_TYPESVEHICULES', $dbAdapter, null, $resultSetPrototype);
   }
 }

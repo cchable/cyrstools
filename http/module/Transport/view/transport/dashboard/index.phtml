@@ -167,7 +167,7 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
       <div>
         <h3 class="fw-bold mb-0 fs-4">Chauffeurs</h3>
         <p>Gestion des chauffeurs et de leurs indisponibilités</p>
-        <p>Nombre de chauffeurs : <?= ($numberOfChauffeur) ? $numberOfChauffeur : '0' ?> </p>
+        <p>Nombre de chauffeurs : <?= ($numberOfChauffeur) ? $numberOfChauffeur : '0' ?></p>
         <button type="button" class="btn btn-outline-primary btn-sm">Chauffeurs</button>
         <button type="button" class="btn btn-outline-danger  btn-sm">Indisponibilités</button>
       </div>
@@ -187,8 +187,8 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
       <div>
         <h3 class="fw-bold mb-0 fs-4">Véhicules</h3>
         <p>Gestion des marques de véhicules, des types de véhicules, des véhicules et de leurs indisponibilités</p>
-        <p>Nombre de marques : x<br />
-           Nombre de types : x<br />
+        <p>Nombre de marques : <?= ($numberOfMarque) ? $numberOfMarque : '0' ?><br />
+           Nombre de types : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?><br />
            Nombre de véhicules : x</p>
         <button type="button" class="btn btn-outline-primary btn-sm">Marques</button>
         <button type="button" class="btn btn-outline-primary btn-sm">Types</button>
