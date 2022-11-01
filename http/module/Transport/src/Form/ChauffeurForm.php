@@ -16,6 +16,7 @@ use DomainException;
 
 use Laminas\Form\Form;
 use Laminas\Form\Element;
+use Laminas\Form\Element\Checkbox;
 
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
@@ -51,7 +52,7 @@ class ChauffeurForm extends Form
   {
 
     // Save parameters for internal use
-    $this->scenario          = $scenario;
+    $this->scenario = $scenario;
       
     // Define form name
     parent::__construct('chauffeur-form');
@@ -75,6 +76,41 @@ class ChauffeurForm extends Form
       'type' => 'text',
       'options' => [
         'label' => 'Prénom',
+      ],
+    ]);
+    
+    // Add "principal" field
+    $this->add([
+      'name'  => 'PRINCIPALCHAUFFEUR',
+      'type'  => Checkbox::class,
+      'class' => 'form-check-input',
+      'attributes' => [
+        'id'    => 'PRINCIPALCHAUFFEUR',
+        'class' => 'form-check-input',
+      ],
+      'options' => [
+        'label' => 'Principal',
+        'label_attributes' => [
+          'class' => 'form-check-label',
+          'for'   => 'PRINCIPALCHAUFFEUR',
+        ],
+      ],
+    ]);
+    
+    // Add "actif" field
+    $this->add([
+      'name' => 'ACTIFCHAUFFEUR',
+      'type' => Checkbox::class,
+      'attributes' => [
+        'id'    => 'ACTIFCHAUFFEUR',
+        'class' => 'form-check-input',
+      ],
+      'options' => [
+        'label' => 'Actif',
+        'label_attributes' => [
+          'class' => 'form-check-label',
+          'for'   => 'ACTIFCHAUFFEUR',
+        ],
       ],
     ]);
     

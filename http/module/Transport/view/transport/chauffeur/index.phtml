@@ -73,6 +73,8 @@ $formSearch->prepare();
     <thead class="table-light">
       <tr>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Prénom</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Principal</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Actif</th>
         <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
       </tr>
     </thead>
@@ -80,6 +82,8 @@ $formSearch->prepare();
   <?php foreach ($this->chauffeurs as $chauffeur) : ?>
       <tr>
         <td><?= $this->escapeHtml($chauffeur->getPrenom()) ?></td>
+        <td><?= ($this->escapeHtml($chauffeur->getPrincipal()) == "1") ? 'oui' : 'non'; ?></td>
+        <td><?= ($this->escapeHtml($chauffeur->getActif()) == "1") ? 'oui' : 'non'; ?></td>
         <td>
           <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('chauffeur', ['action'=>'edit', 'id'=>$chauffeur->getId()]); ?>">
             <span class="far fa-edit" aria-hidden="true"></span>

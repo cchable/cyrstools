@@ -47,6 +47,20 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
           <?= $this->formLabel($form->get('PRENOMCHAUFFEUR')); ?>
           <?= $this->formElementErrors($form->get('PRENOMCHAUFFEUR')); ?>              
         </div>
+        <div class="form-floating">
+          <div class="form-check">
+            <?= $this->formElement($form->get('PRINCIPALCHAUFFEUR')); ?>
+            <?= $this->formLabel($form->get('PRINCIPALCHAUFFEUR')); ?>
+            <?= $this->formElementErrors($form->get('PRINCIPALCHAUFFEUR')); ?>              
+          </div>
+        </div>
+        <div class="form-floating">
+          <div class="form-check">
+            <?= $this->formElement($form->get('ACTIFCHAUFFEUR')); ?>
+            <?= $this->formLabel($form->get('ACTIFCHAUFFEUR')); ?>
+            <?= $this->formElementErrors($form->get('ACTIFCHAUFFEUR')); ?>     
+          </div>            
+        </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
         <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
         <?= PHP_EOL; ?>

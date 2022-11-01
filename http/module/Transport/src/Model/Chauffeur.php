@@ -16,16 +16,17 @@ use DomainException;
 
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
-use Laminas\Filter\ToInt;
+//use Laminas\Filter\ToInt;
+use Laminas\Filter\Boolean;
 
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
 use Laminas\Validator\StringLength;
-use Laminas\Validator\InArray;
-use Laminas\I18n\Validator\IsInt;
-use Laminas\I18n\Validator\DateTime;
+//use Laminas\Validator\InArray;
+//use Laminas\I18n\Validator\IsInt;
+//use Laminas\I18n\Validator\DateTime;
 
 
 /*
@@ -36,6 +37,8 @@ class Chauffeur implements InputFilterAwareInterface
   
   private $id;
   private $prenom;
+  private $principal;
+  private $actif;
 
   private $inputFilter;
 
@@ -63,8 +66,10 @@ class Chauffeur implements InputFilterAwareInterface
   public function exchangeArray(array $data)
   {
 
-    $this->id     = !empty($data['IDX_CHAUFFEUR'])   ? $data['IDX_CHAUFFEUR']   : null;
-    $this->prenom = !empty($data['PRENOMCHAUFFEUR']) ? $data['PRENOMCHAUFFEUR'] : null;
+    $this->id        = !empty($data['IDX_CHAUFFEUR'])      ? $data['IDX_CHAUFFEUR']      : null;
+    $this->prenom    = !empty($data['PRENOMCHAUFFEUR'])    ? $data['PRENOMCHAUFFEUR']    : null;
+    $this->principal = !empty($data['PRINCIPALCHAUFFEUR']) ? $data['PRINCIPALCHAUFFEUR'] : null;
+    $this->actif     = !empty($data['ACTIFCHAUFFEUR'])     ? $data['ACTIFCHAUFFEUR']     : null;
   }
   
   //
@@ -72,8 +77,10 @@ class Chauffeur implements InputFilterAwareInterface
   {
 
     return [
-      'IDX_CHAUFFEUR'   => $this->id,
-      'PRENOMCHAUFFEUR' => $this->prenom,
+      'IDX_CHAUFFEUR'      => $this->id,
+      'PRENOMCHAUFFEUR'    => $this->prenom,
+      'PRINCIPALCHAUFFEUR' => $this->principal,
+      'ACTIFCHAUFFEUR'     => $this->actif,
 
     ];
   }    
@@ -106,11 +113,38 @@ class Chauffeur implements InputFilterAwareInterface
       ],
     ]);
     
+    $inputFilter->add([
+      'name' => 'PRINCIPALCHAUFFEUR',
+      'required' => true,
+      'filters' => [
+        [
+          'name' => Boolean::class,
+          'options' => [
+            'type' => Boolean::TYPE_INTEGER + Boolean::TYPE_ZERO_STRING,
+          ]
+        ],
+      ],
+    ]);
+    
+    $inputFilter->add([
+      'name' => 'ACTIFCHAUFFEUR',
+      'required' => true,
+      'filters' => [
+        [
+          'name' => Boolean::class,
+          'options' => [
+            'type' => Boolean::TYPE_INTEGER + Boolean::TYPE_ZERO_STRING,
+          ]
+        ],
+      ],
+    ]);
+    
     $this->inputFilter = $inputFilter;
     return $this->inputFilter;
   }
 
-  //
+  // Setter
+  // id
   public function getId() 
   {
 
@@ -124,7 +158,7 @@ class Chauffeur implements InputFilterAwareInterface
     $this->id = $id;
   }
     
-  //
+  // prenom
   public function getPrenom() 
   {
     
@@ -137,4 +171,32 @@ class Chauffeur implements InputFilterAwareInterface
     
     $this->prenom = $prenom;
   }
-}  
+
+  // principal
+  public function getPrincipal() 
+  {
+    
+    return $this->principal;
+  }
+
+  //
+  public function setPrincipal($principal) 
+  {
+    
+    $this->principal = $principal;
+  }
+  
+   // actif
+  public function getActif() 
+  {
+    
+    return $this->actif;
+  }
+
+  //
+  public function setActif($actif) 
+  {
+    
+    $this->actif = $actif;
+  } 
+}
