@@ -35,7 +35,7 @@ class Chauffeur implements InputFilterAwareInterface
 {
   
   private $id;
-  private $nom;
+  private $prenom;
 
   private $inputFilter;
 
@@ -63,8 +63,8 @@ class Chauffeur implements InputFilterAwareInterface
   public function exchangeArray(array $data)
   {
 
-    $this->id  = !empty($data['IDX_CHAUFFEUR'])   ? $data['IDX_CHAUFFEUR']   : null;
-    $this->nom = !empty($data['NOMCHAUFFEUR']) ? $data['NOMCHAUFFEUR'] : null;
+    $this->id     = !empty($data['IDX_CHAUFFEUR'])   ? $data['IDX_CHAUFFEUR']   : null;
+    $this->prenom = !empty($data['PRENOMCHAUFFEUR']) ? $data['PRENOMCHAUFFEUR'] : null;
   }
   
   //
@@ -72,8 +72,8 @@ class Chauffeur implements InputFilterAwareInterface
   {
 
     return [
-      'IDX_CHAUFFEUR' => $this->id,
-      'NOMCHAUFFEUR'  => $this->nom,
+      'IDX_CHAUFFEUR'   => $this->id,
+      'PRENOMCHAUFFEUR' => $this->prenom,
 
     ];
   }    
@@ -84,7 +84,7 @@ class Chauffeur implements InputFilterAwareInterface
 
     //
     $inputFilter->add([
-      'name' => 'NOMCHAUFFEUR',
+      'name' => 'PRENOMCHAUFFEUR',
       'required' => true,
       'validators' => [
         [
@@ -125,16 +125,16 @@ class Chauffeur implements InputFilterAwareInterface
   }
     
   //
-  public function getNom() 
+  public function getPrenom() 
   {
     
-    return $this->nom;
+    return $this->prenom;
   }
 
   //
-  public function setNom($nom) 
+  public function setPrenom($prenom) 
   {
     
-    $this->nom = $nom;
+    $this->prenom = $prenom;
   }
 }  

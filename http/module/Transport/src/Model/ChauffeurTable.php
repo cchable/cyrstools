@@ -51,7 +51,7 @@ class ChauffeurTable
 
     return $this->tableGateway->select(function (\Laminas\Db\Sql\Select $select)
     {
-      $select->order('NOMCHAUFFEUR ASC');
+      $select->order('PRENOMCHAUFFEUR ASC');
     }); 
   }
    
@@ -60,11 +60,11 @@ class ChauffeurTable
   {
         
     $fbSelect = new FBSelect($this->tableGateway->table);
-    $fbSelect->order('NOMCHAUFFEUR ASC');
+    $fbSelect->order('PRENOMCHAUFFEUR ASC');
     if ($search) {
         
       $where = new Where();
-      $fbSelect->where($where->like('NOMCHAUFFEUR', "%$search%"));
+      $fbSelect->where($where->like('PRENOMCHAUFFEUR', "%$search%"));
     }
     
     /*
@@ -113,7 +113,7 @@ class ChauffeurTable
   
     // Create a new Select object for the table:
     $fbSelect = new FBSelect($this->tableGateway->getTable());
-    $fbSelect->order('NOMCHAUFFEUR ASC');
+    $fbSelect->order('PRENOMCHAUFFEUR ASC');
 
     // Create a new result set based on the Chauffeur entity:
     $resultSetPrototype = new ResultSet();
@@ -150,16 +150,17 @@ class ChauffeurTable
   }
 
   //
-  public function saveChauffeur(Chauffeur $vehicule)
+  public function saveChauffeur(Chauffeur $chauffeur)
   {
 
-    $data = $vehicule->getArrayCopy();
-    $id = (int) $vehicule->getId();
+    $data = $chauffeur->getArrayCopy();
+    $id = (int) $chauffeur->getId();
 
     if ($id === 0) {
+      unset($data["IDX_CHAUFFEUR"]);
       $result = $this->tableGateway->insert($data);
-      $vehicule = $this->findOneByRecord($vehicule);
-      return $vehicule;
+      $chauffeur = $this->findOneByRecord($chauffeur);
+      return $chauffeur;
     }
     
     try {
@@ -199,10 +200,10 @@ class ChauffeurTable
   }
   
   //
-  public function findOneByNom($nom)
+  public function findOneByNom($prenom)
   {
     
-    $vehicule = $this->findOneBy(['NOMCHAUFFEUR' => $nom]);
+    $vehicule = $this->findOneBy(['PRENOMCHAUFFEUR' => $prenom]);
     return $vehicule;
   }
   

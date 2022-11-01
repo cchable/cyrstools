@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Planning/view/planning/dashboard/index.phtml
+ * @package   : module/Transport/view/transport/dashboard/index.phtml
  *
  * @purpose   :
  * 
@@ -14,9 +14,8 @@ $title = 'Tableau de bord du Transport';
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('dashboard');
 $this->pageBreadcrumbs()->setItems([
-  'Accueil'   => $this->url('home'),
-  'Transport' => $this->url('transport'),
-  'Dashboard' => $this->url('dashboard'),
+  'Accueil'             => $this->url('home'),
+  'Transport\Dashboard' => $this->url('dashboard'),
 ]);
 
 echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
@@ -100,7 +99,7 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
 
 </svg>
 
-<div class="container px-4 py-5" id="dashboard-grid">
+<div class="container" id="dashboard-grid">
   <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
@@ -168,8 +167,8 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
         <h3 class="fw-bold mb-0 fs-4">Chauffeurs</h3>
         <p>Gestion des chauffeurs et de leurs indisponibilités</p>
         <p>Nombre de chauffeurs : <?= ($numberOfChauffeur) ? $numberOfChauffeur : '0' ?></p>
-        <button type="button" class="btn btn-outline-primary btn-sm">Chauffeurs</button>
-        <button type="button" class="btn btn-outline-danger  btn-sm">Indisponibilités</button>
+        <a class="btn btn-light btn-outline-primary btn-sm"  role="button" aria-pressed="true" href="<?= $this->url('chauffeur', ['action'=>'index']); ?>" role="button">Chauffeurs</a>
+        <button type="button" class="btn btn-outline-danger btn-sm">Indisponibilités</button>
       </div>
     </div>
     <div class="col d-flex align-items-start">

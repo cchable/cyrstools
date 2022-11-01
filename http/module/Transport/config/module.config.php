@@ -19,7 +19,22 @@ use Laminas\Router\Http\Segment;
 return [
 	//Router 
 	'router' => [
-		'routes' => [	
+		'routes' => [
+			// Define a new route called "dashboard"
+			'transport' => [
+				'type'    => Segment::class,
+				'options' => [
+					'route'       => '/dashboard[/:action[/:ID]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],
+					'defaults' => [
+						'controller' => Controller\DashboardController::class,
+						'action'     => 'index',
+					],
+				],
+			],    
 			// Define a new route called "dashboard"
 			'dashboard' => [
 				'type'    => Segment::class,
@@ -31,6 +46,25 @@ return [
 					],
 					'defaults' => [
 						'controller' => Controller\DashboardController::class,
+						'action'     => 'index',
+					],
+				],
+			],
+
+      // Define a new route called "chauffeur"
+			'chauffeur' => [
+        // Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+        // Listen to "/chauffeur" as uri:
+					'route'       => '/chauffeur[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],
+          // Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\ChauffeurController::class,
 						'action'     => 'index',
 					],
 				],
@@ -285,6 +319,9 @@ return [
 
 		Controller\DashboardController::class 
 			=> Controller\Factory\DashboardControllerFactory::class,
+      
+		Controller\ChauffeurController::class 
+			=> Controller\Factory\ChauffeurControllerFactory::class,
 /*	
 		Controller\HeurePlanningController::class 
 			=> Controller\Factory\HeurePlanningControllerFactory::class,
@@ -423,10 +460,10 @@ return [
 				=> Model\Factory\TransportFullTableGatewayFactory::class,
 */     
 			// Register Services
-/*		
+	
 			Service\ChauffeurManager::class
 				=> Service\Factory\ChauffeurManagerFactory::class,
-
+/*
 			Service\HeurePlanningManager::class
 				=> Service\Factory\HeurePlanningManagerFactory::class,
 			
