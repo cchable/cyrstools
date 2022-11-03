@@ -8,9 +8,10 @@ $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('home');
 
 $this->pageBreadcrumbs()->setItems([
-  'Accueil'      => $this->url('home'),
+  'Accueil' => $this->url('home'),
   ]);
 ?>
 
-<h1><?= $this->escapeHtml($title) ?></h1>
-
+<div class="container">
+  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+</div>

@@ -119,6 +119,7 @@ return [
     'TypePlanningSessionContainer',
     'TransportSessionContainer',
     'PlanningSessionContainer',
+    'DashboardSessionContainer',
   ],
   
 	//View Helper

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Model/Chauffeur.php
+ * @package   : module/Transport/src/Model/Chauffeur.php
  *
  * @purpose   :
  * 
@@ -77,10 +77,22 @@ class Chauffeur implements InputFilterAwareInterface
   {
 
     return [
+      'PRENOMCHAUFFEUR'    => $this->prenom,
+      'PRINCIPALCHAUFFEUR' => (BOOL) $this->principal,
+      'ACTIFCHAUFFEUR'     => (BOOL) $this->actif,
+
+    ];
+  }    
+  
+  //
+  public function getArrayCopyFull()
+  {
+
+    return [
       'IDX_CHAUFFEUR'      => $this->id,
       'PRENOMCHAUFFEUR'    => $this->prenom,
-      'PRINCIPALCHAUFFEUR' => $this->principal,
-      'ACTIFCHAUFFEUR'     => $this->actif,
+      'PRINCIPALCHAUFFEUR' => (BOOL) $this->principal,
+      'ACTIFCHAUFFEUR'     => (BOOL) $this->actif,
 
     ];
   }    
@@ -176,27 +188,27 @@ class Chauffeur implements InputFilterAwareInterface
   public function getPrincipal() 
   {
     
-    return $this->principal;
+    return (bool) $this->principal;
   }
 
   //
   public function setPrincipal($principal) 
   {
     
-    $this->principal = $principal;
+    $this->principal = (bool) $principal;
   }
   
    // actif
   public function getActif() 
   {
     
-    return $this->actif;
+    return (bool) $this->actif;
   }
 
   //
   public function setActif($actif) 
   {
     
-    $this->actif = $actif;
+    $this->actif = (bool) $actif;
   } 
 }

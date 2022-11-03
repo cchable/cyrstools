@@ -157,7 +157,7 @@ class ChauffeurTable
     $id = (int) $chauffeur->getId();
 
     if ($id === 0) {
-      unset($data["IDX_CHAUFFEUR"]);
+      //unset($data["IDX_CHAUFFEUR"]);
       $result = $this->tableGateway->insert($data);
       $chauffeur = $this->findOneByRecord($chauffeur);
       return $chauffeur;
@@ -204,7 +204,7 @@ class ChauffeurTable
   {
     
     $vehicule = $this->findOneBy(['PRENOMCHAUFFEUR' => $prenom]);
-    return $vehicule;
+    return $chauffeur;
   }
   
   // 
@@ -212,10 +212,10 @@ class ChauffeurTable
   {
     
     $recordArray = $record->getArrayCopy();
-    unset($recordArray["IDX_CHAUFFEUR"]);
-    $vehicule = $this->findOneBy($recordArray);
+    //unset($recordArray["IDX_CHAUFFEUR"]);
+    $chauffeur = $this->findOneBy($recordArray);
     
-    return $vehicule;
+    return $chauffeur;
   }
   
   public function getNumberOfRows () 

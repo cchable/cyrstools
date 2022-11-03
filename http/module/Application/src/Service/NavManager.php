@@ -41,12 +41,12 @@ class NavManager
   {
     
     $url = $this->urlHelper;
-        
+/*        
     $planningTransportItems = [];
     $planningTransportItems[] = [
-      'id'    => 'transport',
-      'label' => 'Transport',
-      'link'  => $url('transport')
+      'id'    => 'planningtransport',
+      'label' => 'PlanningTransport',
+      'link'  => $url('planningtransport')
     ]; 
     $planningTransportItems[] = [
       'divider' => 'hr',
@@ -128,6 +128,22 @@ class NavManager
       'label' => '->Années Scolaires',
       'link'  => $url('anneescolaire')
     ];
+*/    
+    //
+    $transportItems = [];
+    $transportItems[] = [
+      'id'    => 'dashboard',
+      'label' => 'Dashboard',
+      'link'  => $url('dashboard')
+    ]; 
+    $transportItems[] = [
+      'divider' => 'hr',
+    ]; 
+    $transportItems[] = [
+      'id'    => 'chauffeur',
+      'label' => 'Chauffeurs',
+      'link'  => $url('chauffeur')
+    ];
     
     //
     $userItems = [];
@@ -152,12 +168,20 @@ class NavManager
       'label' => 'Accueil',
       'link'  => $url('home')
     ];
+/*    
     $items[] = [
       'id'       => 'planningtransport',
       'label'    => 'Planning Transport',
       'link'     => $url('planningtransport'),
       'dropdown' => $planningTransportItems,
-    ];    
+    ];
+*/    
+    $items[] = [
+      'id'       => 'transport',
+      'label'    => 'Transport',
+      'link'     => $url('dashboard'),
+      'dropdown' => $transportItems,
+    ];
     $items[] = [
       'id'       => 'user',
       'label'    => 'User',

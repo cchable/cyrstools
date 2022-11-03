@@ -84,7 +84,13 @@ return [
 				'dsn'      => 'firebird:dbname=127.0.0.1:planningtransport51;charset=utf8;',
 				'user'     => 'sysdba',
 				'password' => 'masterkey',
-			]
+			],
+			'Transport\Db\ReadWriteAdapter' => [
+				'driver'   => 'Pdo',
+				'dsn'      => 'firebird:dbname=srv-db-01.chablerie.net:transport;charset=utf8;',
+				'user'     => 'sysdba',
+				'password' => 'masterkey',
+			],
 		],
 	],
 ];
