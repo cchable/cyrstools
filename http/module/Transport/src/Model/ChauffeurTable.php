@@ -153,11 +153,10 @@ class ChauffeurTable
   public function saveChauffeur(Chauffeur $chauffeur)
   {
 
-    $data = $chauffeur->getArrayCopy();
+    $data = $chauffeur->getArrayCopy(false);
     $id = (int) $chauffeur->getId();
 
     if ($id === 0) {
-      //unset($data["IDX_CHAUFFEUR"]);
       $result = $this->tableGateway->insert($data);
       $chauffeur = $this->findOneByRecord($chauffeur);
       return $chauffeur;
@@ -171,6 +170,10 @@ class ChauffeurTable
         $id
       ));
     }
+    //unset($data["PRINCIPALCHAUFFEUR"]);
+    //$data["PRINCIPALCHAUFFEUR"] = true;
+    //unset($data["ACTIFCHAUFFEUR"]);
+    
     $this->tableGateway->update($data, ['IDX_CHAUFFEUR' => $id]);
   }
 
@@ -186,17 +189,17 @@ class ChauffeurTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $vehicule = $rowset->current();
+    $chauffeur = $rowset->current();
     
-    return $vehicule;
+    return $chauffeur;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $vehicule = $this->findOneBy(['IDX_CHAUFFEUR' => (int) $id]);
-    return $vehicule;
+    $chauffeur = $this->findOneBy(['IDX_CHAUFFEUR' => (int) $id]);
+    return $chauffeur;
   }
   
   //

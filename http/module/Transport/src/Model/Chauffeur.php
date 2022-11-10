@@ -63,17 +63,18 @@ class Chauffeur implements InputFilterAwareInterface
   }
 
   //
-  public function exchangeArray(array $data)
+  public function exchangeArray(array $data, bool $idx=true)
   {
-
-    $this->id        = !empty($data['IDX_CHAUFFEUR'])      ? $data['IDX_CHAUFFEUR']      : null;
+    if ($idx) {
+      $this->id      = !empty($data['IDX_CHAUFFEUR'])      ? $data['IDX_CHAUFFEUR']      : null;
+    }
     $this->prenom    = !empty($data['PRENOMCHAUFFEUR'])    ? $data['PRENOMCHAUFFEUR']    : null;
-    $this->principal = !empty($data['PRINCIPALCHAUFFEUR']) ? $data['PRINCIPALCHAUFFEUR'] : null;
-    $this->actif     = !empty($data['ACTIFCHAUFFEUR'])     ? $data['ACTIFCHAUFFEUR']     : null;
+    $this->principal = !empty($data['PRINCIPALCHAUFFEUR']) ? $data['PRINCIPALCHAUFFEUR'] : false;
+    $this->actif     = !empty($data['ACTIFCHAUFFEUR'])     ? $data['ACTIFCHAUFFEUR']     : false;
   }
   
   //
-  public function getArrayCopy()
+  public function getArrayCopyOld()
   {
 
     return [
@@ -85,17 +86,25 @@ class Chauffeur implements InputFilterAwareInterface
   }    
   
   //
-  public function getArrayCopyFull()
+  public function getArrayCopy(bool $idx=true)
   {
-
-    return [
-      'IDX_CHAUFFEUR'      => $this->id,
-      'PRENOMCHAUFFEUR'    => $this->prenom,
-      'PRINCIPALCHAUFFEUR' => (BOOL) $this->principal,
-      'ACTIFCHAUFFEUR'     => (BOOL) $this->actif,
-
-    ];
-  }    
+    if ($idx) {
+      
+      return [
+        'IDX_CHAUFFEUR'      => $this->id,
+        'PRENOMCHAUFFEUR'    => $this->prenom,
+        'PRINCIPALCHAUFFEUR' => (BOOL) $this->principal,
+        'ACTIFCHAUFFEUR'     => (BOOL) $this->actif,
+      ];
+    } else {
+  
+      return [
+        'PRENOMCHAUFFEUR'    => $this->prenom,
+        'PRINCIPALCHAUFFEUR' => (BOOL) $this->principal,
+        'ACTIFCHAUFFEUR'     => (BOOL) $this->actif,
+      ];
+    }
+  }
   
   //
   public function fillInputFilter(InputFilterInterface $inputFilter)

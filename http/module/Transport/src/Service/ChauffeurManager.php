@@ -82,8 +82,7 @@ class ChauffeurManager
       
       return false;
     }
-
-    $chauffeur->setPrenom($data['PRENOMCHAUFFEUR']);
+    $chauffeur->exchangeArray($data, false);
 
     // Apply changes to database.
     $this->chauffeurTable->saveChauffeur($chauffeur);

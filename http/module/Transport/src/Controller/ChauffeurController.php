@@ -276,11 +276,11 @@ class ChauffeurController extends AbstractActionController
       }               
     } else {
 		
-      $form->setData($chauffeur->getArrayCopyFull());
+      $form->setData($chauffeur->getArrayCopy(true));
     }
 
     return new ViewModel([
-      'form'      => $form,
+      'form' => $form,
     ]);
   }
 }
