@@ -65,6 +65,7 @@ class Chauffeur implements InputFilterAwareInterface
   //
   public function exchangeArray(array $data, bool $idx=true)
   {
+    
     if ($idx) {
       $this->id      = !empty($data['IDX_CHAUFFEUR'])      ? $data['IDX_CHAUFFEUR']      : null;
     }
@@ -72,22 +73,11 @@ class Chauffeur implements InputFilterAwareInterface
     $this->principal = !empty($data['PRINCIPALCHAUFFEUR']) ? $data['PRINCIPALCHAUFFEUR'] : false;
     $this->actif     = !empty($data['ACTIFCHAUFFEUR'])     ? $data['ACTIFCHAUFFEUR']     : false;
   }
-  
-  //
-  public function getArrayCopyOld()
-  {
 
-    return [
-      'PRENOMCHAUFFEUR'    => $this->prenom,
-      'PRINCIPALCHAUFFEUR' => (BOOL) $this->principal,
-      'ACTIFCHAUFFEUR'     => (BOOL) $this->actif,
-
-    ];
-  }    
-  
   //
   public function getArrayCopy(bool $idx=true)
   {
+    
     if ($idx) {
       
       return [
@@ -136,12 +126,16 @@ class Chauffeur implements InputFilterAwareInterface
     
     $inputFilter->add([
       'name' => 'PRINCIPALCHAUFFEUR',
-      'required' => true,
+      //'required' => true,
       'filters' => [
         [
           'name' => Boolean::class,
           'options' => [
-            'type' => Boolean::TYPE_INTEGER + Boolean::TYPE_ZERO_STRING,
+            'type' => [
+              Boolean::TYPE_BOOLEAN,
+              Boolean::TYPE_INTEGER,
+              Boolean::TYPE_ZERO_STRING,
+            ],  
           ]
         ],
       ],
@@ -154,7 +148,10 @@ class Chauffeur implements InputFilterAwareInterface
         [
           'name' => Boolean::class,
           'options' => [
-            'type' => Boolean::TYPE_INTEGER + Boolean::TYPE_ZERO_STRING,
+            'type' => [
+              Boolean::TYPE_INTEGER,
+              Boolean::TYPE_ZERO_STRING,
+            ],  
           ]
         ],
       ],

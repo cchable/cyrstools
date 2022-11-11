@@ -24,6 +24,24 @@ $form->get('PRENOMCHAUFFEUR')->setAttributes([
   'placeholder' => 'Prénom'
 ]);
 
+$form->get('PRINCIPALCHAUFFEUR')->setAttributes([
+  'class'       => 'form-check-input',
+  'placeholder' => 'Principal'
+]);
+
+$form->get('PRINCIPALCHAUFFEUR')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('ACTIFCHAUFFEUR')->setAttributes([
+  'class'       => 'form-check-input',
+  'placeholder' => 'Actif'
+]);
+
+$form->get('ACTIFCHAUFFEUR')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
 $form->get('submit')->setAttributes([
 	'class'        => 'btn btn-outline-warning',
 	'role'         => 'button',

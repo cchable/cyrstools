@@ -83,16 +83,20 @@ class ChauffeurForm extends Form
     $this->add([
       'name'  => 'PRINCIPALCHAUFFEUR',
       'type'  => Checkbox::class,
-      'class' => 'form-check-input',
+        
       'attributes' => [
         'id'    => 'PRINCIPALCHAUFFEUR',
         'class' => 'form-check-input',
+        'value' => '0',
       ],
+        
       'options' => [
+        'use_hidden_element' => true,
+        'checked_value'   => '1',
+        'unchecked_value' => '0',
         'label' => 'Principal',
         'label_attributes' => [
-          'class' => 'form-check-label',
-          'for'   => 'PRINCIPALCHAUFFEUR',
+          'for' => 'PRINCIPALCHAUFFEUR',
         ],
       ],
     ]);
@@ -101,15 +105,20 @@ class ChauffeurForm extends Form
     $this->add([
       'name' => 'ACTIFCHAUFFEUR',
       'type' => Checkbox::class,
+        
       'attributes' => [
         'id'    => 'ACTIFCHAUFFEUR',
         'class' => 'form-check-input',
+        'value' => 'true',
       ],
+        
       'options' => [
+        'use_hidden_element' => true,
+        'checked_value'   => '1',
+        'unchecked_value' => '0',
         'label' => 'Actif',
         'label_attributes' => [
-          'class' => 'form-check-label',
-          'for'   => 'ACTIFCHAUFFEUR',
+          'for' => 'ACTIFCHAUFFEUR',
         ],
       ],
     ]);
