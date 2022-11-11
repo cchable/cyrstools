@@ -24,7 +24,7 @@ use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
 use Laminas\Validator\StringLength;
-//use Laminas\Validator\InArray;
+use Laminas\Validator\InArray;
 //use Laminas\I18n\Validator\IsInt;
 //use Laminas\I18n\Validator\DateTime;
 
@@ -100,7 +100,7 @@ class Chauffeur implements InputFilterAwareInterface
   public function fillInputFilter(InputFilterInterface $inputFilter)
   {
 
-    //
+    // PRENOMCHAUFFEUR
     $inputFilter->add([
       'name' => 'PRENOMCHAUFFEUR',
       'required' => true,
@@ -123,13 +123,17 @@ class Chauffeur implements InputFilterAwareInterface
         ],
       ],
     ]);
-    
+
+    // PRINCIPALCHAUFFEUR
     $inputFilter->add([
       'name' => 'PRINCIPALCHAUFFEUR',
-      //'required' => true,
+      'required'          => true,
+      'allow_empty'       => true,
+      'continue_if_empty' => true,        
+      'description'       => 'is principal ?',
       'filters' => [
         [
-          'name' => Boolean::class,
+          'name'    => Boolean::class,
           'options' => [
             'type' => [
               Boolean::TYPE_BOOLEAN,
@@ -140,21 +144,26 @@ class Chauffeur implements InputFilterAwareInterface
         ],
       ],
     ]);
-    
+
+    // ACTIFCHAUFFEUR
     $inputFilter->add([
-      'name' => 'ACTIFCHAUFFEUR',
-      'required' => true,
+      'name'              => 'ACTIFCHAUFFEUR',
+      'required'          => true,
+      'allow_empty'       => true,
+      'continue_if_empty' => true,        
+      'description'       => 'is actif ?',
       'filters' => [
         [
-          'name' => Boolean::class,
+          'name'    => Boolean::class,
           'options' => [
             'type' => [
+              Boolean::TYPE_BOOLEAN,
               Boolean::TYPE_INTEGER,
               Boolean::TYPE_ZERO_STRING,
             ],  
           ]
         ],
-      ],
+      ],         
     ]);
     
     $this->inputFilter = $inputFilter;

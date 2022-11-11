@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Modification d'un chauffeur - Cyr's tools</title>
+    <meta name="viewport" content="width&#x3D;device-width,&#x20;initial-scale&#x3D;1.0">
+<meta http-equiv="X-UA-Compatible" content="IE&#x3D;edge">
+    <!-- Style -->
+    <link href="&#x2F;css&#x2F;fontawesome&#x2F;all.css" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="&#x2F;css&#x2F;510&#x2F;bootstrap.min.css" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="&#x2F;css&#x2F;navbar.css" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="&#x2F;css&#x2F;style.css" media="screen" rel="stylesheet" type="text&#x2F;css">
+<link href="&#x2F;img&#x2F;favicon.ico" rel="shortcut&#x20;icon" type="image&#x2F;vnd.microsoft.icon">
+    <!-- Scripts -->
+    <script  src="&#x2F;js&#x2F;jquery-3.6.0.min.js"></script>
+<script  src="&#x2F;js&#x2F;fontawesome&#x2F;all.js"></script>
+<script  src="&#x2F;js&#x2F;510&#x2F;bootstrap.min.js"></script>    
+    <style>
+      body, html {
+        height: 100%;
+        margin: 0;
+      }
+
+      .bg {
+        background-image: url("/img/bg-tumblr_ls0w5txuft1r3vazto3_400.png");
+        background-repeat: repeat;
+        background-attachment: fixed;
+      }
+    </style>
+    
+  </head>
+  <body class="bg">
+    <div class="container">
+      <!-- Page header
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="app-caption">Cyr's tools</div>
+        </div>                
+      </div>
+      -->
+      <!-- Navigation bar -->
+      <div class="row">
+        <div class="col-lg-12">
+          
+<nav class="navbar navbar-expand-lg navbar-light bg-primary bg-opacity-25 rounded" role="navigation" aria-label="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarsmain">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item "><a class="nav-link " aria-current="page" href="/">Accueil</a></li>
+          <li class="nav-item dropdown active"><a class="nav-link dropdown-toggle link-dark text-decoration-none active" href="#" id="dropdowntransport" data-bs-toggle="dropdown" aria-expanded="false">Transport</a>
+            <ul class="dropdown-menu text-small bg-light" aria-labelledby="dropdowntransport">
+              <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item active" href="/chauffeur">Chauffeurs</a></li>
+            </ul>
+          </li>
+      </ul>
+      <div class="text-end">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle link-dark text-decoration-none" href="#" id="dropdownuser" data-bs-toggle="dropdown" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg></a>
+            <ul class="dropdown-menu text-small bg-light" aria-labelledby="dropdownuser">
+              <li><a class="dropdown-item" href="/">Login</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/">Informations</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+        </div>
+      </div>
+      <!-- Breadcrumbs -->
+      <div class="row">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg rounded mt-0" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb"><div class="container-fluid"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="/">Accueil</a></li><li class="breadcrumb-item"><a href="/chauffeur">Transport\Chauffeur</a></li><li class="breadcrumb-item active">Ajout</li></ol></div></nav>
+        </div>
+      </div>
+      <!-- Page content placeholder -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="container">
+  <h2 class="pb-2 border-bottom">Modification d&#039;un chauffeur</h2>
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <form method="post" name="chauffeur-form" id="chauffeur-form">      
+        <div class="form-floating my-2">
+          <input type="text" name="PRENOMCHAUFFEUR" class="form-control" placeholder="Pr&#xE9;nom" value="Karim">          <label for="PRENOMCHAUFFEUR">Prénom</label>                        
+        </div>
+        <div class="form-floating">
+          <div class="form-check">
+            <input type="hidden" name="PRINCIPALCHAUFFEUR" value="false"><input type="checkbox" name="PRINCIPALCHAUFFEUR" id="PRINCIPALCHAUFFEUR" class="form-check-input" placeholder="Principal" value="true">            <label for="PRINCIPALCHAUFFEUR">Principal</label>                          
+          </div>
+        </div>
+        <div class="form-floating">
+          <div class="form-check">
+            <input type="checkbox" name="ACTIFCHAUFFEUR" id="ACTIFCHAUFFEUR" class="form-check-input" placeholder="Actif" value="true">            <label for="ACTIFCHAUFFEUR">Actif</label>                 
+          </div>            
+        </div>
+        <input type="hidden" name="csrf" value="f015a27527ddaa3b781a6526c298de67-235b53ed211728dd4014f5c1cdf306a0">
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+        
+      </form>
+    </div>    
+  </div>
+</div>
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <div class="text-center">
+          <p>&copy; 2018 - 2022 par <img src="/img/LogoSPFBLo_75x41.png" height="28" width="50" alt="Logo SPFB"> SPFB. Tous droits réservés.</p>
+        </div>
+      </footer>
+    </div>
+        
+  </body>
+</html>

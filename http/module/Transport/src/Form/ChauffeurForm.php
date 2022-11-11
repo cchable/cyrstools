@@ -92,10 +92,10 @@ class ChauffeurForm extends Form
         
       'options' => [
         'use_hidden_element' => true,
-        'checked_value'   => '1',
-        'unchecked_value' => '0',
-        'label' => 'Principal',
-        'label_attributes' => [
+        'checked_value'      => '1',
+        'unchecked_value'    => '0',
+        'label'              => 'Principal',
+        'label_attributes'   => [
           'for' => 'PRINCIPALCHAUFFEUR',
         ],
       ],
@@ -109,15 +109,15 @@ class ChauffeurForm extends Form
       'attributes' => [
         'id'    => 'ACTIFCHAUFFEUR',
         'class' => 'form-check-input',
-        'value' => 'true',
+        'value' => '0',
       ],
         
       'options' => [
         'use_hidden_element' => true,
-        'checked_value'   => '1',
-        'unchecked_value' => '0',
-        'label' => 'Actif',
-        'label_attributes' => [
+        'checked_value'      => '1',
+        'unchecked_value'    => '0',
+        'label'              => 'Actif',
+        'label_attributes'   => [
           'for' => 'ACTIFCHAUFFEUR',
         ],
       ],
@@ -125,8 +125,8 @@ class ChauffeurForm extends Form
     
     // Add the Submit button
     $this->add([
-      'name' => 'submit',
-      'type' => 'submit',
+      'name'       => 'submit',
+      'type'       => 'submit',
       'attributes' => [
         'value' => 'Sauver',
         'id'    => 'submit',
@@ -135,8 +135,8 @@ class ChauffeurForm extends Form
     
     // Add the CSRF field
     $this->add([
-      'name' => 'csrf',
-      'type' => 'csrf',
+      'name'    => 'csrf',
+      'type'    => 'csrf',
       'options' => [
         'csrf_options' => [
           'timeout' => 600
