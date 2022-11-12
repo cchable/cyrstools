@@ -18,17 +18,12 @@ $this->pageBreadcrumbs()->setItems([
   'Transport\Dashboard' => $this->url('dashboard'),
 ]);
 
-echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
-echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
-echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
-echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
-
+  echo $this->flashMessenger()->render('default');
+  echo $this->flashMessenger()->render('error');
+  echo $this->flashMessenger()->render('warning');
+  echo $this->flashMessenger()->render('success');
+  echo $this->flashMessenger()->render('info');
 ?>
-<!--
-<div class="text-center">
-  <h2><?= $this->escapeHtml($title) ?></h2>
-</div>
--->
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -83,7 +78,6 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
   <symbol id="geo-fill" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
   </symbol>
-  
   <symbol id="universal-access" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M9.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM6 5.5l-4.535-.442A.531.531 0 0 1 1.531 4H14.47a.531.531 0 0 1 .066 1.058L10 5.5V9l.452 6.42a.535.535 0 0 1-1.053.174L8.243 9.97c-.064-.252-.422-.252-.486 0l-1.156 5.624a.535.535 0 0 1-1.053-.174L6 9V5.5Z"/>
   </symbol>
@@ -94,9 +88,13 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
   <symbol id="truck-front-fill" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M3.5 0A2.5 2.5 0 0 0 1 2.5v9c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2v-9A2.5 2.5 0 0 0 12.5 0h-9ZM3 3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3.9c0 .625-.562 1.092-1.17.994C10.925 7.747 9.208 7.5 8 7.5c-1.208 0-2.925.247-3.83.394A1.008 1.008 0 0 1 3 6.9V3Zm1 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-5-2a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Z"/>
   </symbol> 
-
-
-
+  <symbol id="signpost-split" viewBox="0 0 16 16">
+    <path fill-rsle="evenodd" d="M7 7V1.414a1 1 0 0 1 2 0V2h5a1 1 0 0 1 .8.4l.975 1.3a.5.5 0 0 1 0 .6L14.8 5.6a1 1 0 0 1-.8.4H9v10H7v-5H2a1 1 0 0 1-.8-.4L.225 9.3a.5.5 0 0 1 0-.6L1.2 7.4A1 1 0 0 1 2 7h5zm1 3V8H2l-.75 1L2 10h6zm0-5h6l.75-1L14 3H8v2z"/>
+  </symbol> 
+  <symbol id="calendar3-range" viewBox="0 0 16 16">
+    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+    <path d="M7 10a1 1 0 0 0 0-2H1v2h6zm2-3h6V5H9a1 1 0 0 0 0 2z"/>
+  </symbol> 
 </svg>
 
 <div class="container" id="dashboard-grid">
@@ -168,7 +166,7 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
         <p>Gestion des chauffeurs et de leurs indisponibilités</p>
         <p>Nombre de chauffeurs : <?= ($numberOfChauffeur) ? $numberOfChauffeur : '0' ?></p>
         <a class="btn btn-light btn-outline-primary btn-sm"  role="button" aria-pressed="true" href="<?= $this->url('chauffeur', ['action'=>'index']); ?>" role="button">Chauffeurs</a>
-        <button type="button" class="btn btn-outline-danger btn-sm">Indisponibilités</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" disabled>Indisponibilités</button>
       </div>
     </div>
     <div class="col d-flex align-items-start">
@@ -177,8 +175,8 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
         <h3 class="fw-bold mb-0 fs-4">AS &amp; Éphémérides</h3>
         <p>Gestion des années scolaires &amp; de leurs éphémérides</p>
         <p>Il faut créer l'année scolaire avant ses éphémérides</p>
-        <button type="button" class="btn btn-outline-primary btn-sm">Années scolaires</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Éphémérides</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Années scolaires</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Éphémérides</button>
       </div>
     </div>
     <div class="col d-flex align-items-start">
@@ -189,11 +187,33 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
         <p>Nombre de marques : <?= ($numberOfMarque) ? $numberOfMarque : '0' ?><br />
            Nombre de types : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?><br />
            Nombre de véhicules : x</p>
-        <button type="button" class="btn btn-outline-primary btn-sm">Marques</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Types</button>
-        <button type="button" class="btn btn-outline-primary btn-sm">Véhicules</button>
-        <button type="button" class="btn btn-outline-danger  btn-sm">Indisponibilités</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Marques</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Types</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Véhicules</button>
+        <button type="button" class="btn btn-outline-danger  btn-sm" disabled>Indisponibilités</button>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#signpost-split"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4">Trajets</h3>
+        <p>Gestion des trajets</p>
+        <p>Il faut créer les étapes d'un trajet avant le trajet</p> 
+        <p>Nombre d'étapes : <?= ($numberOfMarque) ? $numberOfMarque : '0' ?><br />
+           Nombre de trajets : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?></p>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Etapes</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Trajets</button>
       </div>
     </div>
   </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3-range"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4">Plannings</h3>
+        <p>Gestion des plannings</p>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Plannings</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Impression</button>
+      </div>
+    </div>
+  </div>  
 </div>

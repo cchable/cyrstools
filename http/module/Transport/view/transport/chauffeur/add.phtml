@@ -19,23 +19,44 @@ $this->pageBreadcrumbs()->setItems([
   'Ajout'               => $this->url('chauffeur', ['action'=>'add']),
 ]);
 
+echo $this->flashMessenger()->renderCurrent('default');
+echo $this->flashMessenger()->renderCurrent('error');
+echo $this->flashMessenger()->renderCurrent('warning');
+echo $this->flashMessenger()->renderCurrent('success');
+echo $this->flashMessenger()->renderCurrent('info');
+
+$this->flashMessenger()->clearMessagesFromContainer();
+
 $form->get('PRENOMCHAUFFEUR')->setAttributes([
   'class'       => 'form-control', 
   'placeholder' => 'Prénom'
 ]);
 
+$form->get('PRINCIPALCHAUFFEUR')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'Ce chauffeur est principal'
+]);
+$form->get('PRINCIPALCHAUFFEUR')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('ACTIFCHAUFFEUR')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'Ce chauffeur est actif'
+]);
+$form->get('ACTIFCHAUFFEUR')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
 $form->get('submit')->setAttributes([
 	'class'        => 'btn btn-outline-warning',
 	'role'         => 'button',
-	'aria-pressed' => 'true']
-	);
+	'aria-pressed' => 'true'
+]);
 
 $form->prepare();
-
-echo $this->flashMessenger()->render('error',   ['alert', 'alert-dismissible', 'fade', 'show', 'alert-danger']);
-echo $this->flashMessenger()->render('warning', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-warning']);
-echo $this->flashMessenger()->render('success', ['alert', 'alert-dismissible', 'fade', 'show', 'alert-success']);
-echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', 'fade', 'show', 'alert-info']);
 ?>
 <div class="container">
   <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
@@ -47,7 +68,23 @@ echo $this->flashMessenger()->render('info',    ['alert', 'alert-dismissible', '
           <?= $this->formLabel($form->get('PRENOMCHAUFFEUR')); ?>
           <?= $this->formElementErrors($form->get('PRENOMCHAUFFEUR')); ?>              
         </div>
+        <hr class="my-4">
+        <div class="form-floating">
+          <div class="form-check form-switch">
+            <?= $this->formElement($form->get('PRINCIPALCHAUFFEUR')); ?>
+            <?= $this->formLabel($form->get('PRINCIPALCHAUFFEUR')); ?>
+            <?= $this->formElementErrors($form->get('PRINCIPALCHAUFFEUR')); ?>              
+          </div>
+        </div>
+        <div class="form-floating">
+          <div class="form-check form-switch">
+            <?= $this->formElement($form->get('ACTIFCHAUFFEUR')); ?>
+            <?= $this->formLabel($form->get('ACTIFCHAUFFEUR')); ?>
+            <?= $this->formElementErrors($form->get('ACTIFCHAUFFEUR')); ?>     
+          </div>            
+        </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+        <hr class="my-4">
         <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
         <?= PHP_EOL; ?>
       <?= $this->form()->closeTag() . PHP_EOL; ?>

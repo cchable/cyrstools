@@ -63,10 +63,10 @@ class Chauffeur implements InputFilterAwareInterface
   }
 
   //
-  public function exchangeArray(array $data, bool $idx=true)
+  public function exchangeArray(array $data, bool $bIdx=true)
   {
     
-    if ($idx) {
+    if ($bIdx) {
       $this->id      = !empty($data['IDX_CHAUFFEUR'])      ? $data['IDX_CHAUFFEUR']      : null;
     }
     $this->prenom    = !empty($data['PRENOMCHAUFFEUR'])    ? $data['PRENOMCHAUFFEUR']    : null;
@@ -75,10 +75,10 @@ class Chauffeur implements InputFilterAwareInterface
   }
 
   //
-  public function getArrayCopy(bool $idx=true)
+  public function getArrayCopy(bool $bIdx=true)
   {
     
-    if ($idx) {
+    if ($bIdx) {
       
       return [
         'IDX_CHAUFFEUR'      => $this->id,

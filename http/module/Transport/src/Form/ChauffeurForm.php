@@ -94,7 +94,7 @@ class ChauffeurForm extends Form
         'use_hidden_element' => true,
         'checked_value'      => '1',
         'unchecked_value'    => '0',
-        'label'              => 'Principal',
+        'label'              => 'Ce chauffeur est principal',
         'label_attributes'   => [
           'for' => 'PRINCIPALCHAUFFEUR',
         ],
@@ -116,7 +116,7 @@ class ChauffeurForm extends Form
         'use_hidden_element' => true,
         'checked_value'      => '1',
         'unchecked_value'    => '0',
-        'label'              => 'Actif',
+        'label'              => 'Ce chauffeur est actif',
         'label_attributes'   => [
           'for' => 'ACTIFCHAUFFEUR',
         ],

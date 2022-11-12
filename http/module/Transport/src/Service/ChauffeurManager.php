@@ -57,21 +57,20 @@ class ChauffeurManager
   public function addChauffeur($data) 
   {
     
-    // Create new Chauffeur entity.
-    $chauffeur = new Chauffeur();
-    $chauffeur->exchangeArray($data);   
-
-    if(!$this->chauffeurTable->findOneByRecord($chauffeur)) {
+    if(!$this->chauffeurTable->findOneByPrenom($data)) {
       
-      $chauffeur = $this->chauffeurTable->saveChauffeur($chauffeur);
-      return $chauffeur;
+      // Create new Chauffeur entiy.
+      $chauffeur= new Chauffeur();
+      $chauffeur->exchangeArray($data);  
+      $result = $this->chauffeurTable->saveChauffeur($chauffeur);
+      return $result;
     }
     
     return false;
   }
     
   /*
-   * This method updates data of an existing chauffeur
+   * This method update datas of an existing chauffeur
    */
   public function updateChauffeur($chauffeur, $data) 
   {

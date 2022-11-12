@@ -16,8 +16,8 @@ use RuntimeException;
 
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGatewayInterface;
-use Laminas\Db\Sql\Sql;
-use Laminas\Db\Sql\Select;
+//use Laminas\Db\Sql\Sql;
+//use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
 use Laminas\Paginator\Adapter\DbSelect;
@@ -157,8 +157,8 @@ class ChauffeurTable
     $id = (int) $chauffeur->getId();
 
     if ($id === 0) {
-      $result = $this->tableGateway->insert($data);
-      $chauffeur = $this->findOneByRecord($chauffeur);
+      $this->tableGateway->insert($data);
+      $chauffeur = $this->findOneByPrenom($data);
       return $chauffeur;
     }
     
@@ -170,9 +170,6 @@ class ChauffeurTable
         $id
       ));
     }
-    //unset($data["PRINCIPALCHAUFFEUR"]);
-    //$data["PRINCIPALCHAUFFEUR"] = true;
-    //unset($data["ACTIFCHAUFFEUR"]);
     
     $this->tableGateway->update($data, ['IDX_CHAUFFEUR' => $id]);
   }
@@ -203,10 +200,10 @@ class ChauffeurTable
   }
   
   //
-  public function findOneByNom($prenom)
+  public function findOneByPrenom($data)
   {
     
-    $vehicule = $this->findOneBy(['PRENOMCHAUFFEUR' => $prenom]);
+    $chauffeur = $this->findOneBy(['PRENOMCHAUFFEUR' => $data['PRENOMCHAUFFEUR']]);
     return $chauffeur;
   }
   

@@ -160,10 +160,37 @@ return [
 	//View helper
 	'view_helper_config' => [
     // The following key allows to define custom styling for FlashMessenger view helper.
-		'flashmessenger' => [
-      'message_open_format'      => '<div %s role="alert">',
-      'message_separator_string' => '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div><div %s role="alert">',
-      'message_close_string'     => '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-    ],
+    'flashmessenger' => [
+      'default' => [
+        'message_open_format'      => '<div%s role="alert"><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_close_string'     => '</div>' . " \r\n",
+        'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
+        'classes'                  => 'alert alert-primary alert-dismissible fadeshow',
+      ],
+      'success' => [
+        'message_open_format'      => '<div%s role="alert"><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_close_string'     => '</div>' . " \r\n",
+        'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
+        'classes'                  => 'alert alert-success alert-dismissible fadeshow',
+      ],
+      'warning' => [
+        'message_open_format'      => '<div%s role="alert"><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_close_string'     => '</div>' . " \r\n",
+        'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
+        'classes'                  => 'alert alert-success alert-dismissible fadeshow',
+      ],
+      'error'   => [
+        'message_open_format'      => '<div%s role="alert"><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_close_string'     => '</div>' . " \r\n",
+        'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
+        'classes'                  => 'alert alert-danger alert-dismissible fadeshow',
+      ],
+      'info'    => [
+        'message_open_format'      => '<div%s role="alert"><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_close_string'     => '</div>' . " \r\n",
+        'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
+        'classes'                  => 'alert alert-info alert-dismissible fadeshow',
+      ],
+    ],    
   ],
 ];

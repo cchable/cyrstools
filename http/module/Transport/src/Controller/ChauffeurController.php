@@ -14,6 +14,7 @@ namespace Transport\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
 use Transport\Service\ChauffeurManager;
 
@@ -99,11 +100,14 @@ class ChauffeurController extends AbstractActionController
     $rowPerPage = ($rowPerPage < 1) ? 0 : $rowPerPage;
    
     if ($rowPerPage) {
+      
       $this->sessionContainer->rowPerPage = $rowPerPage;
     } else {
       if (isset($this->sessionContainer->rowPerPage)) {
+        
         $rowPerPage = $this->sessionContainer->rowPerPage;
       } else {
+        
         $this->sessionContainer->rowPerPage = $rowPerPage = $this->defaultRowPerPage;
       }
     }
@@ -167,23 +171,26 @@ class ChauffeurController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
+        $this->flashMessenger()->setNamespace('error');
+        $msgsCurrent = $this->flashMessenger()->getCurrentMessages();        
+        
         // Add chauffeur
         if ($this->chauffeurManager->addChauffeur($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Chauffeur ' . $data['PRENOMCHAUFFEUR'] . ' ajouté');          
+          $this->flashMessenger()->addSuccessMessage('Chauffeur ' . $data['PRENOMCHAUFFEUR'] . ' ajouté');
+          // Redirect to "index" page
+          return $this->redirect()->toRoute('chauffeur', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Le chauffeur " . $data['PRENOMCHAUFFEUR'] . " existe déjà");
-          
+          $this->flashMessenger()->addErrorMessage("Le chauffeur " . $data['PRENOMCHAUFFEUR'] . " existe déjà");      
+//          $this->flashMessenger()->setNamespace('error');
+//          $msgsCurrent = $this->flashMessenger()->getCurrentMessages();
           return new ViewModel([
             'form' => $form,
           ]);  
         }
-        
-        // Redirect to "index" page
-        return $this->redirect()->toRoute('chauffeur', ['action'=>'index']); 
       }               
     } 
     
