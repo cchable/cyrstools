@@ -144,6 +144,11 @@ class NavManager
       'label' => 'Chauffeurs',
       'link'  => $url('chauffeur')
     ];
+    $transportItems[] = [
+      'id'    => 'indisponibilitechauffeur',
+      'label' => 'Indisponibilites Chauffeurs',
+      'link'  => $url('indisponibilitechauffeur')
+    ];
     
     //
     $userItems = [];

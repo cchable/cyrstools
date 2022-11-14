@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Model/ChauffeurTable.php
+ * @package   : module/Transport/src/Model/IndisponibiliteChauffeurTable.php
  *
  * @purpose   :
  * 
@@ -16,8 +16,6 @@ use RuntimeException;
 
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGatewayInterface;
-//use Laminas\Db\Sql\Sql;
-//use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
 use Laminas\Paginator\Adapter\DbSelect;
@@ -29,7 +27,7 @@ use Hpb\Db\Sql\FBSelect;
 /*
  * 
  */
-class ChauffeurTable
+class IndisponibiliteChauffeurTable
 {
   
   private $tableGateway;
@@ -51,7 +49,7 @@ class ChauffeurTable
 
     return $this->tableGateway->select(function (\Laminas\Db\Sql\Select $select)
     {
-      $select->order('PRENOMCHAUFFEUR ASC');
+      $select->order('DATEDEBUTINDISPONIBILITECHAUFFEUR ASC');
     }); 
   }
    
@@ -60,11 +58,11 @@ class ChauffeurTable
   {
         
     $fbSelect = new FBSelect($this->tableGateway->table);
-    $fbSelect->order('PRENOMCHAUFFEUR ASC');
+    $fbSelect->order('DATEDEBUTINDISPONIBILITECHAUFFEUR ASC');
     if ($search) {
         
       $where = new Where();
-      $fbSelect->where($where->like('PRENOMCHAUFFEUR', "%$search%"));
+      $fbSelect->where($where->like('DATEDEBUTINDISPONIBILITECHAUFFEUR', "%$search%"));
     }
     
     /*
@@ -113,7 +111,7 @@ class ChauffeurTable
   
     // Create a new Select object for the table:
     $fbSelect = new FBSelect($this->tableGateway->getTable());
-    $fbSelect->order('PRENOMCHAUFFEUR ASC');
+    $fbSelect->order('DATEDEBUTINDISPONIBILITECHAUFFEUR ASC');
 
     // Create a new result set based on the Chauffeur entity:
     $resultSetPrototype = new ResultSet();
@@ -134,11 +132,11 @@ class ChauffeurTable
   }
   
   //
-  public function getChauffeur($id)
+  public function getIndisponibiliteChauffeur($id)
   {
     
     $id = (int) $id;
-    $rowset = $this->tableGateway->select(['IDX_CHAUFFEUR' => $id]);
+    $rowset = $this->tableGateway->select(['IDX_INDISPONIBILITECHAUFFEUR' => $id]);
     $row = $rowset->current();
     if (! $row) {
       throw new RuntimeException(sprintf(
@@ -150,20 +148,20 @@ class ChauffeurTable
   }
 
   //
-  public function saveChauffeur(Chauffeur $chauffeur)
+  public function saveIndisponibiliteChauffeur(IndisponibiliteChauffeur $indisponibiliteChauffeur)
   {
 
-    $data = $chauffeur->getArrayCopy(false);
-    $id = (int) $chauffeur->getId();
+    $data = $indisponibiliteChauffeur->getArrayCopy(false);
+    $id = (int) $indisponibiliteChauffeur->getId();
 
     if ($id === 0) {
       $this->tableGateway->insert($data);
-      $chauffeur = $this->findOneByPrenom($data);
-      return $chauffeur;
+      $indisponibiliteChauffeur = $this->findOneByDateDebut($data);
+      return $indisponibiliteChauffeur;
     }
     
     try {
-      $this->getChauffeur($id);
+      $this->getIndisponibiliteChauffeur($id);
     } catch (RuntimeException $e) {
       throw new RuntimeException(sprintf(
         'Cannot update vehicule with identifier %d; does not exist',
@@ -171,14 +169,14 @@ class ChauffeurTable
       ));
     }
     
-    $this->tableGateway->update($data, ['IDX_CHAUFFEUR' => $id]);
+    $this->tableGateway->update($data, ['IDX_INDISPONIBILITECHAUFFEUR' => $id]);
   }
 
   //
-  public function deleteChauffeur($id)
+  public function deleteIndisponibiliteChauffeur($id)
   {
     
-    $this->tableGateway->delete(['IDX_CHAUFFEUR' => (int) $id]);
+    $this->tableGateway->delete(['IDX_INDISPONIBILITECHAUFFEUR' => (int) $id]);
   }
   
   //
@@ -186,25 +184,25 @@ class ChauffeurTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $chauffeur = $rowset->current();
+    $indisponibiliteChauffeur = $rowset->current();
     
-    return $chauffeur;
+    return $indisponibiliteChauffeur;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $chauffeur = $this->findOneBy(['IDX_CHAUFFEUR' => (int) $id]);
-    return $chauffeur;
+    $indisponibiliteChauffeur = $this->findOneBy(['IDX_INDISPONIBILITECHAUFFEUR' => (int) $id]);
+    return $indisponibiliteChauffeur;
   }
   
   //
-  public function findOneByPrenom($data)
+  public function findOneByDateDebut($data)
   {
     
-    $chauffeur = $this->findOneBy(['PRENOMCHAUFFEUR' => $data['PRENOMCHAUFFEUR']]);
-    return $chauffeur;
+    $indisponibiliteChauffeur = $this->findOneBy(['DATEDEBUTINDISPONIBILITECHAUFFEUR' => $data['DATEDEBUTINDISPONIBILITECHAUFFEUR']]);
+    return $indisponibiliteChauffeur;
   }
   
   // 
@@ -213,9 +211,9 @@ class ChauffeurTable
     
     $recordArray = $record->getArrayCopy();
     //unset($recordArray["IDX_CHAUFFEUR"]);
-    $chauffeur = $this->findOneBy($recordArray);
+    $indisponibiliteChauffeur = $this->findOneBy($recordArray);
     
-    return $chauffeur;
+    return $indisponibiliteChauffeur;
   }
   
   public function getNumberOfRows () 

@@ -48,51 +48,7 @@ return [
 			Controller\IndexController::class 
 				=> Controller\Factory\IndexControllerFactory::class,
 		],
-	],
-    
-	//Navigation
-	'navigation2' => [
-		'default' => [
-			[
-				'label' => 'Home',
-				'route' => 'home',
-			],
-			
-			[
-				'label' => 'PlanningBus',
-				'route' => 'planning',
-				'pages' => [
-					[
-						'label'  => 'Add',
-						'route'  => 'planning',
-						'action' => 'add',
-					],
-				],
-			],
-			[
-				'label' => 'Ephemeride',
-				'route' => 'ephemeride',
-				'pages' => [
-					[
-						'label'  => 'Add',
-						'route'  => 'ephemeride',
-						'action' => 'add',
-					],
-				],
-			],
-			[
-				'label' => 'Année scolaire',
-				'route' => 'anneescolaire',
-				'pages' => [
-					[
-						'label'  => 'Add',
-						'route'  => 'anneescolaire',
-						'action' => 'add',
-					],
-				],
-			],
-		],
-	],    
+	], 
     
 	//Service Manager
   'service_manager' => [
@@ -120,6 +76,7 @@ return [
     'TransportSessionContainer',
     'PlanningSessionContainer',
     'DashboardSessionContainer',
+    'IndisponibilitechauffeurSessionContainer',
   ],
   
 	//View Helper

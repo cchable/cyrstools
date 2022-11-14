@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Service/Factory/ChauffeurManagerFactory.php
+ * @package   : module/Transport/src/Service/Factory/IndisponibiliteChauffeurManagerFactory.php
  *
  * @purpose   : This is the factory class for ChauffeurManager service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
@@ -15,14 +15,14 @@ namespace Transport\Service\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-use Transport\Service\ChauffeurManager;
-use Transport\Model\ChauffeurTable;
+use Transport\Service\IndisponibiliteChauffeurManager;
+use Transport\Model\IndisponibiliteChauffeurTable;
 
 
 /*
  * 
  */
-class ChauffeurManagerFactory implements FactoryInterface
+class IndisponibiliteChauffeurManagerFactory implements FactoryInterface
 {
 
   /*
@@ -31,12 +31,12 @@ class ChauffeurManagerFactory implements FactoryInterface
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
     
-    $chauffeurTable = $container->get(ChauffeurTable::class);
-    $viewRenderer   = $container->get('ViewRenderer');
-    $config         = $container->get('Config');
+    $indisponibiliteChauffeurTable = $container->get(IndisponibiliteChauffeurTable::class);
+    $viewRenderer = $container->get('ViewRenderer');
+    $config       = $container->get('Config');
 
-    return new ChauffeurManager(
-      $chauffeurTable,
+    return new IndisponibiliteChauffeurManager(
+      $indisponibiliteChauffeurTable,
       $viewRenderer,
       $config
     );

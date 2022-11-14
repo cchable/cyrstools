@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Controller/ChauffeurController.php
+ * @package   : module/Transport/src/Controller/IndisponibiliteChauffeurController.php
  *
  * @purpose   :
  * 
@@ -16,32 +16,32 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
-use Transport\Service\ChauffeurManager;
+use Transport\Service\IndisponibiliteChauffeurManager;
 
-use Transport\Model\Chauffeur;
-use Transport\Model\ChauffeurTable;
+use Transport\Model\IndisponibiliteChauffeur;
+use Transport\Model\IndisponibiliteChauffeurTable;
 
-use Transport\Form\ChauffeurForm;
+use Transport\Form\IndisponibiliteChauffeurForm;
 use Transport\Form\SearchForm;
 
 
 /*
  * 
  */
-class ChauffeurController extends AbstractActionController
+class IndisponibiliteChauffeurController extends AbstractActionController
 {
   
   /*
-   * Chauffeur table manager
+   * IndisponibiliteChauffeur table manager
    * @var Transport\Model\ChauffeurTable
    */
-  private $chauffeurTable; 
+  private $indisponibiliteChauffeurTable; 
   
   /*
-   * Chauffeur manager
+   * CIndisponibilitehauffeur manager
    * @var Transport\Service\ChauffeurManager
    */
-  private $chauffeurManager;
+  private $indisponibiliteChauffeurManager;
 
   /*
    * Application config.
@@ -66,18 +66,18 @@ class ChauffeurController extends AbstractActionController
    * 
    */
   public function __construct(
-    ChauffeurTable $chauffeurTable,
-    ChauffeurManager $chauffeurManager,
+    IndisponibiliteChauffeurTable 	$indisponibiliteChauffeurTable,
+    IndisponibiliteChauffeurManager $indisponibiliteChauffeurManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
   {
     
-    $this->chauffeurTable     = $chauffeurTable;
-    $this->chauffeurManager   = $chauffeurManager;
-    $this->defaultRowPerPage  = $defaultRowPerPage;
-    $this->stepRowPerPage     = $stepRowPerPage;
-    $this->sessionContainer   = $sessionContainer;
+    $this->indisponibilitechauffeurTable   = $indisponibiliteChauffeurTable;
+    $this->indisponibilitechauffeurManager = $indisponibiliteChauffeurManager;
+    $this->defaultRowPerPage = $defaultRowPerPage;
+    $this->stepRowPerPage    = $stepRowPerPage;
+    $this->sessionContainer  = $sessionContainer;
   }
 
   /*
@@ -140,12 +140,12 @@ class ChauffeurController extends AbstractActionController
       $formSearch->setData(['search' => $search]);
     
     return new ViewModel([
-      'formSearch'     => $formSearch,
-      'module'         => 'chauffeur',
-      'search'         => $search,
-      'rowPerPage'     => $rowPerPage,
-      'stepRowPerPage' => $this->stepRowPerPage,
-      'chauffeurs'     => $this->chauffeurTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'formSearch'                 => $formSearch,
+      'module'                     => 'indisponibilitechauffeur',
+      'search'                     => $search,
+      'rowPerPage'                 => $rowPerPage,
+      'stepRowPerPage'             => $this->stepRowPerPage,
+      'indisponibilitesChauffeurs' => $this->indisponibilitechauffeurTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);   
   }
    

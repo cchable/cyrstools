@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Controller/Factory/ChauffeurControllerFactory.php
+ * @package   : module/Transport/src/Controller/Factory/ChauffeurControllerFactory.php
  *
  * @purpose   : This is the factory for ChauffeurController. Its purpose is to instantiate the controller
  *              and inject dependencies into its constructor.

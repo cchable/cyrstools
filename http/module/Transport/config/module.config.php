@@ -70,6 +70,24 @@ return [
 				],
 			],
 
+      // Define a new route called "indisponibilitechauffeur"
+			'indisponibilitechauffeur' => [
+        // Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+        // Listen to "/chauffeur" as uri:
+					'route'       => '/indisponibilitechauffeur[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],
+          // Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\IndisponibiliteChauffeurController::class,
+						'action'     => 'index',
+					],
+				],
+			],        
 /*
 			// Define a new route called "vehicule"
 			vehicule' => [
@@ -322,6 +340,9 @@ return [
       
 		Controller\ChauffeurController::class 
 			=> Controller\Factory\ChauffeurControllerFactory::class,
+
+    Controller\IndisponibiliteChauffeurController::class 
+			=> Controller\Factory\IndisponibiliteChauffeurControllerFactory::class,
 /*	
 		Controller\HeurePlanningController::class 
 			=> Controller\Factory\HeurePlanningControllerFactory::class,
@@ -368,6 +389,11 @@ return [
 				=> Model\Factory\ChauffeurTableFactory::class,
 			Model\ChauffeurTableGateway::class
 				=> Model\Factory\ChauffeurTableGatewayFactory::class,
+        
+			Model\IndisponibiliteChauffeurTable::class
+				=> Model\Factory\IndisponibiliteChauffeurTableFactory::class,
+			Model\IndisponibiliteChauffeurTableGateway::class
+				=> Model\Factory\IndisponibiliteChauffeurTableGatewayFactory::class,
         
       Model\MarqueTable::class
 				=> Model\Factory\MarqueTableFactory::class,
@@ -460,9 +486,11 @@ return [
 				=> Model\Factory\TransportFullTableGatewayFactory::class,
 */     
 			// Register Services
-	
 			Service\ChauffeurManager::class
 				=> Service\Factory\ChauffeurManagerFactory::class,
+        
+			Service\IndisponibiliteChauffeurManager::class
+				=> Service\Factory\IndisponibiliteChauffeurManagerFactory::class,
 /*
 			Service\HeurePlanningManager::class
 				=> Service\Factory\HeurePlanningManagerFactory::class,
