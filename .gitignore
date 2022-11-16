@@ -1,2 +1,3 @@
 /_logs
 /db/*.fdb
+/http/config/autoload/global.php
