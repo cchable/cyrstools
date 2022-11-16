@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.29.0@7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3">
+  <file src="src/Aggregate/AggregateHydrator.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>null === $this-&gt;eventManager</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="1">
+      <code>$eventManager</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/ArraySerializable.php">
+    <DeprecatedClass occurrences="1">
+      <code>ArraySerializable::class</code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/ArraySerializableHydrator.php">
+    <MixedArgument occurrences="1">
+      <code>$original</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="2">
+      <code>$data[$name]</code>
+      <code>$data[$name]</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$data[$name]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="7">
+      <code>$data</code>
+      <code>$data[$name]</code>
+      <code>$name</code>
+      <code>$original</code>
+      <code>$replacement[$name]</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$data</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/ClassMethods.php">
+    <DeprecatedClass occurrences="1">
+      <code>ClassMethods::class</code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/ClassMethodsHydrator.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>$options instanceof Traversable</code>
+      <code>null === $this-&gt;extractionMethodsCache[$objectClass]</code>
+    </DocblockTypeContradiction>
+    <MixedArgument occurrences="3">
+      <code>$options</code>
+      <code>$options['methodExistsCheck']</code>
+      <code>$options['underscoreSeparatedKeys']</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$property</code>
+      <code>$property</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="2">
+      <code>$value</code>
+      <code>$values[$realAttributeName]</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="1">
+      <code>$this-&gt;hydrationMethodsCache[$propertyFqn]</code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/DelegatingHydrator.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>HydratorInterface</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;hydrators-&gt;get($object::class)</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/DelegatingHydratorFactory.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>ContainerInterface</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="3">
+      <code>$container-&gt;get('HydratorManager')</code>
+      <code>$container-&gt;get('Zend\Hydrator\HydratorPluginManager')</code>
+      <code>$container-&gt;get(HydratorPluginManager::class)</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Filter/FilterComposite.php">
+    <MixedArgument occurrences="2">
+      <code>$filter</code>
+      <code>$filter</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$filter</code>
+      <code>$filter</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/HydratorPluginManager.php">
+    <DeprecatedClass occurrences="4">
+      <code>ArraySerializable::class</code>
+      <code>ClassMethods::class</code>
+      <code>ObjectProperty::class</code>
+      <code>Reflection::class</code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/HydratorPluginManagerFactory.php">
+    <MixedArgument occurrences="1">
+      <code>$config['hydrators']</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Iterator/HydratingIteratorIterator.php">
+    <MixedArgument occurrences="1">
+      <code>$currentValue</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$currentValue</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="1">
+      <code>new $prototype()</code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/Module.php">
+    <MixedAssignment occurrences="2">
+      <code>$container</code>
+      <code>$serviceListener</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="2">
+      <code>addServiceManager</code>
+      <code>get</code>
+    </MixedMethodCall>
+  </file>
+  <file src="src/NamingStrategy/MapNamingStrategy.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$key</code>
+      <code>$value</code>
+    </MissingClosureParamType>
+  </file>
+  <file src="src/NamingStrategy/UnderscoreNamingStrategy/CamelCaseToUnderscoreFilter.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MissingClosureParamType>
+    <MixedArgument occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MixedArgument>
+  </file>
+  <file src="src/NamingStrategy/UnderscoreNamingStrategy/StringSupportTrait.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>$this-&gt;mbStringSupport === null</code>
+      <code>$this-&gt;pcreUnicodeSupport === null</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="4">
+      <code>$mbStringSupport</code>
+      <code>$mbStringSupport</code>
+      <code>$pcreUnicodeSupport</code>
+      <code>$pcreUnicodeSupport</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/NamingStrategy/UnderscoreNamingStrategy/UnderscoreToCamelCaseFilter.php">
+    <MissingClosureParamType occurrences="4">
+      <code>$matches</code>
+      <code>$matches</code>
+      <code>$matches</code>
+      <code>$value</code>
+    </MissingClosureParamType>
+    <MixedArgument occurrences="5">
+      <code>$matches[2]</code>
+      <code>$matches[2]</code>
+      <code>$matches[2]</code>
+      <code>$value</code>
+      <code>$value[0]</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$pcreInfo-&gt;replacement</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="4">
+      <code>$matches[2]</code>
+      <code>$matches[2]</code>
+      <code>$matches[2]</code>
+      <code>$value[0]</code>
+    </MixedArrayAccess>
+  </file>
+  <file src="src/ObjectProperty.php">
+    <DeprecatedClass occurrences="1">
+      <code>ObjectProperty::class</code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/ObjectPropertyHydrator.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$name</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="3">
+      <code>$data[$name]</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Reflection.php">
+    <DeprecatedClass occurrences="1">
+      <code>Reflection::class</code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/ReflectionHydrator.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="3">
+      <code>$result[$propertyName]</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/StandaloneHydratorPluginManager.php">
+    <DeprecatedClass occurrences="4">
+      <code>ArraySerializable::class</code>
+      <code>ClassMethods::class</code>
+      <code>ObjectProperty::class</code>
+      <code>Reflection::class</code>
+    </DeprecatedClass>
+    <InvalidStringClass occurrences="1">
+      <code>new $class()</code>
+    </InvalidStringClass>
+  </file>
+  <file src="src/Strategy/BackedEnumStrategy.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>T</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;enumClass::from($value)</code>
+    </MixedReturnStatement>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$enumClass</code>
+    </PropertyNotSetInConstructor>
+    <UndefinedClass occurrences="1">
+      <code>$this-&gt;enumClass</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="4">
+      <code>$value-&gt;value</code>
+      <code>T</code>
+      <code>class-string&lt;T&gt;</code>
+      <code>string</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/Strategy/BooleanStrategy.php">
+    <DocblockTypeContradiction occurrences="4">
+      <code>! is_int($falseValue) &amp;&amp; ! is_string($falseValue)</code>
+      <code>! is_int($trueValue) &amp;&amp; ! is_string($trueValue)</code>
+      <code>! is_string($value) &amp;&amp; ! is_int($value)</code>
+      <code>is_bool($value)</code>
+    </DocblockTypeContradiction>
+    <MoreSpecificImplementedParamType occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+  </file>
+  <file src="src/Strategy/CollectionStrategy.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;objectClassName</code>
+    </ArgumentTypeCoercion>
+    <DocblockTypeContradiction occurrences="2">
+      <code>is_array($value)</code>
+      <code>is_array($value)</code>
+    </DocblockTypeContradiction>
+    <MixedArgument occurrences="2">
+      <code>$data</code>
+      <code>$object</code>
+    </MixedArgument>
+    <MoreSpecificImplementedParamType occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+  </file>
+  <file src="src/Strategy/DateTimeImmutableFormatterStrategy.php">
+    <MixedAssignment occurrences="1">
+      <code>$hydrated</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Strategy/ExplodeStrategy.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>is_array($value)</code>
+      <code>is_string($value)</code>
+    </DocblockTypeContradiction>
+    <MoreSpecificImplementedParamType occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <RedundantCast occurrences="2">
+      <code>(string) $value</code>
+      <code>(string) $value</code>
+    </RedundantCast>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>is_string($value)</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Strategy/HydratorStrategy.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;objectClassName</code>
+    </ArgumentTypeCoercion>
+    <DocblockTypeContradiction occurrences="1">
+      <code>gettype($value)</code>
+    </DocblockTypeContradiction>
+    <MixedInferredReturnType occurrences="1">
+      <code>object|string|null</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$value</code>
+    </MixedReturnStatement>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>is_object($value)</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Strategy/SerializableStrategy.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>iterator_to_array($serializerOptions)</code>
+      <code>null === $this-&gt;serializer</code>
+    </DocblockTypeContradiction>
+    <MixedArgument occurrences="2">
+      <code>$serializerOptions</code>
+      <code>$value</code>
+    </MixedArgument>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>is_array($serializerOptions)</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Strategy/StrategyChain.php">
+    <MixedAssignment occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/Aggregate/HydratorListenerTest.php">
+    <InternalMethod occurrences="2">
+      <code>onExtract</code>
+      <code>onHydrate</code>
+    </InternalMethod>
+  </file>
+  <file src="test/ArraySerializableHydratorTest.php">
+    <InvalidArgument occurrences="2">
+      <code>'thisIsNotAnObject'</code>
+      <code>'thisIsNotAnObject'</code>
+    </InvalidArgument>
+  </file>
+  <file src="test/ArraySerializableTest.php">
+    <DeprecatedClass occurrences="1">
+      <code>new ArraySerializable()</code>
+    </DeprecatedClass>
+  </file>
+  <file src="test/ClassMethodsHydratorTest.php">
+    <InvalidArgument occurrences="4">
+      <code>$options</code>
+      <code>'invalid options'</code>
+      <code>'non-object'</code>
+      <code>'non-object'</code>
+    </InvalidArgument>
+  </file>
+  <file src="test/ClassMethodsTest.php">
+    <DeprecatedClass occurrences="1">
+      <code>new ClassMethods()</code>
+    </DeprecatedClass>
+  </file>
+  <file src="test/Filter/FilterCompositeTest.php">
+    <MixedArgument occurrences="2">
+      <code>$andFilters</code>
+      <code>$orFilters</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="7">
+      <code>$andFilters</code>
+      <code>$andFilters</code>
+      <code>$andFilters</code>
+      <code>$name</code>
+      <code>$orFilters</code>
+      <code>$orFilters</code>
+      <code>$orFilters</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="3">
+      <code>$andFilters</code>
+      <code>$orFilters</code>
+      <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/HydratorAwareTraitTest.php">
+    <MixedMethodCall occurrences="6">
+      <code>getHydrator</code>
+      <code>getHydrator</code>
+      <code>getHydrator</code>
+      <code>getHydrator</code>
+      <code>setHydrator</code>
+      <code>setHydrator</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/HydratorClosureStrategyTest.php">
+    <MissingClosureParamType occurrences="4">
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MissingClosureParamType>
+    <MixedArgument occurrences="4">
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedArgument>
+    <UndefinedInterfaceMethod occurrences="17">
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>getStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>removeStrategy</code>
+    </UndefinedInterfaceMethod>
+    <UndefinedPropertyFetch occurrences="1">
+      <code>$entity-&gt;field3</code>
+    </UndefinedPropertyFetch>
+  </file>
+  <file src="test/HydratorObjectPropertyTest.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$property</code>
+    </MissingClosureParamType>
+  </file>
+  <file src="test/HydratorStrategyTest.php">
+    <MixedArgument occurrences="2">
+      <code>$attributes['entities']</code>
+      <code>$attributes['entities']</code>
+    </MixedArgument>
+    <MixedArrayAssignment occurrences="1">
+      <code>$attributes['entities'][]</code>
+    </MixedArrayAssignment>
+    <UndefinedInterfaceMethod occurrences="17">
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>addStrategy</code>
+      <code>getStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>hasStrategy</code>
+      <code>removeStrategy</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="test/HydratorTest.php">
+    <MissingClosureParamType occurrences="3">
+      <code>$property</code>
+      <code>$property</code>
+      <code>$property</code>
+    </MissingClosureParamType>
+    <MixedArgument occurrences="2">
+      <code>$property</code>
+      <code>$property</code>
+    </MixedArgument>
+  </file>
+  <file src="test/NamingStrategy/UnderscoreNamingStrategy/CamelCaseToUnderscoreFilterTest.php">
+    <InternalClass occurrences="3">
+      <code>new CamelCaseToUnderscoreFilter()</code>
+      <code>new CamelCaseToUnderscoreFilter()</code>
+      <code>new CamelCaseToUnderscoreFilter()</code>
+    </InternalClass>
+    <InternalMethod occurrences="3">
+      <code>filter</code>
+      <code>filter</code>
+      <code>filter</code>
+    </InternalMethod>
+  </file>
+  <file src="test/NamingStrategy/UnderscoreNamingStrategy/UnderscoreToCamelCaseFilterTest.php">
+    <InternalClass occurrences="3">
+      <code>new UnderscoreToCamelCaseFilter()</code>
+      <code>new UnderscoreToCamelCaseFilter()</code>
+      <code>new UnderscoreToCamelCaseFilter()</code>
+    </InternalClass>
+    <InternalMethod occurrences="3">
+      <code>filter</code>
+      <code>filter</code>
+      <code>filter</code>
+    </InternalMethod>
+  </file>
+  <file src="test/ObjectPropertyHydratorTest.php">
+    <InvalidArgument occurrences="2">
+      <code>'thisIsNotAnObject'</code>
+      <code>'thisIsNotAnObject'</code>
+    </InvalidArgument>
+  </file>
+  <file src="test/ObjectPropertyTest.php">
+    <DeprecatedClass occurrences="1">
+      <code>new ObjectProperty()</code>
+    </DeprecatedClass>
+  </file>
+  <file src="test/ReflectionHydratorTest.php">
+    <InvalidArgument occurrences="2">
+      <code>$argument</code>
+      <code>$argument</code>
+    </InvalidArgument>
+  </file>
+  <file src="test/ReflectionTest.php">
+    <DeprecatedClass occurrences="1">
+      <code>new Reflection()</code>
+    </DeprecatedClass>
+  </file>
+  <file src="test/StandaloneHydratorPluginManagerFactoryTest.php">
+    <DeprecatedClass occurrences="8">
+      <code>ArraySerializable::class</code>
+      <code>ArraySerializable::class</code>
+      <code>ClassMethods::class</code>
+      <code>ClassMethods::class</code>
+      <code>ObjectProperty::class</code>
+      <code>ObjectProperty::class</code>
+      <code>Reflection::class</code>
+      <code>Reflection::class</code>
+    </DeprecatedClass>
+  </file>
+  <file src="test/StandaloneHydratorPluginManagerTest.php">
+    <DeprecatedClass occurrences="4">
+      <code>Hydrator\ArraySerializable::class</code>
+      <code>Hydrator\ClassMethods::class</code>
+      <code>Hydrator\ObjectProperty::class</code>
+      <code>Hydrator\Reflection::class</code>
+    </DeprecatedClass>
+    <MixedArgument occurrences="1">
+      <code>$factories</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$factories[$class]</code>
+      <code>$factories[Hydrator\DelegatingHydrator::class]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="3">
+      <code>$factories</code>
+      <code>$factories</code>
+      <code>$instance</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/Strategy/BackedEnumStrategyTest.php">
+    <MixedArgument occurrences="6">
+      <code>TestBackedEnum::class</code>
+      <code>TestBackedEnum::class</code>
+      <code>TestBackedEnum::class</code>
+      <code>TestBackedEnum::class</code>
+      <code>TestBackedEnum::class</code>
+      <code>TestBackedEnum::class</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$expected</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="1">
+      <code>TestBackedEnum::class</code>
+    </MixedOperand>
+    <UndefinedClass occurrences="12">
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestBackedEnum</code>
+      <code>TestUnitEnum</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/Strategy/BooleanStrategyTest.php">
+    <InvalidArgument occurrences="1">
+      <code>false</code>
+    </InvalidArgument>
+    <InvalidScalarArgument occurrences="2">
+      <code>5</code>
+      <code>true</code>
+    </InvalidScalarArgument>
+  </file>
+  <file src="test/Strategy/CollectionStrategyTest.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$data</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>static function ($data) {</code>
+    </MissingClosureReturnType>
+    <MixedArgument occurrences="1">
+      <code>$data</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="1">
+      <code>hydrate</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/Strategy/DateTimeFormatterStrategyTest.php">
+    <MixedAssignment occurrences="5">
+      <code>$date</code>
+      <code>$date</code>
+      <code>$extracted</code>
+      <code>$extracted</code>
+      <code>$hydrated</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="3">
+      <code>format</code>
+      <code>getName</code>
+      <code>getTimezone</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/Strategy/DateTimeImmutableFormatterStrategyTest.php">
+    <MixedMethodCall occurrences="1">
+      <code>format</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/Strategy/HydratorStrategyTest.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$data</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>static function ($data) {</code>
+    </MissingClosureReturnType>
+    <MixedArgument occurrences="4">
+      <code>$data</code>
+      <code>$object</code>
+      <code>$objectClassName</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="1">
+      <code>hydrate</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/Strategy/SerializableStrategyTest.php">
+    <MixedAssignment occurrences="2">
+      <code>$serialized</code>
+      <code>$serialized</code>
+    </MixedAssignment>
+  </file>
+</files>
