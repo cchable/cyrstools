@@ -16,8 +16,6 @@ use RuntimeException;
 
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGatewayInterface;
-//use Laminas\Db\Sql\Sql;
-//use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
 use Laminas\Paginator\Adapter\DbSelect;

@@ -77,7 +77,7 @@ class IndisponibiliteChauffeurManager
     
     // Do not allow to change chauffeur if another chauffeur with such data already exits
     //if($this->checkChauffeurExists($data)) {
-    if($indisponibiliteChauffeur->getDateDebut()!=$data['DATEDEBUTINDISPONIBILITECHAUFFEUR'] && $this->checkIndisponibiliteChauffeurExists($data)) {  
+    if($indisponibiliteChauffeur->getDateDebut()!=$data['DATEDEBUTINDISPONIBILITE'] && $this->checkIndisponibiliteChauffeurExists($data)) {  
       
       return false;
     }
@@ -103,7 +103,7 @@ class IndisponibiliteChauffeurManager
    */
   public function checkIndisponibiliteChauffeurExists(array $data) {
 
-    $search['DATEDEBUTINDISPONIBILITECHAUFFEUR'] = $data['DATEDEBUTINDISPONIBILITECHAUFFEUR'];
+    $search['DATEDEBUTINDISPONIBILITE'] = $data['DATEDEBUTINDISPONIBILITE'];
     $indisponibiliteChauffeur = $this->chauffeurTable->findOneBy($search);
     return $indisponibiliteChauffeur;
   }  

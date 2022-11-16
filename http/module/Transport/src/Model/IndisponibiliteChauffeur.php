@@ -70,14 +70,14 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
   {
     
     if ($bIdx) {
-      $this->id        = !empty($data['IDX_INDISPONIBILITECHAUFFEUR'])       ? $data['IDX_INDISPONIBILITECHAUFFEUR']       : null;
+      $this->id        = !empty($data['IDX_INDISPONIBILITECHAUFFEUR']) ? $data['IDX_INDISPONIBILITECHAUFFEUR']       : null;
     }
-    $this->idChauffeur = !empty($data['IDX_CHAUFFEUR'])                      ? $data['IDX_CHAUFFEUR']                      : null;
-    $this->dateDebut   = !empty($data['DATEDEBUTINDISPONIBILITECHAUFFEUR'])  ? $data['DATEDEBUTINDISPONIBILITECHAUFFEUR']  : null;
-    $this->heureDebut  = !empty($data['TIMEDEBUTINDISPONIBILITECHAUFFEUR'])  ? $data['TIMEDEBUTINDISPONIBILITECHAUFFEUR']  : null;
-    $this->dateFin     = !empty($data['DATEFININDISPONIBILITECHAUFFEUR'])    ? $data['DATEFININDISPONIBILITECHAUFFEUR']    : null;
-    $this->heureFin    = !empty($data['TIMEFININDISPONIBILITECHAUFFEUR'])    ? $data['TIMEFININDISPONIBILITECHAUFFEUR']    : null;
-    $this->jourEntier  = !empty($data['JOURENTIERINDISPONIBILITECHAUFFEUR']) ? $data['JOURENTIERINDISPONIBILITECHAUFFEUR'] : false;
+    $this->idChauffeur = !empty($data['IDX_CHAUFFEUR'])                ? $data['IDX_CHAUFFEUR']                      : null;
+    $this->dateDebut   = !empty($data['DATEDEBUTINDISPONIBILITE'])     ? $data['DATEDEBUTINDISPONIBILITE']  : null;
+    $this->heureDebut  = !empty($data['TIMEDEBUTINDISPONIBILITE'])     ? $data['TIMEDEBUTINDISPONIBILITE']  : null;
+    $this->dateFin     = !empty($data['DATEFININDISPONIBILITE'])       ? $data['DATEFININDISPONIBILITE']    : null;
+    $this->heureFin    = !empty($data['TIMEFININDISPONIBILITE'])       ? $data['TIMEFININDISPONIBILITE']    : null;
+    $this->jourEntier  = !empty($data['JOURENTIERINDISPONIBILITE'])    ? $data['JOURENTIERINDISPONIBILITE'] : false;
   }
 
   //
@@ -87,23 +87,23 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
     if ($bIdx) {
       
       return [
-        'IDX_INDISPONIBILITECHAUFFEUR'       => $this->id,
-        'IDX_CHAUFFEUR'                      => $this->idChauffeur,
-        'DATEDEBUTINDISPONIBILITECHAUFFEUR'  => $this->dateDebut,
-        'TIMEDEBUTINDISPONIBILITECHAUFFEUR'  => $this->heureDebut,
-        'DATEFININDISPONIBILITECHAUFFEUR'    => $this->dateFin,
-        'TIMEFININDISPONIBILITECHAUFFEUR'    => $this->heureFin,
-        'JOURENTIERINDISPONIBILITECHAUFFEUR' => (bool) $this->jourEntier,
+        'IDX_INDISPONIBILITECHAUFFEUR' => $this->id,
+        'IDX_CHAUFFEUR'                => $this->idChauffeur,
+        'DATEDEBUTINDISPONIBILITE'     => $this->dateDebut,
+        'TIMEDEBUTINDISPONIBILITE'     => $this->heureDebut,
+        'DATEFININDISPONIBILITE'       => $this->dateFin,
+        'TIMEFININDISPONIBILITE'       => $this->heureFin,
+        'JOURENTIERINDISPONIBILITE'    => (bool) $this->jourEntier,
       ];
     } else {
   
       return [
-        'IDX_CHAUFFEUR'                      => $this->idChauffeur,
-        'DATEDEBUTINDISPONIBILITECHAUFFEUR'  => $this->dateDebut,
-        'TIMEDEBUTINDISPONIBILITECHAUFFEUR'  => $this->heureDebut,
-        'DATEFININDISPONIBILITECHAUFFEUR'    => $this->dateFin,
-        'TIMEFININDISPONIBILITECHAUFFEUR'    => $this->heureFin,
-        'JOURENTIERINDISPONIBILITECHAUFFEUR' => (bool) $this->jourEntier,
+        'IDX_CHAUFFEUR'             => $this->idChauffeur,
+        'DATEDEBUTINDISPONIBILITE'  => $this->dateDebut,
+        'TIMEDEBUTINDISPONIBILITE'  => $this->heureDebut,
+        'DATEFININDISPONIBILITE'    => $this->dateFin,
+        'TIMEFININDISPONIBILITE'    => $this->heureFin,
+        'JOURENTIERINDISPONIBILITE' => (bool) $this->jourEntier,
       ];
     }
   }
@@ -112,9 +112,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
   public function fillInputFilter(InputFilterInterface $inputFilter)
   {
 
-    //DATEDEBUTINDISPONIBILITECHAUFFEUR
+    //DATEDEBUTINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'DATEDEBUTINDISPONIBILITECHAUFFEUR',
+      'name'       => 'DATEDEBUTINDISPONIBILITE',
       'required'   => true,
       'validators' => [
         [
@@ -135,9 +135,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);
      
-    //DATEFININDISPONIBILITECHAUFFEUR
+    //DATEFININDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'DATEDEBUTINDISPONIBILITECHAUFFEUR',
+      'name'       => 'DATEDEBUTINDISPONIBILITE',
       'required'   => false,
       'validators' => [
         [
@@ -158,9 +158,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);   
     
-    //TIMEDEBUTINDISPONIBILITECHAUFFEUR
+    //TIMEDEBUTINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'TIMEDEBUTINDISPONIBILITECHAUFFEUR',
+      'name'       => 'TIMEDEBUTINDISPONIBILITE',
       'required'   => false,
       'validators' => [
         [
@@ -181,9 +181,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);
     
-    //TIMEFININDISPONIBILITECHAUFFEUR
+    //TIMEFININDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'TIMEFININDISPONIBILITECHAUFFEUR',
+      'name'       => 'TIMEFININDISPONIBILITE',
       'required'   => false,
       'validators' => [
         [
@@ -204,9 +204,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);
 
-    // JOURENTIERINDISPONIBILITECHAUFFEUR
+    // JOURENTIERINDISPONIBILITE
     $inputFilter->add([
-      'name' => 'JOURENTIERINDISPONIBILITECHAUFFEUR',
+      'name' => 'JOURENTIERINDISPONIBILITE',
       'required'          => true,
       'allow_empty'       => true,
       'continue_if_empty' => true,        

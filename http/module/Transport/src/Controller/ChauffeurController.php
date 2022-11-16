@@ -66,7 +66,7 @@ class ChauffeurController extends AbstractActionController
    * 
    */
   public function __construct(
-    ChauffeurTable $chauffeurTable,
+    ChauffeurTable   $chauffeurTable,
     ChauffeurManager $chauffeurManager,
     $defaultRowPerPage,
     $stepRowPerPage,

@@ -49,7 +49,7 @@ class IndisponibiliteChauffeurTable
 
     return $this->tableGateway->select(function (\Laminas\Db\Sql\Select $select)
     {
-      $select->order('DATEDEBUTINDISPONIBILITECHAUFFEUR ASC');
+      $select->order('DATEDEBUTINDISPONIBILITE ASC');
     }); 
   }
    
@@ -58,11 +58,11 @@ class IndisponibiliteChauffeurTable
   {
         
     $fbSelect = new FBSelect($this->tableGateway->table);
-    $fbSelect->order('DATEDEBUTINDISPONIBILITECHAUFFEUR ASC');
+    $fbSelect->order('DATEDEBUTINDISPONIBILITE ASC');
     if ($search) {
         
       $where = new Where();
-      $fbSelect->where($where->like('DATEDEBUTINDISPONIBILITECHAUFFEUR', "%$search%"));
+      $fbSelect->where($where->like('DATEDEBUTINDISPONIBILITE', "%$search%"));
     }
     
     /*
@@ -111,11 +111,11 @@ class IndisponibiliteChauffeurTable
   
     // Create a new Select object for the table:
     $fbSelect = new FBSelect($this->tableGateway->getTable());
-    $fbSelect->order('DATEDEBUTINDISPONIBILITECHAUFFEUR ASC');
+    $fbSelect->order('DATEDEBUTINDISPONIBILITE ASC');
 
     // Create a new result set based on the Chauffeur entity:
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new Chauffeur());
+    $resultSetPrototype->setArrayObjectPrototype(new IndisponibiliteChauffeur());
 
     // Create a new pagination adapter object:
     $paginatorAdapter = new DbSelect(
@@ -201,7 +201,7 @@ class IndisponibiliteChauffeurTable
   public function findOneByDateDebut($data)
   {
     
-    $indisponibiliteChauffeur = $this->findOneBy(['DATEDEBUTINDISPONIBILITECHAUFFEUR' => $data['DATEDEBUTINDISPONIBILITECHAUFFEUR']]);
+    $indisponibiliteChauffeur = $this->findOneBy(['DATEDEBUTINDISPONIBILITE' => $data['DATEDEBUTINDISPONIBILITE']]);
     return $indisponibiliteChauffeur;
   }
   
