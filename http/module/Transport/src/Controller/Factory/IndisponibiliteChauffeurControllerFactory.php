@@ -18,6 +18,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 use Transport\Controller\IndisponibiliteChauffeurController;
 use Transport\Service\IndisponibiliteChauffeurManager;
 use Transport\Model\IndisponibiliteChauffeurTable;
+use Transport\Model\IndisponibiliteChauffeurTableView;
 
 
 /*
@@ -29,8 +30,9 @@ class IndisponibiliteChauffeurControllerFactory implements FactoryInterface
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {   
   
-    $indisponibiliteChauffeurTable   = $container->get(IndisponibiliteChauffeurTable::class);
-    $indisponibiliteChauffeurManager = $container->get(IndisponibiliteChauffeurManager::class);
+    $indisponibiliteChauffeurTable     = $container->get(IndisponibiliteChauffeurTable::class);
+    $indisponibiliteChauffeurTableView = $container->get(IndisponibiliteChauffeurTableView::class);
+    $indisponibiliteChauffeurManager   = $container->get(IndisponibiliteChauffeurManager::class);
     
     $config            = $container->get('Config');
     $defaultRowPerPage = $config['paginator']['options']['defaultRowPerPage'];
@@ -41,6 +43,7 @@ class IndisponibiliteChauffeurControllerFactory implements FactoryInterface
     // Instantiate the controller and inject dependencies
     return new IndisponibiliteChauffeurController(
       $indisponibiliteChauffeurTable,
+      $indisponibiliteChauffeurTableView,
       $indisponibiliteChauffeurManager,
       $defaultRowPerPage,
       $stepRowPerPage,

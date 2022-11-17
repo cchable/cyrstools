@@ -25,14 +25,14 @@ class EphemerideManager
   
   /*
    * Ephemeride table manager.
-   * @var Parling\Model\EphemerideTable
+   * @var Parking\Model\EphemerideTable
    */
   private $ephemerideTable;
   
   
   /*
    * Ephemeride table manager.
-   * @var Parling\Model\EphemerideTable
+   * @var Parking\Model\EphemerideTable
    */
   private $anneeScolaireTable; 
   

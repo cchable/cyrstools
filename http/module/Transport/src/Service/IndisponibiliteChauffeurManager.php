@@ -5,7 +5,7 @@
  * @purpose   : This service is responsible for adding/editing chauffeur. 
  *
  *
- * @copyright : Copyright (C) 2018-21 H.P.B
+ * @copyright : Copyright (C) 2018-22 H.P.B
  *
  * @license   : GNU General Public License version 2 or later; see LICENSE.txt
  **/
@@ -14,6 +14,8 @@ namespace Transport\Service;
 
 use Transport\Model\IndisponibiliteChauffeur;
 use Transport\Model\IndisponibiliteChauffeurTable;
+use Transport\Model\ChauffeurTable;
+
 
 /*
  * 
@@ -23,9 +25,15 @@ class IndisponibiliteChauffeurManager
   
   /*
    * IndisponibiliteChauffeur table manager.
-   * @var Parling\Model\ChauffeurTable
+   * @var Transport\Model\INdisponibiliteChauffeurTable
    */
   private $indisponibiliteChauffeurTable;
+  
+  /*
+   * Chauffeur table manager.
+   * @var Transport\Model\ChauffeurTable
+   */
+  private $chauffeurTable;
   
   /*
    * PHP template renderer.
@@ -43,10 +51,11 @@ class IndisponibiliteChauffeurManager
   /*
    * Constructs the service.
    */
-  public function __construct(IndisponibiliteChauffeurTable $indisponibiliteChauffeurTable, $viewRenderer, $config) 
+  public function __construct(IndisponibiliteChauffeurTable $indisponibiliteChauffeurTable, ChauffeurTable $chauffeurTable, $viewRenderer, $config) 
   {
     
-    $this->chauffeurTable = $indisponibiliteChauffeurTable;
+    $this->indisponibiliteChauffeurTable = $indisponibiliteChauffeurTable;
+    $this->chauffeurTable                = $chauffeurTable;
     $this->viewRenderer   = $viewRenderer;
     $this->config         = $config;
   }
@@ -57,30 +66,50 @@ class IndisponibiliteChauffeurManager
   public function addIndisponibiliteChauffeur($data) 
   {
     
-    if(!$this->indisponibiliteChauffeurTable->findOneByDateDebut($data)) {
+    if(!$this->indisponibiliteChauffeurTable->findOneByRecord($data)) {
       
       // Create new IndisponibiliteChauffeur entiy.
       $indisponibiliteChauffeur= new IndisponibiliteChauffeur();
-      $indisponibiliteChauffeur->exchangeArray($data);  
-      $result = $this->chauffeurTable->saveIndisponibiliteChauffeur($indisponibiliteChauffeur);
-      return $result;
+      $indisponibiliteChauffeur->exchangeArray($data);
+      
+      if(!$this->ephemerideTable->findOneByRecord($indisponibiliteChauffeur)) {
+
+        // Find chauffeur
+        $idChauffeur = $data['IDX_CHAUFFEUR'];
+        $chauffeur = $this->chauffeurTable->findOneById($idChauffeur);
+        if($chauffeur == null) {
+          throw new \Exception('Chauffeur not found');
+        }
+        $indisponibiliteChauffeur->setIdChauffeur($chauffeur->getId());
+      
+        $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->saveIndisponibiliteChauffeur($indisponibiliteChauffeur);
+        return $indisponibiliteChauffeur;
+      }
     }
     
     return false;
   }
     
   /*
-   * This method update datas of an existing chauffeur
+   * This method update datas of an existing indisponibilitechauffeur
    */
   public function updateIndisponibiliteChauffeur($indisponibiliteChauffeur, $data) 
   {
     
-    // Do not allow to change chauffeur if another chauffeur with such data already exits
-    //if($this->checkChauffeurExists($data)) {
-    if($indisponibiliteChauffeur->getDateDebut()!=$data['DATEDEBUTINDISPONIBILITE'] && $this->checkIndisponibiliteChauffeurExists($data)) {  
+    // Do not allow to change indisponibilitechauffeur if another indisponibilitechauffeur with such data already exits
+    if($this->checkIndisponibiliteChauffeurExists($data)) {
+    //if($indisponibiliteChauffeur->getDateDebut()!=$data['DATEDEBUTINDISPONIBILITE'] && $this->checkIndisponibiliteChauffeurExists($data)) {  
       
       return false;
     }
+    
+    //find anneeScolaire id
+    $idChauffeur = $data['IDX_CHAUFFEUR'];
+    $chauffeur = $this->chauffeurTable->findOneById($idChauffeur);
+    if ($chauffeur == null) {
+      throw new \Exception('Chauffeur not found');
+    }
+    
     $indisponibiliteChauffeur->exchangeArray($data, false);
 
     // Apply changes to database.
@@ -103,9 +132,68 @@ class IndisponibiliteChauffeurManager
    */
   public function checkIndisponibiliteChauffeurExists(array $data) {
 
-    $search['DATEDEBUTINDISPONIBILITE'] = $data['DATEDEBUTINDISPONIBILITE'];
-    $indisponibiliteChauffeur = $this->chauffeurTable->findOneBy($search);
-    return $indisponibiliteChauffeur;
-  }  
+    $search['IDX_CHAUFFEUR']            = $data['IDX_CHAUFFEUR'];
+    $search['STARTDATEINDISPONIBILITE'] = $data['STARTDATEINDISPONIBILITE'];
+    $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->findOneBy($search);
+    $bResult = false;
+    if ($indisponibiliteChauffeur) {
+      
+      if ($indisponibiliteChauffeur->getJourEntier() || $data['ALLDAYINDISPONIBILITE']) {
+        
+        $bResult = true;
+      } else {
+        
+        if ($indisponibiliteChauffeur->getDateFin() != $data['ENDDATEINDISPONIBILITE']) {
+          
+          $bResult = true;
+        } else {
+          
+          if (checkTimeBetween(
+                $indisponibiliteChauffeur->getHeureDebut(), 
+                $data['STARTTIMEINDISPONIBILITE'], 
+                $data['ENDTIMEINDISPONIBILITE']
+                )
+              ||
+              checkTimeBetween(
+                $indisponibiliteChauffeur->getHeurefin(),
+                $data['STARTTIMEINDISPONIBILITE'], 
+                $data['ENDTIMEINDISPONIBILITE']
+                )
+             ) {
+                
+            $bResult = true;
+          } else {      
+            $bResult = checkRangeTimeBetween(
+              $indisponibiliteChauffeur->getHeureDebut(), 
+              $indisponibiliteChauffeur->getHeureFin(), 
+              $data['STARTTIMEINDISPONIBILITE'], 
+              $data['ENDTIMEINDISPONIBILITE']
+            );
+          }
+        }
+      }
+    }
+    
+    return $bResult;
+  }
+  
+  private function checkTimeBetween($value, $start, $end) {
+    
+    $timeValue = new DateTime($value);
+    $timeStart = new DateTime($start);
+    $timeEnd   = new DateTime($end);
+    
+    return (($timeValue > $timeStart) && ($timeValue < $timeEnd));  
+  }
+  
+  private function checkRangeTimeBetween($start1, $end1, $start2, $end2) {
+    
+    $timeStart1 = new DateTime($start1);
+    $timeEnd1   = new DateTime($end1);
+    $timeStart2 = new DateTime($start2);
+    $timeEnd2   = new DateTime($end2);
+
+    return (($timeStart1 > $timeStart2) && ($timeEnd1 < $timeEnd2) || ($timeStart1 < $timeStart2) && ($timeEnd1 > $timeEnd2));
+  }
 }
 

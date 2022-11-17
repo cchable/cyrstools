@@ -20,6 +20,7 @@ use Transport\Service\IndisponibiliteChauffeurManager;
 
 use Transport\Model\IndisponibiliteChauffeur;
 use Transport\Model\IndisponibiliteChauffeurTable;
+use Transport\Model\IndisponibiliteChauffeurTableView;
 
 use Transport\Form\IndisponibiliteChauffeurForm;
 use Transport\Form\SearchForm;
@@ -33,9 +34,15 @@ class IndisponibiliteChauffeurController extends AbstractActionController
   
   /*
    * IndisponibiliteChauffeur table manager
-   * @var Transport\Model\ChauffeurTable
+   * @var Transport\Model\IndisponibiliteTable
    */
-  private $indisponibiliteChauffeurTable; 
+  private $indisponibiliteChauffeurTable;
+  
+  /*
+   * IndisponibiliteChauffeur tableview manager
+   * @var Transport\Model\IndisponibiliteChauffeurTableView
+   */
+  private $indisponibiliteChauffeurTableView; 
   
   /*
    * CIndisponibilitehauffeur manager
@@ -66,15 +73,17 @@ class IndisponibiliteChauffeurController extends AbstractActionController
    * 
    */
   public function __construct(
-    IndisponibiliteChauffeurTable 	$indisponibiliteChauffeurTable,
-    IndisponibiliteChauffeurManager $indisponibiliteChauffeurManager,
+    IndisponibiliteChauffeurTable   	$indisponibiliteChauffeurTable,
+    IndisponibiliteChauffeurTableView $indisponibiliteChauffeurTableView,
+    IndisponibiliteChauffeurManager   $indisponibiliteChauffeurManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
   {
     
-    $this->indisponibilitechauffeurTable   = $indisponibiliteChauffeurTable;
-    $this->indisponibilitechauffeurManager = $indisponibiliteChauffeurManager;
+    $this->indisponibilitechauffeurTable     = $indisponibiliteChauffeurTable;
+    $this->indisponibilitechauffeurTableView = $indisponibiliteChauffeurTableView;
+    $this->indisponibilitechauffeurManager   = $indisponibiliteChauffeurManager;
     $this->defaultRowPerPage = $defaultRowPerPage;
     $this->stepRowPerPage    = $stepRowPerPage;
     $this->sessionContainer  = $sessionContainer;
@@ -145,7 +154,7 @@ class IndisponibiliteChauffeurController extends AbstractActionController
       'search'                     => $search,
       'rowPerPage'                 => $rowPerPage,
       'stepRowPerPage'             => $this->stepRowPerPage,
-      'indisponibilitesChauffeurs' => $this->indisponibilitechauffeurTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'indisponibilitesChauffeurs' => $this->indisponibilitechauffeurTableView->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);   
   }
    

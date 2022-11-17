@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Model/IndisponibiliteChauffeurTable.php
+ * @package   : module/Transport/src/Model/IndisponibiliteChauffeurTableView.php
  *
  * @purpose   :
  * 
@@ -27,7 +27,7 @@ use Hpb\Db\Sql\FBSelect;
 /*
  * 
  */
-class IndisponibiliteChauffeurTable
+class IndisponibiliteChauffeurTableView
 {
   
   private $tableGateway;
@@ -146,48 +146,6 @@ class IndisponibiliteChauffeurTable
     }
     return $row;
   }
-
-  //
-  public function saveIndisponibiliteChauffeur(IndisponibiliteChauffeur $indisponibiliteChauffeur)
-  {
-
-    $data = $indisponibiliteChauffeur->getArrayCopy(false);
-    $id = (int) $indisponibiliteChauffeur->getId();
-
-    if ($id === 0) {
-      $this->tableGateway->insert($data);
-      $indisponibiliteChauffeur = $this->findOneByDateDebut($data);
-      return $indisponibiliteChauffeur;
-    }
-    
-    try {
-      $this->getIndisponibiliteChauffeur($id);
-    } catch (RuntimeException $e) {
-      throw new RuntimeException(sprintf(
-        'Cannot update vehicule with identifier %d; does not exist',
-        $id
-      ));
-    }
-    
-    $this->tableGateway->update($data, ['IDX_INDISPONIBILITECHAUFFEUR' => $id]);
-  }
-
-  //
-  public function deleteIndisponibiliteChauffeur($id)
-  {
-    
-    $this->tableGateway->delete(['IDX_INDISPONIBILITECHAUFFEUR' => (int) $id]);
-  }
-  
-  //
-  public function findOneBy(array $criteria)
-  {
-    
-    $rowset = $this->tableGateway->select($criteria);
-    $indisponibiliteChauffeur = $rowset->current();
-    
-    return $indisponibiliteChauffeur;
-  }
   
   //
   public function findOneById(int $id)
@@ -206,32 +164,12 @@ class IndisponibiliteChauffeurTable
   }
   
   // 
-  public function findOneByRecord(Chauffeur $record)
+  public function findOneByRecord(IndisponibiliteChauffeurView $record)
   {
     
-    $recordArray = $record->getArrayCopy();
-    //unset($recordArray["IDX_CHAUFFEUR"]);
+    $recordArray = $record->getArrayCopy(false);
     $indisponibiliteChauffeur = $this->findOneBy($recordArray);
     
     return $indisponibiliteChauffeur;
-  }
-  
-  public function getNumberOfRows () 
-  {
-    
-    $adapter = $this->tableGateway->getAdapter();
-    $sql     = $this->tableGateway->getSql();
-    $select  = $sql->select();
-    $select->columns(
-      [
-        'COUNT' => new \Laminas\Db\Sql\Expression("COUNT('')"),
-      ],
-      FALSE,
-    );
-    
-    $selectString = $sql->buildSqlString($select);
-    $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-    
-    return $rowset->current();
   }
 }

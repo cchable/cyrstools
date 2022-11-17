@@ -17,6 +17,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 
 use Transport\Service\IndisponibiliteChauffeurManager;
 use Transport\Model\IndisponibiliteChauffeurTable;
+use Transport\Model\ChauffeurTable;
 
 
 /*
@@ -26,17 +27,19 @@ class IndisponibiliteChauffeurManagerFactory implements FactoryInterface
 {
 
   /*
-   * This method creates the ChauffeurManager service and returns its instance. 
+   * This method creates the IndisponibiliteChauffeurManager service and returns its instance. 
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
     
-    $indisponibiliteChauffeurTable = $container->get(IndisponibiliteChauffeurTable::class);
+    $indisponibiliteChauffeurTable  = $container->get(IndisponibiliteChauffeurTable::class);
+    $chauffeurTable                 = $container->get(ChauffeurTable::class);
     $viewRenderer = $container->get('ViewRenderer');
     $config       = $container->get('Config');
 
     return new IndisponibiliteChauffeurManager(
       $indisponibiliteChauffeurTable,
+      $chauffeurTable,
       $viewRenderer,
       $config
     );

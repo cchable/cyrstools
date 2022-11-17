@@ -343,6 +343,7 @@ return [
 
     Controller\IndisponibiliteChauffeurController::class 
 			=> Controller\Factory\IndisponibiliteChauffeurControllerFactory::class,
+
 /*	
 		Controller\HeurePlanningController::class 
 			=> Controller\Factory\HeurePlanningControllerFactory::class,
@@ -394,6 +395,11 @@ return [
 				=> Model\Factory\IndisponibiliteChauffeurTableFactory::class,
 			Model\IndisponibiliteChauffeurTableGateway::class
 				=> Model\Factory\IndisponibiliteChauffeurTableGatewayFactory::class,
+          
+			Model\IndisponibiliteChauffeurTableView::class
+				=> Model\Factory\IndisponibiliteChauffeurTableViewFactory::class,
+			Model\IndisponibiliteChauffeurTableViewGateway::class
+				=> Model\Factory\IndisponibiliteChauffeurTableViewGatewayFactory::class,
         
       Model\MarqueTable::class
 				=> Model\Factory\MarqueTableFactory::class,
