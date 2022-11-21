@@ -206,17 +206,35 @@ class IndisponibiliteChauffeurTable
   }
   
   // 
-  public function findOneByRecord(Chauffeur $record)
+  public function findOneByRecordOld(array $record)
   {
     
-    $recordArray = $record->getArrayCopy();
-    //unset($recordArray["IDX_CHAUFFEUR"]);
-    $indisponibiliteChauffeur = $this->findOneBy($recordArray);
+    $indisponibiliteChauffeur = $this->findOneBy($record);
     
     return $indisponibiliteChauffeur;
   }
   
-  public function getNumberOfRows () 
+  // 
+  public function findOneByRecord($record, bool $bWithIDX)
+  {
+    if(is_array($record)) {
+      if(!$bWithIDX) {
+        unset($record['IDX_INDISPONIBILITECHAUFFEUR']);
+      }
+      $indisponibiliteChauffeur = $this->findOneBy($record);
+    } else { 
+      if(is_object($record)) {
+        $recordArray = $record->getArrayCopy($bWithIDX);
+        $indisponibiliteChauffeur = $this->findOneBy($recordArray);
+      } else {
+        $indisponibiliteChauffeur = false;
+      }
+    }
+    
+    return $indisponibiliteChauffeur;
+  }
+  
+  public function getNumberOfRows() 
   {
     
     $adapter = $this->tableGateway->getAdapter();

@@ -19,14 +19,6 @@ $this->pageBreadcrumbs()->setItems([
   'Ajout'               => $this->url('chauffeur', ['action'=>'add']),
 ]);
 
-echo $this->flashMessenger()->renderCurrent('default');
-echo $this->flashMessenger()->renderCurrent('error');
-echo $this->flashMessenger()->renderCurrent('warning');
-echo $this->flashMessenger()->renderCurrent('success');
-echo $this->flashMessenger()->renderCurrent('info');
-
-$this->flashMessenger()->clearMessagesFromContainer();
-
 $form->get('PRENOMCHAUFFEUR')->setAttributes([
   'class'       => 'form-control', 
   'placeholder' => 'Prénom'

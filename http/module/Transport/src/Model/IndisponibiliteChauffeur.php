@@ -25,6 +25,7 @@ use Laminas\InputFilter\InputFilterInterface;
 
 use Laminas\Validator\StringLength;
 use Laminas\Validator\InArray;
+use Laminas\Validator\Regex;
 use Laminas\I18n\Validator\IsInt;
 use Laminas\I18n\Validator\DateTime;
 
@@ -112,9 +113,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
   public function fillInputFilter(InputFilterInterface $inputFilter)
   {
 
-    //DATEDEBUTINDISPONIBILITE
+    //STARTDATEINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'DATEDEBUTINDISPONIBILITE',
+      'name'       => 'STARTDATEINDISPONIBILITE',
       'required'   => true,
       'validators' => [
         [
@@ -135,9 +136,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);
      
-    //DATEFININDISPONIBILITE
+    //ENDDATEINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'DATEDEBUTINDISPONIBILITE',
+      'name'       => 'ENDDATEINDISPONIBILITE',
       'required'   => false,
       'validators' => [
         [
@@ -158,9 +159,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);   
     
-    //TIMEDEBUTINDISPONIBILITE
+    //STARTTIMEINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'TIMEDEBUTINDISPONIBILITE',
+      'name'       => 'STARTTIMEINDISPONIBILITE',
       'required'   => false,
       'validators' => [
         [
@@ -181,9 +182,9 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);
     
-    //TIMEFININDISPONIBILITE
+    //ENDTIMEINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'TIMEFININDISPONIBILITE',
+      'name'       => 'ENDTIMEINDISPONIBILITE',
       'required'   => false,
       'validators' => [
         [
@@ -204,13 +205,13 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
       ],
     ]);
 
-    // JOURENTIERINDISPONIBILITE
+    //ALLDAYINDISPONIBILITE
     $inputFilter->add([
       'name' => 'ALLDAYINDISPONIBILITE',
       'required'          => true,
       'allow_empty'       => true,
       'continue_if_empty' => true,        
-      'description'       => 'is principal ?',
+      'description'       => 'all day ?',
       'filters' => [
         [
           'name'    => Boolean::class,

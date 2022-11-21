@@ -65,27 +65,24 @@ class IndisponibiliteChauffeurManager
    */
   public function addIndisponibiliteChauffeur($data) 
   {
-    
+////ICI    
     if(!$this->indisponibiliteChauffeurTable->findOneByRecord($data)) {
       
       // Create new IndisponibiliteChauffeur entiy.
       $indisponibiliteChauffeur= new IndisponibiliteChauffeur();
       $indisponibiliteChauffeur->exchangeArray($data);
       
-      if(!$this->ephemerideTable->findOneByRecord($indisponibiliteChauffeur)) {
-
-        // Find chauffeur
-        $idChauffeur = $data['IDX_CHAUFFEUR'];
-        $chauffeur = $this->chauffeurTable->findOneById($idChauffeur);
-        if($chauffeur == null) {
-          throw new \Exception('Chauffeur not found');
-        }
-        $indisponibiliteChauffeur->setIdChauffeur($chauffeur->getId());
-      
-        $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->saveIndisponibiliteChauffeur($indisponibiliteChauffeur);
-        return $indisponibiliteChauffeur;
+      // Find Chauffeur
+      $idChauffeur = $data['IDX_CHAUFFEUR'];
+      $chauffeur = $this->chauffeurTable->findOneById($idChauffeur);
+      if ($chauffeur == null) {
+        
+        throw new \Exception('Chauffeur not found');
       }
-    }
+////  $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->saveIndisponibiliteChauffeur($indisponibiliteChauffeur);
+////      return $indisponibiliteChauffeur;
+      return true;
+      }
     
     return false;
   }
@@ -195,5 +192,21 @@ class IndisponibiliteChauffeurManager
 
     return (($timeStart1 > $timeStart2) && ($timeEnd1 < $timeEnd2) || ($timeStart1 < $timeStart2) && ($timeEnd1 > $timeEnd2));
   }
+  
+  /*
+   * 
+   */
+  public function getChauffeurs() {
+    
+    $chauffeursList = [];
+    
+    $chauffeurs = $this->chauffeurTable->fetchAll();
+
+    foreach ($chauffeurs as $chauffeur) {
+      $chauffeursList[$chauffeur->getId()] = $chauffeur->getPrenom();
+    }
+    
+    return $chauffeursList;
+  }  
 }
 

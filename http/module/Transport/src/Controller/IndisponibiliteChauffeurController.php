@@ -81,9 +81,9 @@ class IndisponibiliteChauffeurController extends AbstractActionController
     $sessionContainer)
   {
     
-    $this->indisponibilitechauffeurTable     = $indisponibiliteChauffeurTable;
-    $this->indisponibilitechauffeurTableView = $indisponibiliteChauffeurTableView;
-    $this->indisponibilitechauffeurManager   = $indisponibiliteChauffeurManager;
+    $this->indisponibiliteChauffeurTable     = $indisponibiliteChauffeurTable;
+    $this->indisponibiliteChauffeurTableView = $indisponibiliteChauffeurTableView;
+    $this->indisponibiliteChauffeurManager   = $indisponibiliteChauffeurManager;
     $this->defaultRowPerPage = $defaultRowPerPage;
     $this->stepRowPerPage    = $stepRowPerPage;
     $this->sessionContainer  = $sessionContainer;
@@ -164,8 +164,11 @@ class IndisponibiliteChauffeurController extends AbstractActionController
   public function addAction()
   {
     
+    // Get the list of all available annee scolaire (sorted)
+    $chauffeurs = $this->indisponibiliteChauffeurManager->getChauffeurs();
+
     // Create Form
-    $form = new ChauffeurForm('create');
+    $form = new IndisponibiliteChauffeurForm($chauffeurs);
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -178,33 +181,26 @@ class IndisponibiliteChauffeurController extends AbstractActionController
       if($form->isValid()) {
 
         // Get filtered and validated data
-        $data = $form->getData();
-
-        $this->flashMessenger()->setNamespace('error');
-        $msgsCurrent = $this->flashMessenger()->getCurrentMessages();        
+        $data = $form->getData();      
         
-        // Add chauffeur
-        if ($this->chauffeurManager->addChauffeur($data)) {
+        // Add indisponibilitechauffeur
+        if ($this->indisponibiliteChauffeurManager->addIndisponibiliteChauffeur($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Chauffeur ' . $data['PRENOMCHAUFFEUR'] . ' ajouté');
+          $this->flashMessenger()->addSuccessMessage("L'indisponibilité du chauffeur a été ajoutée");
           // Redirect to "index" page
-          return $this->redirect()->toRoute('chauffeur', ['action'=>'index']); 
+          return $this->redirect()->toRoute('indisponibilitechauffeur', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Le chauffeur " . $data['PRENOMCHAUFFEUR'] . " existe déjà");      
-//          $this->flashMessenger()->setNamespace('error');
-//          $msgsCurrent = $this->flashMessenger()->getCurrentMessages();
-          return new ViewModel([
-            'form' => $form,
-          ]);  
+          $this->flashMessenger()->addErrorMessage("L'indisponibilité du chauffeur existe déjà");      
         }
       }               
     } 
     
     return new ViewModel([
-      'form' => $form,
+      'form'       => $form,
+      'chauffeurs' => $chauffeurs 
     ]);   
   }  
   
@@ -298,5 +294,10 @@ class IndisponibiliteChauffeurController extends AbstractActionController
     return new ViewModel([
       'form' => $form,
     ]);
+  }
+  
+  private function initDataForPaginator() {
+    
+    
   }
 }
