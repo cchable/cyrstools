@@ -154,7 +154,7 @@ class IndisponibiliteChauffeurController extends AbstractActionController
       'search'                     => $search,
       'rowPerPage'                 => $rowPerPage,
       'stepRowPerPage'             => $this->stepRowPerPage,
-      'indisponibilitesChauffeurs' => $this->indisponibilitechauffeurTableView->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'indisponibilitesChauffeurs' => $this->indisponibiliteChauffeurTableView->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);   
   }
    
@@ -195,7 +195,10 @@ class IndisponibiliteChauffeurController extends AbstractActionController
           // Add a flash message Error
           $this->flashMessenger()->addErrorMessage("L'indisponibilité du chauffeur existe déjà");      
         }
-      }               
+      } else {
+        // Add a flash message Error
+        $this->flashMessenger()->addErrorMessage("Des données dans le formulaire sont erronées");  
+      }             
     } 
     
     return new ViewModel([

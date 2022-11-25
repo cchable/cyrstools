@@ -215,7 +215,7 @@ class IndisponibiliteChauffeurTable
   }
   
   // 
-  public function findOneByRecord($record, bool $bWithIDX)
+  public function findOneByRecord($record, bool $bWithIDX = false)
   {
     if(is_array($record)) {
       if(!$bWithIDX) {

@@ -19,11 +19,11 @@ $this->pageBreadcrumbs()->setItems([
   'Ajout'                              => $this->url('indisponibilitechauffeur', ['action'=>'add']),
 ]);
 
-echo $this->flashMessenger()->renderCurrent('default');
-echo $this->flashMessenger()->renderCurrent('error');
-echo $this->flashMessenger()->renderCurrent('warning');
-echo $this->flashMessenger()->renderCurrent('success');
-echo $this->flashMessenger()->renderCurrent('info');
+echo $this->flashMessenger()->render('default');
+echo $this->flashMessenger()->render('error');
+echo $this->flashMessenger()->render('warning');
+echo $this->flashMessenger()->render('success');
+echo $this->flashMessenger()->render('info');
 
 $form->get('IDX_CHAUFFEUR')->setAttributes([
   'class'       => 'form-control', 

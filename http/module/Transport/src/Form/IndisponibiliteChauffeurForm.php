@@ -16,6 +16,7 @@ use DomainException;
 
 use Laminas\Form\Form;
 use Laminas\Form\Element;
+use Laminas\Form\Element\Time;
 use Laminas\Form\Element\Checkbox;
 
 use Laminas\Filter\StringTrim;
@@ -85,7 +86,7 @@ class IndisponibiliteChauffeurForm extends Form
       ],
     ]);
     
-    // Add "startdate" field
+    // Add "start date" field
     $this->add([
       'name' => 'STARTDATEINDISPONIBILITE',
       'type' => 'date',
@@ -94,7 +95,8 @@ class IndisponibiliteChauffeurForm extends Form
       ],
     ]);
     
-    // Add "startheure" field
+    // Add "start time" field
+/*    
     $this->add([
       'name' => 'STARTTIMEINDISPONIBILITE',
       'type' => 'time',
@@ -102,7 +104,24 @@ class IndisponibiliteChauffeurForm extends Form
         'label' => 'Heure de début',
       ],
     ]);
-        // Add "startdate" field
+*/
+
+    // Add "start time" field
+    $this->add([
+      'name'    => 'STARTTIMEINDISPONIBILITE',
+      'type'    => Element\Time::class,
+      'options' => [
+        'label'  => 'Heure début',
+        'format' => 'H:i',
+      ],
+      'attributes' => [
+        'min'  => '00:00',
+        'max'  => '23:59',
+        'step' => '60',
+      ],
+    ]);
+    
+    // Add "end date" field
     $this->add([
       'name' => 'ENDDATEINDISPONIBILITE',
       'type' => 'date',
@@ -111,7 +130,8 @@ class IndisponibiliteChauffeurForm extends Form
       ],
     ]);
     
-    // Add "startheure" field
+    // Add "end time" field
+/*    
     $this->add([
       'name' => 'ENDTIMEINDISPONIBILITE',
       'type' => 'time',
@@ -119,8 +139,22 @@ class IndisponibiliteChauffeurForm extends Form
         'label' => 'Heure de fin',
       ],
     ]);
-    
-    // Add "toute la journée" field
+*/
+    $this->add([
+      'name'    => 'ENDTIMEINDISPONIBILITE',
+      'type'    => Time::class,
+      'options' => [
+        'label'  => 'Heure fin',
+        'format' => 'H:i',
+      ],
+      'attributes' => [
+        'min'  => '00:00',
+        'max'  => '23:59',
+        'step' => '60',
+      ],
+    ]);
+      
+    // Add "all days" field
     $this->add([
       'name'  => 'ALLDAYINDISPONIBILITE',
       'type'  => Checkbox::class,
@@ -141,7 +175,7 @@ class IndisponibiliteChauffeurForm extends Form
         ],
       ],
     ]);
-    
+
     // Add the Submit button
     $this->add([
       'name'       => 'submit',
