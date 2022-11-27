@@ -65,23 +65,33 @@ class IndisponibiliteChauffeurManager
    */
   public function addIndisponibiliteChauffeur($data) 
   {
-////ICI    
+    
+////ICI
+    //Clean $data from FROM
+    unset($data['csrf']);
+    unset($data['submit']);
+    
+    if($data['ALLDAYINDISPONIBILITE']) {
+      $data['STARTTIMEINDISPONIBILITE'] = '00:00:00';
+      $data['ENDTIMEINDISPONIBILITE']   = '23:59:59';
+      $data['ENDDATEINDISPONIBILITE']   = $data['STARTDATEINDISPONIBILITE'];
+    }
+    
     if(!$this->indisponibiliteChauffeurTable->findOneByRecord($data)) {
       
-      // Create new IndisponibiliteChauffeur entiy.
+      // Create new IndisponibiliteChauffeur entity.
       $indisponibiliteChauffeur= new IndisponibiliteChauffeur();
       $indisponibiliteChauffeur->exchangeArray($data);
       
-      // Find Chauffeur
+      // Check if Chauffeur exist
       $idChauffeur = $data['IDX_CHAUFFEUR'];
       $chauffeur = $this->chauffeurTable->findOneById($idChauffeur);
       if ($chauffeur == null) {
         
         throw new \Exception('Chauffeur not found');
       }
-////  $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->saveIndisponibiliteChauffeur($indisponibiliteChauffeur);
-////      return $indisponibiliteChauffeur;
-      return true;
+      
+      return $this->indisponibiliteChauffeurTable->saveIndisponibiliteChauffeur($indisponibiliteChauffeur);
       }
     
     return false;

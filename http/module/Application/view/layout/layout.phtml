@@ -158,13 +158,11 @@
       <!-- Page content placeholder -->
       <div class="row">
         <div class="col-lg-12">
-          <?php
-          echo $this->flashMessenger()->render('default');
-          echo $this->flashMessenger()->render('error');
-          echo $this->flashMessenger()->render('warning');
-          echo $this->flashMessenger()->render('success');
-          echo $this->flashMessenger()->render('info');
-          ?>        
+          <?= $this->flashMessenger()->renderCurrent('default'); ?>
+          <?= $this->flashMessenger()->renderCurrent('error'); ?>
+          <?= $this->flashMessenger()->renderCurrent('warning'); ?>
+          <?= $this->flashMessenger()->renderCurrent('success'); ?>
+          <?= $this->flashMessenger()->renderCurrent('info'); ?>
           <?= $this->content; ?>
         </div>
       </div>

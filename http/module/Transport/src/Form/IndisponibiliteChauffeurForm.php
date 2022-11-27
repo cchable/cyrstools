@@ -94,22 +94,11 @@ class IndisponibiliteChauffeurForm extends Form
         'label' => 'Date de début',
       ],
     ]);
-    
-    // Add "start time" field
-/*    
-    $this->add([
-      'name' => 'STARTTIMEINDISPONIBILITE',
-      'type' => 'time',
-      'options' => [
-        'label' => 'Heure de début',
-      ],
-    ]);
-*/
 
     // Add "start time" field
     $this->add([
       'name'    => 'STARTTIMEINDISPONIBILITE',
-      'type'    => Element\Time::class,
+      'type'    => Time::class,
       'options' => [
         'label'  => 'Heure début',
         'format' => 'H:i',
@@ -131,15 +120,6 @@ class IndisponibiliteChauffeurForm extends Form
     ]);
     
     // Add "end time" field
-/*    
-    $this->add([
-      'name' => 'ENDTIMEINDISPONIBILITE',
-      'type' => 'time',
-      'options' => [
-        'label' => 'Heure de fin',
-      ],
-    ]);
-*/
     $this->add([
       'name'    => 'ENDTIMEINDISPONIBILITE',
       'type'    => Time::class,

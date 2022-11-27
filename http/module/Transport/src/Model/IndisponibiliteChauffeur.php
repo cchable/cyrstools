@@ -76,8 +76,8 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
     $this->idChauffeur = !empty($data['IDX_CHAUFFEUR'])                ? $data['IDX_CHAUFFEUR']                : null;
     $this->dateDebut   = !empty($data['STARTDATEINDISPONIBILITE'])     ? $data['STARTDATEINDISPONIBILITE']     : null;
     $this->heureDebut  = !empty($data['STARTTIMEINDISPONIBILITE'])     ? $data['STARTTIMEINDISPONIBILITE']     : null;
-    $this->dateFin     = !empty($data['DATEFININDISPONIBILITE'])       ? $data['ENDDATEINDISPONIBILITE']       : null;
-    $this->heureFin    = !empty($data['TIMEFININDISPONIBILITE'])       ? $data['ENDTIMEINDISPONIBILITE']       : null;
+    $this->dateFin     = !empty($data['ENDDATEINDISPONIBILITE'])       ? $data['ENDDATEINDISPONIBILITE']       : null;
+    $this->heureFin    = !empty($data['ENDTIMEINDISPONIBILITE'])       ? $data['ENDTIMEINDISPONIBILITE']       : null;
     $this->jourEntier  = !empty($data['ALLDAYINDISPONIBILITE'])        ? $data['ALLDAYINDISPONIBILITE']        : false;
   }
 

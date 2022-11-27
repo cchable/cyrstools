@@ -19,12 +19,6 @@ $this->pageBreadcrumbs()->setItems([
   'Ajout'                              => $this->url('indisponibilitechauffeur', ['action'=>'add']),
 ]);
 
-echo $this->flashMessenger()->render('default');
-echo $this->flashMessenger()->render('error');
-echo $this->flashMessenger()->render('warning');
-echo $this->flashMessenger()->render('success');
-echo $this->flashMessenger()->render('info');
-
 $form->get('IDX_CHAUFFEUR')->setAttributes([
   'class'       => 'form-control', 
   'placeholder' => 'Chauffeur'
@@ -130,3 +124,7 @@ function valueChangedAllDay()
     </div>    
   </div>
 </div>
+
+<script type="text/javascript">
+  valueChangedAllDay()
+</script>
