@@ -26,6 +26,7 @@ use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\StringLength;
 use Laminas\Validator\InArray;
 use Laminas\Validator\Regex;
+
 use Laminas\I18n\Validator\IsInt;
 use Laminas\I18n\Validator\DateTime;
 
@@ -139,7 +140,7 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
     //ENDDATEINDISPONIBILITE
     $inputFilter->add([
       'name'       => 'ENDDATEINDISPONIBILITE',
-      'required'   => false,
+      'required'   => true,
       'validators' => [
         [
           'name'    => DateTime::class,
@@ -162,16 +163,16 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
     //STARTTIMEINDISPONIBILITE
     $inputFilter->add([
       'name'       => 'STARTTIMEINDISPONIBILITE',
-      'required'   => false,
+      'required'   => true,
       'validators' => [
         [
-          'name'    => Regex::class,
+          'name'    => DateTime::class,
           'options' => [
-            'pattern' => '/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/',
+            'pattern' => 'HH:mm',
             'message' => 'Invalid time format',
           ],
         ],
-      ],     
+      ],       
       'filters' => [
         [
           'name' => StringTrim::class,
@@ -185,43 +186,22 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
     //ENDTIMEINDISPONIBILITE
     $inputFilter->add([
       'name'       => 'ENDTIMEINDISPONIBILITE',
-      'required'   => false,
+      'required'   => true,
       'validators' => [
         [
-          'name'    => Regex::class,
+          'name'    => DateTime::class,
           'options' => [
-            'pattern' => '/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/',
+            'pattern' => 'HH:mm',
             'message' => 'Invalid time format',
           ],
         ],
-      ],     
+      ],       
       'filters' => [
         [
           'name' => StringTrim::class,
         ],
         [
           'name' => StripTags::class,
-        ],
-      ],
-    ]);
-
-    //ALLDAYINDISPONIBILITE
-    $inputFilter->add([
-      'name' => 'ALLDAYINDISPONIBILITE',
-      'required'          => true,
-      'allow_empty'       => true,
-      'continue_if_empty' => true,        
-      'description'       => 'all day ?',
-      'filters' => [
-        [
-          'name'    => Boolean::class,
-          'options' => [
-            'type' => [
-              Boolean::TYPE_BOOLEAN,
-              Boolean::TYPE_INTEGER,
-              Boolean::TYPE_ZERO_STRING,
-            ],  
-          ]
         ],
       ],
     ]);

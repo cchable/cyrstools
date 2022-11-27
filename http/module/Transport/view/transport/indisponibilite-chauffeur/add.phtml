@@ -69,9 +69,9 @@ $form->prepare();
 function valueChangedAllDay()
 {
   if($('#ALLDAYINDISPONIBILITE').is(":checked"))   
-      $("#HiddenElements").hide();
+      $("#HiddenElements").fadeOut('slow');
   else
-      $("#HiddenElements").show();
+      $("#HiddenElements").fadeIn('slow');
 }
 </script>
 
@@ -79,7 +79,10 @@ function valueChangedAllDay()
   <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
   <div class="row justify-content-left">
     <div class="col-md-6">
-      <?= $this->form()->openTag($form); ?>      
+      <?= $this->form()->openTag($form); ?>
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+        <?= PHP_EOL; ?>    
+        <hr class="my-4">        
         <div class="form-floating my-2">
           <?= $this->formElement($form->get('IDX_CHAUFFEUR')) . "\n"; ?>
           <?= $this->formLabel($form->get('IDX_CHAUFFEUR')); ?>
@@ -117,9 +120,6 @@ function valueChangedAllDay()
           </div>
         </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
-        <hr class="my-4">
-        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
-        <?= PHP_EOL; ?>
       <?= $this->form()->closeTag() . PHP_EOL; ?>
     </div>    
   </div>

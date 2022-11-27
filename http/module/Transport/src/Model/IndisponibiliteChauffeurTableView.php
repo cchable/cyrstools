@@ -58,7 +58,7 @@ class IndisponibiliteChauffeurTableView
   {
         
     $fbSelect = new FBSelect($this->tableGateway->table);
-    $fbSelect->order('STARTDATEINDISPONIBILITE ASC');
+    $fbSelect->order('STARTDATEINDISPONIBILITE DESC');
     if ($search) {
         
       $where = new Where();

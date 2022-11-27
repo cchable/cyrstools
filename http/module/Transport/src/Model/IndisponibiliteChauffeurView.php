@@ -23,11 +23,6 @@ use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
-use Laminas\Validator\StringLength;
-use Laminas\Validator\InArray;
-use Laminas\I18n\Validator\IsInt;
-use Laminas\I18n\Validator\DateTime;
-
 
 /*
  * 

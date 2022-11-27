@@ -143,7 +143,7 @@ class IndisponibiliteChauffeurController extends AbstractActionController
         $search = $data['search'];
       }
     }
-
+    
     // Fill form with data from url
     if ($search) 
       $formSearch->setData(['search' => $search]);
@@ -175,6 +175,12 @@ class IndisponibiliteChauffeurController extends AbstractActionController
       
       // Fill in the form with POST data
       $data = $this->params()->fromPost();
+      
+      if($data['ALLDAYINDISPONIBILITE']) {
+        $data['STARTTIMEINDISPONIBILITE'] = '00:00';
+        $data['ENDTIMEINDISPONIBILITE']   = '23:59';
+        $data['ENDDATEINDISPONIBILITE']   = $data['STARTDATEINDISPONIBILITE'];
+      }
       $form->setData($data);
 
       // Validate form
@@ -220,23 +226,23 @@ class IndisponibiliteChauffeurController extends AbstractActionController
       return;
     }
 
-    $chauffeur = $this->chauffeurTable->findOneById($id);
+    $chauffeur = $this->indisponibiliteChauffeurTable->findOneById($id);
     if ($chauffeur == null) {
   
 			$this->getResponse()->setStatusCode(404);
       return;
     }
 
-    $prenom = $chauffeur->getPrenom();
+    $date = $chauffeur->getDateDebut();
     
     // Delete chauffeur.
-    $this->chauffeurManager->deleteChauffeur($id);
+    $this->indisponibiliteChauffeurManager->deleteIndisponibiliteChauffeur($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("Le chauffeur $prenom a été supprimé");
+    $this->flashMessenger()->addWarningMessage("L'indisponibilité du $date a été supprimée");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('chauffeur', ['action'=>'index']);      
+    return $this->redirect()->toRoute('indisponibilitechauffeur', ['action'=>'index']);      
   }
   
   /*
@@ -299,8 +305,8 @@ class IndisponibiliteChauffeurController extends AbstractActionController
     ]);
   }
   
-  private function initDataForPaginator() {
-    
-    
+ //ToDo   
+  private function initDataForPaginator() {  
+ 
   }
 }

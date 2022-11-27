@@ -71,12 +71,6 @@ class IndisponibiliteChauffeurManager
     unset($data['csrf']);
     unset($data['submit']);
     
-    if($data['ALLDAYINDISPONIBILITE']) {
-      $data['STARTTIMEINDISPONIBILITE'] = '00:00:00';
-      $data['ENDTIMEINDISPONIBILITE']   = '23:59:59';
-      $data['ENDDATEINDISPONIBILITE']   = $data['STARTDATEINDISPONIBILITE'];
-    }
-    
     if(!$this->indisponibiliteChauffeurTable->findOneByRecord($data)) {
       
       // Create new IndisponibiliteChauffeur entity.
