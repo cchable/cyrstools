@@ -199,11 +199,12 @@ class IndisponibiliteChauffeurController extends AbstractActionController
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'indisponibilité du chauffeur existe déjà");      
+          $this->flashMessenger()->addMessage("L'indisponibilité du chauffeur existe déjà", 'error', 0);
         }
       } else {
+        
         // Add a flash message Error
-        $this->flashMessenger()->addErrorMessage("Des données dans le formulaire sont erronées");  
+        $this->flashMessenger()->addMessage("Des données dans le formulaire sont erronées", 'error', 0);
       }             
     } 
     

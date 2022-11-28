@@ -122,31 +122,35 @@ return [
         'message_open_format'      => '<div%s role="alert"><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
         'message_close_string'     => '</div>' . " \r\n",
         'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
-        'classes'                  => 'alert alert-primary alert-dismissible fade show',
+        'classes'                  => 'alert alert-default alert-dismissible fade show d-flex align-items-center',
       ],
+      
       'success' => [
-        'message_open_format'      => '<div%s role="alert"><svg class="bi text-muted flex-shrink-0 me-3" width="1em" height="1em"><use xlink:href="#check2_square"/></svg><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_open_format'      => '<div%s role="alert"><svg class="bi text-muted flex-shrink-0 me-2" width="32" height="32" role="img" aria-label="Success:"><use xlink:href="#check2_square"/></svg><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
         'message_close_string'     => '</div>' . " \r\n",
         'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
-        'classes'                  => 'alert alert-success alert-dismissible fade show',
+        'classes'                  => 'alert alert-success alert-dismissible fade show d-flex align-items-center',
       ],
+      
       'warning' => [
-        'message_open_format'      => '<div%s role="alert"><svg class="bi text-muted flex-shrink-0 me-3" width="1em" height="1em"><use xlink:href="#exclamation_square"/></svg><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_open_format'      => '<div%s role="alert"><svg class="bi text-muted flex-shrink-0 me-2" width="32" height="32" role="img" aria-label="Warning:"><use xlink:href="#exclamation_square"/></svg><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
         'message_close_string'     => '</div>' . " \r\n",
         'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
-        'classes'                  => 'alert alert-success alert-dismissible fade show',
+        'classes'                  => 'alert alert-warning alert-dismissible fade show d-flex align-items-center',
       ],
+      
       'error'   => [
-        'message_open_format'      => '<div%s role="alert"><svg class="bi text-muted flex-shrink-0 me-3" width="1em" height="1em"><use xlink:href="#shield_exclamation"/></svg><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_open_format'      => '<div%s role="alert"><svg class="bi text-muted flex-shrink-0 me-2" width="32" height="32" role="img" aria-label="Error:"><use xlink:href="#shield_exclamation"/></svg><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
         'message_close_string'     => '</div>' . " \r\n",
         'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
-        'classes'                  => 'alert alert-danger alert-dismissible fade show',
+        'classes'                  => 'alert alert-danger alert-dismissible fade show d-flex align-items-center',
       ],
+      
       'info'    => [
-        'message_open_format'      => '<div%s role="alert"><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
+        'message_open_format'      => '<div%s role="alert"><svg class="bi text-muted flex-shrink-0 me-2" width="32" height="32" role="img" aria-label="Info:"><use xlink:href="#info_square"/></svg><button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>',
         'message_close_string'     => '</div>' . " \r\n",
         'message_separator_string' => '</div><div%s role="alert">' . " \r\n",
-        'classes'                  => 'alert alert-info alert-dismissible fade show',
+        'classes'                  => 'alert alert-info alert-dismissible fade show d-flex align-items-center',
       ],
     ],    
   ],
