@@ -177,8 +177,8 @@ class IndisponibiliteChauffeurController extends AbstractActionController
       $data = $this->params()->fromPost();
       
       if($data['ALLDAYINDISPONIBILITE']) {
-        $data['STARTTIMEINDISPONIBILITE'] = '00:00';
-        $data['ENDTIMEINDISPONIBILITE']   = '23:59';
+        $data['STARTTIMEINDISPONIBILITE'] = '00:00:00';
+        $data['ENDTIMEINDISPONIBILITE']   = '23:59:59';
         $data['ENDDATEINDISPONIBILITE']   = $data['STARTDATEINDISPONIBILITE'];
       }
       $form->setData($data);
@@ -215,7 +215,7 @@ class IndisponibiliteChauffeurController extends AbstractActionController
   }  
   
   /*
-   * This action delete an chauffeur
+   * This action delete an indisponibilitechauffeur
    */
   public function deleteAction()
   {
@@ -227,14 +227,14 @@ class IndisponibiliteChauffeurController extends AbstractActionController
       return;
     }
 
-    $chauffeur = $this->indisponibiliteChauffeurTable->findOneById($id);
-    if ($chauffeur == null) {
+    $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->findOneById($id);
+    if ($indisponibiliteChauffeur == null) {
   
 			$this->getResponse()->setStatusCode(404);
       return;
     }
 
-    $date = $chauffeur->getDateDebut();
+    $date = $indisponibiliteChauffeur->getDateDebut();
     
     // Delete chauffeur.
     $this->indisponibiliteChauffeurManager->deleteIndisponibiliteChauffeur($id);
@@ -247,26 +247,31 @@ class IndisponibiliteChauffeurController extends AbstractActionController
   }
   
   /*
-   * This action displays a page allowing to edit an existing chauffeur
+   * This action displays a page allowing to edit an existing indisponibilitechauffeur
    */
   public function editAction()
   {
     
 		$id = (int)$this->params()->fromRoute('id', -1);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     if ($id<1) {
+      
       $this->getResponse()->setStatusCode(404);
       return;
     }
     
-    $chauffeur = $this->chauffeurTable->findOneById($id);
+    $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->findOneById($id);
 
-    if ($chauffeur == null) {
+    if ($indisponibiliteChauffeur == null) {
+      
       $this->getResponse()->setStatusCode(404);
       return;
     }
     
-    // Create chauffeur form
-    $form = new ChauffeurForm('update');
+    // Get the list of all available chauffeur (sorted)
+    $chauffeurs = $this->indisponibiliteChauffeurManager->getChauffeurs();
+    
+    // Create Form
+    $form = new IndisponibiliteChauffeurForm($chauffeurs);
     
      // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -281,28 +286,29 @@ class IndisponibiliteChauffeurController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
+        $date = $indisponibiliteChauffeur->getDateDebut();
         // Update chauffeur
-        if ($this->chauffeurManager->updateChauffeur($chauffeur, $data)) {
+        if ($this->indisponibiliteChauffeurManager->updateIndisponibiliteChauffeur($indisponibiliteChauffeur, $data)) {
 				
-          $prenom = $chauffeur->getPrenom();
           // Add a flash message Suucess
-          $this->flashMessenger()->addSuccessMessage("Chauffeur $prenom modifié");
+          $this->flashMessenger()->addSuccessMessage("L'indisponibilité du $date a été modifiée.");
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Le chauffeur " . $data['PRENOMCHAUFFEUR'] . " existe déjà");
+          $this->flashMessenger()->addErrorMessage("L'indisponibilité du $date existe déjà");
         }
 				
         // Redirect to "index" page
-        return $this->redirect()->toRoute('chauffeur', ['action'=>'index']);
+        return $this->redirect()->toRoute('indisponibilitechauffeur', ['action'=>'index']);
       }               
     } else {
 		
-      $form->setData($chauffeur->getArrayCopy());
+      $form->setData($indisponibiliteChauffeur->getArrayCopy());
     }
 
     return new ViewModel([
-      'form' => $form,
+      'form'       => $form,
+      'chauffeurs' => $chauffeurs 
     ]);
   }
   

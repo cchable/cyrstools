@@ -168,7 +168,7 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
         [
           'name'    => DateTime::class,
           'options' => [
-            'pattern' => 'HH:mm',
+            'pattern' => 'HH:mm:ss',
             'message' => 'Invalid time format',
           ],
         ],
@@ -191,7 +191,7 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
         [
           'name'    => DateTime::class,
           'options' => [
-            'pattern' => 'HH:mm',
+            'pattern' => 'HH:mm:ss',
             'message' => 'Invalid time format',
           ],
         ],

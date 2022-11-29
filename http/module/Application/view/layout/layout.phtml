@@ -179,15 +179,19 @@
           <?= $this->pageBreadcrumbs()->render(); ?>
         </div>
       </div>
-      <!-- Page content placeholder -->
+      <!-- FlashMessenger -->
       <div class="row">
-        <span id="FlashMessengerZone">
+        <div class="col-lg-12" id="FlashMessengerZone">
 <?= $this->flashMessenger()->renderCurrent('default'); ?>
 <?= $this->flashMessenger()->renderCurrent('error'); ?>
 <?= $this->flashMessenger()->renderCurrent('warning'); ?>
 <?= $this->flashMessenger()->renderCurrent('success'); ?>
 <?= $this->flashMessenger()->renderCurrent('info'); ?>
-        </span>      
+        </div>
+      </div>     
+      
+      <!-- Page content placeholder -->
+      <div class="row">
         <div class="col-lg-12">
           <?= $this->content; ?>
         </div>

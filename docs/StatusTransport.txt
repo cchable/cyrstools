@@ -9,14 +9,19 @@ Fait
   IndisponibiliteChauffeur
     Liste   : Ok
     Add     : Ok    (20221127)
+    Delete  : Ok    (20221129)
+    Edit    : Ok    (20221129)
 
 __________________________________________________________________________________________________________________
 En cours
-
+  Année scolaire
+    Liste   : 
 __________________________________________________________________________________________________________________
 A faire
-  IndisponibiliteChauffeur
-    Delete  :
+  Année scolaire
+    Liste   : 
+    Add     : 
+    Delete  : 
     Edit    : 
     
     
@@ -26,3 +31,15 @@ A créer
 
 __________________________________________________________________________________________________________________
 A modifier
+  Mettre des images SVG devant chaque menus 
+  Retirer les secondes des heures dans les formumaires
+__________________________________________________________________________________________________________________
+A résoudre
+  Ok  Problème avec le FlashMessenger
+        Dans le flux, pas de message : contoler -> vue
+        Si le flux est brisé, redirect, alors message
+
+__________________________________________________________________________________________________________________
+Résolu
+  Problème avec le FlashMessenger : 20221129
+    utilisation dans le flux de addMessage("xxx", 'error', 0) à la place de addErrorMessage("xxx")

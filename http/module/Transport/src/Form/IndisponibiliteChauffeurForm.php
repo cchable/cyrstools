@@ -101,12 +101,12 @@ class IndisponibiliteChauffeurForm extends Form
       'type'    => Time::class,
       'options' => [
         'label'  => 'Heure début',
-        'format' => 'H:i',
+        'format' => 'H:i:s',
       ],
       'attributes' => [
-        'min'  => '00:00',
-        'max'  => '23:59',
-        'step' => '60',
+        'min'  => '00:00:00',
+        'max'  => '23:59:59',
+        'step' => '1',
       ],
     ]);
     
@@ -125,12 +125,12 @@ class IndisponibiliteChauffeurForm extends Form
       'type'    => Time::class,
       'options' => [
         'label'  => 'Heure fin',
-        'format' => 'H:i',
+        'format' => 'H:i:s',
       ],
       'attributes' => [
-        'min'  => '00:00',
-        'max'  => '23:59',
-        'step' => '60',
+        'min'  => '00:00:00',
+        'max'  => '23:59:59',
+        'step' => '1',
       ],
     ]);
       

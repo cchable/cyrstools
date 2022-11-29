@@ -66,12 +66,12 @@ class IndisponibiliteChauffeurManager
   public function addIndisponibiliteChauffeur($data) 
   {
     
-////ICI
     //Clean $data from FROM
     unset($data['csrf']);
     unset($data['submit']);
     
-    if(!$this->indisponibiliteChauffeurTable->findOneByRecord($data)) {
+    if(!$this->checkIndisponibiliteChauffeurExists($data)) {
+    //if(!$this->indisponibiliteChauffeurTable->findOneByRecord($data)) {
       
       // Create new IndisponibiliteChauffeur entity.
       $indisponibiliteChauffeur= new IndisponibiliteChauffeur();
@@ -99,15 +99,15 @@ class IndisponibiliteChauffeurManager
     
     // Do not allow to change indisponibilitechauffeur if another indisponibilitechauffeur with such data already exits
     if($this->checkIndisponibiliteChauffeurExists($data)) {
-    //if($indisponibiliteChauffeur->getDateDebut()!=$data['DATEDEBUTINDISPONIBILITE'] && $this->checkIndisponibiliteChauffeurExists($data)) {  
-      
+ 
       return false;
     }
     
-    //find anneeScolaire id
+    //find chauffeur id
     $idChauffeur = $data['IDX_CHAUFFEUR'];
     $chauffeur = $this->chauffeurTable->findOneById($idChauffeur);
     if ($chauffeur == null) {
+      
       throw new \Exception('Chauffeur not found');
     }
     
