@@ -149,6 +149,14 @@ class NavManager
       'label' => 'Indisponibilites Chauffeurs',
       'link'  => $url('indisponibilitechauffeur')
     ];
+    $transportItems[] = [
+      'divider' => 'hr',
+    ];
+    $transportItems[] = [
+      'id'    => 'anneescolaire',
+      'label' => 'Années Scolaires',
+      'link'  => $url('anneescolaire')
+    ];
     
     //
     $userItems = [];

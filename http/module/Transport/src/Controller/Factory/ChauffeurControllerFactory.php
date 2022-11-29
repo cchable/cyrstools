@@ -29,14 +29,14 @@ class ChauffeurControllerFactory implements FactoryInterface
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {   
   
-    $chauffeurTable     = $container->get(ChauffeurTable::class);
-    $chauffeurManager   = $container->get(ChauffeurManager::class);
+    $chauffeurTable    = $container->get(ChauffeurTable::class);
+    $chauffeurManager  = $container->get(ChauffeurManager::class);
     
-    $config             = $container->get('Config');
-    $defaultRowPerPage  = $config['paginator']['options']['defaultRowPerPage'];
-    $stepRowPerPage     = $config['paginator']['options']['stepRowPerPage'];
+    $config            = $container->get('Config');
+    $defaultRowPerPage = $config['paginator']['options']['defaultRowPerPage'];
+    $stepRowPerPage    = $config['paginator']['options']['stepRowPerPage'];
       
-    $sessionContainer   = $container->get('ChauffeurSessionContainer');
+    $sessionContainer  = $container->get('ChauffeurSessionContainer');
     
     // Instantiate the controller and inject dependencies
     return new ChauffeurController(

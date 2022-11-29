@@ -15,7 +15,7 @@ namespace Transport\Controller\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-use Transport\Controller\AnneeScolaire;
+use Transport\Controller\AnneeScolaireController;
 use Transport\Service\AnneeScolaireManager;
 use Transport\Model\AnneeScolaireTable;
 
@@ -23,7 +23,7 @@ use Transport\Model\AnneeScolaireTable;
 /*
  * 
  */
-class AnneeScolaireFactory implements FactoryInterface
+class AnneeScolaireControllerFactory implements FactoryInterface
 {
   
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
@@ -32,14 +32,14 @@ class AnneeScolaireFactory implements FactoryInterface
     $anneeScolaireTable   = $container->get(AnneeScolaireTable::class);
     $anneeScolaireManager = $container->get(AnneeScolaireManager::class);
     
-    $config             = $container->get('Config');
-    $defaultRowPerPage  = $config['paginator']['options']['defaultRowPerPage'];
-    $stepRowPerPage     = $config['paginator']['options']['stepRowPerPage'];
+    $config               = $container->get('Config');
+    $defaultRowPerPage    = $config['paginator']['options']['defaultRowPerPage'];
+    $stepRowPerPage       = $config['paginator']['options']['stepRowPerPage'];
       
-    $sessionContainer   = $container->get('AnneeScolaireSessionContainer');
+    $sessionContainer     = $container->get('AnneeScolaireSessionContainer');
     
     // Instantiate the controller and inject dependencies
-    return new AnneeScolaire(
+    return new AnneeScolaireController(
       $anneeScolaireTable,
       $anneeScolaireManager,
       $defaultRowPerPage,

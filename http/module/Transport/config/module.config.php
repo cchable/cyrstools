@@ -87,7 +87,26 @@ return [
 						'action'     => 'index',
 					],
 				],
-			],        
+			],
+			
+			// Define a new route called "anneescolaire"
+			'anneescolaire' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/anneescolaire" as uri:
+					'route'       => '/anneescolaire[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\AnneeScolaireController::class,
+						'action'     => 'index',
+					],
+				],
+			],			
 /*
 			// Define a new route called "vehicule"
 			vehicule' => [
@@ -149,24 +168,7 @@ return [
 			],
 */
 /*
-			// Define a new route called "anneescolaire"
-			'anneescolaire' => [
-				// Define a "Segment" route type: 
-				'type'    => Segment::class,
-				'options' => [
-					// Listen to "/anneescolaire" as uri:
-					'route'       => '/anneescolaire[/:action[/:id]]',
-					'constraints' => [
-						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'id'     => '[0-9]+',
-					],          
-					// Define default controller and action to be called when this route is matched
-					'defaults' => [
-						'controller' => Controller\AnneeScolaireController::class,
-						'action'     => 'index',
-					],
-				],
-			],
+
 */
 /*
 			// Define a new route called "etape"
@@ -343,6 +345,9 @@ return [
 
     Controller\IndisponibiliteChauffeurController::class 
 			=> Controller\Factory\IndisponibiliteChauffeurControllerFactory::class,
+			
+		Controller\AnneeScolaireController::class 
+			=> Controller\Factory\AnneeScolaireControllerFactory::class,
 
 /*	
 		Controller\HeurePlanningController::class 
@@ -400,7 +405,12 @@ return [
 				=> Model\Factory\IndisponibiliteChauffeurTableViewFactory::class,
 			Model\IndisponibiliteChauffeurTableViewGateway::class
 				=> Model\Factory\IndisponibiliteChauffeurTableViewGatewayFactory::class,
-        
+      
+			Model\AnneeScolaireTable::class
+				=> Model\Factory\AnneeScolaireTableFactory::class,
+			Model\AnneeScolaireTableGateway::class
+				=> Model\Factory\AnneeScolaireTableGatewayFactory::class,
+
       Model\MarqueTable::class
 				=> Model\Factory\MarqueTableFactory::class,
 			Model\MarqueTableGateway::class
@@ -497,6 +507,10 @@ return [
         
 			Service\IndisponibiliteChauffeurManager::class
 				=> Service\Factory\IndisponibiliteChauffeurManagerFactory::class,
+				
+			Service\AnneeScolaireManager::class
+				=> Service\Factory\AnneeScolaireManagerFactory::class,	
+				
 /*
 			Service\HeurePlanningManager::class
 				=> Service\Factory\HeurePlanningManagerFactory::class,

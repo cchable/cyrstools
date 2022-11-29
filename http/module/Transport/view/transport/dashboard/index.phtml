@@ -98,7 +98,7 @@ $this->pageBreadcrumbs()->setItems([
         <h3 class="fw-bold mb-0 fs-4">AS &amp; Éphémérides</h3>
         <p>Gestion des années scolaires &amp; de leurs éphémérides</p>
         <p>Il faut créer l'année scolaire avant ses éphémérides</p>
-        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Années scolaires</button>
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('anneescolaire', ['action'=>'index']); ?>" role="button">Années scolaires</a>
         <button type="button" class="btn btn-outline-primary btn-sm" disabled>Éphémérides</button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Controller/ChauffeurController.php
+ * @package   : module/Transport/src/Controller/AnneeScolaireController.php
  *
  * @purpose   :
  * 
@@ -16,32 +16,32 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
-use Transport\Service\ChauffeurManager;
+use Transport\Service\AnneeScolaireManager;
 
-use Transport\Model\Chauffeur;
-use Transport\Model\ChauffeurTable;
+use Transport\Model\AnneeScolaire;
+use Transport\Model\AnneeScolaireTable;
 
-use Transport\Form\ChauffeurForm;
+use Transport\Form\AnneeScolaireForm;
 use Transport\Form\SearchForm;
 
 
 /*
  * 
  */
-class ChauffeurController extends AbstractActionController
+class AnneeScolaireController extends AbstractActionController
 {
   
   /*
-   * Chauffeur table manager
-   * @var Transport\Model\ChauffeurTable
+   * AnneeScolaire table manager
+   * @var Transport\Model\AnneeScolaireTable
    */
-  private $chauffeurTable; 
+  private $anneeScolaireTable; 
   
   /*
-   * Chauffeur manager
-   * @var Transport\Service\ChauffeurManager
+   * AnneeScolaire manager
+   * @var Transport\Service\AnneeScolaireManager
    */
-  private $chauffeurManager;
+  private $anneeScolaireManager;
 
   /*
    * Application config.
@@ -66,23 +66,23 @@ class ChauffeurController extends AbstractActionController
    * 
    */
   public function __construct(
-    ChauffeurTable   $chauffeurTable,
-    ChauffeurManager $chauffeurManager,
+    AnneeScolaireTable   $anneeScolaireTable,
+    AnneeScolaireManager $anneeScolaireManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
   {
     
-    $this->chauffeurTable     = $chauffeurTable;
-    $this->chauffeurManager   = $chauffeurManager;
-    $this->defaultRowPerPage  = $defaultRowPerPage;
-    $this->stepRowPerPage     = $stepRowPerPage;
-    $this->sessionContainer   = $sessionContainer;
+    $this->anneeScolaireTable   = $anneeScolaireTable;
+    $this->anneeScolaireManager = $anneeScolaireManager;
+    $this->defaultRowPerPage    = $defaultRowPerPage;
+    $this->stepRowPerPage       = $stepRowPerPage;
+    $this->sessionContainer     = $sessionContainer;
   }
 
   /*
    * This is the default "index" action of the controller. It displays the 
-   * list of chauffeur.
+   * list of anneeScolaire.
    */
   public function indexAction()
   {
@@ -140,23 +140,23 @@ class ChauffeurController extends AbstractActionController
       $formSearch->setData(['search' => $search]);
     
     return new ViewModel([
-      'formSearch'     => $formSearch,
-      'module'         => 'chauffeur',
-      'search'         => $search,
-      'rowPerPage'     => $rowPerPage,
-      'stepRowPerPage' => $this->stepRowPerPage,
-      'chauffeurs'     => $this->chauffeurTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'formSearch'      => $formSearch,
+      'module'          => 'anneescolaire',
+      'search'          => $search,
+      'rowPerPage'      => $rowPerPage,
+      'stepRowPerPage'  => $this->stepRowPerPage,
+      'anneesScolaires' => $this->anneeScolaireTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);   
   }
    
   /*
-   * This action displays a page allowing to add a new chauffeur.
+   * This action displays a page allowing to add a new anneeScolaire.
    */
   public function addAction()
   {
     
     // Create Form
-    $form = new ChauffeurForm('create');
+    $form = new AnneeScolaireForm('create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -174,17 +174,17 @@ class ChauffeurController extends AbstractActionController
         $this->flashMessenger()->setNamespace('error');
         $msgsCurrent = $this->flashMessenger()->getCurrentMessages();        
         
-        // Add chauffeur
-        if ($this->chauffeurManager->addChauffeur($data)) {
+        // Add anneeScolaire
+        if ($this->anneeScolaireManager->addAnneeScolaire($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Chauffeur ' . $data['PRENOMCHAUFFEUR'] . ' ajouté');
+          $this->flashMessenger()->addSuccessMessage('AnneeScolaire ' . $data['PRENOMCHAUFFEUR'] . ' ajouté');
           // Redirect to "index" page
-          return $this->redirect()->toRoute('chauffeur', ['action'=>'index']); 
+          return $this->redirect()->toRoute('anneeScolaire', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addMessage("Le chauffeur " . $data['PRENOMCHAUFFEUR'] . " existe déjà", 'error', 0);
+          $this->flashMessenger()->addMessage("Le anneeScolaire " . $data['PRENOMCHAUFFEUR'] . " existe déjà", 'error', 0);
         }
       } else {
         
@@ -199,7 +199,7 @@ class ChauffeurController extends AbstractActionController
   }  
   
   /*
-   * This action delete an chauffeur
+   * This action delete an anneeScolaire
    */
   public function deleteAction()
   {
@@ -211,27 +211,27 @@ class ChauffeurController extends AbstractActionController
       return;
     }
 
-    $chauffeur = $this->chauffeurTable->findOneById($id);
-    if ($chauffeur == null) {
+    $anneeScolaire = $this->anneeScolaireTable->findOneById($id);
+    if ($anneeScolaire == null) {
   
 			$this->getResponse()->setStatusCode(404);
       return;
     }
 
-    $prenom = $chauffeur->getPrenom();
+    $prenom = $anneeScolaire->getPrenom();
     
-    // Delete chauffeur.
-    $this->chauffeurManager->deleteChauffeur($id);
+    // Delete anneeScolaire.
+    $this->anneeScolaireManager->deleteAnneeScolaire($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("Le chauffeur $prenom a été supprimé");
+    $this->flashMessenger()->addWarningMessage("Le anneeScolaire $prenom a été supprimé");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('chauffeur', ['action'=>'index']);      
+    return $this->redirect()->toRoute('anneeScolaire', ['action'=>'index']);      
   }
   
   /*
-   * This action displays a page allowing to edit an existing chauffeur
+   * This action displays a page allowing to edit an existing anneeScolaire
    */
   public function editAction()
   {
@@ -242,15 +242,15 @@ class ChauffeurController extends AbstractActionController
       return;
     }
     
-    $chauffeur = $this->chauffeurTable->findOneById($id);
+    $anneeScolaire = $this->anneeScolaireTable->findOneById($id);
 
-    if ($chauffeur == null) {
+    if ($anneeScolaire == null) {
       $this->getResponse()->setStatusCode(404);
       return;
     }
     
-    // Create chauffeur form
-    $form = new ChauffeurForm('update');
+    // Create anneeScolaire form
+    $form = new AnneeScolaireForm('update');
     
      // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -265,24 +265,24 @@ class ChauffeurController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
-        // Update chauffeur
-        if ($this->chauffeurManager->updateChauffeur($chauffeur, $data)) {
+        // Update anneeScolaire
+        if ($this->anneeScolaireManager->updateAnneeScolaire($anneeScolaire, $data)) {
 				
-          $prenom = $chauffeur->getPrenom();
+          $prenom = $anneeScolaire->getPrenom();
           // Add a flash message Suucess
-          $this->flashMessenger()->addSuccessMessage("Chauffeur $prenom modifié");
+          $this->flashMessenger()->addSuccessMessage("AnneeScolaire $prenom modifié");
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Le chauffeur " . $data['PRENOMCHAUFFEUR'] . " existe déjà");
+          $this->flashMessenger()->addErrorMessage("Le anneeScolaire " . $data['PRENOMCHAUFFEUR'] . " existe déjà");
         }
 				
         // Redirect to "index" page
-        return $this->redirect()->toRoute('chauffeur', ['action'=>'index']);
+        return $this->redirect()->toRoute('anneeScolaire', ['action'=>'index']);
       }               
     } else {
 		
-      $form->setData($chauffeur->getArrayCopy());
+      $form->setData($anneeScolaire->getArrayCopy());
     }
 
     return new ViewModel([
