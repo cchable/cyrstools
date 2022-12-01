@@ -1,0 +1,52 @@
+<?php
+/**
+ * @package   : module/Transport/view/transport/anneescolaire/edit.phtml
+ *
+ * @purpose   : AnneeScolaire edit
+ * 
+ * 
+ * @copyright : Copyright (C) 2018-22 H.P.B
+ * 
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Modification d'une année scolaire";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('anneescolaire');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'                  => $this->url('home'),
+  'Transport\Annee Scolaire' => $this->url('anneescolaire'),
+  'Modification'             => $this->url('anneescolaire', ['action'=>'edit']),
+]);
+
+$form->get('ANNEEANNEESCOLAIRE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Année Scolaire'
+]);
+
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true'
+]);
+
+$form->prepare();
+?>
+<div class="container">
+  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <?= $this->form()->openTag($form); ?>
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button><?= PHP_EOL; ?>    
+        <hr class="my-4">      
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('ANNEEANNEESCOLAIRE')); ?>
+          <?= $this->formLabel($form->get('ANNEEANNEESCOLAIRE')); ?>
+          <?= $this->formElementErrors($form->get('ANNEEANNEESCOLAIRE')); ?>              
+        </div>
+        <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+      <?= $this->form()->closeTag() . PHP_EOL; ?>
+    </div>    
+  </div>
+</div>

@@ -77,7 +77,7 @@ class AnneeScolaireManager
     
     // Do not allow to change anneeScolaire if another anneeScolaire with such data already exits
     //if($this->checkAnneeScolaireExists($data)) {
-    if($anneeScolaire->getPrenom()!=$data['PRENOMCHAUFFEUR'] && $this->checkAnneeScolaireExists($data)) {  
+    if($anneeScolaire->getAnneeScolaire()!=$data['ANNEEANNEESCOLAIRE'] && $this->checkAnneeScolaireExists($data)) {  
       
       return false;
     }

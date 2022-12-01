@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Controller/AnneeScolaireController.php
+ * @package   : module/Transport/src/Controller/EphemerideController.php
  *
  * @purpose   :
  * 
@@ -16,32 +16,32 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
-use Transport\Service\AnneeScolaireManager;
+use Transport\Service\EphemerideManager;
 
-use Transport\Model\AnneeScolaire;
-use Transport\Model\AnneeScolaireTable;
+use Transport\Model\Ephemeride;
+use Transport\Model\EphemerideTable;
 
-use Transport\Form\AnneeScolaireForm;
+use Transport\Form\EphemerideForm;
 use Transport\Form\SearchForm;
 
 
 /*
  * 
  */
-class AnneeScolaireController extends AbstractActionController
+class EphemerideController extends AbstractActionController
 {
   
   /*
-   * AnneeScolaire table manager
-   * @var Transport\Model\AnneeScolaireTable
+   * Ephemeride table manager
+   * @var Transport\Model\EphemerideTable
    */
-  private $anneeScolaireTable; 
+  private $ephemerideTable; 
   
   /*
-   * AnneeScolaire manager
-   * @var Transport\Service\AnneeScolaireManager
+   * Ephemeride manager
+   * @var Transport\Service\EphemerideManager
    */
-  private $anneeScolaireManager;
+  private $ephemerideManager;
 
   /*
    * Application config.
@@ -66,23 +66,23 @@ class AnneeScolaireController extends AbstractActionController
    * 
    */
   public function __construct(
-    AnneeScolaireTable   $anneeScolaireTable,
-    AnneeScolaireManager $anneeScolaireManager,
+    EphemerideTable   $ephemerideTable,
+    EphemerideManager $ephemerideManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
   {
     
-    $this->anneeScolaireTable   = $anneeScolaireTable;
-    $this->anneeScolaireManager = $anneeScolaireManager;
-    $this->defaultRowPerPage    = $defaultRowPerPage;
-    $this->stepRowPerPage       = $stepRowPerPage;
-    $this->sessionContainer     = $sessionContainer;
+    $this->ephemerideTable   = $ephemerideTable;
+    $this->ephemerideManager = $ephemerideManager;
+    $this->defaultRowPerPage = $defaultRowPerPage;
+    $this->stepRowPerPage    = $stepRowPerPage;
+    $this->sessionContainer  = $sessionContainer;
   }
 
   /*
    * This is the default "index" action of the controller. It displays the 
-   * list of anneeScolaire.
+   * list of ephemeride.
    */
   public function indexAction()
   {
@@ -140,23 +140,23 @@ class AnneeScolaireController extends AbstractActionController
       $formSearch->setData(['search' => $search]);
     
     return new ViewModel([
-      'formSearch'      => $formSearch,
-      'module'          => 'anneescolaire',
-      'search'          => $search,
-      'rowPerPage'      => $rowPerPage,
-      'stepRowPerPage'  => $this->stepRowPerPage,
-      'anneesScolaires' => $this->anneeScolaireTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'formSearch'     => $formSearch,
+      'module'         => 'ephemeride',
+      'search'         => $search,
+      'rowPerPage'     => $rowPerPage,
+      'stepRowPerPage' => $this->stepRowPerPage,
+      'ephemerides'    => $this->ephemerideTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);   
   }
    
   /*
-   * This action displays a page allowing to add a new anneeScolaire.
+   * This action displays a page allowing to add a new ephemeride.
    */
   public function addAction()
   {
     
     // Create Form
-    $form = new AnneeScolaireForm('create');
+    $form = new EphemerideForm('create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -171,8 +171,8 @@ class AnneeScolaireController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();  
         
-        // Add AnneeScolaire
-        if ($this->anneeScolaireManager->addAnneeScolaire($data)) {
+        // Add Ephemeride
+        if ($this->ephemerideManager->addEphemeride($data)) {
           
           // Add a flash message Success
           $this->flashMessenger()->addSuccessMessage("L'année scolaire " . $data['ANNEEANNEESCOLAIRE'] . ' a été ajoutée');
@@ -196,7 +196,7 @@ class AnneeScolaireController extends AbstractActionController
   }  
   
   /*
-   * This action delete an anneeScolaire
+   * This action delete an ephemeride
    */
   public function deleteAction()
   {
@@ -208,27 +208,27 @@ class AnneeScolaireController extends AbstractActionController
       return;
     }
 
-    $anneeScolaire = $this->anneeScolaireTable->findOneById($id);
-    if ($anneeScolaire == null) {
+    $ephemeride = $this->ephemerideTable->findOneById($id);
+    if ($ephemeride == null) {
   
 			$this->getResponse()->setStatusCode(404);
       return;
     }
 
-    $anneeScolaire = $anneeScolaire->getAnneeScolaire();
+    $ephemeride = $ephemeride->getEphemeride();
     
-    // Delete anneeScolaire.
-    $this->anneeScolaireManager->deleteAnneeScolaire($id);
+    // Delete ephemeride.
+    $this->ephemerideManager->deleteEphemeride($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("L'anneeScolaire $anneeScolaire a été supprimée");
+    $this->flashMessenger()->addWarningMessage("L'ephemeride $ephemeride a été supprimée");
 
     // Redirect to "index" page
     return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']);      
   }
   
   /*
-   * This action displays a page allowing to edit an existing anneeScolaire
+   * This action displays a page allowing to edit an existing ephemeride
    */
   public function editAction()
   {
@@ -239,15 +239,15 @@ class AnneeScolaireController extends AbstractActionController
       return;
     }
     
-    $anneeScolaire = $this->anneeScolaireTable->findOneById($id);
+    $ephemeride = $this->ephemerideTable->findOneById($id);
 
-    if ($anneeScolaire == null) {
+    if ($ephemeride == null) {
       $this->getResponse()->setStatusCode(404);
       return;
     }
     
-    // Create anneeScolaire form
-    $form = new AnneeScolaireForm('update');
+    // Create ephemeride form
+    $form = new EphemerideForm('update');
     
      // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -262,15 +262,15 @@ class AnneeScolaireController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
-        // Update anneeScolaire
-        if ($this->anneeScolaireManager->updateAnneeScolaire($anneeScolaire, $data)) {
+        // Update ephemeride
+        if ($this->ephemerideManager->updateEphemeride($ephemeride, $data)) {
 				
           // Add a flash message Suucess
           $this->flashMessenger()->addSuccessMessage("L'année scolaire a été modifiée");
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'anneeScolaire " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
+          $this->flashMessenger()->addErrorMessage("L'ephemeride " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
         }
 				
         // Redirect to "index" page
@@ -278,7 +278,7 @@ class AnneeScolaireController extends AbstractActionController
       }               
     } else {
 		
-      $form->setData($anneeScolaire->getArrayCopy());
+      $form->setData($ephemeride->getArrayCopy());
     }
 
     return new ViewModel([
