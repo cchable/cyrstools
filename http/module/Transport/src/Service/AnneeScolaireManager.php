@@ -57,7 +57,7 @@ class AnneeScolaireManager
   public function addAnneeScolaire($data) 
   {
     
-    if(!$this->anneeScolaireTable->findOneByPrenom($data)) {
+    if(!$this->anneeScolaireTable->findOneByAnneeScolaire($data['ANNEEANNEESCOLAIRE'])) {
       
       // Create new AnneeScolaire entiy.
       $anneeScolaire= new AnneeScolaire();

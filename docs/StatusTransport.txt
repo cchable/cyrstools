@@ -12,27 +12,27 @@ Fait
     Delete  : Ok    (20221129)
     Edit    : Ok    (20221129)
 
+  Année scolaire
+    Liste   : Ok    (20221130)
+    Add     : Ok    (20221130
+    Delete  : Ok    (20221130)
+
+
 __________________________________________________________________________________________________________________
 En cours
   Année scolaire
-    Liste   : 
+    Edit    :  
 __________________________________________________________________________________________________________________
 A faire
-  Année scolaire
+  Ephéméride
     Liste   : 
     Add     : 
     Delete  : 
-    Edit    : 
-    
-    
-__________________________________________________________________________________________________________________  
-A créer
-  Mise en place d'un filtre sur les Années scolaire pour les listes. Par défaut, l'année scolaire en cours.
+    Edit    :  
 
-__________________________________________________________________________________________________________________
-A modifier
-  Mettre des images SVG devant chaque menus 
-  Retirer les secondes des heures dans les formumaires
+
+
+
 __________________________________________________________________________________________________________________
 A résoudre
   Ok  Problème avec le FlashMessenger

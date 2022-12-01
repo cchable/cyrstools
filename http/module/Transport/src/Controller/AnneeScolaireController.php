@@ -169,22 +169,19 @@ class AnneeScolaireController extends AbstractActionController
       if($form->isValid()) {
 
         // Get filtered and validated data
-        $data = $form->getData();
-
-        $this->flashMessenger()->setNamespace('error');
-        $msgsCurrent = $this->flashMessenger()->getCurrentMessages();        
+        $data = $form->getData();  
         
-        // Add anneeScolaire
+        // Add AnneeScolaire
         if ($this->anneeScolaireManager->addAnneeScolaire($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('AnneeScolaire ' . $data['PRENOMCHAUFFEUR'] . ' ajouté');
+          $this->flashMessenger()->addSuccessMessage("L'année scolaire " . $data['ANNEEANNEESCOLAIRE'] . ' a été ajoutée');
           // Redirect to "index" page
-          return $this->redirect()->toRoute('anneeScolaire', ['action'=>'index']); 
+          return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addMessage("Le anneeScolaire " . $data['PRENOMCHAUFFEUR'] . " existe déjà", 'error', 0);
+          $this->flashMessenger()->addMessage("L'année scolaire " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà", 'error', 0);
         }
       } else {
         
@@ -218,16 +215,16 @@ class AnneeScolaireController extends AbstractActionController
       return;
     }
 
-    $prenom = $anneeScolaire->getPrenom();
+    $anneeScolaire = $anneeScolaire->getAnneeScolaire();
     
     // Delete anneeScolaire.
     $this->anneeScolaireManager->deleteAnneeScolaire($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("Le anneeScolaire $prenom a été supprimé");
+    $this->flashMessenger()->addWarningMessage("L'anneeScolaire $anneeScolaire a été supprimée");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('anneeScolaire', ['action'=>'index']);      
+    return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']);      
   }
   
   /*

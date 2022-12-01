@@ -169,16 +169,13 @@ class ChauffeurController extends AbstractActionController
       if($form->isValid()) {
 
         // Get filtered and validated data
-        $data = $form->getData();
-
-        $this->flashMessenger()->setNamespace('error');
-        $msgsCurrent = $this->flashMessenger()->getCurrentMessages();        
+        $data = $form->getData();   
         
         // Add chauffeur
         if ($this->chauffeurManager->addChauffeur($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Chauffeur ' . $data['PRENOMCHAUFFEUR'] . ' ajouté');
+          $this->flashMessenger()->addSuccessMessage('Le chauffeur ' . $data['PRENOMCHAUFFEUR'] . ' a été ajouté');
           // Redirect to "index" page
           return $this->redirect()->toRoute('chauffeur', ['action'=>'index']); 
         } else {

@@ -23,7 +23,6 @@ use Laminas\InputFilter\InputFilterInterface;
 use Laminas\I18n\Validator\IsInt;
 
 
-
 /*
  * 
  */
@@ -61,9 +60,9 @@ class AnneeScolaire implements InputFilterAwareInterface
   {
     
     if($bIdx){
-      $this->id = !empty($data['IDX_ANNEESCOLAIRE'])  ? $data['IDX_ANNEESCOLAIRE']  : null;
+      $this->id          = !empty($data['IDX_ANNEESCOLAIRE'])  ? $data['IDX_ANNEESCOLAIRE']  : null;
     }
-    $this->as   = !empty($data['ANNEEANNEESCOLAIRE']) ? $data['ANNEEANNEESCOLAIRE'] : null;
+    $this->anneeScolaire = !empty($data['ANNEEANNEESCOLAIRE']) ? $data['ANNEEANNEESCOLAIRE'] : null;
 
   }
 
@@ -97,13 +96,13 @@ class AnneeScolaire implements InputFilterAwareInterface
       'description'    => 'Années scolaire',
       'fallback_value' => 1,
 
-      'validators'  => [
+      'validators'     => [
         [
           'name' => IsInt::class,
         ],
       ],
       
-      'filters'     => [
+      'filters'        => [
         [
           'name' => ToInt::class,
         ],

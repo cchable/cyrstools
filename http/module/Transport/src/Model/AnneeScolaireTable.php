@@ -156,7 +156,7 @@ class AnneeScolaireTable
 
     if ($id === 0) {
       $this->tableGateway->insert($data);
-      $anneeScolaire = $this->findOneByPrenom($data);
+      $anneeScolaire = $this->findOneByAnneeScolaire($data['ANNEEANNEESCOLAIRE']);
       return $anneeScolaire;
     }
     
@@ -194,6 +194,14 @@ class AnneeScolaireTable
   {
     
     $anneeScolaire = $this->findOneBy(['IDX_ANNEESCOLAIRE' => (int) $id]);
+    return $anneeScolaire;
+  }
+
+  //
+  public function findOneByAnneeScolaire(int $as)
+  {
+    
+    $anneeScolaire = $this->findOneBy(['ANNEEANNEESCOLAIRE' => (int) $as]);
     return $anneeScolaire;
   }
   
