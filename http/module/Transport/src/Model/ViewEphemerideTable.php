@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Model/IndisponibiliteChauffeurTableView.php
+ * @package   : module/Transport/src/Model/ViewEphemerideTable.php
  *
  * @purpose   :
  * 
@@ -27,7 +27,7 @@ use Hpb\Db\Sql\FBSelect;
 /*
  * 
  */
-class IndisponibiliteChauffeurTableView
+class ViewEphemerideTable
 {
   
   private $tableGateway;
@@ -49,7 +49,7 @@ class IndisponibiliteChauffeurTableView
 
     return $this->tableGateway->select(function (\Laminas\Db\Sql\Select $select)
     {
-      $select->order('STARTDATEINDISPONIBILITE ASC');
+      $select->order('ANNEEANNEESCOLAIRE DESC, STARTDATEPHEMERIDE ASC');
     }); 
   }
    
@@ -58,11 +58,11 @@ class IndisponibiliteChauffeurTableView
   {
         
     $fbSelect = new FBSelect($this->tableGateway->table);
-    $fbSelect->order('STARTDATEINDISPONIBILITE DESC');
+    $fbSelect->order('ANNEEANNEESCOLAIRE DESC, STARTDATEPHEMERIDE ASC');
     if ($search) {
         
       $where = new Where();
-      $fbSelect->where($where->like('STARTDATEINDISPONIBILITE', "%$search%"));
+      $fbSelect->where($where->like('STARTDATEPHEMERIDE', "%$search%"));
     }
     
     /*
@@ -111,11 +111,11 @@ class IndisponibiliteChauffeurTableView
   
     // Create a new Select object for the table:
     $fbSelect = new FBSelect($this->tableGateway->getTable());
-    $fbSelect->order('STARTDATEINDISPONIBILITE ASC');
+    $fbSelect->order('STARTDATEPHEMERIDE ASC');
 
     // Create a new result set based on the Chauffeur entity:
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new IndisponibiliteChauffeur());
+    $resultSetPrototype->setArrayObjectPrototype(new Ephemeride());
 
     // Create a new pagination adapter object:
     $paginatorAdapter = new DbSelect(
@@ -132,11 +132,11 @@ class IndisponibiliteChauffeurTableView
   }
   
   //
-  public function getIndisponibiliteChauffeur($id)
+  public function getEphemeride($id)
   {
     
     $id = (int) $id;
-    $rowset = $this->tableGateway->select(['IDX_INDISPONIBILITECHAUFFEUR' => $id]);
+    $rowset = $this->tableGateway->select(['IDX_EPHEMERIDE' => $id]);
     $row = $rowset->current();
     if (! $row) {
       throw new RuntimeException(sprintf(
@@ -151,25 +151,25 @@ class IndisponibiliteChauffeurTableView
   public function findOneById(int $id)
   {
     
-    $indisponibiliteChauffeur = $this->findOneBy(['IDX_INDISPONIBILITECHAUFFEUR' => (int) $id]);
-    return $indisponibiliteChauffeur;
+    $ephemeride = $this->findOneBy(['IDX_EPHEMERIDE' => (int) $id]);
+    return $ephemeride;
   }
   
   //
   public function findOneByDateDebut($data)
   {
     
-    $indisponibiliteChauffeur = $this->findOneBy(['STARTDATEINDISPONIBILITE' => $data['STARTDATEINDISPONIBILITE']]);
-    return $indisponibiliteChauffeur;
+    $ephemeride = $this->findOneBy(['STARTDATEPHEMERIDE' => $data['STARTDATEPHEMERIDE']]);
+    return $ephemeride;
   }
   
   // 
-  public function findOneByRecord(IndisponibiliteChauffeurView $record)
+  public function findOneByRecord(EphemerideView $record)
   {
     
     $recordArray = $record->getArrayCopy(false);
-    $indisponibiliteChauffeur = $this->findOneBy($recordArray);
+    $ephemeride = $this->findOneBy($recordArray);
     
-    return $indisponibiliteChauffeur;
+    return $ephemeride;
   }
 }

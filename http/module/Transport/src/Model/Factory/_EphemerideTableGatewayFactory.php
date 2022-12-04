@@ -1,8 +1,8 @@
 <?php
 /**
- * @package   : module/Transport/src/Service/Factory/IndisponibiliteChauffeurTableViewGatewayFactory.php
+ * @package   : module/Transport/src/Service/Factory/EphemerideTableGatewayFactory.php
  *
- * @purpose   : This is the factory class for ChauffeurTableGateway service. The purpose of the factory
+ * @purpose   : This is the factory class for EphemerideTableGateway service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
  * 
  * @copyright : Copyright (C) 2018-22 H.P.B
@@ -19,24 +19,24 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 
 use Transport\Model;
-use Transport\Model\IndisponibiliteChauffeurView;
+use Transport\Model\Ephemeride;
 
 
 /*
  * 
  */
-class IndisponibiliteChauffeurTableViewGatewayFactory implements FactoryInterface
+class EphemerideTableGatewayFactory implements FactoryInterface
 {
 	
   /*
-   * This method creates the IndisponibiliteChauffeurTableViewGateway service and returns its instance. 
+   * This method creates the EphemerideTableGateway service and returns its instance. 
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
 		
     $dbAdapter = $container->get('Transport\Db\ReadWriteAdapter');
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new IndisponibiliteChauffeurView());
-    return new TableGateway('V_INDISPONIBILITESCHAUFFEURS', $dbAdapter, null, $resultSetPrototype);
+    $resultSetPrototype->setArrayObjectPrototype(new Ephemeride());
+    return new TableGateway('T_EPHEMERIDES', $dbAdapter, null, $resultSetPrototype);
   }
 }

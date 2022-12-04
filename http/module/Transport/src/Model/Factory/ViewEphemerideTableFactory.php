@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Service/Factory/IndisponibiliteChauffeurTableViewFactory.php
+ * @package   : module/Transport/src/Service/Factory/ViewEphemerideTableFactory.php
  *
  * @purpose   : This is the factory class for ChauffeurTable service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
@@ -15,23 +15,23 @@ namespace Transport\Model\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-use Transport\Model\IndisponibiliteChauffeurTableView;
-use Transport\Model\IndisponibiliteChauffeurTableViewGateway;
+use Transport\Model\ViewEphemerideTable;
+use Transport\Model\ViewEphemerideTableGateway;
 
 
 /*
  *
  */
-class IndisponibiliteChauffeurTableViewFactory implements FactoryInterface
+class ViewEphemerideTableFactory implements FactoryInterface
 {
   
   /*
-   * This method creates the IndisponibiliteChauffeurTableView service and returns its instance. 
+   * This method creates the ViewEphemerideTable model and returns its instance. 
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {        
   
-    $tableGateway = $container->get(IndisponibiliteChauffeurTableViewGateway::class);
-    return new IndisponibiliteChauffeurTableView($tableGateway);
+    $tableGateway = $container->get(ViewEphemerideTableGateway::class);
+    return new ViewEphemerideTable($tableGateway);
   }
 }

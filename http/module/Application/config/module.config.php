@@ -77,6 +77,7 @@ return [
     'PlanningSessionContainer',
     'DashboardSessionContainer',
     'IndisponibilitechauffeurSessionContainer',
+    'EphemerideSessionContainer',
   ],
   
 	//View Helper

@@ -157,6 +157,11 @@ class NavManager
       'label' => 'Années Scolaires',
       'link'  => $url('anneescolaire')
     ];
+    $transportItems[] = [
+      'id'    => 'ephemeride',
+      'label' => 'Ephémérides',
+      'link'  => $url('ephemeride')
+    ];
     
     //
     $userItems = [];

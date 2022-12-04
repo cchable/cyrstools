@@ -18,6 +18,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 use Transport\Controller\EphemerideController;
 use Transport\Service\EphemerideManager;
 use Transport\Model\EphemerideTable;
+use Transport\Model\ViewEphemerideTable;
 
 
 /*
@@ -29,8 +30,9 @@ class EphemerideControllerFactory implements FactoryInterface
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {   
   
-    $ephemerideTable   = $container->get(EphemerideTable::class);
-    $ephemerideManager = $container->get(EphemerideManager::class);
+    $ephemerideTable     = $container->get(EphemerideTable::class);
+    $viewEphemerideTable = $container->get(ViewEphemerideTable::class);
+    $ephemerideManager   = $container->get(EphemerideManager::class);
     
     $config            = $container->get('Config');
     $defaultRowPerPage = $config['paginator']['options']['defaultRowPerPage'];
@@ -41,6 +43,7 @@ class EphemerideControllerFactory implements FactoryInterface
     // Instantiate the controller and inject dependencies
     return new EphemerideController(
       $ephemerideTable,
+      $viewEphemerideTable,
       $ephemerideManager,
       $defaultRowPerPage,
       $stepRowPerPage,

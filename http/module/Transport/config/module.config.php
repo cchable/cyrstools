@@ -106,6 +106,25 @@ return [
 						'action'     => 'index',
 					],
 				],
+			],
+      
+			// Define a new route called "ephemeride"
+			'ephemeride' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/ephemeride" as uri:
+					'route'       => '/ephemeride[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\EphemerideController::class,
+						'action'     => 'index',
+					],
+				],
 			],			
 /*
 			// Define a new route called "vehicule"
@@ -348,41 +367,10 @@ return [
 			
 		Controller\AnneeScolaireController::class 
 			=> Controller\Factory\AnneeScolaireControllerFactory::class,
-
-/*	
-		Controller\HeurePlanningController::class 
-			=> Controller\Factory\HeurePlanningControllerFactory::class,
-
-		Controller\DatePlanningController::class 
-			=> Controller\Factory\DatePlanningControllerFactory::class,
-
-		Controller\TypePlanningController::class 
-			=> Controller\Factory\TypePlanningControllerFactory::class,
-
-		Controller\PlanningController::class 
-			=> Controller\Factory\PlanningControllerFactory::class,
-		
+			
 		Controller\EphemerideController::class 
 			=> Controller\Factory\EphemerideControllerFactory::class,
-
-		Controller\AnneeScolaireController::class 
-			=> Controller\Factory\AnneeScolaireControllerFactory::class,
-
-		Controller\VehiculeController::class 
-			=> Controller\Factory\VehiculeControllerFactory::class,
-
-		Controller\EtapeController::class 
-			=> Controller\Factory\EtapeControllerFactory::class,
-		
-		Controller\TrajetController::class 
-			=> Controller\Factory\TrajetControllerFactory::class,  
-		
-		Controller\GroupeController::class 
-			=> Controller\Factory\GroupeControllerFactory::class,
-		
-		Controller\TransportController::class 
-			=> Controller\Factory\TransportControllerFactory::class,  
-*/
+      
     ],
   ],
 	
@@ -401,10 +389,10 @@ return [
 			Model\IndisponibiliteChauffeurTableGateway::class
 				=> Model\Factory\IndisponibiliteChauffeurTableGatewayFactory::class,
           
-			Model\IndisponibiliteChauffeurTableView::class
-				=> Model\Factory\IndisponibiliteChauffeurTableViewFactory::class,
-			Model\IndisponibiliteChauffeurTableViewGateway::class
-				=> Model\Factory\IndisponibiliteChauffeurTableViewGatewayFactory::class,
+			Model\ViewIndisponibiliteChauffeurTable::class
+				=> Model\Factory\ViewIndisponibiliteChauffeurTableFactory::class,
+			Model\ViewIndisponibiliteChauffeurTableGateway::class
+				=> Model\Factory\ViewIndisponibiliteChauffeurTableGatewayFactory::class,
       
 			Model\AnneeScolaireTable::class
 				=> Model\Factory\AnneeScolaireTableFactory::class,
@@ -419,7 +407,17 @@ return [
       Model\TypeVehiculeTable::class
 				=> Model\Factory\TypeVehiculeTableFactory::class,
 			Model\TypeVehiculeTableGateway::class
-				=> Model\Factory\TypeVehiculeTableGatewayFactory::class,  
+				=> Model\Factory\TypeVehiculeTableGatewayFactory::class,
+      
+			Model\EphemerideTable::class
+				=> Model\Factory\EphemerideTableFactory::class,
+			Model\EphemerideTableGateway::class
+				=> Model\Factory\EphemerideTableGatewayFactory::class,
+        
+			Model\ViewEphemerideTable::class
+				=> Model\Factory\ViewEphemerideTableFactory::class,
+			Model\ViewEphemerideTableGateway::class
+				=> Model\Factory\ViewEphemerideTableGatewayFactory::class,        
 /*					
 			Model\ChauffeurFullTable::class
 				=> Model\Factory\ChauffeurFullTableFactory::class,
@@ -509,7 +507,10 @@ return [
 				=> Service\Factory\IndisponibiliteChauffeurManagerFactory::class,
 				
 			Service\AnneeScolaireManager::class
-				=> Service\Factory\AnneeScolaireManagerFactory::class,	
+				=> Service\Factory\AnneeScolaireManagerFactory::class,
+        
+			Service\EphemerideManager::class
+				=> Service\Factory\EphemerideManagerFactory::class,	
 				
 /*
 			Service\HeurePlanningManager::class

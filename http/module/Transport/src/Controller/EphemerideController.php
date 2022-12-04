@@ -20,6 +20,7 @@ use Transport\Service\EphemerideManager;
 
 use Transport\Model\Ephemeride;
 use Transport\Model\EphemerideTable;
+use Transport\Model\ViewEphemerideTable;
 
 use Transport\Form\EphemerideForm;
 use Transport\Form\SearchForm;
@@ -35,7 +36,13 @@ class EphemerideController extends AbstractActionController
    * Ephemeride table manager
    * @var Transport\Model\EphemerideTable
    */
-  private $ephemerideTable; 
+  private $ephemerideTable;   
+  
+  /*
+   * ViewEphemeride table manager
+   * @var Transport\Model\ViewEphemerideTable
+   */
+  private $viewEphemerideTable; 
   
   /*
    * Ephemeride manager
@@ -66,15 +73,17 @@ class EphemerideController extends AbstractActionController
    * 
    */
   public function __construct(
-    EphemerideTable   $ephemerideTable,
-    EphemerideManager $ephemerideManager,
+    EphemerideTable     $ephemerideTable,
+    ViewEphemerideTable $viewEphemerideTable,
+    EphemerideManager   $ephemerideManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
   {
     
-    $this->ephemerideTable   = $ephemerideTable;
-    $this->ephemerideManager = $ephemerideManager;
+    $this->ephemerideTable     = $ephemerideTable;
+    $this->viewEphemerideTable = $viewEphemerideTable;
+    $this->ephemerideManager   = $ephemerideManager;
     $this->defaultRowPerPage = $defaultRowPerPage;
     $this->stepRowPerPage    = $stepRowPerPage;
     $this->sessionContainer  = $sessionContainer;
@@ -145,7 +154,7 @@ class EphemerideController extends AbstractActionController
       'search'         => $search,
       'rowPerPage'     => $rowPerPage,
       'stepRowPerPage' => $this->stepRowPerPage,
-      'ephemerides'    => $this->ephemerideTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'ephemerides'    => $this->viewEphemerideTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);   
   }
    

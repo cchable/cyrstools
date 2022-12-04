@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/src/Model/IndisponibiliteChauffeurView.php
+ * @package   : module/Transport/src/Model/ViewIndisponibiliteChauffeur.php
  *
  * @purpose   :
  * 
@@ -14,11 +14,6 @@ namespace Transport\Model;
 
 use DomainException;
 
-use Laminas\Filter\StringTrim;
-use Laminas\Filter\StripTags;
-use Laminas\Filter\ToInt;
-use Laminas\Filter\Boolean;
-
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
@@ -27,7 +22,7 @@ use Laminas\InputFilter\InputFilterInterface;
 /*
  * 
  */
-class IndisponibiliteChauffeurView implements InputFilterAwareInterface
+class ViewIndisponibiliteChauffeur implements InputFilterAwareInterface
 {
    
   private $id;
@@ -48,7 +43,7 @@ class IndisponibiliteChauffeurView implements InputFilterAwareInterface
       __CLASS__
     ));
   }
-
+  
   //
   public function getInputFilter()
   {
@@ -58,8 +53,7 @@ class IndisponibiliteChauffeurView implements InputFilterAwareInterface
     }
 
     $inputFilter = new InputFilter();
-    $this->inputFilter = fillInputFilter($inputFilter);
-  } 
+  }  
   
   //
   public function exchangeArray(array $data, bool $bIdx=true)

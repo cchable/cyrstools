@@ -2,7 +2,7 @@
 /**
  * @package   : module/Transport/src/Service/Factory/EphemerideTableFactory.php
  *
- * @purpose   : This is the factory class for ChauffeurTable service. The purpose of the factory
+ * @purpose   : This is the factory class for EphemerideTable service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
  * 
  * @copyright : Copyright (C) 2018-22 H.P.B
