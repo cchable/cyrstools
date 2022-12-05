@@ -16,14 +16,19 @@ use DomainException;
 
 use Laminas\Form\Form;
 use Laminas\Form\Element;
+use Laminas\Form\Element\Time;
+use Laminas\Form\Element\Checkbox;
 
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
 use Laminas\Filter\ToInt;
+use Laminas\Filter\DateTimeFormatter;
 
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
-use Laminas\I18n\Validator\IsInt;
+use Laminas\Validator\StringLength;
 
 use Transport\Model\Ephemeride;
 
@@ -40,18 +45,23 @@ class EphemerideForm extends Form
    */
   private $scenario;
 
+  /*
+   * 
+   * @var 
+   */
+  private $haystackEphemerides;
 
   /*
    * Constructor
    */
-  public function __construct($scenario = 'create')
+  public function __construct(array $haystackAnneesScolaires)
   {
 
     // Save parameters for internal use
-    $this->scenario = $scenario;
+    $this->haystackAnneesScolaires = $haystackAnneesScolaires;
       
     // Define form name
-    parent::__construct('anneescolaire-form');
+    parent::__construct('ephemeride-form');
     
     // Set POST method for this form
     $this->setAttribute('method', 'post');
@@ -66,16 +76,40 @@ class EphemerideForm extends Form
   protected function addElements() 
   {
     
-    // Add "prenom" field
+    // Add "idxEphemeride" field
     $this->add([
-      'name'       => 'ANNEEANNEESCOLAIRE',
-      'type'       => 'Number',
-      'options'    => [
-        'label' => 'Année scolaire',
+      'name' => 'IDX_ANNEESCOLAIRE',
+      'type' => 'select',
+      'options' => [
+        'value_options' => $this->haystackEphemerides,
+        'label'         => 'Année scolaire',
       ],
-      'attributes' => [
-        'min'   => '2021',
-        'step'  => '1', // default step interval is 1
+    ]);
+
+    // Add "nom" field
+    $this->add([
+      'name' => 'NOMEPHEMERIDE',
+      'type' => 'text',
+      'options' => [
+        'label' => 'Nom',
+      ],
+    ]);
+    
+    // Add "start date" field
+    $this->add([
+      'name' => 'STARTDATEPHEMERIDE',
+      'type' => 'date',
+      'options' => [
+        'label' => 'Date de début',
+      ],
+    ]);
+    
+    // Add "end date" field
+    $this->add([
+      'name' => 'ENDDATEPHEMERIDE',
+      'type' => 'date',
+      'options' => [
+        'label' => 'Date de fin',
       ],
     ]);
 

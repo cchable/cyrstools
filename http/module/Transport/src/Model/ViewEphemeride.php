@@ -65,7 +65,6 @@ class ViewEphemeride implements InputFilterAwareInterface
     $this->dateDebut       = !empty($data['STARTDATEPHEMERIDE']) ? $data['STARTDATEPHEMERIDE'] : null;
     $this->dateFin         = !empty($data['ENDDATEPHEMERIDE'])   ? $data['ENDDATEPHEMERIDE']   : null;
     $this->anneeScolaire   = !empty($data['ANNEEANNEESCOLAIRE']) ? $data['ANNEEANNEESCOLAIRE']   : null;
-
   }
 
   //
@@ -137,7 +136,6 @@ class ViewEphemeride implements InputFilterAwareInterface
     $this->anneeScolaire = $anneeScolaire;
   }
     
-  
   //nomEpehmeride
   public function getNomEphemeride() 
   {

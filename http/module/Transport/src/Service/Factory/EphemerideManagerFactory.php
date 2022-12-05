@@ -17,6 +17,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 
 use Transport\Service\EphemerideManager;
 use Transport\Model\EphemerideTable;
+use Transport\Model\AnneeScolaireTable;
 
 
 /*
@@ -31,12 +32,14 @@ class EphemerideManagerFactory implements FactoryInterface
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
     
-    $ephemerideTable = $container->get(EphemerideTable::class);
-    $viewRenderer    = $container->get('ViewRenderer');
-    $config          = $container->get('Config');
+    $ephemerideTable    = $container->get(EphemerideTable::class);
+    $anneeScolaireTable = $container->get(AnneeScolaireTable::class);
+    $viewRenderer = $container->get('ViewRenderer');
+    $config       = $container->get('Config');
 
     return new EphemerideManager(
       $ephemerideTable,
+      $anneeScolaireTable,
       $viewRenderer,
       $config
     );

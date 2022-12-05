@@ -72,14 +72,12 @@ class Ephemeride implements InputFilterAwareInterface
   {
     
     if ($bIdx) {
-      $this->id        = !empty($data['IDX_INDISPONIBILITECHAUFFEUR']) ? $data['IDX_INDISPONIBILITECHAUFFEUR'] : null;
+      $this->id            = !empty($data['IDX_EPHEMERIDE'])     ? $data['IDX_EPHEMERIDE']     : null;
     }
-    $this->idChauffeur = !empty($data['IDX_CHAUFFEUR'])                ? $data['IDX_CHAUFFEUR']                : null;
-    $this->dateDebut   = !empty($data['STARTDATEINDISPONIBILITE'])     ? $data['STARTDATEINDISPONIBILITE']     : null;
-    $this->heureDebut  = !empty($data['STARTTIMEINDISPONIBILITE'])     ? $data['STARTTIMEINDISPONIBILITE']     : null;
-    $this->dateFin     = !empty($data['ENDDATEINDISPONIBILITE'])       ? $data['ENDDATEINDISPONIBILITE']       : null;
-    $this->heureFin    = !empty($data['ENDTIMEINDISPONIBILITE'])       ? $data['ENDTIMEINDISPONIBILITE']       : null;
-    $this->jourEntier  = !empty($data['ALLDAYINDISPONIBILITE'])        ? $data['ALLDAYINDISPONIBILITE']        : false;
+    $this->idAnneeScolaire = !empty($data['IDX_ANNEESCOLAIRE'])  ? $data['IDX_ANNEESCOLAIRE']  : null;
+    $this->nomEphemeride   = !empty($data['NOMEPHEMERIDE'])      ? $data['NOMEPHEMERIDE']      : null;
+    $this->dateDebut       = !empty($data['STARTDATEPHEMERIDE']) ? $data['STARTDATEPHEMERIDE'] : null;
+    $this->dateFin         = !empty($data['ENDDATEPHEMERIDE'])   ? $data['ENDDATEPHEMERIDE']   : null;
   }
 
   //
@@ -89,23 +87,19 @@ class Ephemeride implements InputFilterAwareInterface
     if ($bIdx) {
       
       return [
-        'IDX_INDISPONIBILITECHAUFFEUR' => $this->id,
-        'IDX_CHAUFFEUR'                => $this->idChauffeur,
-        'STARTDATEINDISPONIBILITE'     => $this->dateDebut,
-        'STARTTIMEINDISPONIBILITE'     => $this->heureDebut,
-        'ENDDATEINDISPONIBILITE'       => $this->dateFin,
-        'ENDTIMEINDISPONIBILITE'       => $this->heureFin,
-        'ALLDAYINDISPONIBILITE'        => (bool) $this->jourEntier,
+        'IDX_EPHEMERIDE'     => $this->id,
+        'IDX_ANNEESCOLAIRE'  => $this->idAnneeScolaire,
+        'NOMEPHEMERIDE'      => $this->nomEphemeride,
+        'STARTDATEPHEMERIDE' => $this->dateDebut,
+        'ENDDATEPHEMERIDE'   => $this->dateFin,
       ];
     } else {
   
       return [
-        'IDX_CHAUFFEUR'             => $this->idChauffeur,
-        'STARTDATEINDISPONIBILITE'  => $this->dateDebut,
-        'STARTTIMEINDISPONIBILITE'  => $this->heureDebut,
-        'ENDDATEINDISPONIBILITE'    => $this->dateFin,
-        'ENDTIMEINDISPONIBILITE'    => $this->heureFin,
-        'ALLDAYINDISPONIBILITE'     => (bool) $this->jourEntier,
+        'IDX_ANNEESCOLAIRE'  => $this->idAnneeScolaire,
+        'NOMEPHEMERIDE'      => $this->nomEphemeride,
+        'STARTDATEPHEMERIDE' => $this->dateDebut,
+        'ENDDATEPHEMERIDE'   => $this->dateFin,
       ];
     }
   }
@@ -114,9 +108,54 @@ class Ephemeride implements InputFilterAwareInterface
   public function fillInputFilter(InputFilterInterface $inputFilter)
   {
 
+    // ANNEEANNEESCOLAIRE
+    $inputFilter->add([
+      'name'           => 'IDX_ANNEESCOLAIRE',
+      'allow_empty'    => false,
+      'required'       => true,
+      'description'    => 'ID Années scolaire',
+      'fallback_value' => 1,
+
+      'validators'     => [
+        [
+          'name' => IsInt::class,
+        ],
+      ],
+      
+      'filters'        => [
+        [
+          'name' => ToInt::class,
+        ],
+      ],
+    ]);
+    
+    // NOMEPHEMERIDE
+    $inputFilter->add([
+      'name' => 'NOMEPHEMERIDE',
+      'required' => true,
+      'validators' => [
+        [
+          'name' => StringLength::class,
+          'options' => [
+            'encoding' => 'UTF-8',
+            'min'      => 1,
+            'max'      => 60,
+          ],
+        ],
+      ],
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);
+    
     //STARTDATEINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'STARTDATEINDISPONIBILITE',
+      'name'       => 'STARTDATEPHEMERIDE',
       'required'   => true,
       'validators' => [
         [
@@ -139,7 +178,7 @@ class Ephemeride implements InputFilterAwareInterface
      
     //ENDDATEINDISPONIBILITE
     $inputFilter->add([
-      'name'       => 'ENDDATEINDISPONIBILITE',
+      'name'       => 'ENDDATEPHEMERIDE',
       'required'   => true,
       'validators' => [
         [
@@ -159,52 +198,7 @@ class Ephemeride implements InputFilterAwareInterface
         ],
       ],
     ]);   
-    
-    //STARTTIMEINDISPONIBILITE
-    $inputFilter->add([
-      'name'       => 'STARTTIMEINDISPONIBILITE',
-      'required'   => true,
-      'validators' => [
-        [
-          'name'    => DateTime::class,
-          'options' => [
-            'pattern' => 'HH:mm:ss',
-            'message' => 'Invalid time format',
-          ],
-        ],
-      ],       
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
-    
-    //ENDTIMEINDISPONIBILITE
-    $inputFilter->add([
-      'name'       => 'ENDTIMEINDISPONIBILITE',
-      'required'   => true,
-      'validators' => [
-        [
-          'name'    => DateTime::class,
-          'options' => [
-            'pattern' => 'HH:mm:ss',
-            'message' => 'Invalid time format',
-          ],
-        ],
-      ],       
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
+   
     
     $this->inputFilter = $inputFilter;
     return $this->inputFilter;
@@ -225,18 +219,32 @@ class Ephemeride implements InputFilterAwareInterface
     $this->id = $id;
   }
     
-  //idChauffeur
-  public function getIdChauffeur() 
+  //idAnneeScolaire
+  public function getIdAnneeScolaire() 
   {
     
-    return $this->idChauffeur;
+    return $this->idAnneeScolaire;
   }
 
   //
-  public function setIdChauffeur($id) 
+  public function setIdAnneeScolaire($id) 
   {
     
-    $this->idChauffeur = $id;
+    $this->idAnneeScolaire = $id;
+  }
+    
+  //nomEpehmeride
+  public function getNomEphemeride() 
+  {
+    
+    return $this->nomEphemeride;
+  }
+
+  //
+  public function setNomEphemeride($nomEphemeride) 
+  {
+    
+    $this->nomEphemeride = $nomEphemeride;
   }
 
   //dateDebut
@@ -266,48 +274,4 @@ class Ephemeride implements InputFilterAwareInterface
     
     $this->dateFin = $dateFin;
   }
-
-  //heureDebut
-  public function getHeureDebut() 
-  {
-    
-    return $this->heureDebut;
-  }
-
-  //
-  public function setHeureDebut($heureDebut) 
-  {
-    
-    $this->heureDebut = $heureDebut;
-  }
-  
-  //heureFin
-  public function getHeureFin() 
-  {
-    
-    return $this->heureFin;
-  }
-
-  //
-  public function setHeureFin($heureFin) 
-  {
-    
-    $this->heureFin = $heureFin;
-  }
-  
-  //jourEntier
-  public function getJourEntier() 
-  {
-    
-    return $this->jourEntier;
-  }
-
-  //
-  public function setJourEntier(bool $jourEntier) 
-  {
-    
-    $this->jourEntier = $jourEntier;
-  }
-  
-
 }

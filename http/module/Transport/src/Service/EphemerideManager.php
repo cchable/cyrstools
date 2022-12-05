@@ -14,6 +14,8 @@ namespace Transport\Service;
 
 use Transport\Model\Ephemeride;
 use Transport\Model\EphemerideTable;
+use Transport\Model\AnneeScolaireTable;
+
 
 /*
  * 
@@ -26,6 +28,12 @@ class EphemerideManager
    * @var Parling\Model\EphemerideTable
    */
   private $ephemerideTable;
+    
+  /*
+   * AnneeScolaire table manager.
+   * @var Parling\Model\AnneeScolaireTable
+   */
+  private $anneeScolaireTable;
   
   /*
    * PHP template renderer.
@@ -43,12 +51,13 @@ class EphemerideManager
   /*
    * Constructs the service.
    */
-  public function __construct(EphemerideTable $ephemerideTable, $viewRenderer, $config) 
+  public function __construct(EphemerideTable $ephemerideTable, AnneeScolaireTable $anneeScolaireTable, $viewRenderer, $config) 
   {
     
-    $this->ephemerideTable = $ephemerideTable;
-    $this->viewRenderer    = $viewRenderer;
-    $this->config          = $config;
+    $this->ephemerideTable    = $ephemerideTable;
+    $this->anneeScolaireTable = $anneeScolaireTable;
+    $this->viewRenderer = $viewRenderer;
+    $this->config       = $config;
   }
     
   /*
@@ -107,5 +116,20 @@ class EphemerideManager
     $ephemeride = $this->ephemerideTable->findOneBy($search);
     return $ephemeride;
   }  
-}
 
+  /*
+   * 
+   */
+  public function getAnneesScolaires() {
+    
+    $anneesScolairesList = [];
+    
+    $anneesScolaires = $this->anneeScolaireTable->fetchAll();
+
+    foreach ($anneesScolaires as $anneeScolaire) {
+      $anneesScolairesList[$anneeScolaire->getId()] = $anneeScolaire->getAnneeScolaire();
+    }
+    
+    return $anneesScolairesList;
+  }  
+}

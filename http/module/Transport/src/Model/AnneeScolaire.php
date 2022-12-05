@@ -63,7 +63,6 @@ class AnneeScolaire implements InputFilterAwareInterface
       $this->id          = !empty($data['IDX_ANNEESCOLAIRE'])  ? $data['IDX_ANNEESCOLAIRE']  : null;
     }
     $this->anneeScolaire = !empty($data['ANNEEANNEESCOLAIRE']) ? $data['ANNEEANNEESCOLAIRE'] : null;
-
   }
 
   //

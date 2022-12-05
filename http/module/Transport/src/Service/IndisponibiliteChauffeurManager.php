@@ -56,8 +56,8 @@ class IndisponibiliteChauffeurManager
     
     $this->indisponibiliteChauffeurTable = $indisponibiliteChauffeurTable;
     $this->chauffeurTable                = $chauffeurTable;
-    $this->viewRenderer   = $viewRenderer;
-    $this->config         = $config;
+    $this->viewRenderer = $viewRenderer;
+    $this->config       = $config;
   }
     
   /*

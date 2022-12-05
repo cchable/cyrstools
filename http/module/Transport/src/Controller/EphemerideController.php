@@ -254,9 +254,12 @@ class EphemerideController extends AbstractActionController
       $this->getResponse()->setStatusCode(404);
       return;
     }
+
+    // Get the list of all available chauffeur (sorted)
+    $anneesScolaires = $this->ephemerideManager->getAnneesScolaires();
     
-    // Create ephemeride form
-    $form = new EphemerideForm('update');
+    // Create ephemeride Form
+    $form = new EphemerideForm($anneesScolaires);
     
      // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -274,12 +277,12 @@ class EphemerideController extends AbstractActionController
         // Update ephemeride
         if ($this->ephemerideManager->updateEphemeride($ephemeride, $data)) {
 				
-          // Add a flash message Suucess
+          // Add a flash message Success
           $this->flashMessenger()->addSuccessMessage("L'année scolaire a été modifiée");
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'ephemeride " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
+          $this->flashMessenger()->addErrorMessage("L'éphéméride " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
         }
 				
         // Redirect to "index" page
