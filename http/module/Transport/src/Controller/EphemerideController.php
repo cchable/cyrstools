@@ -164,8 +164,11 @@ class EphemerideController extends AbstractActionController
   public function addAction()
   {
     
-    // Create Form
-    $form = new EphemerideForm('create');
+    // Get the list of all available chauffeur (sorted)
+    $anneesScolaires = $this->ephemerideManager->getAnneesScolaires();
+    
+    // Create ephemeride Form
+    $form = new EphemerideForm($anneesScolaires, 'create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -184,13 +187,13 @@ class EphemerideController extends AbstractActionController
         if ($this->ephemerideManager->addEphemeride($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("L'année scolaire " . $data['ANNEEANNEESCOLAIRE'] . ' a été ajoutée');
+          $this->flashMessenger()->addSuccessMessage("L'éphéméride " . $data['NOMEPHEMERIDE'] . ' a été ajoutée');
           // Redirect to "index" page
-          return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']); 
+          return $this->redirect()->toRoute('ephemeride', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addMessage("L'année scolaire " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà", 'error', 0);
+          $this->flashMessenger()->addMessage("L'éphéméride '" . $data['NOMEPHEMERIDE'] . "' ou la  '" . $data['STARTDATEPHEMERIDE'] . "' existe déjà", 'error', 0);
         }
       } else {
         
@@ -201,6 +204,7 @@ class EphemerideController extends AbstractActionController
     
     return new ViewModel([
       'form' => $form,
+      'anneesScolaires' => $anneesScolaires       
     ]);   
   }  
   
@@ -224,16 +228,16 @@ class EphemerideController extends AbstractActionController
       return;
     }
 
-    $ephemeride = $ephemeride->getEphemeride();
+    $nomEphemeride = $ephemeride->getNomEphemeride();
     
     // Delete ephemeride.
     $this->ephemerideManager->deleteEphemeride($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("L'ephemeride $ephemeride a été supprimée");
+    $this->flashMessenger()->addWarningMessage("L'éphéméride '$nomEphemeride' a été supprimée");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']);      
+    return $this->redirect()->toRoute('ephemeride', ['action'=>'index']);      
   }
   
   /*
@@ -278,15 +282,15 @@ class EphemerideController extends AbstractActionController
         if ($this->ephemerideManager->updateEphemeride($ephemeride, $data)) {
 				
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("L'année scolaire a été modifiée");
+          $this->flashMessenger()->addSuccessMessage("L'éphéméride '" . $data['NOMEPHEMERIDE'] . "' a été modifiée");
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'éphéméride " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
+          $this->flashMessenger()->addErrorMessage("L'éphéméride avec le nom '" . $data['NOMEPHEMERIDE'] . "' ou la date '" . $data['STARTDATEPHEMERIDE'] . "' existe déjà");
         }
 				
         // Redirect to "index" page
-        return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']);
+        return $this->redirect()->toRoute('ephemeride', ['action'=>'index']);
       }               
     } else {
 		
@@ -294,7 +298,8 @@ class EphemerideController extends AbstractActionController
     }
 
     return new ViewModel([
-      'form' => $form,
+      'form'            => $form,
+      'anneesScolaires' => $anneesScolaires 
     ]);
   }
 }

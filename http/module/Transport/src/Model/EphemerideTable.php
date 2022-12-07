@@ -17,6 +17,7 @@ use RuntimeException;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGatewayInterface;
 use Laminas\Db\Sql\Where;
+use Laminas\Db\Sql\Select;
 
 use Laminas\Paginator\Adapter\DbSelect;
 use Laminas\Paginator\Paginator;
@@ -156,7 +157,7 @@ class EphemerideTable
 
     if ($id === 0) {
       $this->tableGateway->insert($data);
-      $ephemeride = $this->findOneByDateDebut($data);
+      $ephemeride = $this->findOneByRecord($data);
       return $ephemeride;
     }
     
@@ -164,7 +165,7 @@ class EphemerideTable
       $this->getEphemeride($id);
     } catch (RuntimeException $e) {
       throw new RuntimeException(sprintf(
-        'Cannot update vehicule with identifier %d; does not exist',
+        'Cannot update ephemeride with identifier %d; does not exist',
         $id
       ));
     }
@@ -184,33 +185,32 @@ class EphemerideTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $ephemeride = $rowset->current();
+    $row = $rowset->current();
     
-    return $ephemeride;
+    return $row;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $ephemeride = $this->findOneBy(['IDX_EPHEMERIDE' => (int) $id]);
-    return $ephemeride;
+    $row = $this->findOneBy(['IDX_EPHEMERIDE' => (int) $id]);
+    return $row;
   }
   
   //
-  public function findOneByDateDebut($data)
+  public function findOneByName($name)
   {
     
-    $ephemeride = $this->findOneBy(['STARTDATEPHEMERIDE' => $data['STARTDATEPHEMERIDE']]);
-    return $ephemeride;
+    $row = $this->findOneBy(['NOMEPHEMERIDE' => $name]);
+    return $row;
   }
   
-  // 
-  public function findOneByRecordOld(array $record)
+  //
+  public function findOneByBeginDate($data)
   {
-    
-    $ephemeride = $this->findOneBy($record);
-    
+   
+    $ephemeride = $this->findOneBy(['STARTDATEPHEMERIDE' => $data['STARTDATEPHEMERIDE']]);
     return $ephemeride;
   }
   
@@ -219,21 +219,53 @@ class EphemerideTable
   {
     if(is_array($record)) {
       if(!$bWithIDX) {
-        unset($record['STARTDATEPHEMERIDE']);
+        unset($record['IDX_EPHEMERIDE']);
       }
-      $ephemeride = $this->findOneBy($record);
+      $row = $this->findOneBy($record);
     } else { 
       if(is_object($record)) {
         $recordArray = $record->getArrayCopy($bWithIDX);
-        $ephemeride = $this->findOneBy($recordArray);
+        $row = $this->findOneBy($recordArray);
       } else {
-        $ephemeride = false;
+        $row = false;
       }
     }
     
-    return $ephemeride;
+    return $row;
   }
   
+  //ici 
+  //01/01/2023-31/01/2023 - 15/01/2023-15/02/2023 => ko
+  //                        02/01/2023-03/01/2023 => ko
+  //                        02/01/2023-03/01/2023 => ko
+  //
+  public function checkBetweenDates($date) 
+  {
+ 
+    // Sample : SELECT * FROM "T_EPHEMERIDES" WHERE "STARTDATEPHEMERIDE" >= '2021-09-27' AND "ENDDATEPHEMERIDE" <= '2021-09-27';
+
+    $mySelect = 
+      function (Select $select) use ($date)
+      {
+        $select->where->greaterThanOrEqualTo('STARTDATEPHEMERIDE', $date);
+        $select->where->lessThanOrEqualTo('ENDDATEPHEMERIDE', $date);
+      };
+      
+      $rowset = $this->tableGateway->select($mySelect);
+      
+/*        
+    $rowset = $this->tableGateway->select(function (Select $select) {
+      
+      $i = func_num_args();
+      $date = "2022-09-27";
+      $select->where->greaterThanOrEqualTo('STARTDATEPHEMERIDE', $date);
+      $select->where->lessThanOrEqualTo('ENDDATEPHEMERIDE', $date);
+    });
+*/ 
+    return $rowset->current();
+  }
+  
+  //
   public function getNumberOfRows() 
   {
     

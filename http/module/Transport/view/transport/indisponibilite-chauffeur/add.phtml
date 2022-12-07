@@ -63,16 +63,16 @@ $form->get('submit')->setAttributes([
 
 $form->prepare();
 ?>
-
 <script type="text/javascript">
 
-function valueChangedAllDay()
-{
-  if($('#ALLDAYINDISPONIBILITE').is(":checked"))   
-      $("#HiddenElements").fadeOut('slow');
-  else
-      $("#HiddenElements").fadeIn('slow');
-}
+  //
+  function valueChangedAllDay()
+  {
+    if($('#ALLDAYINDISPONIBILITE').is(":checked"))   
+        $("#HiddenElements").fadeOut('slow');
+    else
+        $("#HiddenElements").fadeIn('slow');
+  }
 </script>
 
 <div class="container">
@@ -101,7 +101,6 @@ function valueChangedAllDay()
           </div>
         </div>
         <div id="HiddenElements">
-          <hr class="my-4">
           <div class="form-floating my-2">
             <?= $this->formElement($form->get('STARTTIMEINDISPONIBILITE')); ?>
             <?= $this->formLabel($form->get('STARTTIMEINDISPONIBILITE')); ?>
@@ -119,6 +118,7 @@ function valueChangedAllDay()
           </div>
         </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+        <hr class="my-4"> 
       <?= $this->form()->closeTag() . PHP_EOL; ?>
     </div>    
   </div>

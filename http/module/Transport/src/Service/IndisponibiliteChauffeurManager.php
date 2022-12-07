@@ -106,7 +106,7 @@ class IndisponibiliteChauffeurManager
     //find chauffeur id
     $idChauffeur = $data['IDX_CHAUFFEUR'];
     $chauffeur = $this->chauffeurTable->findOneById($idChauffeur);
-    if ($chauffeur == null) {
+    if($chauffeur == null) {
       
       throw new \Exception('Chauffeur not found');
     }
@@ -131,20 +131,21 @@ class IndisponibiliteChauffeurManager
   /*
    *
    */
-  public function checkIndisponibiliteChauffeurExists(array $data) {
+  public function checkIndisponibiliteChauffeurExists(array $data) 
+  {
 
     $search['IDX_CHAUFFEUR']            = $data['IDX_CHAUFFEUR'];
     $search['STARTDATEINDISPONIBILITE'] = $data['STARTDATEINDISPONIBILITE'];
     $indisponibiliteChauffeur = $this->indisponibiliteChauffeurTable->findOneBy($search);
     $bResult = false;
-    if ($indisponibiliteChauffeur) {
+    if($indisponibiliteChauffeur) {
       
-      if ($indisponibiliteChauffeur->getJourEntier() || $data['ALLDAYINDISPONIBILITE']) {
+      if($indisponibiliteChauffeur->getJourEntier() || $data['ALLDAYINDISPONIBILITE']) {
         
         $bResult = true;
       } else {
         
-        if ($indisponibiliteChauffeur->getDateFin() != $data['ENDDATEINDISPONIBILITE']) {
+        if($indisponibiliteChauffeur->getDateFin() != $data['ENDDATEINDISPONIBILITE']) {
           
           $bResult = true;
         } else {
@@ -178,7 +179,8 @@ class IndisponibiliteChauffeurManager
     return $bResult;
   }
   
-  private function checkTimeBetween($value, $start, $end) {
+  private function checkTimeBetween($value, $start, $end) 
+  {
     
     $timeValue = new DateTime($value);
     $timeStart = new DateTime($start);
@@ -200,7 +202,8 @@ class IndisponibiliteChauffeurManager
   /*
    * 
    */
-  public function getChauffeurs() {
+  public function getChauffeurs() 
+  {
     
     $chauffeursList = [];
     

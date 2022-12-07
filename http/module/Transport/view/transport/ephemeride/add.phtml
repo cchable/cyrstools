@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/Transport/view/transport/ephemeride/edit.phtml
+ * @package   : module/Transport/view/transport/ephemeride/add.phtml
  *
  * @purpose   : IndisponibiliteChauffeur edit
  * 
@@ -10,13 +10,13 @@
  * @license   : GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-$title = "Modification d'une éphéméride";
+$title = "Ajout d'une éphéméride";
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('ephemeride');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'              => $this->url('home'),
   'Transport\Ephéméride' => $this->url('ephemeride'),
-  'Modification'         => $this->url('ephemeride', ['action'=>'edit']),
+  'Ajout'                => $this->url('ephemeride', ['action'=>'add']),
 ]);
 
 $form->get('IDX_ANNEESCOLAIRE')->setAttributes([

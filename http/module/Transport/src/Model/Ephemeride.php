@@ -17,7 +17,6 @@ use DomainException;
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
 use Laminas\Filter\ToInt;
-use Laminas\Filter\Boolean;
 
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
@@ -38,12 +37,9 @@ class Ephemeride implements InputFilterAwareInterface
 {
    
   private $id;
-  private $idChauffeur;
+  private $idAnneeScolaire;
   private $dateDebut;
-  private $heureDebut;
   private $dateFin;
-  private $heureFin;
-  private $jourEntier;
 
   private $inputFilter;
 
@@ -74,6 +70,7 @@ class Ephemeride implements InputFilterAwareInterface
     if ($bIdx) {
       $this->id            = !empty($data['IDX_EPHEMERIDE'])     ? $data['IDX_EPHEMERIDE']     : null;
     }
+    
     $this->idAnneeScolaire = !empty($data['IDX_ANNEESCOLAIRE'])  ? $data['IDX_ANNEESCOLAIRE']  : null;
     $this->nomEphemeride   = !empty($data['NOMEPHEMERIDE'])      ? $data['NOMEPHEMERIDE']      : null;
     $this->dateDebut       = !empty($data['STARTDATEPHEMERIDE']) ? $data['STARTDATEPHEMERIDE'] : null;
@@ -197,9 +194,8 @@ class Ephemeride implements InputFilterAwareInterface
           'name' => StripTags::class,
         ],
       ],
-    ]);   
-   
-    
+    ]);
+
     $this->inputFilter = $inputFilter;
     return $this->inputFilter;
   }

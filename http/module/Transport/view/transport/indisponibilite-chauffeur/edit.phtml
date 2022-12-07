@@ -80,11 +80,8 @@ function valueChangedAllDay()
   <div class="row justify-content-left">
     <div class="col-md-6">
       <?= $this->form()->openTag($form); ?>
-        <?= PHP_EOL; ?>   
-        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
-
-        <?= PHP_EOL; ?>    
-        <hr class="my-4">        
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button><?= PHP_EOL; ?>    
+        <hr class="my-4">   
         <div class="form-floating my-2">
           <?= $this->formElement($form->get('IDX_CHAUFFEUR')) . "\n"; ?>
           <?= $this->formLabel($form->get('IDX_CHAUFFEUR')); ?>
@@ -104,7 +101,6 @@ function valueChangedAllDay()
           </div>
         </div>
         <div id="HiddenElements">
-          <hr class="my-4">
           <div class="form-floating my-2">
             <?= $this->formElement($form->get('STARTTIMEINDISPONIBILITE')); ?>
             <?= $this->formLabel($form->get('STARTTIMEINDISPONIBILITE')); ?>
@@ -122,6 +118,7 @@ function valueChangedAllDay()
           </div>
         </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+        <hr class="my-4"> 
       <?= $this->form()->closeTag() . PHP_EOL; ?>
     </div>    
   </div>

@@ -66,9 +66,15 @@ class EphemerideManager
   public function addEphemeride($data) 
   {
     
-    if(!$this->ephemerideTable->findOneByEphemeride($data['ANNEEANNEESCOLAIRE'])) {
+    $search['IDX_ANNEESCOLAIRE'] = $data['IDX_ANNEESCOLAIRE'];
+    $search['NOMEPHEMERIDE']     = $data['NOMEPHEMERIDE'];
+    if(
+      !$this->ephemerideTable->findOneByRecord($search)
+      && 
+      !$this->checkEphemerideDatesExists($data)
+    ) {  
       
-      // Create new Ephemeride entiy.
+      // Create new Ephemeride entity.
       $ephemeride= new Ephemeride();
       $ephemeride->exchangeArray($data);  
       $result = $this->ephemerideTable->saveEphemeride($ephemeride);
@@ -83,15 +89,14 @@ class EphemerideManager
    */
   public function updateEphemeride($ephemeride, $data) 
   {
-    
-    // Do not allow to change ephemeride if another ephemeride with such data already exits
-    //if($this->checkEphemerideExists($data)) {
-    if($ephemeride->getEphemeride()!=$data['ANNEEANNEESCOLAIRE'] && $this->checkEphemerideExists($data)) {  
-      
+     
+    // Do not allow to change ephemeride if another ephemeride with such data already exists
+    if($this->checkEphemerideExists($ephemeride, $data)) {
+         
       return false;
     }
+    
     $ephemeride->exchangeArray($data, false);
-
     // Apply changes to database.
     $this->ephemerideTable->saveEphemeride($ephemeride);
     
@@ -107,20 +112,95 @@ class EphemerideManager
     $this->ephemerideTable->deleteEphemeride($id);
   }
 
+    /*
+   *
+   */
+  public function checkEphemerideExists(Ephemeride $ephemeride, array $newData) {
+  
+    if(   
+      $newData['IDX_ANNEESCOLAIRE'] != $ephemeride->getIdAnneeScolaire() 
+      ||
+      $newData['NOMEPHEMERIDE']     != $ephemeride->getNomEphemeride()
+    ) {
+      
+      $search['IDX_ANNEESCOLAIRE'] = $newData['IDX_ANNEESCOLAIRE'];
+      $search['NOMEPHEMERIDE']     = $newData['NOMEPHEMERIDE'];
+      if($this->ephemerideTable->findOneByRecord($search)) {
+        
+        return true;
+      }
+    } 
+      
+    if(   
+      $newData['STARTDATEPHEMERIDE'] != $ephemeride->getDateDebut() 
+      ||
+      $newData['ENDDATEPHEMERIDE']   != $ephemeride->getDateFin()
+    ) {
+
+      $search2['STARTDATEPHEMERIDE'] = $newData['STARTDATEPHEMERIDE'];
+      $search2['ENDDATEPHEMERIDE']   = $newData['ENDDATEPHEMERIDE'];
+      if($this->checkEphemerideDatesExists($search2)) {
+
+        return true;
+      }     
+    }
+    
+    return false;
+  }  
   /*
    *
    */
-  public function checkEphemerideExists(array $data) {
-
-    $search['ANNEEANNEESCOLAIRE'] = $data['ANNEEANNEESCOLAIRE'];
-    $ephemeride = $this->ephemerideTable->findOneBy($search);
-    return $ephemeride;
+  public function checkEphemerideExistsOld(Ephemeride $ephemeride, array $newData) {
+    
+    $search['IDX_ANNEESCOLAIRE'] = $newData['IDX_ANNEESCOLAIRE'];
+    $search['NOMEPHEMERIDE']     = $newData['NOMEPHEMERIDE'];
+    $search2['NOMEPHEMERIDE']    = $newData['NOMEPHEMERIDE'];
+    
+    return (
+      (
+        $this->ephemerideTable->findOneByRecord($search)    // check same name and AS
+        &&
+        $ephemeride->getDateDebut() == $newData['STARTDATEPHEMERIDE']
+        &&
+        $ephemeride->getDateFin() == $newData['ENDDATEPHEMERIDE']
+      )   
+      ||
+      (
+        !$this->ephemerideTable->findOneByRecord($search2) // check name <> and same date
+        &&
+        $this->checkEphemerideDatesExists($newData)
+      )      
+    );
   }  
+
+ /*
+   *
+   */
+  public function checkEphemerideDatesExists(array $data) 
+  {
+
+    $search['STARTDATEPHEMERIDE'] = $data['STARTDATEPHEMERIDE'];
+    $ephemeride = $this->ephemerideTable->findOneBy($search);
+    $bResult = false;
+    
+    if($ephemeride) {
+      
+      $bResult = true;
+    } else {
+      
+      $bResult = ($this->ephemerideTable->checkBetweenDates($data['STARTDATEPHEMERIDE']) 
+                  ||
+                  $this->ephemerideTable->checkBetweenDates($data['ENDDATEPHEMERIDE']));
+    }
+    
+    return $bResult;
+  }
 
   /*
    * 
    */
-  public function getAnneesScolaires() {
+  public function getAnneesScolaires() 
+  {
     
     $anneesScolairesList = [];
     

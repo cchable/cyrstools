@@ -49,7 +49,7 @@ class EphemerideForm extends Form
    * 
    * @var 
    */
-  private $haystackEphemerides;
+  private $haystackAnneesScolaires;
 
   /*
    * Constructor
@@ -81,7 +81,7 @@ class EphemerideForm extends Form
       'name' => 'IDX_ANNEESCOLAIRE',
       'type' => 'select',
       'options' => [
-        'value_options' => $this->haystackEphemerides,
+        'value_options' => $this->haystackAnneesScolaires,
         'label'         => 'Année scolaire',
       ],
     ]);
