@@ -187,13 +187,13 @@ class EphemerideController extends AbstractActionController
         if ($this->ephemerideManager->addEphemeride($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("L'éphéméride " . $data['NOMEPHEMERIDE'] . ' a été ajoutée');
+          $this->flashMessenger()->addSuccessMessage("L'éphéméride '" . $data['NOMEPHEMERIDE'] . "' a été ajoutée");
           // Redirect to "index" page
           return $this->redirect()->toRoute('ephemeride', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addMessage("L'éphéméride '" . $data['NOMEPHEMERIDE'] . "' ou la  '" . $data['STARTDATEPHEMERIDE'] . "' existe déjà", 'error', 0);
+          $this->flashMessenger()->addMessage("L'éphéméride nommée '" . $data['NOMEPHEMERIDE'] . "' ou la date '" . $data['STARTDATEPHEMERIDE'] . "' ne peuvent pas être utilisés", 'error', 0);
         }
       } else {
         
@@ -286,7 +286,7 @@ class EphemerideController extends AbstractActionController
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'éphéméride avec le nom '" . $data['NOMEPHEMERIDE'] . "' ou la date '" . $data['STARTDATEPHEMERIDE'] . "' existe déjà");
+          $this->flashMessenger()->addErrorMessage("L'éphéméride nommée '" . $data['NOMEPHEMERIDE'] . "' ou la date '" . $data['STARTDATEPHEMERIDE'] . "' ne peuvent pas être utilisés");
         }
 				
         // Redirect to "index" page
