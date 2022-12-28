@@ -5,7 +5,7 @@
  * @purpose   :
  * 
  * 
- * @copyright : Copyright (C) 2018-22 H.P.B
+ * @copyright : Copyright (C) H.P.B 2018-22
  * 
  * @license   : GNU General Public License version 2 or later; see LICENSE.txt
  **/
@@ -112,7 +112,7 @@ class EphemerideTable
   
     // Create a new Select object for the table:
     $fbSelect = new FBSelect($this->tableGateway->getTable());
-    $fbSelect->order('STARTDATEPHEMERIDE ASC ASC');
+    $fbSelect->order('STARTDATEPHEMERIDE ASC');
 
     // Create a new result set based on the Chauffeur entity:
     $resultSetPrototype = new ResultSet();
@@ -210,8 +210,8 @@ class EphemerideTable
   public function findOneByBeginDate($data)
   {
    
-    $ephemeride = $this->findOneBy(['STARTDATEPHEMERIDE' => $data['STARTDATEPHEMERIDE']]);
-    return $ephemeride;
+    $row = $this->findOneBy(['STARTDATEPHEMERIDE' => $data['STARTDATEPHEMERIDE']]);
+    return $row;
   }
   
   // 
@@ -234,38 +234,81 @@ class EphemerideTable
     return $row;
   }
   
-  //ici 
-  //01/01/2023-31/01/2023 - 15/01/2023-15/02/2023 => ko
-  //                        02/01/2023-03/01/2023 => ko
-  //                        02/01/2023-03/01/2023 => ko
-  //
+  /**
+   * Recherche si une date unique existe déjà
+   *
+   * @param array $data
+   * @return row $row
+   * @access public
+   */
+   public function findOneByUniqueDate($data) 
+   {
+   
+    if($data['STARTDATEPHEMERIDE'] ==  $data['ENDDATEPHEMERIDE']){
+      $search['STARTDATEPHEMERIDE'] = $data['STARTDATEPHEMERIDE'];
+      $search['ENDDATEPHEMERIDE']   = $data['ENDDATEPHEMERIDE'];
+      $row = $this->findOneBy($search);
+      return $row;
+    } else {
+      return false;
+    }
+   }
+
+  /**
+   * Recherche si une éphéméride englobe une autre éphéméride
+   *
+   * @param array $data
+   * @return row $row
+   * @access public
+   */
+   public function checkEncloseDates($data) 
+   {
+    
+    //SELECT * FROM "T_EPHEMERIDES" WHERE '2022-12-01' <= "STARTDATEPHEMERIDE" AND '2022-12-31' >= "ENDDATEPHEMERIDE" AND "STARTDATEPHEMERIDE" <> "ENDDATEPHEMERIDE";
+    $mySelect = 
+      function (Select $select) use ($data)
+      {
+        $select->where->greaterThanOrEqualTo('STARTDATEPHEMERIDE', $data['STARTDATEPHEMERIDE']);
+        $select->where->lessThanOrEqualTo('ENDDATEPHEMERIDE', $data['ENDDATEPHEMERIDE'], );
+        $select->where->literal('"STARTDATEPHEMERIDE" != "ENDDATEPHEMERIDE"');
+      };
+      
+    $rowset = $this->tableGateway->select($mySelect);
+      
+    return $rowset->current();    
+   }
+     
+  /**
+   * Recherche si une date est comprise dans une épéhéméride
+   *
+   * @param date $date
+   * @return row $row
+   * @access public
+   */
   public function checkBetweenDates($date) 
   {
  
-    // Sample : SELECT * FROM "T_EPHEMERIDES" WHERE "STARTDATEPHEMERIDE" >= '2021-09-27' AND "ENDDATEPHEMERIDE" <= '2021-09-27';
-
+    // SELECT * FROM "T_EPHEMERIDES" WHERE 'X' >= "STARTDATEPHEMERIDE" AND 'X' <= "ENDDATEPHEMERIDE" AND "STARTDATEPHEMERIDE" <> "ENDDATEPHEMERIDE";
     $mySelect = 
       function (Select $select) use ($date)
       {
-        $select->where->greaterThanOrEqualTo('STARTDATEPHEMERIDE', $date);
-        $select->where->lessThanOrEqualTo('ENDDATEPHEMERIDE', $date);
+      
+        $select->where->lessThanOrEqualTo('STARTDATEPHEMERIDE', $date);
+        $select->where->greaterThanOrEqualTo('ENDDATEPHEMERIDE', $date);
+        $select->where->literal('"STARTDATEPHEMERIDE" != "ENDDATEPHEMERIDE"');
       };
       
-      $rowset = $this->tableGateway->select($mySelect);
+    $rowset = $this->tableGateway->select($mySelect);
       
-/*        
-    $rowset = $this->tableGateway->select(function (Select $select) {
-      
-      $i = func_num_args();
-      $date = "2022-09-27";
-      $select->where->greaterThanOrEqualTo('STARTDATEPHEMERIDE', $date);
-      $select->where->lessThanOrEqualTo('ENDDATEPHEMERIDE', $date);
-    });
-*/ 
     return $rowset->current();
   }
   
-  //
+  /**
+   * Calcul le nombre d'enregistrement dans la table
+   *
+   * @return int $count
+   * @access public
+   */
   public function getNumberOfRows() 
   {
     
@@ -281,7 +324,9 @@ class EphemerideTable
     
     $selectString = $sql->buildSqlString($select);
     $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    $row = $rowset->current();
+    $count = $row['COUNT'];
     
-    return $rowset->current();
+    return $count;
   }
 }

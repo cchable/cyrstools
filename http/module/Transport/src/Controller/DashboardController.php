@@ -81,15 +81,11 @@ class DashboardController extends AbstractActionController
 	 */
 	public function indexAction()
 	{
-
-    $numberOfRowsChauffeur    = $this->chauffeurTable->getNumberOfRows();
-    $numberOfRowsMarque       = $this->marqueTable->getNumberOfRows();
-    $numberOfRowsTypeVehicule = $this->typeVehiculeTable->getNumberOfRows();
     
     return new ViewModel([
-      'numberOfChauffeur'    => $numberOfRowsChauffeur['COUNT'],
-      'numberOfMarque'       => $numberOfRowsMarque['COUNT'],
-      'numberOfTypeVehicule' => $numberOfRowsTypeVehicule['COUNT'],
+      'numberOfChauffeur'    => $this->chauffeurTable->getNumberOfRows(),
+      'numberOfMarque'       => $this->marqueTable->getNumberOfRows(),
+      'numberOfTypeVehicule' => $this->typeVehiculeTable->getNumberOfRows(),
     ]); 
   }
 }

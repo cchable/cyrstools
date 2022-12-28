@@ -5,10 +5,10 @@
  * @purpose   :
  * 
  * 
- * @copyright : Copyright (C) 2018-22 H.P.B
+ * @copyright : 2018-22 H.P.B 2018-22 
  * 
  * @license   : GNU General Public License version 2 or later; see LICENSE.txt
- **/
+ */
 
 namespace Transport\Model;
 
@@ -216,7 +216,13 @@ class ChauffeurTable
     return $chauffeur;
   }
   
-  public function getNumberOfRows () 
+  /**
+   * Calcul le nombre d'enregistrement dans la table
+   *
+   * @return int $count
+   * @access public
+   */
+  public function getNumberOfRows() 
   {
     
     $adapter = $this->tableGateway->getAdapter();
@@ -231,7 +237,9 @@ class ChauffeurTable
     
     $selectString = $sql->buildSqlString($select);
     $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    $row = $rowset->current();
+    $count = $row['COUNT'];
     
-    return $rowset->current();
+    return $count;
   }
 }

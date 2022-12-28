@@ -217,7 +217,13 @@ class TypeVehiculeTable
     return $vehicule;
   }
   
-  public function getNumberOfRows () 
+  /**
+   * Calcul le nombre d'enregistrement dans la table
+   *
+   * @return int $count
+   * @access public
+   */
+  public function getNumberOfRows() 
   {
     
     $adapter = $this->tableGateway->getAdapter();
@@ -232,7 +238,9 @@ class TypeVehiculeTable
     
     $selectString = $sql->buildSqlString($select);
     $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    $row = $rowset->current();
+    $count = $row['COUNT'];
     
-    return $rowset->current();
+    return $count;
   }
 }

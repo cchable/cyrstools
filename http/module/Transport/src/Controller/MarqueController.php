@@ -1,8 +1,8 @@
 <?php
 /**
- * This is the AnneeScolaire Controller. 
+ * This is the Marque Controller. 
  * 
- * @package   module/Transport/src/Controller/AnneeScolaireController.php
+ * @package   module/Transport/src/Controller/MarqueController.php
  * @version   1.0
  * @copyright 2018-22 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -15,32 +15,32 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
-use Transport\Service\AnneeScolaireManager;
+use Transport\Service\MarqueManager;
 
-use Transport\Model\AnneeScolaire;
-use Transport\Model\AnneeScolaireTable;
+use Transport\Model\Marque;
+use Transport\Model\MarqueTable;
 
-use Transport\Form\AnneeScolaireForm;
+use Transport\Form\MarqueForm;
 use Transport\Form\SearchForm;
 
 
 /*
  * 
  */
-class AnneeScolaireController extends AbstractActionController
+class MarqueController extends AbstractActionController
 {
   
   /*
-   * AnneeScolaire table manager
-   * @var Transport\Model\AnneeScolaireTable
+   * Marque table manager
+   * @var Transport\Model\MarqueTable
    */
-  private $anneeScolaireTable; 
+  private $marqueTable; 
   
   /*
-   * AnneeScolaire manager
-   * @var Transport\Service\AnneeScolaireManager
+   * Marque manager
+   * @var Transport\Service\MarqueManager
    */
-  private $anneeScolaireManager;
+  private $marqueManager;
 
   /*
    * Application config.
@@ -65,15 +65,15 @@ class AnneeScolaireController extends AbstractActionController
    * 
    */
   public function __construct(
-    AnneeScolaireTable   $anneeScolaireTable,
-    AnneeScolaireManager $anneeScolaireManager,
+    MarqueTable   $marqueTable,
+    MarqueManager $marqueManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
   {
     
-    $this->anneeScolaireTable   = $anneeScolaireTable;
-    $this->anneeScolaireManager = $anneeScolaireManager;
+    $this->marqueTable   = $marqueTable;
+    $this->marqueManager = $marqueManager;
     $this->defaultRowPerPage    = $defaultRowPerPage;
     $this->stepRowPerPage       = $stepRowPerPage;
     $this->sessionContainer     = $sessionContainer;
@@ -81,7 +81,7 @@ class AnneeScolaireController extends AbstractActionController
 
   /*
    * This is the default "index" action of the controller. It displays the 
-   * list of anneeScolaire.
+   * list of marque.
    */
   public function indexAction()
   {
@@ -140,22 +140,22 @@ class AnneeScolaireController extends AbstractActionController
     
     return new ViewModel([
       'formSearch'      => $formSearch,
-      'module'          => 'anneescolaire',
+      'module'          => 'marque',
       'search'          => $search,
       'rowPerPage'      => $rowPerPage,
       'stepRowPerPage'  => $this->stepRowPerPage,
-      'anneesScolaires' => $this->anneeScolaireTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'marques'         => $this->marqueTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);   
   }
    
   /*
-   * This action displays a page allowing to add a new anneeScolaire.
+   * This action displays a page allowing to add a new marque.
    */
   public function addAction()
   {
     
     // Create Form
-    $form = new AnneeScolaireForm('create');
+    $form = new MarqueForm('create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -170,17 +170,17 @@ class AnneeScolaireController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();  
         
-        // Add AnneeScolaire
-        if ($this->anneeScolaireManager->addAnneeScolaire($data)) {
+        // Add Marque
+        if ($this->marqueManager->addMarque($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("L'année scolaire " . $data['ANNEEANNEESCOLAIRE'] . ' a été ajoutée');
+          $this->flashMessenger()->addSuccessMessage("La marque '" . $data['NOMMARQUE'] . "' a été ajoutée");
           // Redirect to "index" page
-          return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']); 
+          return $this->redirect()->toRoute('marque', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addMessage("L'année scolaire " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà", 'error', 0);
+          $this->flashMessenger()->addMessage("La marque '" . $data['NOMMARQUE'] . "' existe déjà", 'error', 0);
         }
       } else {
         
@@ -195,7 +195,7 @@ class AnneeScolaireController extends AbstractActionController
   }  
   
   /*
-   * This action delete an anneeScolaire
+   * This action delete an marque
    */
   public function deleteAction()
   {
@@ -207,27 +207,27 @@ class AnneeScolaireController extends AbstractActionController
       return;
     }
 
-    $anneeScolaire = $this->anneeScolaireTable->findOneById($id);
-    if ($anneeScolaire == null) {
+    $marque = $this->marqueTable->findOneById($id);
+    if ($marque == null) {
   
 			$this->getResponse()->setStatusCode(404);
       return;
     }
 
-    $anneeScolaire = $anneeScolaire->getAnneeScolaire();
+    $marque = $marque->getMarque();
     
-    // Delete anneeScolaire.
-    $this->anneeScolaireManager->deleteAnneeScolaire($id);
+    // Delete marque.
+    $this->marqueManager->deleteMarque($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("L'anneeScolaire $anneeScolaire a été supprimée");
+    $this->flashMessenger()->addWarningMessage("L'marque $marque a été supprimée");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']);      
+    return $this->redirect()->toRoute('marque', ['action'=>'index']);      
   }
   
   /*
-   * This action displays a page allowing to edit an existing anneeScolaire
+   * This action displays a page allowing to edit an existing marque
    */
   public function editAction()
   {
@@ -238,15 +238,15 @@ class AnneeScolaireController extends AbstractActionController
       return;
     }
     
-    $anneeScolaire = $this->anneeScolaireTable->findOneById($id);
+    $marque = $this->marqueTable->findOneById($id);
 
-    if ($anneeScolaire == null) {
+    if ($marque == null) {
       $this->getResponse()->setStatusCode(404);
       return;
     }
     
-    // Create anneeScolaire form
-    $form = new AnneeScolaireForm('update');
+    // Create marque form
+    $form = new MarqueForm('update');
     
      // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -261,23 +261,23 @@ class AnneeScolaireController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
-        // Update anneeScolaire
-        if ($this->anneeScolaireManager->updateAnneeScolaire($anneeScolaire, $data)) {
+        // Update marque
+        if ($this->marqueManager->updateMarque($marque, $data)) {
 				
           // Add a flash message Suucess
           $this->flashMessenger()->addSuccessMessage("L'année scolaire a été modifiée");
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'anneeScolaire " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
+          $this->flashMessenger()->addErrorMessage("L'marque " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
         }
 				
         // Redirect to "index" page
-        return $this->redirect()->toRoute('anneescolaire', ['action'=>'index']);
+        return $this->redirect()->toRoute('marque', ['action'=>'index']);
       }               
     } else {
 		
-      $form->setData($anneeScolaire->getArrayCopy());
+      $form->setData($marque->getArrayCopy());
     }
 
     return new ViewModel([

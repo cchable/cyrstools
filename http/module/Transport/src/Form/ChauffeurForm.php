@@ -1,13 +1,12 @@
 <?php
 /**
+ * Form for the encoding of a Chauffeur
+ * 
  * @package   : module/Transport/src/Form/ChauffeurForm.php
- *
- * @purpose   : 
- * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @version   1.0
+ * @copyright 2018-22 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 namespace Transport\Form;

@@ -125,7 +125,26 @@ return [
 						'action'     => 'index',
 					],
 				],
-			],			
+			],
+      
+			// Define a new route called "marque"
+			'marque' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/marque" as uri:
+					'route'       => '/marque[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\MarqueController::class,
+						'action'     => 'index',
+					],
+				],
+			],      
 /*
 			// Define a new route called "vehicule"
 			vehicule' => [
@@ -371,6 +390,9 @@ return [
 		Controller\EphemerideController::class 
 			=> Controller\Factory\EphemerideControllerFactory::class,
       
+		Controller\MarqueController::class 
+			=> Controller\Factory\MarqueControllerFactory::class,
+      
     ],
   ],
 	
@@ -418,6 +440,11 @@ return [
 				=> Model\Factory\ViewEphemerideTableFactory::class,
 			Model\ViewEphemerideTableGateway::class
 				=> Model\Factory\ViewEphemerideTableGatewayFactory::class,        
+      
+			Model\MarqueTable::class
+				=> Model\Factory\MarqueTableFactory::class,
+			Model\MarqueTableGateway::class
+				=> Model\Factory\MarqueTableGatewayFactory::class,
 /*					
 			Model\ChauffeurFullTable::class
 				=> Model\Factory\ChauffeurFullTableFactory::class,
@@ -511,6 +538,9 @@ return [
         
 			Service\EphemerideManager::class
 				=> Service\Factory\EphemerideManagerFactory::class,	
+				
+			Service\MarqueManager::class
+				=> Service\Factory\MarqueManagerFactory::class,	
 				
 /*
 			Service\HeurePlanningManager::class

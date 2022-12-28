@@ -1,8 +1,8 @@
 <?php
 /**
- * Form for the encoding of a AnneeScolaire
+ * Form for the encoding of a Marque
  * 
- * @package   module/Transport/src/Form/AnneeScolaireForm.php
+ * @package   module/Transport/src/Form/MarqueForm.php
  * @version   1.0
  * @copyright 2018-22 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -16,21 +16,17 @@ use DomainException;
 use Laminas\Form\Form;
 use Laminas\Form\Element;
 
-use Laminas\Filter\ToInt;
-
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
-use Laminas\I18n\Validator\IsInt;
-
-use Transport\Model\AnneeScolaire;
+use Transport\Model\Marque;
 
 
 /*
  * 
  */
-class AnneeScolaireForm extends Form
+class MarqueForm extends Form
 {
 
   /*
@@ -50,7 +46,7 @@ class AnneeScolaireForm extends Form
     $this->scenario = $scenario;
       
     // Define form name
-    parent::__construct('anneescolaire-form');
+    parent::__construct('marque-form');
     
     // Set POST method for this form
     $this->setAttribute('method', 'post');
@@ -67,14 +63,10 @@ class AnneeScolaireForm extends Form
     
     // Add "prenom" field
     $this->add([
-      'name'       => 'ANNEEANNEESCOLAIRE',
-      'type'       => 'Number',
-      'options'    => [
-        'label' => 'Année scolaire',
-      ],
-      'attributes' => [
-        'min'   => '2021',
-        'step'  => '1', // default step interval is 1
+      'name' => 'NOMMARQUE',
+      'type' => 'text',
+      'options' => [
+        'label' => 'Nom',
       ],
     ]);
 
@@ -109,7 +101,7 @@ class AnneeScolaireForm extends Form
     // Create input filter
     $inputFilter = $this->getInputFilter();
 
-    $anneeScolaire = new AnneeScolaire();
-    $anneeScolaire->fillInputFilter($inputFilter);
+    $marque = new Marque();
+    $marque->fillInputFilter($inputFilter);
   }
 }

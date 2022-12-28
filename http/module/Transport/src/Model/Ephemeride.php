@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/Transport/src/Model/Ephemeride.php
- *
- * @purpose   :
+ * This is the Ephemeride class for EphemerideTableGateway service.
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Model/Ephemeride.php
+ * @version   1.0
+ * @copyright 2018-22 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Model;

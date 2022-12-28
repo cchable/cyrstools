@@ -78,6 +78,7 @@ return [
     'DashboardSessionContainer',
     'IndisponibilitechauffeurSessionContainer',
     'EphemerideSessionContainer',
+    'MarqueSessionContainer',
   ],
   
 	//View Helper

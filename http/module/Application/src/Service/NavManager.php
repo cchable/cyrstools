@@ -162,6 +162,19 @@ class NavManager
       'label' => 'Ephémérides',
       'link'  => $url('ephemeride')
     ];
+    $transportItems[] = [
+      'id'    => 'ephemeride',
+      'label' => 'Ephémérides',
+      'link'  => $url('ephemeride')
+    ];
+    $transportItems[] = [
+      'divider' => 'hr',
+    ];
+    $transportItems[] = [
+      'id'    => 'marque',
+      'label' => 'Marques',
+      'link'  => $url('marque')
+    ];
     
     //
     $userItems = [];

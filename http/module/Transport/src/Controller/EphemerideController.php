@@ -184,7 +184,8 @@ class EphemerideController extends AbstractActionController
         $data = $form->getData();  
         
         // Add Ephemeride
-        if ($this->ephemerideManager->addEphemeride($data)) {
+        $result = $this->ephemerideManager->addEphemeride($data);
+        if ($result instanceof Ephemeride) {
           
           // Add a flash message Success
           $this->flashMessenger()->addSuccessMessage("L'éphéméride '" . $data['NOMEPHEMERIDE'] . "' a été ajoutée");
@@ -193,7 +194,28 @@ class EphemerideController extends AbstractActionController
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addMessage("L'éphéméride nommée '" . $data['NOMEPHEMERIDE'] . "' ou la date '" . $data['STARTDATEPHEMERIDE'] . "' ne peuvent pas être utilisés", 'error', 0);
+          switch($result){
+            
+            case 1:
+              $this->flashMessenger()->addErrorMessage("L'éphéméride en date du '" . $data['STARTDATEPHEMERIDE'] . "' existe déjà");
+              break;
+            
+            case 2:
+              $this->flashMessenger()->addErrorMessage("La date de fin de l'éphéméride du '" . $data['STARTDATEPHEMERIDE'] . "' est déjà incluse dans une autre éphéméride");
+              break;
+            
+            case 3:
+              $this->flashMessenger()->addErrorMessage("La date de début de l'éphéméride du '" . $data['STARTDATEPHEMERIDE'] . "' est déjà incluse dans une autre éphéméride");
+              
+              break;
+            
+            case 4:
+              $this->flashMessenger()->addErrorMessage("L'éphéméride en date du '" . $data['STARTDATEPHEMERIDE'] . "' englobe une autre éphéméride");
+              
+              break;
+            default:
+            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde de l'éphéméride du  '" . $data['STARTDATEPHEMERIDE'] . "'");
+          }
         }
       } else {
         
@@ -254,7 +276,7 @@ class EphemerideController extends AbstractActionController
     
     $ephemeride = $this->ephemerideTable->findOneById($id);
 
-    if ($ephemeride == null) {
+    if (null == $ephemeride) {
       $this->getResponse()->setStatusCode(404);
       return;
     }
@@ -279,16 +301,38 @@ class EphemerideController extends AbstractActionController
         $data = $form->getData();
 
         // Update ephemeride
-        if ($this->ephemerideManager->updateEphemeride($ephemeride, $data)) {
+        $result = $this->ephemerideManager->updateEphemeride($ephemeride, $data);
+        if ($result instanceof Ephemeride) {
 				
           // Add a flash message Success
           $this->flashMessenger()->addSuccessMessage("L'éphéméride '" . $data['NOMEPHEMERIDE'] . "' a été modifiée");
         } else {
-				
+              
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'éphéméride nommée '" . $data['NOMEPHEMERIDE'] . "' ou la date '" . $data['STARTDATEPHEMERIDE'] . "' ne peuvent pas être utilisés");
+          switch($result){
+            
+            case 1:
+              $this->flashMessenger()->addErrorMessage("L'éphéméride en date du '" . $data['STARTDATEPHEMERIDE'] . "' existe déjà");
+              break;
+            
+            case 2:
+              $this->flashMessenger()->addErrorMessage("La date de fin de l'éphéméride du '" . $data['STARTDATEPHEMERIDE'] . "' est déjà incluse dans une autre éphéméride");
+              break;
+            
+            case 3:
+              $this->flashMessenger()->addErrorMessage("La date de début de l'éphéméride du '" . $data['STARTDATEPHEMERIDE'] . "' est déjà incluse dans une autre éphéméride");
+              
+              break;
+            
+            case 4:
+              $this->flashMessenger()->addErrorMessage("L'éphéméride en date du '" . $data['STARTDATEPHEMERIDE'] . "' englobe une autre éphéméride");
+              
+              break;
+            default:
+            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde de l'éphéméride du  '" . $data['STARTDATEPHEMERIDE'] . "'");
+          }
         }
-				
+
         // Redirect to "index" page
         return $this->redirect()->toRoute('ephemeride', ['action'=>'index']);
       }               

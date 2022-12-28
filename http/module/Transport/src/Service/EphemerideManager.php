@@ -66,22 +66,19 @@ class EphemerideManager
   public function addEphemeride($data) 
   {
     
-    $search['IDX_ANNEESCOLAIRE'] = $data['IDX_ANNEESCOLAIRE'];
-    $search['NOMEPHEMERIDE']     = $data['NOMEPHEMERIDE'];
-    if(
-      !$this->ephemerideTable->findOneByRecord($search)
-      && 
-      !$this->checkEphemerideDatesExists($data)
-    ) {  
-      
-      // Create new Ephemeride entity.
-      $ephemeride= new Ephemeride();
-      $ephemeride->exchangeArray($data);  
-      $result = $this->ephemerideTable->saveEphemeride($ephemeride);
+    // Do not allow to add ephemeride if another ephemeride with such data already exists
+    $result = $this->checkEphemerideExists($data);
+    if($result) {
+  
       return $result;
     }
+
+    // Create new Ephemeride entity.
+    $newEphemeride= new Ephemeride();
+    $newEphemeride->exchangeArray($data);  
+    $ephemeride = $this->ephemerideTable->saveEphemeride($newEphemeride);
     
-    return false;
+    return $ephemeride;
   }
     
   /*
@@ -91,9 +88,10 @@ class EphemerideManager
   {
      
     // Do not allow to change ephemeride if another ephemeride with such data already exists
-    if($this->checkEphemerideExists($ephemeride, $data)) {
+    $code = $this->checkEphemerideExists($data);
+    if($code) {
          
-      return false;
+      return $code;
     }
     
     $ephemeride->exchangeArray($data, false);
@@ -115,7 +113,7 @@ class EphemerideManager
     /*
    *
    */
-  public function checkEphemerideExists(Ephemeride $ephemeride, array $newData) {
+  public function checkEphemerideExistsOld2(Ephemeride $ephemeride, array $newData) {
   
     if(   
       $newData['IDX_ANNEESCOLAIRE'] != $ephemeride->getIdAnneeScolaire() 
@@ -171,11 +169,69 @@ class EphemerideManager
         $this->checkEphemerideDatesExists($newData)
       )      
     );
-  }  
+  }
+  
+  /**
+   * Recherche si une éphéméride existe déjà
+   *
+   * @param array $data
+   * @return int $code 0 : pas trouvé
+   *                   1 : éphéméride unique trouvée
+   *                   2 : date de fin de l'éphéméride est comprise dans une autre éphéméride
+   *                   3 : date de début de l'éphéméride est comprise dans une autre éphéméride
+   *                   4 : éphéméride englobe une autre éphéméride (qui n'est pas de 1 jour)
+   * @access public
+   */  
+  public function checkEphemerideExists(array $data) 
+  {
 
- /*
+    /**
+     * Teste si une date unique 'X' est déjà présente
+     * En SQL : SELECT * FROM "T_EPHEMERIDES" WHERE 'X' = "STARTDATEPHEMERIDE" AND 'X' = "ENDDATEPHEMERIDE";
+     * Si trouvé, return 1. Sinon on continue la recherche avec d'autre critère
+     */
+    if($this->ephemerideTable->findOneByUniqueDate($data)){
+
+      return 1;
+    }
+    
+    /**
+     * Teste si la date de fin d'éphéméride 'ENDDATEPHEMERIDE' est comprise dans une éphéméride
+     * En SQL : SELECT * FROM "T_EPHEMERIDES" WHERE 'END' >= "STARTDATEPHEMERIDE" AND 'END' <= "ENDDATEPHEMERIDE" AND "STARTDATEPHEMERIDE" <> "ENDDATEPHEMERIDE";
+     * Si trouvé, return 2. Sinon on continue la recherche avec d'autre critère
+     */
+    if($this->ephemerideTable->checkBetweenDates($data['ENDDATEPHEMERIDE'])){
+      
+      return 2;
+    }
+    
+    /**
+     * Teste si la date de début d'éphéméride 'STARTDATEPHEMERIDE' est comprise dans une éphéméride
+     * En SQL : SELECT * FROM "T_EPHEMERIDES" WHERE 'BEGIN' >= "STARTDATEPHEMERIDE" AND 'BEGIN' <= "ENDDATEPHEMERIDE" AND "STARTDATEPHEMERIDE" <> "ENDDATEPHEMERIDE";
+     * Si trouvé, return 3. Sinon on continue la recherche avec d'autre critère
+     */
+    if($this->ephemerideTable->checkBetweenDates($data['STARTDATEPHEMERIDE'])){
+      
+      return 3;
+    }
+ 
+    /**
+     * Teste si une éphéméride n'englobe pas une autre éphéméride qui n'est pas une date unique
+     * En SQL : SELECT * FROM "T_EPHEMERIDES" WHERE '2022-12-01' <= "STARTDATEPHEMERIDE" AND '2022-12-31' >= "ENDDATEPHEMERIDE" AND "STARTDATEPHEMERIDE" <> "ENDDATEPHEMERIDE";
+     * Si trouvé, return 4. Sinon la recherche est terminée
+     */ 
+    if($this->ephemerideTable->checkEncloseDates($data)){
+      
+      return 4;
+    }
+  
+    return 0;
+  }
+  
+  /*
    *
    */
+  /*
   public function checkEphemerideDatesExists(array $data) 
   {
 
@@ -195,7 +251,7 @@ class EphemerideManager
     
     return $bResult;
   }
-
+*/
   /*
    * 
    */

@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/Transport/src/Service/AnneeScolaireManager.php
+ * This service is responsible for add/edit/delete anneeScolaire. 
  *
- * @purpose   : This service is responsible for adding/editing anneeScolaire. 
- *
- *
- * @copyright : Copyright (C) 2018-21 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Service/AnneeScolaireManager.php
+ * @version   1.0
+ * @copyright 2018-22 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Service;

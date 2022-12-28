@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Model/Marque.php
- *
- * @purpose   :
+ * This is the Marque class for MarqueTableGateway service.
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/PlanningBus/src/Model/Marque.php
+ * @version   1.0
+ * @copyright 2018-22 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Model;
@@ -16,16 +15,12 @@ use DomainException;
 
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
-use Laminas\Filter\ToInt;
 
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
 use Laminas\Validator\StringLength;
-use Laminas\Validator\InArray;
-use Laminas\I18n\Validator\IsInt;
-use Laminas\I18n\Validator\DateTime;
 
 
 /*
@@ -60,23 +55,33 @@ class Marque implements InputFilterAwareInterface
   }
 
   //
-  public function exchangeArray(array $data)
+  public function exchangeArray(array $data, bool $bIdx=true)
   {
+    
+    if ($bIdx) {
+      $this->id = !empty($data['IDX_MARQUE']) ? $data['IDX_MARQUE'] : null;
+    }
 
-    $this->id  = !empty($data['IDX_MARQUE'])   ? $data['IDX_MARQUE']   : null;
-    $this->nom = !empty($data['NOMMARQUE']) ? $data['NOMMARQUE'] : null;
+    $this->nom  = !empty($data['NOMMARQUE'])  ? $data['NOMMARQUE']  : null;
   }
   
   //
-  public function getArrayCopy()
+  public function getArrayCopy(bool $bIdx=true)
   {
-
-    return [
-      'IDX_MARQUE' => $this->id,
-      'NOMMARQUE'  => $this->nom,
-
-    ];
-  }    
+    
+    if ($bIdx) {
+      
+      return [
+        'IDX_MARQUE' => $this->id,
+        'NOMMARQUE'  => $this->nom,
+      ];
+    } else {
+  
+      return [
+        'NOMMARQUE'  => $this->nom,
+      ];
+    }
+  }
   
   //
   public function fillInputFilter(InputFilterInterface $inputFilter)
@@ -125,14 +130,14 @@ class Marque implements InputFilterAwareInterface
   }
     
   //
-  public function getNom() 
+  public function getName() 
   {
     
     return $this->nom;
   }
 
   //
-  public function setNom($nom) 
+  public function setName($nom) 
   {
     
     $this->nom = $nom;

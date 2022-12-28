@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Model/MarqueTable.php
- *
- * @purpose   :
+ * This is the MarqueTable class for MarqueTable service.
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- * 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/PlanningBus/src/Model/MarqueTable.php
+ * @version   1.0
+ * @copyright 2018-22 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Model;
@@ -150,23 +149,23 @@ class MarqueTable
   }
 
   //
-  public function saveMarque(Marque $vehicule)
+  public function saveMarque(Marque $marque)
   {
 
-    $data = $vehicule->getArrayCopy();
-    $id = (int) $vehicule->getId();
+    $data = $marque->getArrayCopy(false);
+    $id = (int) $marque->getId();
 
     if ($id === 0) {
       $result = $this->tableGateway->insert($data);
-      $vehicule = $this->findOneByRecord($vehicule);
-      return $vehicule;
+      $marque = $this->findOneByRecord($marque);
+      return $marque;
     }
     
     try {
       $this->getMarque($id);
     } catch (RuntimeException $e) {
       throw new RuntimeException(sprintf(
-        'Cannot update vehicule with identifier %d; does not exist',
+        'Cannot update marque with identifier %d; does not exist',
         $id
       ));
     }
@@ -185,25 +184,25 @@ class MarqueTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $vehicule = $rowset->current();
+    $marque = $rowset->current();
     
-    return $vehicule;
+    return $marque;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $vehicule = $this->findOneBy(['IDX_MARQUE' => (int) $id]);
-    return $vehicule;
+    $marque = $this->findOneBy(['IDX_MARQUE' => (int) $id]);
+    return $marque;
   }
   
   //
-  public function findOneByNom($nom)
+  public function findOneByName($nom)
   {
     
-    $vehicule = $this->findOneBy(['NOMMARQUE' => $nom]);
-    return $vehicule;
+    $marque = $this->findOneBy(['NOMMARQUE' => $nom]);
+    return $marque;
   }
   
   // 
@@ -212,12 +211,18 @@ class MarqueTable
     
     $recordArray = $record->getArrayCopy();
     unset($recordArray["IDX_MARQUE"]);
-    $vehicule = $this->findOneBy($recordArray);
+    $marque = $this->findOneBy($recordArray);
     
-    return $vehicule;
+    return $marque;
   }
   
-  public function getNumberOfRows () 
+  /**
+   * Calcul le nombre d'enregistrement dans la table
+   *
+   * @return int $count
+   * @access public
+   */
+  public function getNumberOfRows() 
   {
     
     $adapter = $this->tableGateway->getAdapter();
@@ -232,7 +237,9 @@ class MarqueTable
     
     $selectString = $sql->buildSqlString($select);
     $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+    $row = $rowset->current();
+    $count = $row['COUNT'];
     
-    return $rowset->current();
+    return $count;
   }
 }
