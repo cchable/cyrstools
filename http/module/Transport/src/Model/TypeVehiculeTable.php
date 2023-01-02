@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Model/TypeVehiculeTable.php
- *
- * @purpose   :
+ * This is the TypeVehiculeTable class for TypeVehiculeTable service.
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- * 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/PlanningBus/src/Model/TypeVehiculeTable.php
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Model;
@@ -150,23 +149,23 @@ class TypeVehiculeTable
   }
 
   //
-  public function saveTypeVehicule(TypeVehicule $vehicule)
+  public function saveTypeVehicule(TypeVehicule $typeVehicule)
   {
 
-    $data = $vehicule->getArrayCopy();
-    $id = (int) $vehicule->getId();
+    $data = $typeVehicule->getArrayCopy(false);
+    $id = (int) $typeVehicule->getId();
 
     if ($id === 0) {
       $result = $this->tableGateway->insert($data);
-      $vehicule = $this->findOneByRecord($vehicule);
-      return $vehicule;
+      $typeVehicule = $this->findOneByRecord($typeVehicule);
+      return $typeVehicule;
     }
     
     try {
       $this->getTypeVehicule($id);
     } catch (RuntimeException $e) {
       throw new RuntimeException(sprintf(
-        'Cannot update vehicule with identifier %d; does not exist',
+        'Cannot update TypeVehicule with identifier %d; does not exist',
         $id
       ));
     }
@@ -185,25 +184,25 @@ class TypeVehiculeTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $vehicule = $rowset->current();
+    $typeVehicule = $rowset->current();
     
-    return $vehicule;
+    return $typeVehicule;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $vehicule = $this->findOneBy(['IDX_TYPEVEHICULE' => (int) $id]);
-    return $vehicule;
+    $typeVehicule = $this->findOneBy(['IDX_TYPEVEHICULE' => (int) $id]);
+    return $typeVehicule;
   }
   
   //
-  public function findOneByNom($nom)
+  public function findOneByName($nom)
   {
     
-    $vehicule = $this->findOneBy(['NOMTYPEVEHICULE' => $nom]);
-    return $vehicule;
+    $typeVehicule = $this->findOneBy(['NOMTYPEVEHICULE' => $nom]);
+    return $typeVehicule;
   }
   
   // 
@@ -212,9 +211,9 @@ class TypeVehiculeTable
     
     $recordArray = $record->getArrayCopy();
     unset($recordArray["IDX_TYPEVEHICULE"]);
-    $vehicule = $this->findOneBy($recordArray);
+    $typeVehicule = $this->findOneBy($recordArray);
     
-    return $vehicule;
+    return $typeVehicule;
   }
   
   /**

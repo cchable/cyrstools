@@ -79,6 +79,7 @@ return [
     'IndisponibilitechauffeurSessionContainer',
     'EphemerideSessionContainer',
     'MarqueSessionContainer',
+    'TypeVehiculeSessionContainer',
   ],
   
 	//View Helper

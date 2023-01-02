@@ -1,0 +1,52 @@
+<?php
+/**
+ * Add a new 'marque'
+ * 
+ * @package   module/Transport/view/transport/type-vehicule/add.phtml
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+
+$title = "Ajout d'un marque";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('marque');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'             => $this->url('home'),
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Marque'              => $this->url('marque'),
+  'Ajout'               => $this->url('marque', ['action'=>'add']),
+]);
+
+$form->get('NOMMARQUE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Nom'
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true'
+]);
+
+$form->prepare();
+?>
+<div class="container">
+  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <?= $this->form()->openTag($form) . PHP_EOL; ?>
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+        <hr class="my-4">  
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('NOMMARQUE')); ?>
+          <?= $this->formLabel($form->get('NOMMARQUE')); ?>
+          <?= $this->formElementErrors($form->get('NOMMARQUE')); ?>              
+        </div>
+        <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+        <hr class="my-4">
+      <?= $this->form()->closeTag() . PHP_EOL; ?>
+    </div>    
+  </div>
+</div>

@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Model/TypeVehicule.php
- *
- * @purpose   :
+ * This is the TypeVehicule class for TypeVehiculeTableGateway service.
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Model/TypeVehicule.php
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Model;
@@ -16,16 +15,12 @@ use DomainException;
 
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
-use Laminas\Filter\ToInt;
 
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
 use Laminas\Validator\StringLength;
-use Laminas\Validator\InArray;
-use Laminas\I18n\Validator\IsInt;
-use Laminas\I18n\Validator\DateTime;
 
 
 /*
@@ -60,23 +55,33 @@ class TypeVehicule implements InputFilterAwareInterface
   }
 
   //
-  public function exchangeArray(array $data)
+  public function exchangeArray(array $data, bool $bIdx=true)
   {
+    
+    if ($bIdx) {
+      $this->id = !empty($data['IDX_TYPEVEHICULE']) ? $data['IDX_TYPEVEHICULE'] : null;
+    }
 
-    $this->id  = !empty($data['IDX_TYPEVEHICULE'])   ? $data['IDX_TYPEVEHICULE']   : null;
-    $this->nom = !empty($data['NOMTYPEVEHICULE']) ? $data['NOMTYPEVEHICULE'] : null;
+    $this->nom  = !empty($data['NOMTYPEVEHICULE'])  ? $data['NOMTYPEVEHICULE']  : null;
   }
   
   //
-  public function getArrayCopy()
+  public function getArrayCopy(bool $bIdx=true)
   {
-
-    return [
-      'IDX_TYPEVEHICULE' => $this->id,
-      'NOMTYPEVEHICULE'  => $this->nom,
-
-    ];
-  }    
+    
+    if ($bIdx) {
+      
+      return [
+        'IDX_TYPEVEHICULE' => $this->id,
+        'NOMTYPEVEHICULE'  => $this->nom,
+      ];
+    } else {
+  
+      return [
+        'NOMTYPEVEHICULE'  => $this->nom,
+      ];
+    }
+  }
   
   //
   public function fillInputFilter(InputFilterInterface $inputFilter)
@@ -92,7 +97,7 @@ class TypeVehicule implements InputFilterAwareInterface
           'options' => [
             'encoding' => 'UTF-8',
             'min'      => 1,
-            'max'      => 30,
+            'max'      => 20,
           ],
         ],
       ],
@@ -125,14 +130,14 @@ class TypeVehicule implements InputFilterAwareInterface
   }
     
   //
-  public function getNom() 
+  public function getName() 
   {
     
     return $this->nom;
   }
 
   //
-  public function setNom($nom) 
+  public function setName($nom) 
   {
     
     $this->nom = $nom;

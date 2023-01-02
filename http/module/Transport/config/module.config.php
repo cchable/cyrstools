@@ -1,13 +1,12 @@
 <?php
 /**
+ * Gestion des transports du SAES de la COCOF
+ *  
  * @package   : module/Transport/config/module.config.php
- *
- * @purpose   : Gestion des transport du SAES de la COCOF
- * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
  
 namespace Transport;
@@ -141,6 +140,25 @@ return [
 					// Define default controller and action to be called when this route is matched
 					'defaults' => [
 						'controller' => Controller\MarqueController::class,
+						'action'     => 'index',
+					],
+				],
+			],
+      
+			// Define a new route called "typevehicule"
+			'typevehicule' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/typevehicule" as uri:
+					'route'       => '/typevehicule[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\TypeVehiculeController::class,
 						'action'     => 'index',
 					],
 				],
@@ -391,7 +409,10 @@ return [
 			=> Controller\Factory\EphemerideControllerFactory::class,
       
 		Controller\MarqueController::class 
-			=> Controller\Factory\MarqueControllerFactory::class,
+			=> Controller\Factory\MarqueControllerFactory::class,  
+      
+		Controller\TypeVehiculeController::class 
+			=> Controller\Factory\TypeVehiculeControllerFactory::class,
       
     ],
   ],
@@ -444,7 +465,12 @@ return [
 			Model\MarqueTable::class
 				=> Model\Factory\MarqueTableFactory::class,
 			Model\MarqueTableGateway::class
-				=> Model\Factory\MarqueTableGatewayFactory::class,
+				=> Model\Factory\MarqueTableGatewayFactory::class, 
+        
+			Model\TypeVehiculeTable::class
+				=> Model\Factory\TypeVehiculeTableFactory::class,
+			Model\TypeVehiculeTableGateway::class
+				=> Model\Factory\TypeVehiculeTableGatewayFactory::class,
 /*					
 			Model\ChauffeurFullTable::class
 				=> Model\Factory\ChauffeurFullTableFactory::class,
@@ -540,7 +566,10 @@ return [
 				=> Service\Factory\EphemerideManagerFactory::class,	
 				
 			Service\MarqueManager::class
-				=> Service\Factory\MarqueManagerFactory::class,	
+				=> Service\Factory\MarqueManagerFactory::class,					
+
+			Service\TypeVehiculeManager::class
+				=> Service\Factory\TypeVehiculeManagerFactory::class,	
 				
 /*
 			Service\HeurePlanningManager::class

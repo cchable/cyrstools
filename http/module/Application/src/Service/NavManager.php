@@ -175,6 +175,11 @@ class NavManager
       'label' => 'Marques',
       'link'  => $url('marque')
     ];
+    $transportItems[] = [
+      'id'    => 'typevehicule',
+      'label' => 'TypesVehicules',
+      'link'  => $url('typevehicule')
+    ];
     
     //
     $userItems = [];
