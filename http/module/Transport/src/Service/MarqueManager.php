@@ -1,10 +1,10 @@
 <?php
 /**
- * This service is responsible for add/edit/delete marque. 
+ * This service is responsible for add/edit/delete 'marque'. 
  *
  * @package   module/Transport/src/Service/MarqueManager.php
  * @version   1.0
- * @copyright 2018-22 H.P.B
+ * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
@@ -14,33 +14,41 @@ namespace Transport\Service;
 use Transport\Model\Marque;
 use Transport\Model\MarqueTable;
 
-/*
- * 
+/**
+ * MarqueManager class
  */
 class MarqueManager
 {
   
   /*
    * Marque table manager.
-   * @var Parling\Model\MarqueTable
+   * @var class Transport\Model\MarqueTable
+   * @access private
    */
   private $marqueTable;
   
-  /*
+  /**
    * PHP template renderer.
-   * @var type 
+   * @var array
+   * @access private   
    */
   private $viewRenderer;
 
-  /*
+  /**
    * Application config.
-   * @var type 
+   * @var array 
+   * @access private
    */
   private $config;
 
   
-  /*
+  /**
    * Constructs the service.
+   *
+   * @param class $marqueTable
+   * @param array $viewRenderer
+   * @param array $config
+   * @access public
    */
   public function __construct(MarqueTable $marqueTable, $viewRenderer, $config) 
   {
@@ -71,15 +79,19 @@ class MarqueManager
     return $marque;
   }
     
-  /*
-   * This method update datas of an existing marque
+  /**
+   * Update datas of an existing marque
+   *
+   * @param class $marque
+   * @param array $data
+   * @return class $marque Transport\Model\Marque
+   * @access public
    */
   public function updateMarque($marque, $data) 
   {
     
     // Do not allow to change marque if another marque with such data already exits
-    //if($this->checkMarqueExists($data)) {
-    if($marque->getMarque()!=$data['NOMMARQUE'] && $this->checkMarqueExists($data)) {  
+    if($marque->getName()!=$data['NOMMARQUE'] && $this->checkMarqueExists($data)) {  
       
       return false;
     }
@@ -93,6 +105,9 @@ class MarqueManager
   
   /**
    * Deletes the given marque.
+   *
+   * @param int $id
+   * @access public
    */
   public function deleteMarque($id)
   {
@@ -100,8 +115,12 @@ class MarqueManager
     $this->marqueTable->deleteMarque($id);
   }
 
-  /*
+  /**
+   * Check if a 'marque' exists
    *
+   * @param array $data
+   * @return class $marque Transport\Model\Marque
+   * @access public
    */
   public function checkMarqueExists(array $data) {
 

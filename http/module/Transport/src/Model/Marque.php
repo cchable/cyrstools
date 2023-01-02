@@ -2,7 +2,7 @@
 /**
  * This is the Marque class for MarqueTableGateway service.
  * 
- * @package   module/PlanningBus/src/Model/Marque.php
+ * @package   module/Transport/src/Model/Marque.php
  * @version   1.0
  * @copyright 2018-22 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>

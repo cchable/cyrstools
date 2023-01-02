@@ -31,9 +31,9 @@ class MarqueManagerFactory implements FactoryInterface
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
     
-    $marqueTable = $container->get(MarqueTable::class);
-    $viewRenderer       = $container->get('ViewRenderer');
-    $config             = $container->get('Config');
+    $marqueTable  = $container->get(MarqueTable::class);
+    $viewRenderer = $container->get('ViewRenderer');
+    $config       = $container->get('Config');
 
     return new MarqueManager(
       $marqueTable,

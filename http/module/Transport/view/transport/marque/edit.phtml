@@ -2,21 +2,21 @@
 /**
  * Add a new 'marque'
  * 
- * @package   module/Transport/view/transport/marque/add.phtml
- * @version   1.0.1
+ * @package   module/Transport/view/transport/marque/edit.phtml
+ * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-$title = "Ajout d'un marque";
+$title = "Modification d'une marque";
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('marque');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
   'Marque'              => $this->url('marque'),
-  'Ajout'               => $this->url('marque', ['action'=>'add']),
+  'Modification'        => $this->url('marque', ['action'=>'edit']),
 ]);
 
 $form->get('NOMMARQUE')->setAttributes([

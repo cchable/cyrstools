@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/Transport/view/transport/dashboard/index.phtml
+ * Dashboard of Transport Module 
  *
- * @purpose   :
- * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/view/transport/dashboard/index.phtml
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 $title = 'Tableau de bord du Transport';
@@ -17,7 +16,6 @@ $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
 ]);
-
 ?>
 
 <div class="container" id="dashboard-grid">
@@ -110,7 +108,7 @@ $this->pageBreadcrumbs()->setItems([
         <p>Nombre de marques : <?= ($numberOfMarque) ? $numberOfMarque : '0' ?><br />
            Nombre de types : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?><br />
            Nombre de véhicules : x</p>
-        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Marques</button>
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('marque', ['action'=>'index']); ?>" role="button">Marques</a>
         <button type="button" class="btn btn-outline-primary btn-sm" disabled>Types</button>
         <button type="button" class="btn btn-outline-primary btn-sm" disabled>Véhicules</button>
         <button type="button" class="btn btn-outline-danger  btn-sm" disabled>Indisponibilités</button>

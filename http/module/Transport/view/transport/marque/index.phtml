@@ -3,8 +3,8 @@
  * Display of vehicle brands
  * 
  * @package   module/Transport/view/transport/marque/index.phtml
- * @version   1.0
- * @copyright 2018-22 H.P.B
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
@@ -13,8 +13,9 @@ $title = 'Liste des marques';
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('marque');
 $this->pageBreadcrumbs()->setItems([
-  'Accueil'          => $this->url('home'),
-  'Transport\Marque' => $this->url('marque'),
+  'Accueil'             => $this->url('home'),
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Marque'              => $this->url('marque'),
 ]);
 
 $paginator = $this->paginationControl(

@@ -1,10 +1,10 @@
 <?php
 /**
- * This is the Marque Controller. 
+ * This controleur is responsible for add/edit/delete 'marque'. 
  * 
  * @package   module/Transport/src/Controller/MarqueController.php
  * @version   1.0
- * @copyright 2018-22 H.P.B
+ * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
@@ -24,44 +24,54 @@ use Transport\Form\MarqueForm;
 use Transport\Form\SearchForm;
 
 
-/*
- * 
+/**
+ * MarqueController class
  */
 class MarqueController extends AbstractActionController
 {
   
-  /*
+  /**
    * Marque table manager
-   * @var Transport\Model\MarqueTable
+   *
+   * @var Transport\Model\MarqueTable $marqueTable
+   * @access private
    */
   private $marqueTable; 
   
-  /*
-   * Marque manager
-   * @var Transport\Service\MarqueManager
+  /**
+   * Marque manager service
+   *
+   * @var Transport\Service\MarqueManager $marqueManager
+   * @access private
    */
   private $marqueManager;
 
-  /*
-   * Application config.
-   * @var type 
+  /**
+   * Default row per page
+   *
+   * @var int $defaultRowPerPage
+   * @access private
    */
   private $defaultRowPerPage;
 
-  /*
-   * Application config.
-   * @var type 
+  /**
+   * Number of step row per page
+   *
+   * @var int $stepRowPerPage
+   * @access private
    */
   private $stepRowPerPage;
 
-  /*
-   * Session container.
+  /**
+   * Session container
+   *
    * @var Laminas\Session\Container
+   * @access private
    */
   private $sessionContainer;  
   
   
-  /*
+  /**
    * 
    */
   public function __construct(
@@ -74,14 +84,16 @@ class MarqueController extends AbstractActionController
     
     $this->marqueTable   = $marqueTable;
     $this->marqueManager = $marqueManager;
-    $this->defaultRowPerPage    = $defaultRowPerPage;
-    $this->stepRowPerPage       = $stepRowPerPage;
-    $this->sessionContainer     = $sessionContainer;
+    $this->defaultRowPerPage = $defaultRowPerPage;
+    $this->stepRowPerPage    = $stepRowPerPage;
+    $this->sessionContainer  = $sessionContainer;
   }
 
-  /*
-   * This is the default "index" action of the controller. It displays the 
-   * list of marque.
+  /**
+   * This is the default "index" action of the controller. 
+   * It displays the list of marque.
+   *
+   * @access public
    */
   public function indexAction()
   {
@@ -214,13 +226,13 @@ class MarqueController extends AbstractActionController
       return;
     }
 
-    $marque = $marque->getMarque();
+    $nom = $marque->getName();
     
     // Delete marque.
     $this->marqueManager->deleteMarque($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("L'marque $marque a été supprimée");
+    $this->flashMessenger()->addWarningMessage("La marque '$nom' a été supprimée");
 
     // Redirect to "index" page
     return $this->redirect()->toRoute('marque', ['action'=>'index']);      
@@ -265,11 +277,11 @@ class MarqueController extends AbstractActionController
         if ($this->marqueManager->updateMarque($marque, $data)) {
 				
           // Add a flash message Suucess
-          $this->flashMessenger()->addSuccessMessage("L'année scolaire a été modifiée");
+          $this->flashMessenger()->addSuccessMessage('La marque a été modifiée');
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("L'marque " . $data['ANNEEANNEESCOLAIRE'] . " existe déjà");
+          $this->flashMessenger()->addErrorMessage("La marque '" . $data['NOMMARQUE'] . "' existe déjà");
         }
 				
         // Redirect to "index" page
