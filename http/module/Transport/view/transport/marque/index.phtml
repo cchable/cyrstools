@@ -15,7 +15,7 @@ $this->mainMenu()->setActiveItemId('marque');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Marque'              => $this->url('marque'),
+  'Marque'              => $this->url(($this->module),
 ]);
 
 $paginator = $this->paginationControl(
@@ -76,10 +76,10 @@ $formSearch->prepare();
       <tr>
         <td><?= $this->escapeHtml($marque->getName()) ?></td>
         <td>
-          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('marque', ['action'=>'edit', 'id'=>$marque->getId()]); ?>">
+          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'edit', 'id'=>$marque->getId()]); ?>">
             <span class="far fa-edit" aria-hidden="true"></span>
           </a>
-          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('marque', ['action'=>'delete', 'id'=>$marque->getId()]); ?>">
+          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'delete', 'id'=>$marque->getId()]); ?>">
             <span class="far fa-trash-alt"></span>
           </a>
         </td>

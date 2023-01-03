@@ -1,22 +1,22 @@
 <?php
 /**
- * @package   : module/Transport/view/transport/indisponibilitechauffeur/add.phtml
- *
- * @purpose   : IndisponibiliteChauffeur add
+ * Add a new unavailability for one driver
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- * 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/view/transport/type-vehicule/add.phtml
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
-
+ 
 $title = "Ajout d'une indisponibilité pour un chauffeur";
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('indisponibilitechauffeur');
 $this->pageBreadcrumbs()->setItems([
-  'Accueil'                            => $this->url('home'),
-  'Transport\IndisponibiliteChauffeur' => $this->url('indisponibilitechauffeur'),
-  'Ajout'                              => $this->url('indisponibilitechauffeur', ['action'=>'add']),
+  'Accueil'                         => $this->url('home'),
+  'Transport\Dashboard'             => $this->url('dashboard'),
+  'Indisponibilités des chauffeurs' => $this->url($this->module),
+  'Ajout'                           => $this->url($this->module, ['action'=>'add']),
 ]);
 
 $form->get('IDX_CHAUFFEUR')->setAttributes([

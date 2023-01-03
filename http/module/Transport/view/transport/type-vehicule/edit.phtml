@@ -1,6 +1,6 @@
 <?php
 /**
- * Add a new 'marque'
+ * Edit a type of vehicle
  * 
  * @package   module/Transport/view/transport/type-vehicule/edit.phtml
  * @version   1.0
@@ -9,14 +9,14 @@
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-$title = "Modification d'une marque";
+$title = "Modification d'un type de véhicule";
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('marque');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Type Vehicule'       => $this->url('typevehicule'),
-  'Modification'        => $this->url('typevehicule', ['action'=>'edit']),
+  'Type de véhicule'    => $this->url($this->module),
+  'Modification'        => $this->url($this->module, ['action'=>'edit']),
 ]);
 
 $form->get('NOMMARQUE')->setAttributes([

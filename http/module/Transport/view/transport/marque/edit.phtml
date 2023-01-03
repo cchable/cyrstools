@@ -1,6 +1,6 @@
 <?php
 /**
- * Add a new 'marque'
+ * Edit a brand
  * 
  * @package   module/Transport/view/transport/marque/edit.phtml
  * @version   1.0
@@ -15,8 +15,8 @@ $this->mainMenu()->setActiveItemId('marque');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Marque'              => $this->url('marque'),
-  'Modification'        => $this->url('marque', ['action'=>'edit']),
+  'Marque'              => $this->url($this->module),
+  'Modification'        => $this->url($this->module, ['action'=>'edit']),
 ]);
 
 $form->get('NOMMARQUE')->setAttributes([

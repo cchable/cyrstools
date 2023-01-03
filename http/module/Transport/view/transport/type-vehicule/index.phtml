@@ -3,19 +3,19 @@
  * Display of vehicle types
  * 
  * @package   module/Transport/view/transport/type-vehicule/index.phtml
- * @version   1.0
+ * @version   1.0.1
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-$title = 'Liste des marques';
+$title = 'Liste des types de véhicule';
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('type');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Type Vehicule'       => $this->url($this->module),
+  'Type de véhicule'    => $this->url($this->module),
 ]);
 
 $paginator = $this->paginationControl(
@@ -76,10 +76,10 @@ $formSearch->prepare();
       <tr>
         <td><?= $this->escapeHtml($typeVehicule->getName()) ?></td>
         <td>
-          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('typevehicule', ['action'=>'edit', 'id'=>$typeVehicule->getId()]); ?>">
+          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'edit', 'id'=>$typeVehicule->getId()]); ?>">
             <span class="far fa-edit" aria-hidden="true"></span>
           </a>
-          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('typevehicule', ['action'=>'delete', 'id'=>$typeVehicule->getId()]); ?>">
+          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'delete', 'id'=>$typeVehicule->getId()]); ?>">
             <span class="far fa-trash-alt"></span>
           </a>
         </td>

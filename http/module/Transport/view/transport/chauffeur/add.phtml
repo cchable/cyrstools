@@ -1,22 +1,22 @@
 <?php
 /**
- * @package   : module/Transport/view/transport/chauffeur/add.phtml
- *
- * @purpose   : Chauffeur add
+ * Add a new 'marque'
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- * 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/view/transport/chauffeur/add.phtml
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
-
+ 
 $title = "Ajout d'un chauffeur";
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('chauffeur');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
-  'Transport\Chauffeur' => $this->url('chauffeur'),
-  'Ajout'               => $this->url('chauffeur', ['action'=>'add']),
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Chauffeur'           => $this->url($this->module),
+  'Ajout'               => $this->url($this->module, ['action'=>'add']),
 ]);
 
 $form->get('PRENOMCHAUFFEUR')->setAttributes([

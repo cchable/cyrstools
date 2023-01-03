@@ -1,22 +1,23 @@
 <?php
 /**
- * @package   : module/Transport/view/transport/indisponibilitechauffeur/edit.phtml
- *
- * @purpose   : IndisponibiliteChauffeur edit
+ * Edit an unavailability for one driver
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- * 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/view/transport/indisponibilitechauffeur/edit.phtml
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
+
 
 $title = "Modification d'une indisponibilité pour un chauffeur";
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('indisponibilitechauffeur');
 $this->pageBreadcrumbs()->setItems([
-  'Accueil'                            => $this->url('home'),
-  'Transport\IndisponibiliteChauffeur' => $this->url('indisponibilitechauffeur'),
-  'Modification'                       => $this->url('indisponibilitechauffeur', ['action'=>'edit']),
+  'Accueil'                         => $this->url('home'),
+  'Transport\Dashboard'             => $this->url('dashboard'),
+  'Indisponibilités des chauffeurs' => $this->url($this->module),
+  'Modification'                    => $this->url($this->module, ['action'=>'edit']),
 ]);
 
 $form->get('IDX_CHAUFFEUR')->setAttributes([

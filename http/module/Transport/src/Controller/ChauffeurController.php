@@ -1,15 +1,13 @@
 <?php
 /**
- * @package   : module/Transport/src/Controller/ChauffeurController.php
- *
- * @purpose   :
+ * This controleur is responsible for add/edit/delete 'chauffeur'. 
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Controller/ChauffeurController.php
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
-
 namespace Transport\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -73,11 +71,11 @@ class ChauffeurController extends AbstractActionController
     $sessionContainer)
   {
     
-    $this->chauffeurTable     = $chauffeurTable;
-    $this->chauffeurManager   = $chauffeurManager;
-    $this->defaultRowPerPage  = $defaultRowPerPage;
-    $this->stepRowPerPage     = $stepRowPerPage;
-    $this->sessionContainer   = $sessionContainer;
+    $this->chauffeurTable    = $chauffeurTable;
+    $this->chauffeurManager  = $chauffeurManager;
+    $this->defaultRowPerPage = $defaultRowPerPage;
+    $this->stepRowPerPage    = $stepRowPerPage;
+    $this->sessionContainer  = $sessionContainer;
   }
 
   /*
