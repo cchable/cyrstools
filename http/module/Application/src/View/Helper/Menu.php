@@ -134,11 +134,12 @@ class Menu extends AbstractHelper
   protected function renderItem($item) 
   {
 		
-    $id = isset($item['id']) ? $item['id'] : '';
-    $isActive = ($id==$this->activeItemId);
-    $label = isset($item['label']) ? $item['label'] : '';
-    $link = isset($item['link']) ? $item['link'] : '#';
-    $imgSVG = isset($item['imgsvg']) ? $item['imgsvg'] : '';
+    $id             = isset($item['id'])             ? $item['id'] : '';
+    $isActive       = ($id==$this->activeItemId);
+    $label          = isset($item['label'])          ? $item['label'] : '';
+    $link           = isset($item['link'])           ? $item['link'] : '#';
+    $imgSVG         = isset($item['imgsvg'])         ? $item['imgsvg'] : '';
+    $bImageAndLabel = isset($item['bImageAndLabel']) ? $item['bImageAndLabel'] : '';
          
     $result = ''; 
  
@@ -156,27 +157,31 @@ class Menu extends AbstractHelper
           $dropdownItemsResult .= '              <li><hr class="dropdown-divider"></li>' . PHP_EOL;
         } else {
 
-          $idDropdownItem = isset($dropdownItem['id']) ? $dropdownItem['id'] : '';
+          $idDropdownItem       = isset($dropdownItem['id'])    ? $dropdownItem['id'] : '';
           $isActiveDropdownItem = ($idDropdownItem==$this->activeItemId);
-          $linkDropdownItem = isset($dropdownItem['link']) ? $dropdownItem['link'] : '#';
-          $labelDropdownItem = isset($dropdownItem['label']) ? $dropdownItem['label'] : '';
+          $linkDropdownItem     = isset($dropdownItem['link'])  ? $dropdownItem['link'] : '#';
+          $labelDropdownItem    = isset($dropdownItem['label']) ? $dropdownItem['label'] : '';
+          $imgSVGDropdownItem         = isset($dropdownItem['imgsvg'])         ? $dropdownItem['imgsvg'] : '';
+          $bImageAndLabelDropdownItem = isset($dropdownItem['bImageAndLabel']) ? $dropdownItem['bImageAndLabel'] : '';
 
           if (!$itemActived && $isActiveDropdownItem) {
             $itemActived = $isActiveDropdownItem;
           }
           $dropdownItemsResult .= '              <li>'; 
-          $dropdownItemsResult .= '<a class="dropdown-item' . ($isActiveDropdownItem ? ' active' : '') . '" href="' . $escapeHtml($linkDropdownItem) . '">' . $escapeHtml($labelDropdownItem) . '</a>';
+          //$dropdownItemsResult .= '<a class="dropdown-item' . ($isActiveDropdownItem ? ' active' : '') . '" href="' . $escapeHtml($linkDropdownItem) . '">' . $escapeHtml($labelDropdownItem) . '</a>';
+          $dropdownItemsResult .= '<a class="dropdown-item' . ($isActiveDropdownItem ? ' active' : '') . '" href="' . $escapeHtml($linkDropdownItem) . '">' . ($bImageAndLabelDropdownItem ? ($imgSVGDropdownItem ? $imgSVGDropdownItem . $escapeHtml($labelDropdownItem) : $escapeHtml($labelDropdownItem)) : ($imgSVGDropdownItem ? $imgSVGDropdownItem : $escapeHtml($labelDropdownItem))) . '</a>';
           //$dropdownItemsresult .= '<a class="dropdown-item" href="' . $escapeHtml($link) . '">' . $escapeHtml($label) . '</a>';
           $dropdownItemsResult .= '</li>' . PHP_EOL;
         }
-      }
-      
+      } 
+  
       $isActiveItem = ($itemActived || $isActive);
       
       $result .= '          <li class="nav-item dropdown' . ($isActiveItem ? ' active' : '') . '">';
       //$result .= '<a class="nav-link dropdown-toggle' . ($isActiveItem ? ' active' : '') . '" href="' . $escapeHtml($link) . '" id="dropdown' . $id . '" data-bs-toggle="dropdown" aria-expanded="false">';
       $result .= '<a class="nav-link dropdown-toggle link-dark text-decoration-none' . ($isActiveItem ? ' active' : '') . '" href="#" id="dropdown' . $id . '" data-bs-toggle="dropdown" aria-expanded="false">';
-      $result .= ($imgSVG ? $imgSVG : $escapeHtml($label));
+      $result .= ($bImageAndLabel ? ($imgSVG ? $imgSVG . ' ' . $escapeHtml($label) : $escapeHtml($label)) : ($imgSVG ? $imgSVG : $escapeHtml($label)));
+     // $result .= ($imgSVG ? $imgSVG : $escapeHtml($label));
       $result .= '</a>' . PHP_EOL;
      
       $result .= '            <ul class="dropdown-menu text-small bg-light" aria-labelledby="dropdown' . $id . '">' . PHP_EOL;

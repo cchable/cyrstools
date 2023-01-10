@@ -1,13 +1,13 @@
-<?php
+<?php 
 /**
- * @package   : module/Application/src/Service/NavManager.php
- *
- * @purpose   : This service is responsible for determining which items should be in the main menu.
- *              The items may be different depending on whether the user is authenticated or not.
+ * This service is responsible for determining which items should be in the main menu.
+ * The items may be different depending on whether the user is authenticated or not. 
  * 
- * @copyright : Copyright (C) 2018, 21 H.P.B
- 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Application/src/Service/NavManager.php
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
  
 namespace Application\Service;
@@ -134,19 +134,23 @@ class NavManager
     $transportItems[] = [
       'id'    => 'dashboard',
       'label' => 'Dashboard',
+      'imgsvg'         => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#dashboard"/></svg>',
+      'bImageAndLabel' => true,
       'link'  => $url('dashboard')
     ]; 
     $transportItems[] = [
       'divider' => 'hr',
     ]; 
     $transportItems[] = [
-      'id'    => 'chauffeur',
-      'label' => 'Chauffeurs',
-      'link'  => $url('chauffeur')
+      'id'             => 'chauffeur',
+      'label'          => 'Chauffeurs',
+      'imgsvg'         => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#steering_wheel"/></svg>',
+      'bImageAndLabel' => true,
+      'link'           => $url('chauffeur'),
     ];
     $transportItems[] = [
       'id'    => 'indisponibilitechauffeur',
-      'label' => 'Indisponibilites Chauffeurs',
+      'label' => 'Indisponibilités des chauffeurs',
       'link'  => $url('indisponibilitechauffeur')
     ];
     $transportItems[] = [
@@ -154,13 +158,8 @@ class NavManager
     ];
     $transportItems[] = [
       'id'    => 'anneescolaire',
-      'label' => 'Années Scolaires',
+      'label' => 'Années scolaires',
       'link'  => $url('anneescolaire')
-    ];
-    $transportItems[] = [
-      'id'    => 'ephemeride',
-      'label' => 'Ephémérides',
-      'link'  => $url('ephemeride')
     ];
     $transportItems[] = [
       'id'    => 'ephemeride',
@@ -177,7 +176,7 @@ class NavManager
     ];
     $transportItems[] = [
       'id'    => 'typevehicule',
-      'label' => 'TypesVehicules',
+      'label' => 'Types de véhicule',
       'link'  => $url('typevehicule')
     ];
     
@@ -219,14 +218,16 @@ class NavManager
       'dropdown' => $transportItems,
     ];
     $items[] = [
-      'id'       => 'user',
-      'label'    => 'User',
-      'dropdown' => $userItems,
-      'float'    => 'right',
-      'imgsvg'   => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg>'
+      'id'              => 'user',
+      'label'           => 'User',
+      'dropdown'        => $userItems,
+      'float'           => 'right',
+      'imgsvg'          => 
+        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">' . 
+          '<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>'.
+          '<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>'.
+        '</svg>',
+       'bImageAndLabel' => true,
     ];
             
     return $items;
