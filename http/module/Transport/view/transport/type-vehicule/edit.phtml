@@ -3,7 +3,7 @@
  * Edit a type of vehicle
  * 
  * @package   module/Transport/view/transport/type-vehicule/edit.phtml
- * @version   1.0
+ * @version   1.0.1
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
@@ -11,7 +11,7 @@
 
 $title = "Modification d'un type de véhicule";
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('marque');
+$this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
@@ -19,7 +19,7 @@ $this->pageBreadcrumbs()->setItems([
   'Modification'        => $this->url($this->module, ['action'=>'edit']),
 ]);
 
-$form->get('NOMMARQUE')->setAttributes([
+$form->get('NOMTYPEVEHICULE')->setAttributes([
   'class'       => 'form-control', 
   'placeholder' => 'Nom'
 ]);
@@ -40,9 +40,9 @@ $form->prepare();
         <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
         <hr class="my-4">  
         <div class="form-floating my-2">
-          <?= $this->formElement($form->get('NOMMARQUE')); ?>
-          <?= $this->formLabel($form->get('NOMMARQUE')); ?>
-          <?= $this->formElementErrors($form->get('NOMMARQUE')); ?>              
+          <?= $this->formElement($form->get('NOMTYPEVEHICULE')); ?>
+          <?= $this->formLabel($form->get('NOMTYPEVEHICULE')); ?>
+          <?= $this->formElementErrors($form->get('NOMTYPEVEHICULE')); ?>              
         </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
         <hr class="my-4">

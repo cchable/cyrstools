@@ -11,11 +11,11 @@
 
 $title = "Ajout d'un type de véhicule";
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('marque');
+$this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Type Véhicule'       => $this->url($this->module),
+  'Type de véhicule'    => $this->url($this->module),
   'Ajout'               => $this->url($this->module, ['action'=>'add']),
 ]);
 

@@ -15,7 +15,7 @@ $this->mainMenu()->setActiveItemId('marque');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Marque'              => $this->url(($this->module),
+  'Marque'              => $this->url($this->module),
 ]);
 
 $paginator = $this->paginationControl(

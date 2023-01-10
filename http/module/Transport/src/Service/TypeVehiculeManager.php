@@ -91,7 +91,7 @@ class TypeVehiculeManager
   {
     
     // Do not allow to change typeVehicule if another typeVehicule with such data already exits
-    if($typeVehicule->getName()!=$data['NOMMARQUE'] && $this->checkTypeVehiculeExists($data)) {  
+    if($typeVehicule->getName()!=$data['NOMTYPEVEHICULE'] && $this->checkTypeVehiculeExists($data)) {  
       
       return false;
     }
@@ -124,7 +124,7 @@ class TypeVehiculeManager
    */
   public function checkTypeVehiculeExists(array $data) {
 
-    $search['NOMMARQUE'] = $data['NOMMARQUE'];
+    $search['NOMTYPEVEHICULE'] = $data['NOMTYPEVEHICULE'];
     $typeVehicule = $this->typeVehiculeTable->findOneBy($search);
     return $typeVehicule;
   }  

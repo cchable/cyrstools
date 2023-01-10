@@ -11,7 +11,7 @@
 
 $title = 'Liste des types de véhicule';
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('type');
+$this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),

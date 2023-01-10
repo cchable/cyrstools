@@ -19,7 +19,9 @@ $this->pageBreadcrumbs()->setItems([
 ?>
 
 <div class="container" id="dashboard-grid">
-  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#dashboard"/></svg>
+  <?= $this->escapeHtml($title) ?>
+  </h2>
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
 <!--  
@@ -81,7 +83,7 @@ $this->pageBreadcrumbs()->setItems([
     </div>
 -->
     <div class="col d-flex align-items-start">
-      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#universal-access"/></svg>
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#steering_wheel"/></svg>
       <div>
         <h3 class="fw-bold mb-0 fs-4">Chauffeurs</h3>
         <p>Gestion des chauffeurs et de leurs indisponibilités</p>

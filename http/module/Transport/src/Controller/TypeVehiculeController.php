@@ -160,7 +160,7 @@ class TypeVehiculeController extends AbstractActionController
     ]);   
   }
    
-  /*
+  /**
    * This action displays a page allowing to add a new typeVehicule.
    */
   public function addAction()
@@ -186,13 +186,13 @@ class TypeVehiculeController extends AbstractActionController
         if ($this->typeVehiculeManager->addTypeVehicule($data)) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("La typeVehicule '" . $data['NOMMARQUE'] . "' a été ajoutée");
+          $this->flashMessenger()->addSuccessMessage("Le type de véhicule '" . $data['NOMTYPEVEHICULE'] . "' a été ajouté");
           // Redirect to "index" page
-          return $this->redirect()->toRoute('typeVehicule', ['action'=>'index']); 
+          return $this->redirect()->toRoute('typevehicule', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addMessage("La typeVehicule '" . $data['NOMMARQUE'] . "' existe déjà", 'error', 0);
+          $this->flashMessenger()->addMessage("Le type de vehicule '" . $data['NOMTYPEVEHICULE'] . "' existe déjà", 'error', 0);
         }
       } else {
         
@@ -202,7 +202,9 @@ class TypeVehiculeController extends AbstractActionController
     } 
     
     return new ViewModel([
-      'form' => $form,
+      'form'   => $form,
+      'module' => 'typevehicule',
+      
     ]);   
   }  
   
@@ -232,13 +234,13 @@ class TypeVehiculeController extends AbstractActionController
     $this->typeVehiculeManager->deleteTypeVehicule($id);
 
     // Add a flash message.
-    $this->flashMessenger()->addWarningMessage("La typeVehicule '$nom' a été supprimée");
+    $this->flashMessenger()->addWarningMessage("Le type de véhicule '$nom' a été supprimé");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('typeVehicule', ['action'=>'index']);      
+    return $this->redirect()->toRoute('typevehicule', ['action'=>'index']);      
   }
   
-  /*
+  /**
    * This action displays a page allowing to edit an existing typeVehicule
    */
   public function editAction()
@@ -277,15 +279,15 @@ class TypeVehiculeController extends AbstractActionController
         if ($this->typeVehiculeManager->updateTypeVehicule($typeVehicule, $data)) {
 				
           // Add a flash message Suucess
-          $this->flashMessenger()->addSuccessMessage('La typeVehicule a été modifiée');
+          $this->flashMessenger()->addSuccessMessage('Le type de véhicule a été modifié');
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("La typeVehicule '" . $data['NOMMARQUE'] . "' existe déjà");
+          $this->flashMessenger()->addErrorMessage("Le type de véhicule '" . $data['NOMTYPEVEHICULE'] . "' existe déjà");
         }
 				
         // Redirect to "index" page
-        return $this->redirect()->toRoute('typeVehicule', ['action'=>'index']);
+        return $this->redirect()->toRoute('typevehicule', ['action'=>'index']);
       }               
     } else {
 		
@@ -293,7 +295,8 @@ class TypeVehiculeController extends AbstractActionController
     }
 
     return new ViewModel([
-      'form' => $form,
+      'form'   => $form,
+      'module' => 'typevehicule',
     ]);
   }
 }
