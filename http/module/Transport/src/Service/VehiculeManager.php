@@ -1,22 +1,21 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Service/VehiculeManager.php
+ * This service is responsible for add/edit/delete 'type vehicule'. 
  *
- * @purpose   : This service is responsible for adding/editing anneescolaire. 
- *
- *
- * @copyright : Copyright (C) 2018-21 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Service/TypeVehiculeManager.php
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
+ 
+namespace Transport\Service;
 
-namespace PlanningBus\Service;
-
-use PlanningBus\Model\Vehicule;
-use PlanningBus\Model\VehiculeTable;
+use Transport\Model\Vehicule;
+use Transport\Model\VehiculeTable;
 
 
-/*
+/**
  * 
  */
 class VehiculeManager
@@ -46,7 +45,7 @@ class VehiculeManager
   public function __construct(VehiculeTable $vehiculeTable, $viewRenderer, $config) 
   {
     
-    $this->vehiculeTable     = $vehiculeTable;
+    $this->vehiculeTable = $vehiculeTable;
     $this->viewRenderer = $viewRenderer;
     $this->config       = $config;
   }

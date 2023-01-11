@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/Transport/src/Form/EphemerideForm.php
- *
- * @purpose   : 
+ * Form for the encoding ephemeride
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Form/EphemerideForm.php
+ * @version   1.0
+ * @copyright 2018-22 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 namespace Transport\Form;
@@ -33,7 +32,7 @@ use Laminas\Validator\StringLength;
 use Transport\Model\Ephemeride;
 
 
-/*
+/**
  * 
  */
 class EphemerideForm extends Form
@@ -54,12 +53,15 @@ class EphemerideForm extends Form
   /*
    * Constructor
    */
-  public function __construct(array $haystackAnneesScolaires)
+  public function __construct(array $haystackAnneesScolaires, $scenario = 'create')
   {
 
     // Save parameters for internal use
     $this->haystackAnneesScolaires = $haystackAnneesScolaires;
-      
+    
+    // Save parameters for internal use.
+    $this->scenario = $scenario;
+    
     // Define form name
     parent::__construct('ephemeride-form');
     

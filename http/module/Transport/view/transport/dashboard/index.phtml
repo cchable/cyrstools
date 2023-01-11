@@ -11,10 +11,10 @@
 
 $title = 'Tableau de bord du Transport';
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('dashboard');
+$this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
-  'Transport\Dashboard' => $this->url('dashboard'),
+  'Transport\Dashboard' => $this->url($this->module),
 ]);
 ?>
 
@@ -83,7 +83,7 @@ $this->pageBreadcrumbs()->setItems([
     </div>
 -->
     <div class="col d-flex align-items-start">
-      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#steering_wheel"/></svg>
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#blue_car_steering_whell"/></svg>
       <div>
         <h3 class="fw-bold mb-0 fs-4">Chauffeurs</h3>
         <p>Gestion des chauffeurs et de leurs indisponibilités</p>
@@ -103,16 +103,16 @@ $this->pageBreadcrumbs()->setItems([
       </div>
     </div>
     <div class="col d-flex align-items-start">
-      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#truck-front-fill"/></svg>
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#school-bus"/></svg>
       <div>
         <h3 class="fw-bold mb-0 fs-4">Véhicules</h3>
-        <p>Gestion des marques de véhicules, des types de véhicules, des véhicules et de leurs indisponibilités</p>
+        <p>Gestion des marques de véhicules, des types de véhicules, des véhicules & de leurs indisponibilités</p>
         <p>Nombre de marques : <?= ($numberOfMarque) ? $numberOfMarque : '0' ?><br />
            Nombre de types : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?><br />
            Nombre de véhicules : x</p>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('marque', ['action'=>'index']); ?>" role="button">Marques</a>
-        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Types</button>
-        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Véhicules</button>
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('typevehicule', ['action'=>'index']); ?>" role="button">Types</a>
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'index']); ?>" role="button">Véhicules</a>
         <button type="button" class="btn btn-outline-danger  btn-sm" disabled>Indisponibilités</button>
       </div>
     </div>

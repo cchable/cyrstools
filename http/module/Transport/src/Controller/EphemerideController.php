@@ -1,15 +1,14 @@
 <?php
 /**
- * @package   : module/Transport/src/Controller/EphemerideController.php
- *
- * @purpose   :
+ * This controleur is responsible for add/edit/delete 'ephemeride'. 
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Controller/EphemerideController.php
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
-
+ 
 namespace Transport\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -89,9 +88,9 @@ class EphemerideController extends AbstractActionController
     $this->sessionContainer  = $sessionContainer;
   }
 
-  /*
-   * This is the default "index" action of the controller. It displays the 
-   * list of ephemeride.
+  /**
+   * This is the default "index" action of the controller. 
+   * It displays the list of ephemeride.
    */
   public function indexAction()
   {
@@ -102,9 +101,7 @@ class EphemerideController extends AbstractActionController
     $pageNumber = ($pageNumber < 1) ? 1 : $pageNumber;
 
     // Getting requested number per page from the query
-    // or to default if none is set, or the number per page is invalid
-    //$defaultRowPerPage = $this->config['paginator']['options']['defaultRowPerPage'];
-    //$rowPerPage = (int) $this->params()->fromQuery('rowPerPage', $this->defaultRowPerPage);
+    // or to default if none is set, or the number per page is invalid    
     $rowPerPage = (int) $this->params()->fromQuery('rowPerPage', 0);
     $rowPerPage = ($rowPerPage < 1) ? 0 : $rowPerPage;
    
@@ -164,7 +161,7 @@ class EphemerideController extends AbstractActionController
   public function addAction()
   {
     
-    // Get the list of all available chauffeur (sorted)
+    // Get the list of all available school year (sorted)
     $anneesScolaires = $this->ephemerideManager->getAnneesScolaires();
     
     // Create ephemeride Form

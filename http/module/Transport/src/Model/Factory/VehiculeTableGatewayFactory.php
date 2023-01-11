@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Service/Factory/VehiculeTableGatewayFactory.php
+ * @package   : module/Transport/src/Service/Factory/VehiculeTableGatewayFactory.php
  *
  * @purpose   : This is the factory class for VehiculeTableGateway service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
@@ -10,7 +10,7 @@
  * @license   : GNU General Public License version2 or later; see LICENSE.txt
  **/
 
-namespace PlanningBus\Model\Factory;
+namespace Transport\Model\Factory;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -18,8 +18,8 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 
-use PlanningBus\Model;
-use PlanningBus\Model\Vehicule;
+use Transport\Model;
+use Transport\Model\Vehicule;
 
 
 /*
@@ -34,7 +34,7 @@ class VehiculeTableGatewayFactory implements FactoryInterface
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
 		
-    $dbAdapter = $container->get('PlanningBus\Db\ReadWriteAdapter');
+    $dbAdapter = $container->get('Transport\Db\ReadWriteAdapter');
     $resultSetPrototype = new ResultSet();
     $resultSetPrototype->setArrayObjectPrototype(new Vehicule());
     return new TableGateway('T_VEHICULES', $dbAdapter, null, $resultSetPrototype);

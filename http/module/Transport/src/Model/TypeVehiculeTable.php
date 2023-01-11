@@ -2,7 +2,7 @@
 /**
  * This is the TypeVehiculeTable class for TypeVehiculeTable service.
  * 
- * @package   module/PlanningBus/src/Model/TypeVehiculeTable.php
+ * @package   module/Transport/src/Model/TypeVehiculeTable.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -25,7 +25,7 @@ use Laminas\Paginator\Paginator;
 use Hpb\Db\Sql\FBSelect;
 
 
-/*
+/**
  * 
  */
 class TypeVehiculeTable

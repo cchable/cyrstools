@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Module.php
+ * @package   : module/Transport/src/Module.php
  *
  * @purpose   :
  * 

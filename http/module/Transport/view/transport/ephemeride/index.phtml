@@ -1,21 +1,20 @@
 <?php
 /**
- * @package   : module/Transport/view/transport/ephemeride/index.phtml
- *
- * @purpose   :
+ * Display ephemerides
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/view/transport/ephemeride/index.phtml
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
-
+ 
 $title = 'Liste des éphémérides';
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('ephemeride');
+$this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'              => $this->url('home'),
-  'Transport\Ephéméride' => $this->url('ephemeride'),
+  'Transport\Ephéméride' => $this->url($this->module),
 ]);
 
 $paginator = $this->paginationControl(

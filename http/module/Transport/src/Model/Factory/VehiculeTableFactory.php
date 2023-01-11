@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Service/Factory/VehiculeTableFactory.php
+ * @package   : module/Transport/src/Service/Factory/VehiculeTableFactory.php
  *
  * @purpose   : This is the factory class for VehiculeTable service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
@@ -10,13 +10,13 @@
  * @license   : GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-namespace PlanningBus\Model\Factory;
+namespace Transport\Model\Factory;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-use PlanningBus\Model\VehiculeTable;
-use PlanningBus\Model\VehiculeTableGateway;
+use Transport\Model\VehiculeTable;
+use Transport\Model\VehiculeTableGateway;
 
 
 /*

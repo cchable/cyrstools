@@ -1,60 +1,82 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Form/VehiculeForm.php
- *
- * @purpose   :
+ * Form for the encoding vehicle
  * 
- * 
- * @copyright : Copyright (C) 2018-21 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
- **/
+ * @package   module/Transport/src/Form/VehiculeForm.php
+ * @version   1.0
+ * @copyright 2018-22 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
-namespace PlanningBus\Form;
+namespace Transport\Form;
 
 use DomainException;
 
 use Laminas\Form\Form;
 use Laminas\Form\Element;
 
-use PlanningBus\Model\Vehicule;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+
+use Laminas\Validator\StringLength;
+
+use Transport\Model\Vehicule;
 
 
-/*
+/**
  * 
  */
 class VehiculeForm extends Form
 {
 
-  /*
+  /**
    * Scenario ('create' or 'update')
    * @var string 
    */
   private $scenario;
 
-  /*
+  /**
    * Table manager
    * @var Parking\Model\BusTable
    */
   private $vehiculeTable;
 
-  /*
+  /**
    * Current Vehicule
    * @var Parking\Model\Vehicule 
    */
   private $vehicule;
 
-  /*
+  /**
+   * 
+   */
+   private $haystackMarque;
+   
+  /**
+   * 
+   */
+   private $haystackTypeVehicule;
+   
+   
+  /**
    * Constructor
    */
-  public function __construct($scenario = 'create')
+  public function __construct(array $haystackMarque, array $haystackTypeVehicule, $scenario = 'create')
   {
 
+    // Save parameters for internal use
+    $this->haystackMarque = $haystackMarque
+    
+    // Save parameters for internal use
+    $this->haystackTypeVehicule = $haystackTypeVehicule;
+    
     // Save parameters for internal use.
     $this->scenario = $scenario;
     
     // Define form name
-    parent::__construct('anneescolaire-form');
+    parent::__construct('vehicule-form');
     
     // Set POST method for this form
     $this->setAttribute('method', 'post');
@@ -69,6 +91,7 @@ class VehiculeForm extends Form
   protected function addElements() 
   {
 
+//ici
     // Add "marque" field
     $this->add([
       'name' => 'MARQUEVEHICULE',

@@ -39,7 +39,10 @@ $formSearch->setAttribute('action', $this->url($this->module, ['action' => 'inde
 $formSearch->prepare();
 ?>
 <div class="container">
-  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#blue_car_steering_whell"/></svg>
+  <?= $this->escapeHtml($title) ?>
+  </h2>
+  
   <div class="row my-4">
     <div class="col-sm" aria-label="add item">
       <a class="btn btn-light btn-outline-primary" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'add']); ?>">

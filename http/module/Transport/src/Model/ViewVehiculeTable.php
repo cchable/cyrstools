@@ -1,22 +1,20 @@
 <?php
 /**
- * This is the MarqueTable class for MarqueTable service.
+ * This is the ViewVehiculeTable class for ViewVehiculeTable service.
  * 
- * @package   module/Transport/src/Model/MarqueTable.php
+ * @package   module/Transport/src/Model/ViewVehiculeTable.php
  * @version   1.0
- * @copyright 2018-22 H.P.B
+ * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
-
+ 
 namespace Transport\Model;
 
 use RuntimeException;
 
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGatewayInterface;
-use Laminas\Db\Sql\Sql;
-use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
 use Laminas\Paginator\Adapter\DbSelect;
@@ -28,7 +26,7 @@ use Hpb\Db\Sql\FBSelect;
 /*
  * 
  */
-class MarqueTable
+class ViewVehiculeTable
 {
   
   private $tableGateway;
@@ -50,7 +48,7 @@ class MarqueTable
 
     return $this->tableGateway->select(function (\Laminas\Db\Sql\Select $select)
     {
-      $select->order('NOMMARQUE ASC');
+      $select->order('NOMVEHICULE ASC');
     }); 
   }
    
@@ -59,11 +57,11 @@ class MarqueTable
   {
         
     $fbSelect = new FBSelect($this->tableGateway->table);
-    $fbSelect->order('NOMMARQUE ASC');
+    $fbSelect->order('NOMVEHICULE ASC');
     if ($search) {
         
       $where = new Where();
-      $fbSelect->where($where->like('NOMMARQUE', "%$search%"));
+      $fbSelect->where($where->like('NOMVEHICULE', "%$search%"));
     }
     
     /*
@@ -112,11 +110,11 @@ class MarqueTable
   
     // Create a new Select object for the table:
     $fbSelect = new FBSelect($this->tableGateway->getTable());
-    $fbSelect->order('NOMMARQUE ASC');
+    $fbSelect->order('NOMVEHICULE ASC');
 
-    // Create a new result set based on the Marque entity:
+    // Create a new result set based on the Chauffeur entity:
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new Marque());
+    $resultSetPrototype->setArrayObjectPrototype(new Vehicule());
 
     // Create a new pagination adapter object:
     $paginatorAdapter = new DbSelect(
@@ -133,11 +131,11 @@ class MarqueTable
   }
   
   //
-  public function getMarque($id)
+  public function getVehicule($id)
   {
     
     $id = (int) $id;
-    $rowset = $this->tableGateway->select(['IDX_MARQUE' => $id]);
+    $rowset = $this->tableGateway->select(['IDX_VEHICULE' => $id]);
     $row = $rowset->current();
     if (! $row) {
       throw new RuntimeException(sprintf(
@@ -147,99 +145,22 @@ class MarqueTable
     }
     return $row;
   }
-
-  //
-  public function saveMarque(Marque $marque)
-  {
-
-    $data = $marque->getArrayCopy(false);
-    $id = (int) $marque->getId();
-
-    if ($id === 0) {
-      $result = $this->tableGateway->insert($data);
-      $marque = $this->findOneByRecord($marque);
-      return $marque;
-    }
-    
-    try {
-      $this->getMarque($id);
-    } catch (RuntimeException $e) {
-      throw new RuntimeException(sprintf(
-        'Cannot update marque with identifier %d; does not exist',
-        $id
-      ));
-    }
-    $this->tableGateway->update($data, ['IDX_MARQUE' => $id]);
-  }
-
-  //
-  public function deleteMarque($id)
-  {
-    
-    $this->tableGateway->delete(['IDX_MARQUE' => (int) $id]);
-  }
-  
-  //
-  public function findOneBy(array $criteria)
-  {
-    
-    $rowset = $this->tableGateway->select($criteria);
-    $marque = $rowset->current();
-    
-    return $marque;
-  }
   
   //
   public function findOneById(int $id)
   {
     
-    $marque = $this->findOneBy(['IDX_MARQUE' => (int) $id]);
-    return $marque;
-  }
-  
-  //
-  public function findOneByName($nom)
-  {
-    
-    $marque = $this->findOneBy(['NOMMARQUE' => $nom]);
-    return $marque;
+    $ephemeride = $this->findOneBy(['IDX_VEHICULE' => (int) $id]);
+    return $ephemeride;
   }
   
   // 
-  public function findOneByRecord(Marque $record)
+  public function findOneByRecord(VehiculeView $record)
   {
     
-    $recordArray = $record->getArrayCopy();
-    unset($recordArray["IDX_MARQUE"]);
-    $marque = $this->findOneBy($recordArray);
+    $recordArray = $record->getArrayCopy(false);
+    $ephemeride = $this->findOneBy($recordArray);
     
-    return $marque;
-  }
-  
-  /**
-   * Calcul le nombre d'enregistrement dans la table
-   *
-   * @return int $count
-   * @access public
-   */
-  public function getNumberOfRows() 
-  {
-    
-    $adapter = $this->tableGateway->getAdapter();
-    $sql     = $this->tableGateway->getSql();
-    $select  = $sql->select();
-    $select->columns(
-      [
-        'COUNT' => new \Laminas\Db\Sql\Expression("COUNT('')"),
-      ],
-      FALSE,
-    );
-    
-    $selectString = $sql->buildSqlString($select);
-    $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-    $row = $rowset->current();
-    $count = $row['COUNT'];
-    
-    return $count;
+    return $ephemeride;
   }
 }

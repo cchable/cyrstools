@@ -1,30 +1,32 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Controller/VehiculeController.php
- *
- * @purpose   :
+ * This controleur is responsible for add/edit/delete 'vehicule'. 
  * 
- * 
- * @copyright : Copyright (C) 2018-21 H.P.B
- * 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Controller/VehiculeController.php
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-namespace PlanningBus\Controller;
+namespace Transport\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
-use PlanningBus\Service\VehiculeManager;
+use Transport\Service\VehiculeManager;
 
-use PlanningBus\Model\Vehicule;
-use PlanningBus\Model\VehiculeTable;
+use Transport\Model\Vehicule;
+use Transport\Model\ViewVehicule;
+use Transport\Model\VehiculeTable;
+use Transport\Model\ViewVehiculeTable;
 
-use PlanningBus\Form\VehiculeForm;
-use PlanningBus\Form\SearchForm;
+use Transport\Form\VehiculeForm;
+use Transport\Form\SearchForm;
 
 
-/*
+/**
  * 
  */
 class VehiculeController extends AbstractActionController
@@ -35,6 +37,12 @@ class VehiculeController extends AbstractActionController
 	 * @var Plannigvehicule\Model\VehiculeTable
 	 */
 	private $vehiculeTable;
+
+  /*
+   * ViewVehicule table manager
+   * @var Transport\Model\ViewVehiculeTable
+   */
+  private $viewVehiculeTable; 
 	
 	/*
    * Vehicule manager
@@ -43,10 +51,29 @@ class VehiculeController extends AbstractActionController
 	private $vehiculeManager;
 
   /*
+   * Application config.
+   * @var type 
+   */
+  private $defaultRowPerPage;
+
+  /*
+   * Application config.
+   * @var type 
+   */
+  private $stepRowPerPage;
+
+  /*
+   * Session container.
+   * @var Laminas\Session\Container
+   */
+  private $sessionContainer;  
+
+  /**
    * 
    */
 	public function __construct(
 		VehiculeTable $vehiculeTable,
+    ViewVehiculeTable $viewVehiculeTable,
 		VehiculeManager $vehiculeManager,
     $defaultRowPerPage,
     $stepRowPerPage,
@@ -54,13 +81,14 @@ class VehiculeController extends AbstractActionController
 	{
     
 		$this->vehiculeTable     = $vehiculeTable;
+		$this->viewVehiculeTable = $viewVehiculeTable;
 		$this->vehiculeManager   = $vehiculeManager;
     $this->defaultRowPerPage = $defaultRowPerPage;
     $this->stepRowPerPage    = $stepRowPerPage;
     $this->sessionContainer  = $sessionContainer;
 	}
 
-	/*
+	/**
    * This is the default "index" action of the controller. 
    * It displays the list of vehicule.
    */
@@ -78,11 +106,14 @@ class VehiculeController extends AbstractActionController
     $rowPerPage = ($rowPerPage < 1) ? 0 : $rowPerPage;
    
     if ($rowPerPage) {
+      
       $this->sessionContainer->rowPerPage = $rowPerPage;
     } else {
       if (isset($this->sessionContainer->rowPerPage)) {
+        
         $rowPerPage = $this->sessionContainer->rowPerPage;
       } else {
+        
         $this->sessionContainer->rowPerPage = $rowPerPage = $this->defaultRowPerPage;
       }
     }
@@ -120,12 +151,8 @@ class VehiculeController extends AbstractActionController
       'search'         => $search,
       'rowPerPage'     => $rowPerPage,
       'stepRowPerPage' => $this->stepRowPerPage,
-      'vehicules'      => $this->vehiculeTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'vehicules'      => $this->viewVehiculeTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]); 
-      
-   //return new ViewModel([
-   //   'vehicule' => $this->vehiculeTable->fetchAllPaginator($pageNumber, $count),
-   // ]);
   }
   
   /*
@@ -134,8 +161,14 @@ class VehiculeController extends AbstractActionController
   public function addAction()
   {
     
+    // Get the list of all available brand (sorted)
+    $marques = $this->vehiculeManager->getMarque();
+    
+    // Get the list of all available type of vehicle (sorted)
+    $typeVehicule = $this->vehiculeManager->getTypeVehicule();
+    
     // Create Form
-    $form = new VehiculeForm('create', $this->vehiculeTable);
+    $form = new VehiculeForm($marques, $typeVehicule, 'create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -167,7 +200,11 @@ class VehiculeController extends AbstractActionController
       }               
     } 
     
-    return new ViewModel(['form' => $form]);  
+    return new ViewModel([
+      'form'          => $form, 
+      'marques'       => $marques,
+      'typeVehicules' => $typeVehicules,
+    ]);  
   }
   
 /*

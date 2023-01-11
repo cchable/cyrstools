@@ -1,16 +1,15 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Model/Vehicule.php
- *
- * @purpose   :
+ * This is the Vehicule class for Vehicule service.
  * 
- * 
- * @copyright : Copyright (C) 2018-21 H.P.B
- 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Model/Vehicule.php
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-namespace PlanningBus\Model;
+namespace Transport\Model;
 
 use DomainException;
 

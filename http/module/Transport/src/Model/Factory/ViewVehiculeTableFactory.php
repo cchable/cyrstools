@@ -29,9 +29,10 @@ class ViewVehiculeTableFactory implements FactoryInterface
    * This method creates the ViewVehiculeTable model and returns its instance. 
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-  {        
-  
+  {
+ 
     $tableGateway = $container->get(ViewVehiculeTableGateway::class);
-    return new ViewVehiculeTable($tableGateway);
+    return new ViewVehiculeTable($tableGateway); 
+    
   }
 }

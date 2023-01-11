@@ -64,7 +64,10 @@ $form->get('submit')->setAttributes([
 $form->prepare();
 ?>
 <div class="container">
-  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#blue_car_steering_whell"/></svg>
+  <?= $this->escapeHtml($title) ?>
+  </h2>
+  
   <div class="row justify-content-left">
     <div class="col-md-6">
       <?= $this->form()->openTag($form) . PHP_EOL; ?>   

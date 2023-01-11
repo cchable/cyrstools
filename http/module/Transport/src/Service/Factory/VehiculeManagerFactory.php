@@ -1,22 +1,24 @@
 <?php
 /**
- * @package   : module/PlanningBus/src/Service/Factory/VehiculeManagerFactory.php
+ * This is the factory class for VehiculeManager service.
+ * The purpose of the factory is to instantiate the service and pass it dependencies (inject dependencies).
  *
- * @purpose   : This is the factory class for VehiculeManager service. The purpose of the factory
- *              is to instantiate the service and pass it dependencies (inject dependencies).
- * 
- * @copyright : Copyright (C) 2018-21 H.P.B
- *
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Service/Factory/VehiculeManagerFactory.php
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-namespace PlanningBus\Service\Factory;
+namespace Transport\Service\Factory;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-use PlanningBus\Service\VehiculeManager;
-use PlanningBus\Model\VehiculeTable;
+use Transport\Service\VehiculeManager;
+use Transport\Model\VehiculeTable;
+use Transport\Model\MarqueTable;
+use Transport\Model\TypeVehiculeTable;
 
 
 /*
@@ -32,9 +34,17 @@ class VehiculeManagerFactory implements FactoryInterface
   {
     
     $vehiculeTable     = $container->get(VehiculeTable::class);
+    $marqueTable       = $container->get(MarqueTable::class);
+    $typeVehiculeTable = $container->get(TypeVehiculeTable::class);
     $viewRenderer = $container->get('ViewRenderer');
     $config       = $container->get('Config');
 
-    return new VehiculeManager($vehiculeTable, $viewRenderer, $config);
+    return new VehiculeManager(
+      $vehiculeTable, 
+      $marqueTable,
+      $typeVehiculeTable,
+      $viewRenderer, 
+      $config
+    );
   }
 }

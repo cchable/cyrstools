@@ -20,7 +20,7 @@ use Laminas\InputFilter\InputFilterInterface;
 /**
  * 
  */
-class ViewEphemeride implements InputFilterAwareInterface
+class ViewVehicule implements InputFilterAwareInterface
 {
 
   private $id;

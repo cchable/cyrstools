@@ -32,11 +32,11 @@ class MarqueControllerFactory implements FactoryInterface
     $marqueTable   = $container->get(MarqueTable::class);
     $marqueManager = $container->get(MarqueManager::class);
     
-    $config               = $container->get('Config');
-    $defaultRowPerPage    = $config['paginator']['options']['defaultRowPerPage'];
-    $stepRowPerPage       = $config['paginator']['options']['stepRowPerPage'];
+    $config            = $container->get('Config');
+    $defaultRowPerPage = $config['paginator']['options']['defaultRowPerPage'];
+    $stepRowPerPage    = $config['paginator']['options']['stepRowPerPage'];
       
-    $sessionContainer     = $container->get('MarqueSessionContainer');
+    $sessionContainer  = $container->get('MarqueSessionContainer');
     
     // Instantiate the controller and inject dependencies
     return new MarqueController(
