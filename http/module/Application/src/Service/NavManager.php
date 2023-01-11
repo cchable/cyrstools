@@ -144,7 +144,7 @@ class NavManager
     $transportItems[] = [
       'id'             => 'chauffeur',
       'label'          => 'Chauffeurs',
-      'imgsvg'         => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#steering_wheel"/></svg>',
+      'imgsvg'         => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#blue_car_steering_whell"/></svg>',
       'bImageAndLabel' => true,
       'link'           => $url('chauffeur'),
     ];
@@ -168,6 +168,13 @@ class NavManager
     ];
     $transportItems[] = [
       'divider' => 'hr',
+    ];
+    $transportItems[] = [
+      'id'     => 'vehicule',
+      'label'  => 'Véhicule',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#school-bus"/></svg>',
+      'bImageAndLabel' => true,
+      'link'   => $url('vehicule')
     ];
     $transportItems[] = [
       'id'    => 'marque',
