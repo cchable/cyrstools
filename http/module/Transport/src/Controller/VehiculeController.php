@@ -165,10 +165,10 @@ class VehiculeController extends AbstractActionController
     $marques = $this->vehiculeManager->getMarque();
     
     // Get the list of all available type of vehicle (sorted)
-    $typeVehicule = $this->vehiculeManager->getTypeVehicule();
+    $typeVehicules = $this->vehiculeManager->getTypeVehicule();
     
     // Create Form
-    $form = new VehiculeForm($marques, $typeVehicule, 'create');
+    $form = new VehiculeForm($marques, $typeVehicules, 'create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {

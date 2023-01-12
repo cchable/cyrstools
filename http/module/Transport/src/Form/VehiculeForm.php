@@ -67,7 +67,7 @@ class VehiculeForm extends Form
   {
 
     // Save parameters for internal use
-    $this->haystackMarque = $haystackMarque
+    $this->haystackMarque = $haystackMarque;
     
     // Save parameters for internal use
     $this->haystackTypeVehicule = $haystackTypeVehicule;
@@ -91,47 +91,75 @@ class VehiculeForm extends Form
   protected function addElements() 
   {
 
-//ici
-    // Add "marque" field
+    // Add "IDX_TYPEVEHICULE" field
     $this->add([
-      'name' => 'MARQUEVEHICULE',
-      'type' => 'text',
+      'name' => 'IDX_TYPEVEHICULE',
+      'type' => 'select',
       'options' => [
-        'label' => 'Marque',
+        'value_options' => $this->haystackTypeVehicule,
+        'label'         => 'Type de véhicule',
       ],
     ]);
     
-    // Add "modele" field
+    // Add "IDX_MARQUE" field
     $this->add([
-      'name' => 'MODELEVEHICULE',
-      'type' => 'text',
+      'name' => 'IDX_MARQUE',
+      'type' => 'select',
       'options' => [
-        'label' => 'Modèle',
+        'value_options' => $this->haystackMarque,
+        'label'         => 'Marque',
       ],
     ]);
     
-    // Add "nom" field
+    // Add "NOMVEHICULE" field
     $this->add([
       'name' => 'NOMVEHICULE',
-      'type' => 'text',
+      'type' => Element\text::class,
       'options' => [
-        'label' => 'Nom',
+        'label' => 'Nom du véhicule',
       ],
-    ]);    
-     
-    // Add "places" field
+    ]);
+    
+    // Add "PLACESVEHICULES" field
     $this->add([
-      'name' => 'PLACESVEHICULE',
+      'name' => 'PLACESVEHICULES',
       'type' => Element\Number::class,
-      'options'    => [
-        'label' => 'Places',
+      'options' => [
+        'label' => 'Places du véhicule',
+      ],
+    ]);
+    
+    // Add "NUMEROVEHICULE" field
+    $this->add([
+      'name' => 'NUMEROVEHICULE',
+      'type' => Element\Number::class,
+      'options' => [
+        'label' => 'Numéro du véhicule',
       ],
       'attributes' => [
         'min'  => '1',
         'step' => '1', // default step interval is 1
       ],
     ]);    
- 
+     
+    // Add "PLAQUEVEHICULE" field
+    $this->add([
+      'name' => 'PLAQUEVEHICULE',
+      'type' => Element\text::class,
+      'options'    => [
+        'label' => 'Plaque du véhicule',
+      ],
+    ]);      
+     
+    // Add "MODELEVEHICULE" field
+    $this->add([
+      'name' => 'MODELEVEHICULE',
+      'type' => Element\text::class,
+      'options'    => [
+        'label' => 'Modèle',
+      ],
+    ]);      
+
     // Add the Submit button
     $this->add([
       'name' => 'submit',

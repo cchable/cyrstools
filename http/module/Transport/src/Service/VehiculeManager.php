@@ -13,6 +13,8 @@ namespace Transport\Service;
 
 use Transport\Model\Vehicule;
 use Transport\Model\VehiculeTable;
+use Transport\Model\MarqueTable;
+use Transport\Model\typeVehiculeTable;
 
 
 /**
@@ -26,6 +28,18 @@ class VehiculeManager
    * @var Parling\Model\VehiculeTable
    */
   private $vehiculeTable;
+  
+  /*
+   * marque table manager.
+   * @var Parling\Model\MarqueTable
+   */
+  private $marqueTable;
+  
+  /*
+   * marque table typevehicule.
+   * @var Parling\Model\TypeVehiculeTable
+   */
+  private $typeVehiculeTable;
   
   /*
    * PHP template renderer.
@@ -42,10 +56,12 @@ class VehiculeManager
   /*
    * Constructs the service.
    */
-  public function __construct(VehiculeTable $vehiculeTable, $viewRenderer, $config) 
+  public function __construct(VehiculeTable $vehiculeTable, MarqueTable $marqueTable, TypeVehiculeTable $typeVehiculeTable, $viewRenderer, $config) 
   {
     
-    $this->vehiculeTable = $vehiculeTable;
+    $this->vehiculeTable     = $vehiculeTable;
+    $this->marqueTable       = $marqueTable;
+    $this->typeVehiculeTable = $typeVehiculeTable;
     $this->viewRenderer = $viewRenderer;
     $this->config       = $config;
   }
@@ -108,5 +124,39 @@ class VehiculeManager
     
     return $vehicule !== null;
   }
-}
+  
+  /**
+   * 
+   */
+  public function getMarque() 
+  {
+    
+    $marqueList = [];
+    
+    $marques = $this->marqueTable->fetchAll();
+
+    foreach ($marques as $marque) {
+      $marqueList[$marque->getId()] = $marque->getName();
+    }
+    
+    return $marqueList;
+  }
+  
+  /**
+   * 
+   */
+  public function getTypeVehicule() 
+  {
+    
+    $typeVehiculeList = [];
+    
+    $typesVehicules = $this->typeVehiculeTable->fetchAll();
+
+    foreach ($typesVehicules as $typeVehicule) {
+      $marqueList[$typeVehicule->getId()] = $typeVehicule->getName();
+    }
+    
+    return $typeVehiculeList;
+  }  
+}  
 

@@ -252,7 +252,7 @@ class EphemerideManager
     return $bResult;
   }
 */
-  /*
+  /**
    * 
    */
   public function getAnneesScolaires() 
