@@ -27,7 +27,7 @@ class ViewVehicule implements InputFilterAwareInterface
   private $idTypeVehicule;
   private $idMarque;
   private $nomVehicule;
-  private $place;
+  private $places;
   private $numero;
   private $plaque;
   private $modele;
@@ -67,7 +67,7 @@ class ViewVehicule implements InputFilterAwareInterface
     $this->idTypeVehicule  = !empty($data['IDX_TYPEVEHICULE']) ? $data['IDX_TYPEVEHICULE'] : null;
     $this->idMarque        = !empty($data['IDX_MARQUE'])       ? $data['IDX_MARQUE']        : null;
     $this->nomVehicule     = !empty($data['NOMVEHICULE'])      ? $data['NOMVEHICULE']       : null;
-    $this->place           = !empty($data['PLACESVEHICULES'])  ? $data['PLACESVEHICULES']   : null;
+    $this->places          = !empty($data['PLACESVEHICULE'])   ? $data['PLACESVEHICULE']    : null;
     $this->numero          = !empty($data['NUMEROVEHICULE'])   ? $data['NUMEROVEHICULE']    : null;
     $this->plaque          = !empty($data['PLAQUEVEHICULE'])   ? $data['PLAQUEVEHICULE']    : null;
     $this->modele          = !empty($data['MODELEVEHICULE'])   ? $data['MODELEVEHICULE']    : null;
@@ -85,7 +85,7 @@ class ViewVehicule implements InputFilterAwareInterface
       'IDX_TYPEVEHICULE' => $this->idTypeVehicule,
       'IDX_MARQUE'       => $this->idMarque,
       'NOMVEHICULE'      => $this->nomVehicule,
-      'PLACESVEHICULES'  => $this->place,
+      'PLACESVEHICULE'   => $this->places,
       'NUMEROVEHICULE'   => $this->numero,
       'PLAQUEVEHICULE'   => $this->plaque,
       'MODELEVEHICULE'   => $this->modele,
@@ -104,7 +104,7 @@ class ViewVehicule implements InputFilterAwareInterface
         'IDX_TYPEVEHICULE,' => $this->idTypeVehicule,
         'IDX_MARQUE,'       => $this->idMarque,
         'NOMVEHICULE'       => $this->nomVehicule,
-        'PLACESVEHICULES'   => $this->place,
+        'PLACESVEHICULE'    => $this->place,
         'NUMEROVEHICULE'    => $this->numero,
         'PLAQUEVEHICULE'    => $this->plaque,
         'MODELEVEHICULE'    => $this->modele,
@@ -117,7 +117,7 @@ class ViewVehicule implements InputFilterAwareInterface
         'IDX_TYPEVEHICULE,' => $this->idTypeVehicule,
         'IDX_MARQUE,'       => $this->idMarque,
         'NOMVEHICULE'       => $this->nomVehicule,
-        'PLACESVEHICULES'   => $this->place,
+        'PLACESVEHICULE'    => $this->places,
         'NUMEROVEHICULE'    => $this->numero,
         'PLAQUEVEHICULE'    => $this->plaque,
         'MODELEVEHICULE'    => $this->modele,
@@ -136,13 +136,6 @@ class ViewVehicule implements InputFilterAwareInterface
     return $this->id;
   }
 
-  //
-  public function setId($id) 
-  {
-  
-    $this->id = $id;
-  }
-    
   //idTypeVehicule
   public function getIdTypeVehicule() 
   {
@@ -150,25 +143,11 @@ class ViewVehicule implements InputFilterAwareInterface
     return $this->idTypeVehicule;
   }
 
-  //
-  public function setIdTypeVehicule($id) 
-  {
-    
-    $this->idTypeVehicule = $id;
-  }
-  
   //idMarque
   public function getIdMarque() 
   {
     
     return $this->idMarque;
-  }
-
-  //
-  public function setIdMarque($id) 
-  {
-    
-    $this->idMarque = $id;
   }
   
   //nomVehicule
@@ -178,25 +157,11 @@ class ViewVehicule implements InputFilterAwareInterface
     return $this->nomVehicule;
   }
 
-  //
-  public function setNomVehicule($nomVehicule) 
-  {
-    
-    $this->nomVehicule = $nomVehicule;
-  }
-    
   //place
-  public function getPlace() 
+  public function getPlaces() 
   {
     
-    return $this->place;
-  }
-
-  //
-  public function setPlace($place) 
-  {
-    
-    $this->place = $place;
+    return $this->places;
   }
 
   //numero
@@ -206,13 +171,6 @@ class ViewVehicule implements InputFilterAwareInterface
     return $this->numero;
   }
 
-  //
-  public function setNumero($numero) 
-  {
-    
-    $this->numero = $numero;
-  }
-  
   //plaque
   public function getPlaque() 
   {
@@ -220,53 +178,24 @@ class ViewVehicule implements InputFilterAwareInterface
     return $this->plaque;
   }
 
-  //
-  public function setPlaque($plaque) 
-  {
-    
-    $this->plaque = $plaque;
-  }
-
-  //plaque
+  //modele
   public function getModele() 
   {
     
     return $this->modele;
   }
-
-  //
-  public function setModele($modele) 
-  {
-    
-    $this->modele = $modele;
-  }
   
-  
-//nomTypeVehicule
+  //nomTypeVehicule
   public function getNomTypeVehicule() 
   {
     
     return $this->nomTypeVehicule;
   }
 
-  //
-  public function setNomTypeVehicule($nomTypeVehicule) 
-  {
-    
-    $this->nomTypeVehicule = $nomTypeVehicule;
-  }  
-
-//nomMarque
+  //nomMarque
   public function getNomMarque() 
   {
     
     return $this->nomMarque;
   }
-
-  //
-  public function setNomMarque($nomMarque) 
-  {
-    
-    $this->nomMarque = $nomMarque;
-  }  
 }

@@ -18,8 +18,8 @@ use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 use Transport\Service\VehiculeManager;
 
 use Transport\Model\Vehicule;
-use Transport\Model\ViewVehicule;
 use Transport\Model\VehiculeTable;
+use Transport\Model\ViewVehicule;
 use Transport\Model\ViewVehiculeTable;
 
 use Transport\Form\VehiculeForm;
@@ -151,7 +151,7 @@ class VehiculeController extends AbstractActionController
       'search'         => $search,
       'rowPerPage'     => $rowPerPage,
       'stepRowPerPage' => $this->stepRowPerPage,
-      'vehicules'      => $this->viewVehiculeTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'viewVehicules'  => $this->viewVehiculeTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]); 
   }
   
@@ -184,20 +184,31 @@ class VehiculeController extends AbstractActionController
         $data = $form->getData();
 
         // Add vehicule
-        if ($this->vehiculeManager->addVehicule($data)) {
+        $result = $this->vehiculeManager->addVehicule($data);
+        if ($result instanceof Vehicule) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Vehicule ajouté.');          
+          $this->flashMessenger()->addSuccessMessage("Le véhicule '" . $data['NOMVEHICULE'] . "' a été ajouté");          
+          // Redirect to "index" page
+          return $this->redirect()->toRoute('vehicule', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Le vehicule " . $data['NOMVEHICULE'] . " existe déjà.");
-          return new ViewModel(['form' => $form]); 
+          switch($result){
+
+            case 1:
+              $this->flashMessenger()->addErrorMessage("Le véhicule '" . $data['NOMVEHICULE'] . "' existe déjà");
+              break;
+            
+            default:
+            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde du véhicule '" . $data['NOMVEHICULE'] . "'");
+          }
         }
+      } else {
         
-        // Redirect to "index" page
-        return $this->redirect()->toRoute('vehicule', ['action'=>'index']); 
-      }               
+        // Add a flash message Error
+        $this->flashMessenger()->addMessage("Des données dans le formulaire sont erronées", 'error', 0);
+      }
     } 
     
     return new ViewModel([
@@ -207,7 +218,7 @@ class VehiculeController extends AbstractActionController
     ]);  
   }
   
-/*
+  /**
    * This action displays a page allowing to edit an existing vehicule
    */
   public function editAction()

@@ -153,7 +153,7 @@ class VehiculeManager
     $typesVehicules = $this->typeVehiculeTable->fetchAll();
 
     foreach ($typesVehicules as $typeVehicule) {
-      $marqueList[$typeVehicule->getId()] = $typeVehicule->getName();
+      $typeVehiculeList[$typeVehicule->getId()] = $typeVehicule->getName();
     }
     
     return $typeVehiculeList;

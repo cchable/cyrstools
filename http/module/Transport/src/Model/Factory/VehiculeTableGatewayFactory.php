@@ -7,7 +7,7 @@
  * 
  * @copyright : Copyright (C) 2018-21 H.P.B
  * 
- * @license   : GNU General Public License version2 or later; see LICENSE.txt
+ * @license   : GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Model\Factory;

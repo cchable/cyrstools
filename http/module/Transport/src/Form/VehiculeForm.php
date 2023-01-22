@@ -39,7 +39,7 @@ class VehiculeForm extends Form
 
   /**
    * Table manager
-   * @var Parking\Model\BusTable
+   * @var Parking\Model\vehiculeTable
    */
   private $vehiculeTable;
 
@@ -90,16 +90,6 @@ class VehiculeForm extends Form
    */
   protected function addElements() 
   {
-
-    // Add "IDX_TYPEVEHICULE" field
-    $this->add([
-      'name' => 'IDX_TYPEVEHICULE',
-      'type' => 'select',
-      'options' => [
-        'value_options' => $this->haystackTypeVehicule,
-        'label'         => 'Type de véhicule',
-      ],
-    ]);
     
     // Add "IDX_MARQUE" field
     $this->add([
@@ -111,6 +101,15 @@ class VehiculeForm extends Form
       ],
     ]);
     
+    // Add "IDX_TYPEVEHICULE" field
+    $this->add([
+      'name' => 'IDX_TYPEVEHICULE',
+      'type' => 'select',
+      'options' => [
+        'value_options' => $this->haystackTypeVehicule,
+        'label'         => 'Type de véhicule',
+      ],
+    ]);
     // Add "NOMVEHICULE" field
     $this->add([
       'name' => 'NOMVEHICULE',
@@ -120,9 +119,9 @@ class VehiculeForm extends Form
       ],
     ]);
     
-    // Add "PLACESVEHICULES" field
+    // Add "PLACESVEHICULE" field
     $this->add([
-      'name' => 'PLACESVEHICULES',
+      'name' => 'PLACESVEHICULE',
       'type' => Element\Number::class,
       'options' => [
         'label' => 'Places du véhicule',
@@ -172,8 +171,8 @@ class VehiculeForm extends Form
     
     // Add the CSRF field
     $this->add([
-      'name' => 'csrf',
-      'type' => 'csrf',
+      'name'    => 'csrf',
+      'type'    => 'csrf',
       'options' => [
         'csrf_options' => [
           'timeout' => 600
@@ -182,7 +181,7 @@ class VehiculeForm extends Form
     ]);
   }
   
-  /*
+  /**
    * This method creates input filter (used for form filtering/validation).
    */
   private function addInputFilter() 
