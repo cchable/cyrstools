@@ -21,9 +21,7 @@ use Laminas\Filter\StripTags;
 use Laminas\Filter\ToInt;
 
 use Laminas\Validator\StringLength;
-
-use Transport\Model\Vehicule;
-
+use Laminas\I18n\Validator\IsInt;
 
 /**
  * 
@@ -110,6 +108,7 @@ class VehiculeForm extends Form
         'label'         => 'Type de véhicule',
       ],
     ]);
+    
     // Add "NOMVEHICULE" field
     $this->add([
       'name' => 'NOMVEHICULE',
@@ -187,10 +186,127 @@ class VehiculeForm extends Form
   private function addInputFilter() 
   {
     
-    // Create input filter
+    /**
+     * Create input filter
+     */
     $inputFilter = $this->getInputFilter();
 
-    $vehicule = new Vehicule();
-    $vehicule->fillInputFilter($inputFilter);
+    /**
+     * Add input for NOMVEHICULE field
+     */
+    $inputFilter->add([
+      'name' => 'NOMVEHICULE',
+      'required' => true,
+      'validators' => [
+        [
+          'name' => StringLength::class,
+          'options' => [
+            'encoding' => 'UTF-8',
+            'min'      => 1,
+            'max'      => 30,
+          ],
+        ],
+      ],
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);
+
+    /**
+     * Add input for PLACESVEHICULE field
+     */
+    $inputFilter->add([
+      'name' => 'PLACESVEHICULE',
+      'required' => true,
+      'allow_empty' => false,
+      'validators'  => [
+        [
+          'name' => IsInt::class,
+        ],        
+      ],
+      'filters' => [
+        [
+          'name' => ToInt::class,
+        ],
+      ],
+    ]);
+ 
+    /**
+     * Add input for NUMEROVEHICULE field
+     */
+    $inputFilter->add([
+      'name' => 'NUMEROVEHICULE',
+      'required' => true,
+      'allow_empty' => false,
+      'validators'  => [
+        [
+          'name' => IsInt::class,
+        ],        
+      ],
+      'filters' => [
+        [
+          'name' => ToInt::class,
+        ],
+      ],
+    ]);
+ 
+    /**
+     * Add input for PLAQUEVEHICULE field
+     */
+    $inputFilter->add([
+      'name'        => 'PLAQUEVEHICULE',
+      'required'    => true,
+      'allow_empty' => false,
+      'validators'  => [
+        [
+          'name'    => StringLength::class,
+          'options' => [
+            'encoding' => 'UTF-8',
+            'min'      => 1,
+            'max'      => 30,
+          ],
+        ],        
+      ],
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);
+ 
+    /**
+     * Add input for MODELEVEHICULE field
+     */
+    $inputFilter->add([
+      'name'        => 'MODELEVEHICULE',
+      'required'    => true,
+      'allow_empty' => false,
+      'validators'  => [
+        [
+          'name'    => StringLength::class,
+          'options' => [
+            'encoding' => 'UTF-8',
+            'min'      => 1,
+            'max'      => 30,
+          ],
+        ],
+      ],
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);
   }  
 }

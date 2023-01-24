@@ -13,18 +13,9 @@ namespace Transport\Model;
 
 use DomainException;
 
-use Laminas\Filter\StringTrim;
-use Laminas\Filter\StripTags;
-use Laminas\Filter\ToInt;
-
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
-
-use Laminas\Validator\StringLength;
-use Laminas\Validator\InArray;
-use Laminas\I18n\Validator\IsInt;
-use Laminas\I18n\Validator\DateTime;
 
 
 /**
@@ -46,13 +37,17 @@ class Vehicule implements InputFilterAwareInterface
 
   public function setInputFilter(InputFilterInterface $inputFilter)
   {
+    
     throw new DomainException(sprintf(
       '%s does not allow injection of an alternate input filter',
       __CLASS__
     ));
   }
 
-  //
+  /**
+   * 
+   * @return InputFilter
+   */
   public function getInputFilter()
   {
 		
@@ -61,7 +56,8 @@ class Vehicule implements InputFilterAwareInterface
     }
 
     $inputFilter = new InputFilter();
-    $this->inputFilter = fillInputFilter($inputFilter);
+    
+    return $this->inputFilter;
   }
 
   /**
@@ -102,122 +98,9 @@ class Vehicule implements InputFilterAwareInterface
     return $result;
   }    
   
-  //
-  public function fillInputFilter(InputFilterInterface $inputFilter)
-  {
-
-    //
-    $inputFilter->add([
-      'name' => 'NOMVEHICULE',
-      'required' => true,
-      'validators' => [
-        [
-          'name' => StringLength::class,
-          'options' => [
-            'encoding' => 'UTF-8',
-            'min'      => 1,
-            'max'      => 30,
-          ],
-        ],
-      ],
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
-
-    //
-    $inputFilter->add([
-      'name' => 'PLACESVEHICULE',
-      'required' => true,
-      'allow_empty' => false,
-      'validators'  => [
-        [
-          'name' => IsInt::class,
-        ],        
-      ],
-      'filters' => [
-        [
-          'name' => ToInt::class,
-        ],
-      ],
-    ]);
- 
-    //
-    $inputFilter->add([
-      'name' => 'NUMEROVEHICULE',
-      'required' => true,
-      'allow_empty' => false,
-      'validators'  => [
-        [
-          'name' => IsInt::class,
-        ],        
-      ],
-      'filters' => [
-        [
-          'name' => ToInt::class,
-        ],
-      ],
-    ]);
- 
-     //
-    $inputFilter->add([
-      'name'        => 'PLAQUEVEHICULE',
-      'required'    => true,
-      'allow_empty' => false,
-      'validators'  => [
-        [
-          'name'    => StringLength::class,
-          'options' => [
-            'encoding' => 'UTF-8',
-            'min'      => 1,
-            'max'      => 30,
-          ],
-        ],        
-      ],
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
- 
-    //
-    $inputFilter->add([
-      'name'        => 'MODELEVEHICULE',
-      'required'    => true,
-      'allow_empty' => false,
-      'validators'  => [
-        [
-          'name'    => StringLength::class,
-          'options' => [
-            'encoding' => 'UTF-8',
-            'min'      => 1,
-            'max'      => 30,
-          ],
-        ],
-      ],
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
-    
-    $this->inputFilter = $inputFilter;
-    return $this->inputFilter;
-  }
-
+  /**
+   * Setter
+   */
   //IDX_VEHICULE
   public function getId() 
   {

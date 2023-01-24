@@ -12,11 +12,11 @@
 
 $title = "Modification d'une année scolaire";
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('anneescolaire');
+$this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'                  => $this->url('home'),
-  'Transport\Annee Scolaire' => $this->url('anneescolaire'),
-  'Modification'             => $this->url('anneescolaire', ['action'=>'edit']),
+  'Transport\Année Scolaire' => $this->url($this->module),
+  'Modification'             => $this->url($this->module, ['action'=>'edit']),
 ]);
 
 $form->get('ANNEEANNEESCOLAIRE')->setAttributes([

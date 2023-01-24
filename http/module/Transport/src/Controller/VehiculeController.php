@@ -237,7 +237,7 @@ class VehiculeController extends AbstractActionController
       return;
     }
     
-    // Create ephemeride form
+    // Create vehicule form
     $form = new VehiculeForm('update');
     
      // Check if user has submitted the form
@@ -308,4 +308,29 @@ class VehiculeController extends AbstractActionController
     // Redirect to "index" page
     return $this->redirect()->toRoute('vehicule', ['action'=>'index']);      
   }
+  
+/**
+   * This action displays a page of an existing vehicule
+   */
+  public function infoAction()
+  {
+    
+		$id = (int) $this->params()->fromRoute('id', -1);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    if ($id<1) {
+      $this->getResponse()->setStatusCode(404);
+      return;
+    }
+    
+    $vehicule = $this->viewVehiculeTable->getVehicule($id);
+
+    if ($vehicule == null) {
+      $this->getResponse()->setStatusCode(404);
+      return;
+    }
+    
+    return new ViewModel([
+      'module'   => 'vehicule',
+      'vehicule' => $vehicule,
+    ]);  
+  }  
 }

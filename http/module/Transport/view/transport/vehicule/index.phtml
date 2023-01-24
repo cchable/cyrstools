@@ -44,62 +44,63 @@ $formSearch->prepare();
   </h2>
   
   <div class="row my-4">
-  <div class="col-sm" aria-label="add item">
-    <a class="btn btn-light btn-outline-primary" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'add']); ?>">
-      <span class="far fa-plus-square" aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="col-sm" aria-label="search item">
-    <?= $this->form()->openTag($this->formSearch) . PHP_EOL; ?>
-    <div class="row">
-      <div class="col">
-        <?= $this->formElement($this->formSearch->get('search')) ?>
-        <?= $this->formElement($this->formSearch->get('csrf')) . PHP_EOL; ?>
-      </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-light btn-outline-dark"><span class="fas fa-search"></span></button>
-        <a class="btn btn-light btn-outline-dark" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'index'], ['query' => ['search' => '']]); ?>">
-          <span class="fas fa-recycle" aria-hidden="true"></span>
-        </a>
-      </div>
+    <div class="col-sm" aria-label="add item">
+      <a class="btn btn-light btn-outline-primary" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'add']); ?>">
+        <span class="far fa-plus-square" aria-hidden="true"></span>
+      </a>
     </div>
-    <?= $this->form()->closeTag() ?>  
+    <div class="col-sm" aria-label="search item">
+      <?= $this->form()->openTag($this->formSearch) . PHP_EOL; ?>
+      <div class="row">
+        <div class="col">
+          <?= $this->formElement($this->formSearch->get('search')) ?>
+          <?= $this->formElement($this->formSearch->get('csrf')) . PHP_EOL; ?>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-light btn-outline-dark"><span class="fas fa-search"></span></button>
+          <a class="btn btn-light btn-outline-dark" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'index'], ['query' => ['search' => '']]); ?>">
+            <span class="fas fa-recycle" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+      <?= $this->form()->closeTag() ?>  
+    </div>
   </div>
+  <?= $paginator; ?>
+  <table class="table align-middle table-striped table-hover table-sm">
+    <thead class="table-light">
+      <tr>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Nom</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Place</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Marque</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Modèle</th>
+        <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($this->viewVehicules as $vehicule) : ?>
+      <tr>
+        <td><?= $this->escapeHtml($vehicule->getNomVehicule()) ?></td>
+        <td><?= $this->escapeHtml($vehicule->getPlaces()) ?></td>
+        <td><?= $this->escapeHtml($vehicule->getNomMarque()) ?></td>
+        <td><?= $this->escapeHtml($vehicule->getModele()) ?></td>
+        <td>
+          <a class="btn btn-light btn-outline-info" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'info', 'id'=>$vehicule->getId()]); ?>">
+            <span class="fa fa-info"></span>
+          </a>
+          <a class="btn btn-light btn-outline-success" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'edit', 'id'=>$vehicule->getId()]); ?>">
+            <span class="far fa-edit" aria-hidden="true"></span>
+          </a>
+          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'delete', 'id'=>$vehicule->getId()]); ?>">
+            <span class="far fa-trash-alt"></span>
+          </a>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table>
+  <?= $paginator; ?>
 </div>
-<?= $paginator; ?>
-<table class="table align-middle table-striped table-hover table-sm">
-  <thead class="table-light">
-    <tr>
-      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Nom</th>
-      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Place</th>
-      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Marque</th>
-      <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Modèle</th>
-      <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-<?php foreach ($this->viewVehicules as $vehicule) : ?>
-    <tr>
-      <td><?= $this->escapeHtml($vehicule->getNomVehicule()) ?></td>
-      <td><?= $this->escapeHtml($vehicule->getPlaces()) ?></td>
-      <td><?= $this->escapeHtml($vehicule->getNomMarque()) ?></td>
-      <td><?= $this->escapeHtml($vehicule->getModele()) ?></td>
-      <td>
-        <a class="btn btn-light btn-outline-info" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'info', 'id'=>$vehicule->getId()]); ?>">
-          <span class="fa fa-info"></span>
-        </a>
-        <a class="btn btn-light btn-outline-success" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'edit', 'id'=>$vehicule->getId()]); ?>">
-          <span class="far fa-edit" aria-hidden="true"></span>
-        </a>
-        <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'delete', 'id'=>$vehicule->getId()]); ?>">
-          <span class="far fa-trash-alt"></span>
-        </a>
-      </td>
-    </tr>
-<?php endforeach; ?>
-  </tbody>
-</table>
-<?= $paginator; ?>
 <script type="text/javascript">
   function submitformPaginatorNbrPages(value)
   {

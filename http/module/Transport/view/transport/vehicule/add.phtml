@@ -14,8 +14,7 @@ $this->headTitle($title);
 $this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
-  'Transport\Dashboard' => $this->url('dashboard'), 
-  'Véhicule'            => $this->url($this->module), 
+  'Transport\Véhicule'  => $this->url($this->module), 
   'Ajout'               => $this->url($this->module, ['action'=>'add']),
 ]);
 

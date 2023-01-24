@@ -1,29 +1,24 @@
 <?php
 /**
- * @package   : module/Transport/src/Model/AnneeScolaire.php
- *
- * @purpose   :
+ * This is the Vehicule class for AnneeScolaire service.
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/src/Model/AnneeScolaire.php
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 namespace Transport\Model;
 
 use DomainException;
 
-use Laminas\Filter\ToInt;
-
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
-use Laminas\I18n\Validator\IsInt;
 
-
-/*
+/**
  * 
  */
 class AnneeScolaire implements InputFilterAwareInterface
@@ -43,7 +38,10 @@ class AnneeScolaire implements InputFilterAwareInterface
     ));
   }
 
-  //
+  /**
+   * 
+   * @return InputFilter
+   */
   public function getInputFilter()
   {
 		
@@ -52,9 +50,10 @@ class AnneeScolaire implements InputFilterAwareInterface
     }
 
     $inputFilter = new InputFilter();
-    $this->inputFilter = fillInputFilter($inputFilter);
+    
+    return $this->inputFilter;
   }
-
+  
   //
   public function exchangeArray(array $data, bool $bIdx=true)
   {
@@ -83,35 +82,6 @@ class AnneeScolaire implements InputFilterAwareInterface
     }
   }
   
-  //
-  public function fillInputFilter(InputFilterInterface $inputFilter)
-  {
-
-    // ANNEEANNEESCOLAIRE
-    $inputFilter->add([
-      'name'           => 'ANNEEANNEESCOLAIRE',
-      'allow_empty'    => false,
-      'required'       => true,
-      'description'    => 'Années scolaire',
-      'fallback_value' => 1,
-
-      'validators'     => [
-        [
-          'name' => IsInt::class,
-        ],
-      ],
-      
-      'filters'        => [
-        [
-          'name' => ToInt::class,
-        ],
-      ],
-    ]);
-    
-    $this->inputFilter = $inputFilter;
-    return $this->inputFilter;
-  }
-
   // Setter
   // id
   public function getId() 

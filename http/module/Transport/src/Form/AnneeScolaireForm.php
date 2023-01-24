@@ -1,6 +1,6 @@
 <?php
 /**
- * Form for the encoding of a AnneeScolaire
+ * Form for the encoding AnneeScolaire
  * 
  * @package   module/Transport/src/Form/AnneeScolaireForm.php
  * @version   1.0
@@ -23,24 +23,23 @@ use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
 use Laminas\I18n\Validator\IsInt;
+use Laminas\Validator\GreaterThan;
 
-use Transport\Model\AnneeScolaire;
 
-
-/*
+/**
  * 
  */
 class AnneeScolaireForm extends Form
 {
 
-  /*
-   * Scenario ('create' or 'update').
+  /**
+   * Scenario ('create' or 'update' or 'info').
    * @var string 
    */
   private $scenario;
 
 
-  /*
+  /**
    * Constructor
    */
   public function __construct($scenario = 'create')
@@ -59,7 +58,7 @@ class AnneeScolaireForm extends Form
     $this->addInputFilter();
   }
   
-  /*
+  /**
    * This method adds elements to form (input fields and submit button).
    */
   protected function addElements() 
@@ -73,8 +72,8 @@ class AnneeScolaireForm extends Form
         'label' => 'Année scolaire',
       ],
       'attributes' => [
-        'min'   => '2021',
-        'step'  => '1', // default step interval is 1
+        'min'   => 2021,
+        'step'  => 1, // default step interval is 1
       ],
     ]);
 
@@ -100,16 +99,42 @@ class AnneeScolaireForm extends Form
     ]);
   }
   
-  /*
-   * This method creates input filter (used for form filtering/validation).
+  /**
+   * This method createsinput filter (used for form filtering/validation).
    */
   private function addInputFilter() 
   {
     
-    // Create input filter
+    /**
+     * Create input filter
+     */
     $inputFilter = $this->getInputFilter();
 
-    $anneeScolaire = new AnneeScolaire();
-    $anneeScolaire->fillInputFilter($inputFilter);
+    /**
+     * Add input for ANNEEANNEESCOLAIRE field
+     */
+    $inputFilter->add([
+      'name'           => 'ANNEEANNEESCOLAIRE',
+      'allow_empty'    => false,
+      'required'       => true,
+      'description'    => 'Années scolaire',
+      'fallback_value' => 1,
+
+      'filters'        => [
+        [
+          'name'    => ToInt::class,
+        ],
+      ],
+      
+      'validators'     => [
+        [
+          'name'    => IsInt::class,
+        ],
+        [
+          'name'    => GreaterThan::class,
+          'options' => ['min' => 2021],
+        ],
+      ],
+    ]);
   }
 }
