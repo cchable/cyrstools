@@ -14,7 +14,8 @@ $this->headTitle($title);
 $this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
-  'Transport\Véhicules' => $this->url($this->module),  
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Véhicules'           => $this->url($this->module),
 ]);
 
 $paginator = $this->paginationControl(
@@ -67,13 +68,14 @@ $formSearch->prepare();
     </div>
   </div>
   <?= $paginator; ?>
-  <table class="table align-middle table-striped table-hover table-sm">
+  <table class="table align-middle table-striped table-hover table-sm table-borderless">
+    <caption><?= $this->escapeHtml($title) ?></caption>
     <thead class="table-light">
       <tr>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Nom</th>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Place</th>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Marque</th>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Modèle</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Plaque</th>
         <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
       </tr>
     </thead>
@@ -83,12 +85,12 @@ $formSearch->prepare();
         <td><?= $this->escapeHtml($vehicule->getNomVehicule()) ?></td>
         <td><?= $this->escapeHtml($vehicule->getPlaces()) ?></td>
         <td><?= $this->escapeHtml($vehicule->getNomMarque()) ?></td>
-        <td><?= $this->escapeHtml($vehicule->getModele()) ?></td>
+        <td><?= $this->escapeHtml($vehicule->getPlaque()) ?></td>
         <td>
           <a class="btn btn-light btn-outline-info" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'info', 'id'=>$vehicule->getId()]); ?>">
             <span class="fa fa-info"></span>
           </a>
-          <a class="btn btn-light btn-outline-success" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'edit', 'id'=>$vehicule->getId()]); ?>">
+          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'edit', 'id'=>$vehicule->getId()]); ?>">
             <span class="far fa-edit" aria-hidden="true"></span>
           </a>
           <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'delete', 'id'=>$vehicule->getId()]); ?>">

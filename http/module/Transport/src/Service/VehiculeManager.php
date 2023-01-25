@@ -74,7 +74,7 @@ class VehiculeManager
     
     // Create new Vehicule entity.
     $vehicule = new Vehicule();
-    $vehicule->exchangeArray($data);
+    $vehicule->exchangeArray($data, false);
     
     //
     if(!$this->vehiculeTable->findOneByRecord($vehicule)) {
@@ -91,15 +91,13 @@ class VehiculeManager
   public function updateVehicule($vehicule, $data) 
   {
     
-    // Do not allow to change anneescolaire if another vehicule with such value already exits
-    if($vehicule->getNom()!=$data['NOMVEHICULE'] && $this->checkVehiculeExists($data)) {
+    // Do not allow to change vehicule if another vehicule with such value already exits
+    if($this->checkVehiculeExists($vehicule, $data)) {
       
       return false;
     }
     
-    $vehicule->setNom($data['NOMVEHICULE']);
-
-    // Apply changes to database.
+    $vehicule->exchangeArray($data, false);
     $this->vehiculeTable->saveVehicule($vehicule);
     
     return $vehicule;
@@ -117,13 +115,36 @@ class VehiculeManager
   /*
    * Checks whether an active vehicule with given value already exists in the database.     
    */
-  public function checkVehiculeExists(array $data) {
+  public function checkVehiculeExists(Vehicule $vehicule, array $newData) {
 
-    $nom = $data['NOMVEHICULE'];
-    $vehicule = $this->vehiculeTable->findOneByNom($nom);
-    
-    return $vehicule !== null;
-  }
+    if(   
+      $newData['IDX_TYPEVEHICULE'] != $vehicule->getIdTypeVehicule() 
+      ||
+      $newData['IDX_MARQUE']       != $vehicule->getIdMarque()
+      ||
+      $newData['NOMVEHICULE']      != $vehicule->getNom()
+      ||
+      $newData['PLACESVEHICULE']   != $vehicule->getPlaces()
+      ||
+      $newData['NUMEROVEHICULE']   != $vehicule->getNumero()
+      ||
+      $newData['PLAQUEVEHICULE']   != $vehicule->getPlaque()
+      ||
+      $newData['MODELEVEHICULE']   != $vehicule->getModele()
+    ) {
+      $search['IDX_TYPEVEHICULE'] = $newData['IDX_TYPEVEHICULE'];
+      $search['IDX_MARQUE']       = $newData['IDX_MARQUE'];
+      $search['NOMVEHICULE']      = $newData['NOMVEHICULE'];
+      $search['PLACESVEHICULE']   = $newData['PLACESVEHICULE'];
+      $search['NUMEROVEHICULE']   = $newData['NUMEROVEHICULE'];
+      $search['PLAQUEVEHICULE']   = $newData['PLAQUEVEHICULE'];
+      $search['MODELEVEHICULE']   = $newData['MODELEVEHICULE'];
+        
+      return ($this->vehiculeTable->findOneByRecord($search));
+    }   
+      
+     return false;
+  }  
   
   /**
    * 

@@ -151,7 +151,7 @@ class VehiculeTable
   public function saveVehicule(Vehicule $vehicule)
   {
 
-    $data = $vehicule->getArrayCopy();
+    $data = $vehicule->getArrayCopy(false);
     $id = (int) $vehicule->getId();
 
     if ($id === 0) {
@@ -205,12 +205,11 @@ class VehiculeTable
   }
   
   // 
-  public function findOneByRecord(Vehicule $record)
+  public function findOneByRecord(array $data)
   {
     
-    $recordArray = $record->getArrayCopy();
-    unset($recordArray["IDX_VEHICULE"]);
-    $vehicule = $this->findOneBy($recordArray);
+    unset($data["IDX_VEHICULE"]);
+    $vehicule = $this->findOneBy($data);
     
     return $vehicule;
   }

@@ -62,17 +62,17 @@ class ViewVehicule implements InputFilterAwareInterface
   {
  
     if ($bIdx) {
-      $this->id            = !empty($data['IDX_VEHICULE'])     ? $data['IDX_VEHICULE']      : null;
+      $this->id            = !empty($data['IDX_VEHICULE'])     ? $data['IDX_VEHICULE']     : null;
     }
     $this->idTypeVehicule  = !empty($data['IDX_TYPEVEHICULE']) ? $data['IDX_TYPEVEHICULE'] : null;
-    $this->idMarque        = !empty($data['IDX_MARQUE'])       ? $data['IDX_MARQUE']        : null;
-    $this->nomVehicule     = !empty($data['NOMVEHICULE'])      ? $data['NOMVEHICULE']       : null;
-    $this->places          = !empty($data['PLACESVEHICULE'])   ? $data['PLACESVEHICULE']    : null;
-    $this->numero          = !empty($data['NUMEROVEHICULE'])   ? $data['NUMEROVEHICULE']    : null;
-    $this->plaque          = !empty($data['PLAQUEVEHICULE'])   ? $data['PLAQUEVEHICULE']    : null;
-    $this->modele          = !empty($data['MODELEVEHICULE'])   ? $data['MODELEVEHICULE']    : null;
-    $this->nomTypeVehicule = !empty($data['NOMTYPEVEHICULE'])  ? $data['NOMTYPEVEHICULE']   : null;
-    $this->nomMarque       = !empty($data['NOMMARQUE'])        ? $data['NOMMARQUE']         : null;
+    $this->idMarque        = !empty($data['IDX_MARQUE'])       ? $data['IDX_MARQUE']       : null;
+    $this->nomVehicule     = !empty($data['NOMVEHICULE'])      ? $data['NOMVEHICULE']      : null;
+    $this->places          = !empty($data['PLACESVEHICULE'])   ? $data['PLACESVEHICULE']   : null;
+    $this->numero          = !empty($data['NUMEROVEHICULE'])   ? $data['NUMEROVEHICULE']   : null;
+    $this->plaque          = !empty($data['PLAQUEVEHICULE'])   ? $data['PLAQUEVEHICULE']   : null;
+    $this->modele          = !empty($data['MODELEVEHICULE'])   ? $data['MODELEVEHICULE']   : null;
+    $this->nomTypeVehicule = !empty($data['NOMTYPEVEHICULE'])  ? $data['NOMTYPEVEHICULE']  : null;
+    $this->nomMarque       = !empty($data['NOMMARQUE'])        ? $data['NOMMARQUE']        : null;
   }
 
   /**

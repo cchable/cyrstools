@@ -14,7 +14,8 @@ $this->headTitle($title);
 $this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
-  'Transport\Véhicules' => $this->url($this->module),  
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Véhicule'            => $this->url($this->module), 
   'Info'                => $this->url($this->module, ['action'=>'info']),
 ]);
 ?>
@@ -23,23 +24,42 @@ $this->pageBreadcrumbs()->setItems([
   <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#school-bus"/></svg>
   <?= $this->escapeHtml($title) ?>
   </h2>
-
-  <table class="table align-middle table-striped table-hover table-sm">
-    <thead class="table-light">
-      <tr>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Nom</th>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Place</th>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Marque</th>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Modèle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><?= $this->escapeHtml($vehicule->getNomVehicule()) ?></td>
-        <td><?= $this->escapeHtml($vehicule->getPlaces()) ?></td>
-        <td><?= $this->escapeHtml($vehicule->getNomMarque()) ?></td>
-        <td><?= $this->escapeHtml($vehicule->getModele()) ?></td>
-      </tr>
-    </tbody>
-  </table>
+  
+  <div class="row justify-content-left">
+    <div class="col-6">
+      <table class="table align-middle table-striped table-hover table-borderless">
+        <caption><?= $this->escapeHtml($title) ?></caption>
+        <tbody>
+          <tr>
+            <th scope="row" class="justify-content-left">Nom</th>
+            <td><?= $this->escapeHtml($vehicule->getNomVehicule()) ?></td>
+          </tr>
+          <tr>
+            <th scope="row">Place</th>
+            <td><?= $this->escapeHtml($vehicule->getPlaces()) ?></td>
+          </tr>
+          <tr>
+            <th scope="row">Numéro</th>
+            <td><?= $this->escapeHtml($vehicule->getNumero()) ?></td>
+          </tr>
+          <tr>
+            <th scope="row">Plaque</th>
+            <td><?= $this->escapeHtml($vehicule->getPlaque()) ?></td>
+          </tr>
+          <tr>
+            <th scope="row">Marque</th>
+            <td><?= $this->escapeHtml($vehicule->getNomMarque()) ?></td>
+          </tr>
+          <tr>
+            <th scope="row">Modèle</th>
+            <td><?= $this->escapeHtml($vehicule->getModele()) ?></td>
+          </tr>
+          <tr>
+            <th scope="row">Type</th>
+            <td><?= $this->escapeHtml($vehicule->getNomTypeVehicule()) ?></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

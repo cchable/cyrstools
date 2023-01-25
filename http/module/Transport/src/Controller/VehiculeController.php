@@ -237,8 +237,14 @@ class VehiculeController extends AbstractActionController
       return;
     }
     
+    // Get the list of all available brand (sorted)
+    $marques = $this->vehiculeManager->getMarque();
+    
+    // Get the list of all available type of vehicle (sorted)
+    $typeVehicules = $this->vehiculeManager->getTypeVehicule();
+    
     // Create vehicule form
-    $form = new VehiculeForm('update');
+    $form = new VehiculeForm($marques, $typeVehicules, 'update');
     
      // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -273,7 +279,9 @@ class VehiculeController extends AbstractActionController
     }
 
     return new ViewModel([
-      'form' => $form,
+      'form'          => $form,
+      'marques'       => $marques,
+      'typeVehicules' => $typeVehicules,
     ]); 
   }
   
@@ -309,7 +317,7 @@ class VehiculeController extends AbstractActionController
     return $this->redirect()->toRoute('vehicule', ['action'=>'index']);      
   }
   
-/**
+  /**
    * This action displays a page of an existing vehicule
    */
   public function infoAction()

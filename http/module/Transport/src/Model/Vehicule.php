@@ -27,7 +27,7 @@ class Vehicule implements InputFilterAwareInterface
   private $id;
   private $idTypeVehicule;
   private $idMarque;
-  private $nomVehicule;
+  private $nom;
   private $places;
   private $numero;
   private $plaque;
@@ -71,11 +71,11 @@ class Vehicule implements InputFilterAwareInterface
     }
     $this->idTypeVehicule  = !empty($data['IDX_TYPEVEHICULE']) ? $data['IDX_TYPEVEHICULE'] : null;
     $this->idMarque        = !empty($data['IDX_MARQUE'])       ? $data['IDX_MARQUE']       : null;
-    $this->nomVehicule     = !empty($data['NOMVEHICULE'])      ? $data['NOMVEHICULE']      : null;
+    $this->nom             = !empty($data['NOMVEHICULE'])      ? $data['NOMVEHICULE']      : null;
     $this->places          = !empty($data['PLACESVEHICULE'])   ? $data['PLACESVEHICULE']   : null;
     $this->numero          = !empty($data['NUMEROVEHICULE'])   ? $data['NUMEROVEHICULE']   : null;
     $this->plaque          = !empty($data['PLAQUEVEHICULE'])   ? $data['PLAQUEVEHICULE']   : null;
-    $this->nomMarque       = !empty($data['NOMMARQUE'])        ? $data['NOMMARQUE']        : null;
+    $this->modele          = !empty($data['MODELEVEHICULE'])   ? $data['MODELEVEHICULE']   : null;
   }
   
   //
@@ -85,7 +85,7 @@ class Vehicule implements InputFilterAwareInterface
     $result = [
       'IDX_TYPEVEHICULE' => $this->idTypeVehicule,
       'IDX_MARQUE'       => $this->idMarque,
-      'NOMVEHICULE'      => $this->nomVehicule,
+      'NOMVEHICULE'      => $this->nom,
       'PLACESVEHICULE'   => $this->places,
       'NUMEROVEHICULE'   => $this->numero,
       'PLAQUEVEHICULE'   => $this->plaque,
@@ -113,6 +113,34 @@ class Vehicule implements InputFilterAwareInterface
   {
   
     $this->id = $id;
+  }
+  
+  //IDX_TYPEVEHICULE
+  public function getIdTypeVehicule() 
+  {
+
+    return (int) $this->idTypeVehicule;
+  }
+
+  //
+  public function setIdTypeVehicule($idTypeVehicule) 
+  {
+  
+    $this->idTypeVehicule = $idTypeVehicule;
+  }
+  
+  //IDX_MARQUE
+  public function getIdMarque() 
+  {
+
+    return (int) $this->idMarque;
+  }
+
+  //
+  public function setIdMarque($idMarque) 
+  {
+  
+    $this->idMarque = $idMarque;
   }
    
   //MODELEVEHICULE
