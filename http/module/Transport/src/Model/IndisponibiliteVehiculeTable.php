@@ -1,21 +1,20 @@
 <?php
 /**
- * This is the VehiculeTable class for VehiculeTable service.
+ * This is the IndisponibiliteVehiculeTable class for IndisponibiliteVehiculeTable service.
  * 
- * @package   module/Transport/src/Model/VehiculeTable.php
+ * @package   module/Transport/src/Model/IndisponibiliteVehiculeTable.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
- 
+
 namespace Transport\Model;
 
 use RuntimeException;
 
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGatewayInterface;
-use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
 use Laminas\Paginator\Adapter\DbSelect;
@@ -27,7 +26,7 @@ use Hpb\Db\Sql\FBSelect;
 /*
  * 
  */
-class VehiculeTable
+class IndisponibiliteVehiculeTable
 {
   
   private $tableGateway;
@@ -49,7 +48,7 @@ class VehiculeTable
 
     return $this->tableGateway->select(function (\Laminas\Db\Sql\Select $select)
     {
-      $select->order('NOMVEHICULE ASC');
+      $select->order('STARTDATEINDISPONIBILITE ASC');
     }); 
   }
    
@@ -58,11 +57,11 @@ class VehiculeTable
   {
         
     $fbSelect = new FBSelect($this->tableGateway->table);
-    $fbSelect->order('NOMVEHICULE ASC');
+    $fbSelect->order('STARTDATEINDISPONIBILITE ASC');
     if ($search) {
         
       $where = new Where();
-      $fbSelect->where($where->like('NOMVEHICULE', "%$search%"));
+      $fbSelect->where($where->like('STARTDATEINDISPONIBILITE', "%$search%"));
     }
     
     /*
@@ -111,11 +110,11 @@ class VehiculeTable
   
     // Create a new Select object for the table:
     $fbSelect = new FBSelect($this->tableGateway->getTable());
-    $fbSelect->order('NOMVEHICULE ASC');
+    $fbSelect->order('STARTDATEINDISPONIBILITE ASC');
 
     // Create a new result set based on the Vehicule entity:
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new Vehicule());
+    $resultSetPrototype->setArrayObjectPrototype(new IndisponibiliteVehicule());
 
     // Create a new pagination adapter object:
     $paginatorAdapter = new DbSelect(
@@ -132,11 +131,11 @@ class VehiculeTable
   }
   
   //
-  public function getVehicule($id)
+  public function getIndisponibiliteVehicule($id)
   {
     
     $id = (int) $id;
-    $rowset = $this->tableGateway->select(['IDX_VEHICULE' => $id]);
+    $rowset = $this->tableGateway->select(['IDX_INDISPONIBILITEVEHICULE' => $id]);
     $row = $rowset->current();
     if (! $row) {
       throw new RuntimeException(sprintf(
@@ -148,34 +147,35 @@ class VehiculeTable
   }
 
   //
-  public function saveVehicule(Vehicule $vehicule)
+  public function saveIndisponibiliteVehicule(IndisponibiliteVehicule $indisponibiliteVehicule)
   {
 
-    $data = $vehicule->getArrayCopy(false);
-    $id = (int) $vehicule->getId();
+    $data = $indisponibiliteVehicule->getArrayCopy(false);
+    $id = (int) $indisponibiliteVehicule->getId();
 
     if ($id === 0) {
-      $result = $this->tableGateway->insert($data);
-      $vehicule = $this->findOneByRecord($vehicule);
-      return $vehicule;
+      $this->tableGateway->insert($data);
+      $indisponibiliteVehicule = $this->findOneByDateDebut($data);
+      return $indisponibiliteVehicule;
     }
     
     try {
-      $this->getVehicule($id);
+      $this->getIndisponibiliteVehicule($id);
     } catch (RuntimeException $e) {
       throw new RuntimeException(sprintf(
         'Cannot update vehicule with identifier %d; does not exist',
         $id
       ));
     }
-    $this->tableGateway->update($data, ['IDX_VEHICULE' => $id]);
+    
+    $this->tableGateway->update($data, ['IDX_INDISPONIBILITEVEHICULE' => $id]);
   }
 
   //
-  public function deleteVehicule($id)
+  public function deleteIndisponibiliteVehicule($id)
   {
     
-    $this->tableGateway->delete(['IDX_VEHICULE' => (int) $id]);
+    $this->tableGateway->delete(['IDX_INDISPONIBILITEVEHICULE' => (int) $id]);
   }
   
   //
@@ -183,43 +183,56 @@ class VehiculeTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $vehicule = $rowset->current();
+    $indisponibiliteVehicule = $rowset->current();
     
-    return $vehicule;
+    return $indisponibiliteVehicule;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $vehicule = $this->findOneBy(['IDX_VEHICULE' => (int) $id]);
-    return $vehicule;
+    $indisponibiliteVehicule = $this->findOneBy(['IDX_INDISPONIBILITEVEHICULE' => (int) $id]);
+    return $indisponibiliteVehicule;
   }
   
   //
-  public function findOneByNom($nom)
+  public function findOneByDateDebut($data)
   {
     
-    $vehicule = $this->findOneBy(['NOMVEHICULE' => $nom]);
-    return $vehicule;
+    $indisponibiliteVehicule = $this->findOneBy(['STARTDATEINDISPONIBILITE' => $data['STARTDATEINDISPONIBILITE']]);
+    return $indisponibiliteVehicule;
   }
   
   // 
-  public function findOneByRecord(array $data)
+  public function findOneByRecordOld(array $record)
   {
     
-    unset($data["IDX_VEHICULE"]);
-    $vehicule = $this->findOneBy($data);
+    $indisponibiliteVehicule = $this->findOneBy($record);
     
-    return $vehicule;
+    return $indisponibiliteVehicule;
   }
   
-  /**
-   * Calcul le nombre d'enregistrement dans la table
-   *
-   * @return int $count
-   * @access public
-   */
+  // 
+  public function findOneByRecord($record, bool $bWithIDX = false)
+  {
+    if(is_array($record)) {
+      if(!$bWithIDX) {
+        unset($record['IDX_INDISPONIBILITEVEHICULE']);
+      }
+      $indisponibiliteVehicule = $this->findOneBy($record);
+    } else { 
+      if(is_object($record)) {
+        $recordArray = $record->getArrayCopy($bWithIDX);
+        $indisponibiliteVehicule = $this->findOneBy($recordArray);
+      } else {
+        $indisponibiliteVehicule = false;
+      }
+    }
+    
+    return $indisponibiliteVehicule;
+  }
+  
   public function getNumberOfRows() 
   {
     
@@ -235,9 +248,7 @@ class VehiculeTable
     
     $selectString = $sql->buildSqlString($select);
     $rowset = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-    $row = $rowset->current();
-    $count = $row['COUNT'];
     
-    return $count;
-  }  
+    return $rowset->current();
+  }
 }
