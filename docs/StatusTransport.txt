@@ -42,21 +42,26 @@ Fait
     Edit    : OK    (20230125)
     info    : OK    (20230125)
 
-
+  IndisponibiliteVéhicule
+    Liste   : OK    (20230125)
+    Add     : OK    (20230125)
+    Delete  : OK    (20230127)
+    Edit    : OK    (20230127) 
 
 
 __________________________________________________________________________________________________________________
 En cours
 
-  IndisponibiliteVéhicule
-    Liste   : OK    (20260125)
-    Add     : OK    (20260125)
+  Etapes
+    Liste   : 
+    Add     : 
     Delete  : 
     Edit    :  
+
 __________________________________________________________________________________________________________________
 A faire
 
-  Etapes
+  Trajets
     Liste   : 
     Add     : 
     Delete  : 
