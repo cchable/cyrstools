@@ -113,7 +113,7 @@ $this->pageBreadcrumbs()->setItems([
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('marque', ['action'=>'index']); ?>" role="button">Marques</a>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('typevehicule', ['action'=>'index']); ?>" role="button">Types</a>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'index']); ?>" role="button">Véhicules</a>
-        <a class="btn btn-light btn-outline-danger btn-sm" role="button" aria-pressed="true" href="<?= $this->url('indisponibilitevehicule', ['action'=>'index']); ?>" role="button">Indisponibilités</a>
+        <a class="btn btn-light btn-outline-danger  btn-sm" role="button" aria-pressed="true" href="<?= $this->url('indisponibilitevehicule', ['action'=>'index']); ?>" role="button">Indisponibilités</a>
       </div>
     </div>
     <div class="col d-flex align-items-start">
@@ -122,9 +122,9 @@ $this->pageBreadcrumbs()->setItems([
         <h3 class="fw-bold mb-0 fs-4">Trajets</h3>
         <p>Gestion des trajets</p>
         <p>Il faut créer les étapes d'un trajet avant le trajet</p> 
-        <p>Nombre d'étapes : <?= ($numberOfMarque) ? $numberOfMarque : '0' ?><br />
+        <p>Nombre d'étapes : <?= ($numberOfMarque) ? $numberOfEtape : '0' ?><br />
            Nombre de trajets : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?></p>
-        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Etapes</button>
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('etape', ['action'=>'index']); ?>" role="button">Étapes</a>
         <button type="button" class="btn btn-outline-primary btn-sm" disabled>Trajets</button>
       </div>
     </div>

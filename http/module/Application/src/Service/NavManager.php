@@ -4,7 +4,7 @@
  * The items may be different depending on whether the user is authenticated or not. 
  * 
  * @package   module/Application/src/Service/NavManager.php
- * @version   1.0.1
+ * @version   1.0.2
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
@@ -172,7 +172,6 @@ class NavManager
       'bImageAndLabel' => true,
       'link'  => $url('ephemeride')
     ];
-    
     $transportItems[] = [
       'divider' => 'hr',
     ];
@@ -199,12 +198,21 @@ class NavManager
     ];
     $transportItems[] = [
       'id'     => 'indisponibilitevehicule',
-      'label'  => 'Indisponibilités des vehicules',
+      'label'  => 'Indisponibilités des véhicules',
       'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#arrow_entrance_exit_internet_log_out_security_icon"/></svg>',
       'bImageAndLabel' => true,
       'link'   => $url('indisponibilitevehicule')
     ];    
-    
+    $transportItems[] = [
+      'divider' => 'hr',
+    ];
+    $transportItems[] = [
+      'id'     => 'etape',
+      'label'  => 'Etapes',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#1-15"/></svg>',
+      'bImageAndLabel' => true,      
+      'link'   => $url('etape')
+    ];     
     //
     $userItems = [];
     $userItems[] = [

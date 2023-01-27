@@ -200,6 +200,25 @@ return [
 						'action'     => 'index',
 					],
 				],
+			], 
+      
+      // Define a new route called "etape"
+			'etape' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/etape" as uri:
+					'route'       => '/etape[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\EtapeController::class,
+						'action'     => 'index',
+					],
+				],
 			],      
  
 		],
@@ -235,6 +254,9 @@ return [
 
 		Controller\VehiculeController::class 
 			=> Controller\Factory\VehiculeControllerFactory::class,
+      
+		Controller\EtapeController::class 
+			=> Controller\Factory\EtapeControllerFactory::class,
       
     ],
   ],
@@ -313,6 +335,11 @@ return [
 				=> Model\Factory\ViewVehiculeTableFactory::class,
 			Model\ViewVehiculeTableGateway::class
 				=> Model\Factory\ViewVehiculeTableGatewayFactory::class,
+        
+			Model\EtapeTable::class
+				=> Model\Factory\EtapeTableFactory::class,
+			Model\EtapeTableGateway::class
+				=> Model\Factory\EtapeTableGatewayFactory::class,
 
 			// Register Services
 			Service\ChauffeurManager::class
@@ -328,16 +355,19 @@ return [
 				=> Service\Factory\AnneeScolaireManagerFactory::class,
         
 			Service\EphemerideManager::class
-				=> Service\Factory\EphemerideManagerFactory::class,	
+				=> Service\Factory\EphemerideManagerFactory::class,
 				
 			Service\MarqueManager::class
-				=> Service\Factory\MarqueManagerFactory::class,					
+				=> Service\Factory\MarqueManagerFactory::class,		
 
 			Service\TypeVehiculeManager::class
-				=> Service\Factory\TypeVehiculeManagerFactory::class,	
+				=> Service\Factory\TypeVehiculeManagerFactory::class,
 				
 			Service\VehiculeManager::class
-				=> Service\Factory\VehiculeManagerFactory::class,			
+				=> Service\Factory\VehiculeManagerFactory::class,
+				
+			Service\EtapeManager::class
+				=> Service\Factory\EtapeManagerFactory::class,	
 		],
 	],
 	

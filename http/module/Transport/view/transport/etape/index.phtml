@@ -1,28 +1,28 @@
 <?php
- /**
- * Display the drivers
+/**
+ * Display etapes
  * 
- * @package   module/Transport/view/transport/chauffeur/index.phtml
- * @version   1.0.1
+ * @package   module/Transport/view/transport/etape/index.phtml
+ * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-$title = 'Liste des chauffeurs';
+$title = 'Liste des étapes';
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('chauffeur');
+$this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Chauffeur'           => $this->url($this->module),
+  'Étapes'              => $this->url($this->module),
 ]);
 
 $paginator = $this->paginationControl(
-  $this->chauffeurs,      // Paginator
-  'sliding',              // Style 'all' | 'elastic' | 'sliding' | 'jumping'
-  'partial/paginator',    // You can add file extension but helper actually takes care about it  
-  [                       // Parameters 
+  $this->etapes,                      // Paginator
+  'sliding',                          // Style 'all' | 'elastic' | 'sliding' | 'jumping'
+  'partial/paginator',                // You can add file extension but helper actually takes care about it  
+  [                                   // Parameters 
     'rowPerPage'     => $this->rowPerPage,
     'stepRowPerPage' => $this->stepRowPerPage,
     'search'         => $this->search,
@@ -31,15 +31,16 @@ $paginator = $this->paginationControl(
 
 $formSearch->get('search')->setAttributes([
   'class'       => 'form-control', 
-  'placeholder' => "Recherche d'un chauffeur par son prénom...",
+  'placeholder' => "Recherche d'une étapes par son nom...",
 ]);
 
 $formSearch->setAttribute('action', $this->url($this->module, ['action' => 'index']));
 
 $formSearch->prepare();
 ?>
+
 <div class="container">
-  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#blue_car_steering_whell"/></svg>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#1-15"/></svg>
   <?= $this->escapeHtml($title) ?>
   </h2>
   
@@ -67,39 +68,37 @@ $formSearch->prepare();
     </div>
   </div>
   <?= $paginator; ?>
-  <table class="table align-middle table-striped table-hover table-sm">
+  <table class="table align-middle table-striped table-hover table-sm table-borderless">
+    <caption><?= $this->escapeHtml($title) ?></caption>
     <thead class="table-light">
       <tr>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Prénom</th>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Principal</th>
-        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Actif</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Nom</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Adresse</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Imprimé</th>
         <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
       </tr>
     </thead>
     <tbody>
-  <?php foreach ($this->chauffeurs as $chauffeur) : ?>
+    <?php foreach ($this->etapes as $etape) : ?>
       <tr>
-        <td><?= $this->escapeHtml($chauffeur->getPrenom()) ?></td>
-        <td>
-          <?php $checkSVG = ($chauffeur->getPrincipal()) ? "check_square" : "square"; ?>
-          <svg class="bi text-muted flex-shrink-0 me-3" width="1em" height="1em"><use xlink:href="#<?= $checkSVG ?>"/></svg>
-        </td>
+        <td><?= $this->escapeHtml($etape->getNom()) ?></td>
+        <td><?= $this->escapeHtml($etape->getAdresse()) ?></td>
         <td>
           <?php
-            $checkSVG = ($chauffeur->getActif()) ? "check_square" : "square";
+            $checkSVG = ($etape->getPrinted()) ? "check_square" : "square";
           ?>
           <svg class="bi text-muted flex-shrink-0 me-3" width="1em" height="1em"><use xlink:href="#<?= $checkSVG ?>"/></svg>
-        </td>
+        </td>    
         <td>
-          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'edit', 'id'=>$chauffeur->getId()]); ?>">
+          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('etape', ['action'=>'edit', 'id'=>$etape->getId()]); ?>">
             <span class="far fa-edit" aria-hidden="true"></span>
           </a>
-          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url($this->module, ['action'=>'delete', 'id'=>$chauffeur->getId()]); ?>">
+          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('etape', ['action'=>'delete', 'id'=>$etape->getId()]); ?>">
             <span class="far fa-trash-alt"></span>
           </a>
         </td>
       </tr>
-  <?php endforeach; ?>
+    <?php endforeach; ?>
     </tbody>
   </table>
   <?= $paginator; ?>

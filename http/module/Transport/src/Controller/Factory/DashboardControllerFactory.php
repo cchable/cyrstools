@@ -16,19 +16,22 @@ use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
 use Transport\Controller\DashboardController;
-//use Transport\Service\DashboardManager;
 use Transport\Model\ChauffeurTable;
 use Transport\Model\MarqueTable;
 use Transport\Model\TypeVehiculeTable;
 use Transport\Model\VehiculeTable;
+use Transport\Model\EtapeTable;
 
 
-/*
+/**
  * 
  */
 class DashboardControllerFactory implements FactoryInterface
 {
   
+  /**
+   * 
+   */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
     
@@ -36,8 +39,9 @@ class DashboardControllerFactory implements FactoryInterface
     $marqueTable       = $container->get(MarqueTable::class);
     $typeVehiculeTable = $container->get(TypeVehiculeTable::class);
     $vehiculeTable     = $container->get(VehiculeTable::class);
+    $etapeTable        = $container->get(EtapeTable::class);
     
-    $sessionContainer = $container->get('DashboardSessionContainer');
+    $sessionContainer  = $container->get('DashboardSessionContainer');
     
     // Instantiate the controller and inject dependencies
     return new DashboardController(
@@ -45,6 +49,7 @@ class DashboardControllerFactory implements FactoryInterface
       $marqueTable,
       $typeVehiculeTable,
       $vehiculeTable,
+      $etapeTable,
       $sessionContainer
     );
   }

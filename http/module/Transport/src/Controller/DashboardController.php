@@ -22,6 +22,8 @@ use Transport\Model\TypeVehicule;
 use Transport\Model\TypeVehiculeTable;
 use Transport\Model\Vehicule;
 use Transport\Model\VehiculeTable;
+use Transport\Model\Etape;
+use Transport\Model\EtapeTable;
 
 use Transport\Form\DashboardForm;
 
@@ -54,7 +56,13 @@ class DashboardController extends AbstractActionController
    * VehiculeTable table manager
    * @var Transport\Model\VehiculeTable
    */
-  private $vehiculeTable; 
+  private $vehiculeTable;
+  
+  /**
+   * EtapeTable table manager
+   * @var Transport\Model\EtapeTable
+   */
+  private $etapeTable; 
 
   /**
    * Session container.
@@ -70,6 +78,7 @@ class DashboardController extends AbstractActionController
 		MarqueTable       $marqueTable,
 		TypeVehiculeTable $typeVehiculeTable,
 		VehiculeTable     $vehiculeTable,
+		EtapeTable        $etapeTable,
 		$sessionContainer
     )
 	{
@@ -78,6 +87,7 @@ class DashboardController extends AbstractActionController
     $this->marqueTable       = $marqueTable;
     $this->typeVehiculeTable = $typeVehiculeTable;
     $this->vehiculeTable     = $vehiculeTable;
+    $this->etapeTable        = $etapeTable;
     $this->sessionContainer  = $sessionContainer;
 	}
 
@@ -93,6 +103,7 @@ class DashboardController extends AbstractActionController
       'numberOfMarque'       => $this->marqueTable->getNumberOfRows(),
       'numberOfTypeVehicule' => $this->typeVehiculeTable->getNumberOfRows(),
       'numberOfVehicule'     => $this->vehiculeTable->getNumberOfRows(),
+      'numberOfEtape'        => $this->etapeTable->getNumberOfRows(),
     ]); 
   }
 }
