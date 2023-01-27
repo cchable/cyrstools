@@ -161,13 +161,18 @@ class NavManager
     $transportItems[] = [
       'id'    => 'anneescolaire',
       'label' => 'Années scolaires',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#day_appointment_schedule_month_event_date_calendar"/></svg>',
+      'bImageAndLabel' => true,
       'link'  => $url('anneescolaire')
     ];
     $transportItems[] = [
       'id'    => 'ephemeride',
       'label' => 'Ephémérides',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#if_weather"/></svg>',
+      'bImageAndLabel' => true,
       'link'  => $url('ephemeride')
     ];
+    
     $transportItems[] = [
       'divider' => 'hr',
     ];
@@ -179,14 +184,18 @@ class NavManager
       'link'   => $url('vehicule')
     ];
     $transportItems[] = [
-      'id'    => 'marque',
-      'label' => 'Marques',
-      'link'  => $url('marque')
+      'id'     => 'marque',
+      'label'  => 'Marques',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#box_design_brand_icon"/></svg>',
+      'bImageAndLabel' => true,
+      'link'   => $url('marque')
     ];
     $transportItems[] = [
-      'id'    => 'typevehicule',
-      'label' => 'Types de véhicule',
-      'link'  => $url('typevehicule')
+      'id'     => 'typevehicule',
+      'label'  => 'Types de véhicule',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#file_type_registry"/></svg>',
+      'bImageAndLabel' => true,
+      'link'   => $url('typevehicule')
     ];
     $transportItems[] = [
       'id'     => 'indisponibilitevehicule',

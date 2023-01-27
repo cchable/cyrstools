@@ -35,6 +35,10 @@ class Vehicule implements InputFilterAwareInterface
 
   private $inputFilter;
 
+
+  /**
+   *
+   */
   public function setInputFilter(InputFilterInterface $inputFilter)
   {
     

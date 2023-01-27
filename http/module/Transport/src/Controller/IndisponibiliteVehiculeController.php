@@ -302,11 +302,11 @@ class IndisponibiliteVehiculeController extends AbstractActionController
       }               
     } else {
 		
-      $form->setData($indisponibiliteVehicule->getArrayCopy());
+      $form->setData($indisponibiliteVehicule->getArrayCopy(true));
     }
 
     return new ViewModel([
-      'form'       => $form,
+      'form'      => $form,
       'vehicules' => $vehicules 
     ]);
   }

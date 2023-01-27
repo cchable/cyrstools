@@ -13,24 +13,12 @@ namespace Transport\Model;
 
 use DomainException;
 
-use Laminas\Filter\StringTrim;
-use Laminas\Filter\StripTags;
-use Laminas\Filter\ToInt;
-use Laminas\Filter\Boolean;
-
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
-use Laminas\Validator\StringLength;
-use Laminas\Validator\InArray;
-use Laminas\Validator\Regex;
 
-use Laminas\I18n\Validator\IsInt;
-use Laminas\I18n\Validator\DateTime;
-
-
-/*
+/**
  * 
  */
 class IndisponibiliteVehicule implements InputFilterAwareInterface
@@ -46,6 +34,9 @@ class IndisponibiliteVehicule implements InputFilterAwareInterface
 
   private $inputFilter;
 
+  /**
+   *
+   */
   public function setInputFilter(InputFilterInterface $inputFilter)
   {
     throw new DomainException(sprintf(
@@ -54,7 +45,10 @@ class IndisponibiliteVehicule implements InputFilterAwareInterface
     ));
   }
 
-  //
+  /**
+   * 
+   * @return InputFilter
+   */
   public function getInputFilter()
   {
 		
@@ -63,8 +57,9 @@ class IndisponibiliteVehicule implements InputFilterAwareInterface
     }
 
     $inputFilter = new InputFilter();
-    $this->inputFilter = fillInputFilter($inputFilter);
-  } 
+    
+    return $this->inputFilter;
+  }
   
   //
   public function exchangeArray(array $data, bool $bIdx=true)
@@ -109,106 +104,6 @@ class IndisponibiliteVehicule implements InputFilterAwareInterface
     }
   }
   
-  //
-  public function fillInputFilter(InputFilterInterface $inputFilter)
-  {
-
-    //STARTDATEINDISPONIBILITE
-    $inputFilter->add([
-      'name'       => 'STARTDATEINDISPONIBILITE',
-      'required'   => true,
-      'validators' => [
-        [
-          'name'    => DateTime::class,
-          'options' => [
-            'pattern' => 'Y-m-d',
-            'message' => 'Invalid date format',
-          ],
-        ],
-      ],      
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
-     
-    //ENDDATEINDISPONIBILITE
-    $inputFilter->add([
-      'name'       => 'ENDDATEINDISPONIBILITE',
-      'required'   => true,
-      'validators' => [
-        [
-          'name'    => DateTime::class,
-          'options' => [
-            'pattern' => 'Y-m-d',
-            'message' => 'Invalid date format',
-          ],
-        ],
-      ],      
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);   
-    
-    //STARTTIMEINDISPONIBILITE
-    $inputFilter->add([
-      'name'       => 'STARTTIMEINDISPONIBILITE',
-      'required'   => true,
-      'validators' => [
-        [
-          'name'    => DateTime::class,
-          'options' => [
-            'pattern' => 'HH:mm:ss',
-            'message' => 'Invalid time format',
-          ],
-        ],
-      ],       
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
-    
-    //ENDTIMEINDISPONIBILITE
-    $inputFilter->add([
-      'name'       => 'ENDTIMEINDISPONIBILITE',
-      'required'   => true,
-      'validators' => [
-        [
-          'name'    => DateTime::class,
-          'options' => [
-            'pattern' => 'HH:mm:ss',
-            'message' => 'Invalid time format',
-          ],
-        ],
-      ],       
-      'filters' => [
-        [
-          'name' => StringTrim::class,
-        ],
-        [
-          'name' => StripTags::class,
-        ],
-      ],
-    ]);
-    
-    $this->inputFilter = $inputFilter;
-    return $this->inputFilter;
-  }
-
   // Setter
   //id
   public function getId() 

@@ -1,13 +1,12 @@
 <?php
 /**
- * @package   : module/Transport/view/transport/ephemeride/edit.phtml
- *
- * @purpose   : IndisponibiliteChauffeur edit
+ * Edit a ephemeride
  * 
- * 
- * @copyright : Copyright (C) 2018-22 H.P.B
- * 
- * @license   : GNU General Public License version 2 or later; see LICENSE.txt
+ * @package   module/Transport/view/transport/ephemeride/edit.phtml
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
 $title = "Modification d'une éphéméride";
@@ -49,7 +48,9 @@ $form->get('submit')->setAttributes([
 $form->prepare();
 ?>
 <div class="container">
-  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#if_weather"/></svg>
+  <?= $this->escapeHtml($title) ?>
+  </h2>
   <div class="row justify-content-left">
     <div class="col-md-6">
       <?= $this->form()->openTag($form) . PHP_EOL; ?>   

@@ -15,6 +15,8 @@ use Transport\Model\IndisponibiliteVehicule;
 use Transport\Model\IndisponibiliteVehiculeTable;
 use Transport\Model\VehiculeTable;
 
+use Laminas\I18n\Validator\DateTime;
+
 
 /**
  * 
@@ -24,7 +26,7 @@ class IndisponibiliteVehiculeManager
   
   /**
    * IndisponibiliteVehicule table manager.
-   * @var Transport\Model\INdisponibiliteVehiculeTable
+   * @var Transport\Model\IndisponibiliteVehiculeTable
    */
   private $indisponibiliteVehiculeTable;
   
@@ -149,13 +151,13 @@ class IndisponibiliteVehiculeManager
           $bResult = true;
         } else {
           
-          if (checkTimeBetween(
+          if ($this->checkTimeBetween(
                 $indisponibiliteVehicule->getHeureDebut(), 
                 $data['STARTTIMEINDISPONIBILITE'], 
                 $data['ENDTIMEINDISPONIBILITE']
                 )
               ||
-              checkTimeBetween(
+              $this->checkTimeBetween(
                 $indisponibiliteVehicule->getHeurefin(),
                 $data['STARTTIMEINDISPONIBILITE'], 
                 $data['ENDTIMEINDISPONIBILITE']
@@ -164,7 +166,7 @@ class IndisponibiliteVehiculeManager
                 
             $bResult = true;
           } else {      
-            $bResult = checkRangeTimeBetween(
+            $bResult = $this->checkRangeTimeBetween(
               $indisponibiliteVehicule->getHeureDebut(), 
               $indisponibiliteVehicule->getHeureFin(), 
               $data['STARTTIMEINDISPONIBILITE'], 

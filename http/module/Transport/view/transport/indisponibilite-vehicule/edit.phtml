@@ -20,11 +20,11 @@ $this->pageBreadcrumbs()->setItems([
   'Modification'                    => $this->url($this->module, ['action'=>'edit']),
 ]);
 
-$form->get('IDX_CHAUFFEUR')->setAttributes([
+$form->get('IDX_VEHICULE')->setAttributes([
   'class'       => 'form-control', 
   'placeholder' => 'Chauffeur'
 ]);
-$form->get('IDX_CHAUFFEUR')->setValueOptions($chauffeurs);
+$form->get('IDX_VEHICULE')->setValueOptions($vehicules);
 
 $form->get('STARTDATEINDISPONIBILITE')->setAttributes([
   'class'       => 'form-control', 
@@ -84,9 +84,9 @@ function valueChangedAllDay()
         <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button><?= PHP_EOL; ?>    
         <hr class="my-4">   
         <div class="form-floating my-2">
-          <?= $this->formElement($form->get('IDX_CHAUFFEUR')) . "\n"; ?>
-          <?= $this->formLabel($form->get('IDX_CHAUFFEUR')); ?>
-          <?= $this->formElementErrors($form->get('IDX_CHAUFFEUR')); ?>              
+          <?= $this->formElement($form->get('IDX_VEHICULE')) . "\n"; ?>
+          <?= $this->formLabel($form->get('IDX_VEHICULE')); ?>
+          <?= $this->formElementErrors($form->get('IDX_VEHICULE')); ?>              
         </div>
         <div class="form-floating my-2">
           <?= $this->formElement($form->get('STARTDATEINDISPONIBILITE')); ?>

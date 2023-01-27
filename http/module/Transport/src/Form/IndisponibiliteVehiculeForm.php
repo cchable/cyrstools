@@ -22,12 +22,19 @@ use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
 use Laminas\Filter\ToInt;
 use Laminas\Filter\DateTimeFormatter;
+use Laminas\Filter\Boolean;
+
 
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
 use Laminas\Validator\StringLength;
+use Laminas\Validator\InArray;
+use Laminas\Validator\Regex;
+
+use Laminas\I18n\Validator\IsInt;
+use Laminas\I18n\Validator\DateTime;
 
 use Transport\Model\IndisponibiliteVehicule;
 
@@ -183,10 +190,109 @@ class IndisponibiliteVehiculeForm extends Form
   private function addInputFilter() 
   {
     
-    // Create input filter
+    /**
+     * Create input filter
+     */
     $inputFilter = $this->getInputFilter();
 
-    $indisponibiliteVehicule = new IndisponibiliteVehicule();
-    $indisponibiliteVehicule->fillInputFilter($inputFilter);
+    /**
+     * Add input for STARTDATEINDISPONIBILITE field
+     */
+    $inputFilter->add([
+      'name'       => 'STARTDATEINDISPONIBILITE',
+      'required'   => true,
+      'validators' => [
+        [
+          'name'    => DateTime::class,
+          'options' => [
+            'pattern' => 'Y-m-d',
+            'message' => 'Invalid date format',
+          ],
+        ],
+      ],      
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);
+     
+    /**
+     * Add input for ENDDATEINDISPONIBILITE field
+     */
+    $inputFilter->add([
+      'name'       => 'ENDDATEINDISPONIBILITE',
+      'required'   => true,
+      'validators' => [
+        [
+          'name'    => DateTime::class,
+          'options' => [
+            'pattern' => 'Y-m-d',
+            'message' => 'Invalid date format',
+          ],
+        ],
+      ],      
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);   
+
+    /**
+     * Add input for STARTTIMEINDISPONIBILITE field
+     */
+    $inputFilter->add([
+      'name'       => 'STARTTIMEINDISPONIBILITE',
+      'required'   => true,
+      'validators' => [
+        [
+          'name'    => DateTime::class,
+          'options' => [
+            'pattern' => 'HH:mm:ss',
+            'message' => 'Invalid time format',
+          ],
+        ],
+      ],       
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);
+    
+    /**
+     * Add input for ENDTIMEINDISPONIBILITE field
+     */
+    $inputFilter->add([
+      'name'       => 'ENDTIMEINDISPONIBILITE',
+      'required'   => true,
+      'validators' => [
+        [
+          'name'    => DateTime::class,
+          'options' => [
+            'pattern' => 'HH:mm:ss',
+            'message' => 'Invalid time format',
+          ],
+        ],
+      ],       
+      'filters' => [
+        [
+          'name' => StringTrim::class,
+        ],
+        [
+          'name' => StripTags::class,
+        ],
+      ],
+    ]);
   }
 }
