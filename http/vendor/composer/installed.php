@@ -3,7 +3,7 @@
         'name' => 'laminas/laminas-mvc-skeleton',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '341464c19d614b092a68166327e484c24c3f1ce1',
+        'reference' => '17e035ebe71df38aca6e5e1f842969b23bfeffc1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -133,6 +133,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'laminas/laminas-i18n-resources' => array(
+            'pretty_version' => '2.9.0',
+            'version' => '2.9.0.0',
+            'reference' => '4e1d53bbb24136555c7d91373f7fec57af945a6a',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laminas/laminas-i18n-resources',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'laminas/laminas-inputfilter' => array(
             'pretty_version' => '2.16.0',
             'version' => '2.16.0.0',
@@ -199,7 +208,7 @@
         'laminas/laminas-mvc-skeleton' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '341464c19d614b092a68166327e484c24c3f1ce1',
+            'reference' => '17e035ebe71df38aca6e5e1f842969b23bfeffc1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

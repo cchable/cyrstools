@@ -3,7 +3,7 @@
  * This is the factory class for TypeVehiculeManager service.
  * The purpose of the factory is to instantiate the service and pass it dependencies (inject dependencies).
  *
- * @package   module/Transport/src/Service/Factory/MarqueManagerFactory.php
+ * @package   module/Transport/src/Service/Factory/TypeManagerFactory.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>

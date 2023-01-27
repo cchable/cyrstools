@@ -76,7 +76,9 @@ $form->prepare();
 </script>
 
 <div class="container">
-  <h2 class="pb-2 border-bottom"><?= $this->escapeHtml($title) ?></h2>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#arrow_entrance_exit_internet_log_out_security_icon"/></svg>
+    <?= $this->escapeHtml($title) ?>
+  </h2>
   <div class="row justify-content-left">
     <div class="col-md-6">
       <?= $this->form()->openTag($form); ?>
@@ -92,7 +94,6 @@ $form->prepare();
           <?= $this->formLabel($form->get('STARTDATEINDISPONIBILITE')); ?>
           <?= $this->formElementErrors($form->get('STARTDATEINDISPONIBILITE')); ?>              
         </div>
-        <hr class="my-4">
         <div class="form-floating">
           <div class="form-check form-switch">
             <?= $this->formElement($form->get('ALLDAYINDISPONIBILITE')); ?>
@@ -101,6 +102,7 @@ $form->prepare();
           </div>
         </div>
         <div id="HiddenElements">
+          <hr class="my-4">
           <div class="form-floating my-2">
             <?= $this->formElement($form->get('STARTTIMEINDISPONIBILITE')); ?>
             <?= $this->formLabel($form->get('STARTTIMEINDISPONIBILITE')); ?>

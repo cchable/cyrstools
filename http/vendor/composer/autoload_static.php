@@ -224,6 +224,7 @@ class ComposerStaticInit4b448c9abd2aa1cc95a164589a725a74
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Laminas\\I18n\\Translator\\Resources' => __DIR__ . '/..' . '/laminas/laminas-i18n-resources/src/Resources.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

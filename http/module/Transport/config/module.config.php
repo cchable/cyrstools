@@ -181,6 +181,25 @@ return [
 						'action'     => 'index',
 					],
 				],
+			],
+      
+      // Define a new route called "indisponibilitevehicule"
+			'indisponibilitevehicule' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/indisponibilitevehicule" as uri:
+					'route'       => '/indisponibilitevehicule[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\IndisponibiliteVehiculeController::class,
+						'action'     => 'index',
+					],
+				],
 			],      
  
 		],
@@ -198,6 +217,9 @@ return [
 
     Controller\IndisponibiliteChauffeurController::class 
 			=> Controller\Factory\IndisponibiliteChauffeurControllerFactory::class,
+
+    Controller\IndisponibiliteVehiculeController::class 
+			=> Controller\Factory\IndisponibiliteVehiculeControllerFactory::class,
 			
 		Controller\AnneeScolaireController::class 
 			=> Controller\Factory\AnneeScolaireControllerFactory::class,
@@ -235,7 +257,17 @@ return [
 			Model\ViewIndisponibiliteChauffeurTable::class
 				=> Model\Factory\ViewIndisponibiliteChauffeurTableFactory::class,
 			Model\ViewIndisponibiliteChauffeurTableGateway::class
-				=> Model\Factory\ViewIndisponibiliteChauffeurTableGatewayFactory::class,
+				=> Model\Factory\ViewIndisponibiliteChauffeurTableGatewayFactory::class,   
+        
+			Model\IndisponibiliteVehiculeTable::class
+				=> Model\Factory\IndisponibiliteVehiculeTableFactory::class,
+			Model\IndisponibiliteVehiculeTableGateway::class
+				=> Model\Factory\IndisponibiliteVehiculeTableGatewayFactory::class,
+          
+			Model\ViewIndisponibiliteVehiculeTable::class
+				=> Model\Factory\ViewIndisponibiliteVehiculeTableFactory::class,
+			Model\ViewIndisponibiliteVehiculeTableGateway::class
+				=> Model\Factory\ViewIndisponibiliteVehiculeTableGatewayFactory::class,
       
 			Model\AnneeScolaireTable::class
 				=> Model\Factory\AnneeScolaireTableFactory::class,
@@ -288,6 +320,9 @@ return [
         
 			Service\IndisponibiliteChauffeurManager::class
 				=> Service\Factory\IndisponibiliteChauffeurManagerFactory::class,
+        
+			Service\IndisponibiliteVehiculeManager::class
+				=> Service\Factory\IndisponibiliteVehiculeManagerFactory::class,
 				
 			Service\AnneeScolaireManager::class
 				=> Service\Factory\AnneeScolaireManagerFactory::class,

@@ -228,30 +228,6 @@ class EphemerideManager
     return 0;
   }
   
-  /*
-   *
-   */
-  /*
-  public function checkEphemerideDatesExists(array $data) 
-  {
-
-    $search['STARTDATEPHEMERIDE'] = $data['STARTDATEPHEMERIDE'];
-    $ephemeride = $this->ephemerideTable->findOneBy($search);
-    $bResult = false;
-    
-    if($ephemeride) {
-      
-      $bResult = true;
-    } else {
-      
-      $bResult = ($this->ephemerideTable->checkBetweenDates($data['STARTDATEPHEMERIDE']) 
-                  ||
-                  $this->ephemerideTable->checkBetweenDates($data['ENDDATEPHEMERIDE']));
-    }
-    
-    return $bResult;
-  }
-*/
   /**
    * 
    */

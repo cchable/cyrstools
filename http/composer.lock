@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fb965b7bf56b042b99d4269cf7ce752",
+    "content-hash": "ff61c0d5533c0d83db734ad1c825b04d",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -60,7 +60,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "D:\\Repositories\\vendor\\hpbframework\\laminas-db",
+                "url": "c:\\Repositories\\vendor\\hpbframework\\laminas-db",
                 "reference": "bbefdc69b382992e63545ce5639c7ad3b5859184"
             },
             "type": "library",
@@ -870,6 +870,65 @@
                 }
             ],
             "time": "2022-04-01T10:47:19+00:00"
+        },
+        {
+            "name": "laminas/laminas-i18n-resources",
+            "version": "2.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-i18n-resources.git",
+                "reference": "4e1d53bbb24136555c7d91373f7fec57af945a6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-i18n-resources/zipball/4e1d53bbb24136555c7d91373f7fec57af945a6a",
+                "reference": "4e1d53bbb24136555c7d91373f7fec57af945a6a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0"
+            },
+            "conflict": {
+                "zendframework/zend-i18n-resources": "*"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "~2.4.0",
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-phpunit": "^0.17.0",
+                "vimeo/psalm": "^4.24"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/Resources.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Provides validator and captcha translations for laminas-i18n's Translator",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "resources",
+                "translations"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-i18n-resources/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-i18n-resources/issues",
+                "rss": "https://github.com/laminas/laminas-i18n-resources/releases.atom",
+                "source": "https://github.com/laminas/laminas-i18n-resources"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2022-10-16T14:35:32+00:00"
         },
         {
             "name": "laminas/laminas-inputfilter",

@@ -1,0 +1,131 @@
+<?php
+/**
+ * Add a new unavailability for one vehicle
+ * 
+ * @package   module/Transport/view/transport/indisponibilit-vehicule/add.phtml
+ * @version   1.0.1
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+ 
+$title = "Ajout d'une indisponibilité pour un véhicule";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('indisponibilitevehicule');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'                         => $this->url('home'),
+  'Transport\Dashboard'             => $this->url('dashboard'),
+  'Indisponibilités des véhicules' => $this->url($this->module),
+  'Ajout'                           => $this->url($this->module, ['action'=>'add']),
+]);
+
+$form->get('IDX_VEHICULE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Vehicule'
+]);
+$form->get('IDX_VEHICULE')->setValueOptions($vehicules);
+
+$form->get('STARTDATEINDISPONIBILITE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Date début'
+]);
+
+$form->get('STARTTIMEINDISPONIBILITE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Heure début'
+]);
+
+$form->get('ENDDATEINDISPONIBILITE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Date fin'
+]);
+
+$form->get('ENDTIMEINDISPONIBILITE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Heure fin'
+]);
+
+$form->get('ALLDAYINDISPONIBILITE')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'Toute de la journée',
+  'onClick'     => 'valueChangedAllDay()',
+]);
+$form->get('ALLDAYINDISPONIBILITE')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true'
+]);
+
+$form->prepare();
+?>
+<script type="text/javascript">
+
+  //
+  function valueChangedAllDay()
+  {
+    if($('#ALLDAYINDISPONIBILITE').is(":checked"))   
+        $("#HiddenElements").fadeOut('slow');
+    else
+        $("#HiddenElements").fadeIn('slow');
+  }
+</script>
+
+<div class="container">
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#arrow_entrance_exit_internet_log_out_security_icon"/></svg>
+    <?= $this->escapeHtml($title) ?>
+  </h2>
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <?= $this->form()->openTag($form); ?>
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button><?= PHP_EOL; ?>    
+        <hr class="my-4">        
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('IDX_VEHICULE')) . "\n"; ?>
+          <?= $this->formLabel($form->get('IDX_VEHICULE')); ?>
+          <?= $this->formElementErrors($form->get('IDX_VEHICULE')); ?>              
+        </div>
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('STARTDATEINDISPONIBILITE')); ?>
+          <?= $this->formLabel($form->get('STARTDATEINDISPONIBILITE')); ?>
+          <?= $this->formElementErrors($form->get('STARTDATEINDISPONIBILITE')); ?>              
+        </div>
+        <div class="form-floating">
+          <div class="form-check form-switch">
+            <?= $this->formElement($form->get('ALLDAYINDISPONIBILITE')); ?>
+            <?= $this->formLabel($form->get('ALLDAYINDISPONIBILITE')); ?>
+            <?= $this->formElementErrors($form->get('ALLDAYINDISPONIBILITE')); ?>              
+          </div>
+        </div>
+        <div id="HiddenElements">
+          <hr class="my-4">
+          <div class="form-floating my-2">
+            <?= $this->formElement($form->get('STARTTIMEINDISPONIBILITE')); ?>
+            <?= $this->formLabel($form->get('STARTTIMEINDISPONIBILITE')); ?>
+            <?= $this->formElementErrors($form->get('STARTTIMEINDISPONIBILITE')); ?>              
+          </div>
+          <div class="form-floating my-2">
+            <?= $this->formElement($form->get('ENDDATEINDISPONIBILITE')); ?>
+            <?= $this->formLabel($form->get('ENDDATEINDISPONIBILITE')); ?>
+            <?= $this->formElementErrors($form->get('ENDDATEINDISPONIBILITE')); ?>              
+          </div>
+          <div class="form-floating my-2">
+            <?= $this->formElement($form->get('ENDTIMEINDISPONIBILITE')); ?>
+            <?= $this->formLabel($form->get('ENDTIMEINDISPONIBILITE')); ?>
+            <?= $this->formElementErrors($form->get('ENDTIMEINDISPONIBILITE')); ?>              
+          </div>
+        </div>
+        <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+        <hr class="my-4"> 
+      <?= $this->form()->closeTag() . PHP_EOL; ?>
+    </div>    
+  </div>
+</div>
+
+<script type="text/javascript">
+  valueChangedAllDay()
+</script>

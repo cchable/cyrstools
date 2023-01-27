@@ -149,9 +149,11 @@ class NavManager
       'link'           => $url('chauffeur'),
     ];
     $transportItems[] = [
-      'id'    => 'indisponibilitechauffeur',
-      'label' => 'Indisponibilités des chauffeurs',
-      'link'  => $url('indisponibilitechauffeur')
+      'id'     => 'indisponibilitechauffeur',
+      'label'  => 'Indisponibilités des chauffeurs',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#arrow_entrance_exit_internet_log_out_security_icon"/></svg>',
+      'bImageAndLabel' => true,
+      'link'   => $url('indisponibilitechauffeur')
     ];
     $transportItems[] = [
       'divider' => 'hr',
@@ -186,6 +188,13 @@ class NavManager
       'label' => 'Types de véhicule',
       'link'  => $url('typevehicule')
     ];
+    $transportItems[] = [
+      'id'     => 'indisponibilitevehicule',
+      'label'  => 'Indisponibilités des vehicules',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#arrow_entrance_exit_internet_log_out_security_icon"/></svg>',
+      'bImageAndLabel' => true,
+      'link'   => $url('indisponibilitevehicule')
+    ];    
     
     //
     $userItems = [];
@@ -210,6 +219,7 @@ class NavManager
       'label' => 'Accueil',
       'link'  => $url('home')
     ];
+    
 /*    
     $items[] = [
       'id'       => 'planningtransport',

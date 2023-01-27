@@ -12,7 +12,7 @@
     "repositories": [
           {
               "type": "composer",
-              "url": "file://D:/htdocs/VirtualHosts/local/hpbframework/http"
+              "url": "file://C:/htdocs/VirtualsHosts/local/hpbframework/http"
           }
     ],  
     "require": {
@@ -29,7 +29,8 @@
         "laminas/laminas-navigation": "^2.16",
         "laminas/laminas-paginator": "^2.15",
         "laminas/laminas-session": "^2.13",
-        "laminas/laminas-skeleton-installer": "^1.0"
+        "laminas/laminas-skeleton-installer": "^1.0",
+        "laminas/laminas-i18n-resources": "^2.9"
     },
     "autoload": {
         "psr-4": {

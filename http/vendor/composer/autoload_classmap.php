@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Laminas\\I18n\\Translator\\Resources' => $vendorDir . '/laminas/laminas-i18n-resources/src/Resources.php',
 );

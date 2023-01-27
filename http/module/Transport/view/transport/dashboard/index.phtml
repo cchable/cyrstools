@@ -109,11 +109,11 @@ $this->pageBreadcrumbs()->setItems([
         <p>Gestion des marques de véhicules, des types de véhicules, des véhicules & de leurs indisponibilités</p>
         <p>Nombre de marques : <?= ($numberOfMarque) ? $numberOfMarque : '0' ?><br />
            Nombre de types : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?><br />
-           Nombre de véhicules : x</p>
+           Nombre de véhicules : <?= ($numberOfVehicule) ? $numberOfVehicule : '0' ?></p>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('marque', ['action'=>'index']); ?>" role="button">Marques</a>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('typevehicule', ['action'=>'index']); ?>" role="button">Types</a>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('vehicule', ['action'=>'index']); ?>" role="button">Véhicules</a>
-        <button type="button" class="btn btn-outline-danger  btn-sm" disabled>Indisponibilités</button>
+        <a class="btn btn-light btn-outline-danger btn-sm" role="button" aria-pressed="true" href="<?= $this->url('indisponibilitevehicule', ['action'=>'index']); ?>" role="button">Indisponibilités</a>
       </div>
     </div>
     <div class="col d-flex align-items-start">

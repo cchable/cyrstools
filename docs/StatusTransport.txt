@@ -7,7 +7,7 @@ Fait
     Edit    : Ok
 
   IndisponibiliteChauffeur
-    Liste   : Ok
+    Liste   : Ok    (20221127)
     Add     : Ok    (20221127)
     Delete  : Ok    (20221129)
     Edit    : Ok    (20221129)
@@ -23,30 +23,40 @@ Fait
     Add     : Ok    (20221228)
     Delete  : Ok    (20221228)
     Edit    : OK    (20221228)
-
-__________________________________________________________________________________________________________________
-En cours
+ 
   Marque
     Liste   : OK    (20221228)
     Add     : OK    (20221228)
-    Delete  : 
-    Edit    :  
+    Delete  : OK    (20230102)
+    Edit    : OK    (20230102)
+
+    Liste   : OK    (20230102)
+    Add     : OK    (20230102) 
+    Delete  : OK    (20230102) 
+    Edit    : OK    (20230102) 
+
+  Vehicule
+    Liste   : OK    (20230125)
+    Add     : OK    (20230125)
+    Delete  : OK    (20230125)
+    Edit    : OK    (20230125)
+    info    : OK    (20230125)
+
+
+
 
 __________________________________________________________________________________________________________________
+En cours
+
+  IndisponibiliteVéhicule
+    Liste   : OK    (20260125)
+    Add     : OK    (20260125)
+    Delete  : 
+    Edit    :  
+__________________________________________________________________________________________________________________
 A faire
-  Marque
-    Liste   : 
-    Add     : 
-    Delete  : 
-    Edit    :  
 
-  Type
-    Liste   : 
-    Add     : 
-    Delete  : 
-    Edit    :  
-
-  Véhicule
+  Etapes
     Liste   : 
     Add     : 
     Delete  : 
