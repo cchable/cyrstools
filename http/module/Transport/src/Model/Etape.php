@@ -28,6 +28,9 @@ class Etape implements InputFilterAwareInterface
   private $nom;
   private $adresse;
   private $printed;
+  private $latitude;
+  private $longitude;
+  private $altitude;
 
 
   /**
@@ -65,12 +68,15 @@ class Etape implements InputFilterAwareInterface
   {
  
     if ($bIdx) {
-      $this->id    = !empty($data['IDX_ETAPE'])     ? $data['IDX_ETAPE']     : null;
+      $this->id    = !empty($data['IDX_ETAPE'])        ? $data['IDX_ETAPE']       : null;
     }
 
-    $this->nom     = !empty($data['NOMETAPE'])      ? $data['NOMETAPE']      : null;
-    $this->adresse = !empty($data['ADRESSEETAPE'])   ? $data['ADRESSEETAPE'] : null;
-    $this->printed = !empty($data['PRINTEDETAPE'])   ? $data['PRINTEDETAPE'] : false;
+    $this->nom       = !empty($data['NOMETAPE'])       ? $data['NOMETAPE']       : null;
+    $this->adresse   = !empty($data['ADRESSEETAPE'])   ? $data['ADRESSEETAPE']   : null;
+    $this->printed   = !empty($data['PRINTEDETAPE'])   ? $data['PRINTEDETAPE']   : (BOOL) false;
+    $this->latitude  = !empty($data['LATITUDEETAPE'])  ? $data['LATITUDEETAPE']  : null;
+    $this->longitude = !empty($data['LONGITUDEETAPE']) ? $data['LONGITUDEETAPE'] : null;
+    $this->altitude  = !empty($data['ALTITUDEETAPE'])  ? $data['ALTITUDEETAPE']  : null;
   }
   
   //
@@ -78,11 +84,12 @@ class Etape implements InputFilterAwareInterface
   {
 
     $result = [
-      'IDX_TYPEETAPE' => $this->idTypeEtape,
-      'NOMETAPE'      => $this->nom,
-      'ADRESSEETAPE'  => $this->adresse,
-      'PRINTEDETAPE'  => $this->printed,
-
+      'NOMETAPE'       => $this->nom,
+      'ADRESSEETAPE'   => $this->adresse,
+      'PRINTEDETAPE'   => (BOOL) $this->printed,
+      'LATITUDEETAPE'  => $this->latitude,
+      'LONGITUDEETAPE' => $this->longitude,
+      'ALTITUDEETAPE'  => $this->altitude,
     ];
 
     if ($bIdx) $result['IDX_ETAPE'] = $this->id;
@@ -133,7 +140,8 @@ class Etape implements InputFilterAwareInterface
   {
     
     $this->nom = $nom;
-  }  
+  }
+  
   //ADRESSETAPE
   public function getAdresse() 
   {
@@ -146,5 +154,47 @@ class Etape implements InputFilterAwareInterface
   {
     
     $this->adresse = $adresse;
+  }
+  
+  //LATITUDEETAPE
+  public function getLatitude() 
+  {
+    
+    return $this->latitude;
+  }
+
+  //
+  public function setLatitude($latitude) 
+  {
+    
+    $this->latitude = $latitude;
+  }
+  
+  //LONGITUDEETAPE
+  public function getLongitude() 
+  {
+    
+    return $this->longitude;
+  }
+
+  //
+  public function setLongitude($longitude) 
+  {
+    
+    $this->longitude = $longitude;
+  }
+  
+  //ALTITUDEETAPE
+  public function getAltitude()
+  {
+    
+    return $this->altitude;
+  }
+
+  //
+  public function setAltitude($altitude)
+  {
+    
+    $this->altitude = $altitude;
   }
 }  

@@ -1,60 +1,56 @@
 <?php
 /**
- * Add a new vehicle
+ * Edit an étape
  * 
- * @package   module/Transport/view/transport/vehicule/edit.phtml
+ * @package   module/Transport/view/transport/etape/edit.phtml
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-$title = "Edition d'un véhicule";
+$title = "Edition d'une étape";
 $this->headTitle($title);
-$this->mainMenu()->setActiveItemId('vehicule');
+$this->mainMenu()->setActiveItemId('etape');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Véhicule'            => $this->url($this->module),
+  'Étape'               => $this->url($this->module),
   'Modification'        => $this->url($this->module, ['action'=>'edit']),
 ]);
 
-$form->get('IDX_TYPEVEHICULE')->setAttributes([
+$form->get('NOMETAPE')->setAttributes([
   'class'       => 'form-control', 
-  'placeholder' => 'Type de véhicule'
-]);
-$form->get('IDX_TYPEVEHICULE')->setValueOptions($typeVehicules);
-
-$form->get('IDX_MARQUE')->setAttributes([
-  'class'       => 'form-control', 
-  'placeholder' => 'Marque de véhicule'
-]);
-$form->get('IDX_MARQUE')->setValueOptions($marques);
-
-
-$form->get('NOMVEHICULE')->setAttributes([
-  'class'       => 'form-control', 
-  'placeholder' => 'Nom du véhicule',
+  'placeholder' => "Nom de l'étape",
 ]);
 
-$form->get('PLACESVEHICULE')->setAttributes([
+$form->get('ADRESSEETAPE')->setAttributes([
   'class'       => 'form-control', 
-  'placeholder' => 'Places du véhicule'
+  'placeholder' => "Adresse de l'étape",
 ]);
 
-$form->get('NUMEROVEHICULE')->setAttributes([
-  'class'       => 'form-control', 
-  'placeholder' => 'Numéro du véhicule'
+$form->get('PRINTEDETAPE')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'Étape imprimée ?'
+]);
+$form->get('PRINTEDETAPE')->setOptions([
+  'class'       => 'form-check-label',
 ]);
 
-$form->get('PLAQUEVEHICULE')->setAttributes([
+$form->get('LATITUDEETAPE')->setAttributes([
   'class'       => 'form-control', 
-  'placeholder' => 'Plaque du véhicule'
+  'placeholder' => 'Latitude'
 ]);
 
-$form->get('MODELEVEHICULE')->setAttributes([
+$form->get('LONGITUDEETAPE')->setAttributes([
   'class'       => 'form-control', 
-  'placeholder' => 'Modèle du véhicule'
+  'placeholder' => 'Longitude'
+]);
+
+$form->get('ALTITUDEETAPE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Altitude'
 ]);
 
 $form->get('submit')->setAttributes([
@@ -67,7 +63,7 @@ $form->prepare();
 
 ?>
 <div class="container">
-  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#school-bus"/></svg>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#location_map_pin_mark"/></svg>
   <?= $this->escapeHtml($title) ?>
   </h2>
   <div class="row justify-content-left">
@@ -75,41 +71,37 @@ $form->prepare();
       <?= $this->form()->openTag($form) . PHP_EOL; ?>   
         <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
         <hr class="my-4">    
-        <div class="form-floating my-2">
-          <?= $this->formElement($form->get('IDX_TYPEVEHICULE')) . "\n"; ?>
-          <?= $this->formLabel($form->get('IDX_TYPEVEHICULE')); ?>
-          <?= $this->formElementErrors($form->get('IDX_TYPEVEHICULE')); ?>              
+       <div class="form-floating my-2">
+          <?= $this->formElement($form->get('NOMETAPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('NOMETAPE')); ?>
+          <?= $this->formElementErrors($form->get('NOMETAPE')); ?>              
         </div>
         <div class="form-floating my-2">
-          <?= $this->formElement($form->get('IDX_MARQUE')) . "\n"; ?>
-          <?= $this->formLabel($form->get('IDX_MARQUE')); ?>
-          <?= $this->formElementErrors($form->get('IDX_MARQUE')); ?>              
-        </div>
-        <hr class="my-4">   
-        <div class="form-floating my-2">
-          <?= $this->formElement($form->get('NOMVEHICULE')) . PHP_EOL; ?>
-          <?= $this->formLabel($form->get('NOMVEHICULE')); ?>
-          <?= $this->formElementErrors($form->get('NOMVEHICULE')); ?>              
+          <?= $this->formElement($form->get('ADRESSEETAPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('ADRESSEETAPE')); ?>
+          <?= $this->formElementErrors($form->get('ADRESSEETAPE')); ?>              
         </div>
         <div class="form-floating my-2">
-          <?= $this->formElement($form->get('NUMEROVEHICULE')) . PHP_EOL; ?>
-          <?= $this->formLabel($form->get('NUMEROVEHICULE')); ?>
-          <?= $this->formElementErrors($form->get('NUMEROVEHICULE')); ?>              
+          <div class="form-check form-switch">
+            <?= $this->formElement($form->get('PRINTEDETAPE')) . PHP_EOL; ?>
+            <?= $this->formLabel($form->get('PRINTEDETAPE')); ?>
+            <?= $this->formElementErrors($form->get('PRINTEDETAPE')); ?>     
+          </div>           
         </div>
         <div class="form-floating my-2">
-          <?= $this->formElement($form->get('PLAQUEVEHICULE')) . PHP_EOL; ?>
-          <?= $this->formLabel($form->get('PLAQUEVEHICULE')); ?>
-          <?= $this->formElementErrors($form->get('PLAQUEVEHICULE')); ?>              
+          <?= $this->formElement($form->get('LATITUDEETAPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('LATITUDEETAPE')); ?>
+          <?= $this->formElementErrors($form->get('LATITUDEETAPE')); ?>              
         </div>
         <div class="form-floating my-2">
-          <?= $this->formElement($form->get('PLACESVEHICULE')) . PHP_EOL; ?>
-          <?= $this->formLabel($form->get('PLACESVEHICULE')); ?>
-          <?= $this->formElementErrors($form->get('PLACESVEHICULE')); ?>              
+          <?= $this->formElement($form->get('LONGITUDEETAPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('LONGITUDEETAPE')); ?>
+          <?= $this->formElementErrors($form->get('LONGITUDEETAPE')); ?>              
         </div>
         <div class="form-floating my-2">
-          <?= $this->formElement($form->get('MODELEVEHICULE')) . PHP_EOL; ?>
-          <?= $this->formLabel($form->get('MODELEVEHICULE')); ?>
-          <?= $this->formElementErrors($form->get('MODELEVEHICULE')); ?>              
+          <?= $this->formElement($form->get('ALTITUDEETAPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('ALTITUDEETAPE')); ?>
+          <?= $this->formElementErrors($form->get('ALTITUDEETAPE')); ?>              
         </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
         <hr class="my-4">

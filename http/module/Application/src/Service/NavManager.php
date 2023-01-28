@@ -209,10 +209,11 @@ class NavManager
     $transportItems[] = [
       'id'     => 'etape',
       'label'  => 'Etapes',
-      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#1-15"/></svg>',
-      'bImageAndLabel' => true,      
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#location_map_pin_mark"/></svg>',
+      'bImageAndLabel' => true,     
       'link'   => $url('etape')
-    ];     
+    ];
+    
     //
     $userItems = [];
     $userItems[] = [

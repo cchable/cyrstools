@@ -156,8 +156,8 @@ class EtapeTable
 
     if ($id === 0) {
       $result = $this->tableGateway->insert($data);
-      $etape = $this->findOneByRecord($etape);
-      return $etape;
+      $record = $this->findOneByRecord($etape);
+      return $record;
     }
     
     try {
@@ -204,12 +204,14 @@ class EtapeTable
     return $etape;
   }
   
-  // 
-  public function findOneByRecord(array $data)
+  /**
+   *
+   */
+  public function findOneByRecord(Etape $record)
   {
     
-    unset($data["IDX_ETAPE"]);
-    $etape = $this->findOneBy($data);
+    $recordArray = $record->getArrayCopy(false);
+    $etape = $this->findOneBy($recordArray);
     
     return $etape;
   }

@@ -150,15 +150,9 @@ class EtapeController extends AbstractActionController
    */
   public function addAction()
   {
-    
-    // Get the list of all available brand (sorted)
-    $marques = $this->etapeManager->getMarque();
-    
-    // Get the list of all available type of vehicle (sorted)
-    $typeEtapes = $this->etapeManager->getTypeEtape();
-    
+       
     // Create Form
-    $form = new EtapeForm($marques, $typeEtapes, 'create');
+    $form = new EtapeForm('create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -178,7 +172,7 @@ class EtapeController extends AbstractActionController
         if ($result instanceof Etape) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("Le véhicule '" . $data['NOMVEHICULE'] . "' a été ajouté");          
+          $this->flashMessenger()->addSuccessMessage("L'étape '" . $data['NOMETAPE'] . "' a été ajoutée");          
           // Redirect to "index" page
           return $this->redirect()->toRoute('etape', ['action'=>'index']); 
         } else {
@@ -187,11 +181,11 @@ class EtapeController extends AbstractActionController
           switch($result){
 
             case 1:
-              $this->flashMessenger()->addErrorMessage("Le véhicule '" . $data['NOMVEHICULE'] . "' existe déjà");
+              $this->flashMessenger()->addErrorMessage("L'étape '" . $data['NOMETAPE'] . "' existe déjà");
               break;
             
             default:
-            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde du véhicule '" . $data['NOMVEHICULE'] . "'");
+            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde de l'étape  '" . $data['NOMETAPE'] . "'");
           }
         }
       } else {
@@ -202,9 +196,7 @@ class EtapeController extends AbstractActionController
     } 
     
     return new ViewModel([
-      'form'          => $form, 
-      'marques'       => $marques,
-      'typeEtapes' => $typeEtapes,
+      'form' => $form, 
     ]);  
   }
   
@@ -227,14 +219,8 @@ class EtapeController extends AbstractActionController
       return;
     }
     
-    // Get the list of all available brand (sorted)
-    $marques = $this->etapeManager->getMarque();
-    
-    // Get the list of all available type of vehicle (sorted)
-    $typeEtapes = $this->etapeManager->getTypeEtape();
-    
     // Create etape form
-    $form = new EtapeForm($marques, $typeEtapes, 'update');
+    $form = new EtapeForm('update');
     
      // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -252,12 +238,12 @@ class EtapeController extends AbstractActionController
         // Update etape
         if ($this->etapeManager->updateEtape($etape, $data)) {
 				
-          // Add a flash message Suucess
-          $this->flashMessenger()->addSuccessMessage('Véhicule modifié');
+          // Add a flash message Success
+          $this->flashMessenger()->addSuccessMessage('Étape modifiée');
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Un véhicule '" . $data['NOMVEHICULE'] . "' existe déjà");
+          $this->flashMessenger()->addErrorMessage("Une étape '" . $data['NOMETAPE'] . "' existe déjà");
         }
 				
         // Redirect to "index" page
@@ -269,9 +255,7 @@ class EtapeController extends AbstractActionController
     }
 
     return new ViewModel([
-      'form'          => $form,
-      'marques'       => $marques,
-      'typeEtapes' => $typeEtapes,
+      'form' => $form,
     ]); 
   }
   

@@ -55,18 +55,18 @@ class EtapeManager
    */
   public function addEtape($data) 
   {
-    
     // Create new Etape entity.
     $etape = new Etape();
     $etape->exchangeArray($data, false);
     
     //
-    if(!$this->etapeTable->findOneByRecord($etape)) {
-      $etape = $this->etapeTable->saveEtape($etape);
-      return $etape;
+    if(!$this->etapeTable->findOneByNom($etape->getNom())) {
+
+      $record = $this->etapeTable->saveEtape($etape);
+      return $record;
     }
     
-    return;
+    return 1;
   }
  
   /*
@@ -102,66 +102,27 @@ class EtapeManager
   public function checkEtapeExists(Etape $etape, array $newData) {
 
     if(   
-      $newData['IDX_TYPEVEHICULE'] != $etape->getIdTypeEtape() 
+      $newData['NOMETAPE']       != $etape->getNom() 
       ||
-      $newData['IDX_MARQUE']       != $etape->getIdMarque()
+      $newData['ADRESSEETAPE']   != $etape->getAdresse()
       ||
-      $newData['NOMVEHICULE']      != $etape->getNom()
+      $newData['PRINTEDETAPE']   != $etape->getPrinted()
       ||
-      $newData['PLACESVEHICULE']   != $etape->getPlaces()
+      $newData['LATITUDEETAPE']  != $etape->getLatitude()
       ||
-      $newData['NUMEROVEHICULE']   != $etape->getNumero()
+      $newData['LONGITUDEETAPE'] != $etape->getLongitude()
       ||
-      $newData['PLAQUEVEHICULE']   != $etape->getPlaque()
-      ||
-      $newData['MODELEVEHICULE']   != $etape->getModele()
+      $newData['ALTITUDEETAPE']  != $etape->getAltitude()
     ) {
-      $search['IDX_TYPEVEHICULE'] = $newData['IDX_TYPEVEHICULE'];
-      $search['IDX_MARQUE']       = $newData['IDX_MARQUE'];
-      $search['NOMVEHICULE']      = $newData['NOMVEHICULE'];
-      $search['PLACESVEHICULE']   = $newData['PLACESVEHICULE'];
-      $search['NUMEROVEHICULE']   = $newData['NUMEROVEHICULE'];
-      $search['PLAQUEVEHICULE']   = $newData['PLAQUEVEHICULE'];
-      $search['MODELEVEHICULE']   = $newData['MODELEVEHICULE'];
+      
+      //Clean $data from FROM
+      unset($newData['csrf']);
+      unset($newData['submit']);
         
-      return ($this->etapeTable->findOneByRecord($search));
+      return ($this->etapeTable->findOneBy($newData));
     }   
       
-     return false;
-  }  
-  
-  /**
-   * 
-   */
-  public function getMarque() 
-  {
-    
-    $marqueList = [];
-    
-    $marques = $this->marqueTable->fetchAll();
-
-    foreach ($marques as $marque) {
-      $marqueList[$marque->getId()] = $marque->getName();
-    }
-    
-    return $marqueList;
-  }
-  
-  /**
-   * 
-   */
-  public function getTypeEtape() 
-  {
-    
-    $typeEtapeList = [];
-    
-    $typesEtapes = $this->typeEtapeTable->fetchAll();
-
-    foreach ($typesEtapes as $typeEtape) {
-      $typeEtapeList[$typeEtape->getId()] = $typeEtape->getName();
-    }
-    
-    return $typeEtapeList;
+    return true;
   }  
 }  
 

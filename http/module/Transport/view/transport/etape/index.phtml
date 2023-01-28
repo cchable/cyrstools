@@ -40,7 +40,7 @@ $formSearch->prepare();
 ?>
 
 <div class="container">
-  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#1-15"/></svg>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#location_map_pin_mark"/></svg>
   <?= $this->escapeHtml($title) ?>
   </h2>
   
@@ -74,6 +74,9 @@ $formSearch->prepare();
       <tr>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Nom</th>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Adresse</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Latitude</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Longitude</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Altitude</th>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Imprimé</th>
         <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
       </tr>
@@ -83,6 +86,9 @@ $formSearch->prepare();
       <tr>
         <td><?= $this->escapeHtml($etape->getNom()) ?></td>
         <td><?= $this->escapeHtml($etape->getAdresse()) ?></td>
+        <td><?= $this->escapeHtml($etape->getLatitude()) ?></td>
+        <td><?= $this->escapeHtml($etape->getLongitude()) ?></td>
+        <td><?= $this->escapeHtml($etape->getAltitude()) ?></td>
         <td>
           <?php
             $checkSVG = ($etape->getPrinted()) ? "check_square" : "square";
