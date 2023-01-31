@@ -19,6 +19,7 @@ use Transport\Service\TrajetManager;
 
 use Transport\Model\Trajet;
 use Transport\Model\TrajetTable;
+use Transport\Model\ViewTrajetTable;
 
 use Transport\Form\TrajetForm;
 use Transport\Form\SearchForm;
@@ -71,7 +72,7 @@ class TrajetController extends AbstractActionController
    */
 	public function __construct(
 		TrajetTable $trajetTable,
-		ViewTrajetTable $ViewTrajetTable,
+		ViewTrajetTable $viewTrajetTable,
 		TrajetManager $trajetManager,
     $defaultRowPerPage,
     $stepRowPerPage,
@@ -79,7 +80,7 @@ class TrajetController extends AbstractActionController
 	{
     
 		$this->trajetTable       = $trajetTable;
-		$this->ViewTrajetTable   = $ViewTrajetTable;
+		$this->viewTrajetTable   = $viewTrajetTable;
 		$this->trajetManager     = $trajetManager;
     $this->defaultRowPerPage = $defaultRowPerPage;
     $this->stepRowPerPage    = $stepRowPerPage;

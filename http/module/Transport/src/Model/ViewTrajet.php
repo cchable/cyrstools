@@ -93,7 +93,7 @@ class ViewTrajet implements InputFilterAwareInterface
       'NOMTRAJET'        => $this->nom,
       'TEMPSTRAJET'      => $this->temps,
       'KMTRAJET'         => $this->km,
-      'NOMETAPEDEPART'   => $this->nomEtapeDepart
+      'NOMETAPEDEPART'   => $this->nomEtapeDepart,
       'NOMETAPEARRIVEE'  => $this->nomEtapeArrivee,
     ];
 
@@ -112,25 +112,11 @@ class ViewTrajet implements InputFilterAwareInterface
     return (int) $this->id;
   }
 
-  //
-  public function setId($id) 
-  {
-  
-    $this->id = $id;
-  }
-  
   //IDX_ETAPEDEPART
   public function getIdEtapeDepart() 
   {
 
     return (int) $this->idEtapeDepart;
-  }
-
-  //
-  public function setIdEtapeDepart($idEtapeDepart) 
-  {
-  
-    $this->idEtapeDepart = $idEtapeDepart;
   }
 
   //IDX_ETAPEARRIVEE
@@ -139,40 +125,19 @@ class ViewTrajet implements InputFilterAwareInterface
 
     return (int) $this->idEtapeArrivee;
   }
-
-  //
-  public function setIddEtapeArrivee($idEtapeArrivee) 
-  {
-  
-    $this->idEtapeArrivee = $idEtapeArrivee;
-  }
   
   //NOMTRAJET
-  public function geNom() 
+  public function getNom() 
   {
     
     return $this->nom;
   }
 
-  //
-  public function setNom($nom) 
-  {
-    
-    $this->nom = $nom;
-  } 
-  
   //TEMPSTRAJET
   public function getTemps() 
   {
     
     return $this->temps;
-  }
-
-  //
-  public function setNom($temps) 
-  {
-    
-    $this->temps = $temps;
   }
   
   //KMTRAJET
@@ -182,40 +147,17 @@ class ViewTrajet implements InputFilterAwareInterface
     return $this->km;
   }
 
-  //
-  public function setKm($km) 
-  {
-    
-    $this->km = $km;
-  }
-  
-    
   //NOMETAPEDEPART
   public function getNomEtapeDepart() 
   {
     
     return $this->nomEtapeDepart;
   }
-
-  //
-  public function setNomEtapeDepart($nomEtapeDepart) 
-  {
-    
-    $this->nomEtapeDepart = $nomEtapeDepart;
-  }
-  
     
   //KMTRAJET
   public function getnomEtapeArrivee() 
   {
     
     return $this->km;
-  }
-
-  //
-  public function setKm($km) 
-  {
-    
-    $this->km = $km;
   }
 }  

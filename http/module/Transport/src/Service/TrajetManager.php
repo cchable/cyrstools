@@ -13,6 +13,7 @@ namespace Transport\Service;
 
 use Transport\Model\Trajet;
 use Transport\Model\TrajetTable;
+use Transport\Model\EtapeTable;
 
 
 /**

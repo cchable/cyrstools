@@ -34,13 +34,13 @@ class TrajetManagerFactory implements FactoryInterface
   {
     
     $trajetTable  = $container->get(TrajetTable::class);
-    $etapbeTable  = $container->get(EtapeTable::class);
+    $etapeTable   = $container->get(EtapeTable::class);
     $viewRenderer = $container->get('ViewRenderer');
     $config       = $container->get('Config');
 
     return new TrajetManager(
       $trajetTable, 
-      $EtapeTable, 
+      $etapeTable, 
       $viewRenderer, 
       $config
     );
