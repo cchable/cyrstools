@@ -215,11 +215,30 @@ return [
 					],          
 					// Define default controller and action to be called when this route is matched
 					'defaults' => [
-						'controller' => Controller\EtapeController::class,
+						'controller' => Controller\TrajetController::class,
 						'action'     => 'index',
 					],
 				],
 			],      
+
+      // Define a new route called "trajet"
+			'trajet' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/trajet" as uri:
+					'route'       => '/trajet[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\TrajetController::class,
+						'action'     => 'index',
+					],
+				],
+			], 
  
 		],
 	],
@@ -257,6 +276,9 @@ return [
       
 		Controller\EtapeController::class 
 			=> Controller\Factory\EtapeControllerFactory::class,
+            
+		Controller\TrajetController::class 
+			=> Controller\Factory\TrajetControllerFactory::class,
       
     ],
   ],
@@ -275,7 +297,6 @@ return [
 				=> Model\Factory\IndisponibiliteChauffeurTableFactory::class,
 			Model\IndisponibiliteChauffeurTableGateway::class
 				=> Model\Factory\IndisponibiliteChauffeurTableGatewayFactory::class,
-          
 			Model\ViewIndisponibiliteChauffeurTable::class
 				=> Model\Factory\ViewIndisponibiliteChauffeurTableFactory::class,
 			Model\ViewIndisponibiliteChauffeurTableGateway::class
@@ -285,7 +306,6 @@ return [
 				=> Model\Factory\IndisponibiliteVehiculeTableFactory::class,
 			Model\IndisponibiliteVehiculeTableGateway::class
 				=> Model\Factory\IndisponibiliteVehiculeTableGatewayFactory::class,
-          
 			Model\ViewIndisponibiliteVehiculeTable::class
 				=> Model\Factory\ViewIndisponibiliteVehiculeTableFactory::class,
 			Model\ViewIndisponibiliteVehiculeTableGateway::class
@@ -310,7 +330,6 @@ return [
 				=> Model\Factory\EphemerideTableFactory::class,
 			Model\EphemerideTableGateway::class
 				=> Model\Factory\EphemerideTableGatewayFactory::class,
-        
 			Model\ViewEphemerideTable::class
 				=> Model\Factory\ViewEphemerideTableFactory::class,
 			Model\ViewEphemerideTableGateway::class
@@ -330,7 +349,6 @@ return [
 				=> Model\Factory\VehiculeTableFactory::class,
 			Model\VehiculeTableGateway::class
 				=> Model\Factory\VehiculeTableGatewayFactory::class,
-        
 			Model\ViewVehiculeTable::class
 				=> Model\Factory\ViewVehiculeTableFactory::class,
 			Model\ViewVehiculeTableGateway::class
@@ -339,7 +357,16 @@ return [
 			Model\EtapeTable::class
 				=> Model\Factory\EtapeTableFactory::class,
 			Model\EtapeTableGateway::class
-				=> Model\Factory\EtapeTableGatewayFactory::class,
+				=> Model\Factory\EtapeTableGatewayFactory::class,    
+        
+			Model\TrajetTable::class
+				=> Model\Factory\TrajetTableFactory::class,
+			Model\TrajetTableGateway::class
+				=> Model\Factory\TrajetTableGatewayFactory::class,
+			Model\ViewTrajetTable::class
+				=> Model\Factory\ViewTrajetTableFactory::class,
+			Model\ViewTrajetTableGateway::class
+				=> Model\Factory\ViewTrajetTableGatewayFactory::class,           
 
 			// Register Services
 			Service\ChauffeurManager::class
@@ -367,7 +394,10 @@ return [
 				=> Service\Factory\VehiculeManagerFactory::class,
 				
 			Service\EtapeManager::class
-				=> Service\Factory\EtapeManagerFactory::class,	
+				=> Service\Factory\EtapeManagerFactory::class,
+        
+			Service\TrajetManager::class
+				=> Service\Factory\TrajetManagerFactory::class,	
 		],
 	],
 	

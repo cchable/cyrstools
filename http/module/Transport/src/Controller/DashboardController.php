@@ -14,16 +14,12 @@ namespace Transport\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
-use Transport\Model\Chauffeur;
 use Transport\Model\ChauffeurTable;
-use Transport\Model\Marque;
 use Transport\Model\MarqueTable;
-use Transport\Model\TypeVehicule;
 use Transport\Model\TypeVehiculeTable;
-use Transport\Model\Vehicule;
 use Transport\Model\VehiculeTable;
-use Transport\Model\Etape;
 use Transport\Model\EtapeTable;
+use Transport\Model\TrajetTable;
 
 use Transport\Form\DashboardForm;
 
@@ -63,6 +59,12 @@ class DashboardController extends AbstractActionController
    * @var Transport\Model\EtapeTable
    */
   private $etapeTable; 
+  
+  /**
+   * TrajetTable table manager
+   * @var Transport\Model\TrajetTable
+   */
+  private $trajetTable; 
 
   /**
    * Session container.
@@ -79,6 +81,7 @@ class DashboardController extends AbstractActionController
 		TypeVehiculeTable $typeVehiculeTable,
 		VehiculeTable     $vehiculeTable,
 		EtapeTable        $etapeTable,
+		TrajetTable       $trajetTable,
 		$sessionContainer
     )
 	{
@@ -88,6 +91,7 @@ class DashboardController extends AbstractActionController
     $this->typeVehiculeTable = $typeVehiculeTable;
     $this->vehiculeTable     = $vehiculeTable;
     $this->etapeTable        = $etapeTable;
+    $this->trajetTable       = $trajetTable;
     $this->sessionContainer  = $sessionContainer;
 	}
 
@@ -104,6 +108,7 @@ class DashboardController extends AbstractActionController
       'numberOfTypeVehicule' => $this->typeVehiculeTable->getNumberOfRows(),
       'numberOfVehicule'     => $this->vehiculeTable->getNumberOfRows(),
       'numberOfEtape'        => $this->etapeTable->getNumberOfRows(),
+      'numberOfTrajet'       => $this->trajetTable->getNumberOfRows(),
     ]); 
   }
 }

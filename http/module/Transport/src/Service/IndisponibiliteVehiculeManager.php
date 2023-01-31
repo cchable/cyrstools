@@ -135,7 +135,7 @@ class IndisponibiliteVehiculeManager
   public function checkIndisponibiliteVehiculeExists(array $data) 
   {
 
-    $search['IDX_VEHICULE']            = $data['IDX_VEHICULE'];
+    $search['IDX_VEHICULE']             = $data['IDX_VEHICULE'];
     $search['STARTDATEINDISPONIBILITE'] = $data['STARTDATEINDISPONIBILITE'];
     $indisponibiliteVehicule = $this->indisponibiliteVehiculeTable->findOneBy($search);
     $bResult = false;

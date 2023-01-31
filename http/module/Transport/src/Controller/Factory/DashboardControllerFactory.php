@@ -21,6 +21,7 @@ use Transport\Model\MarqueTable;
 use Transport\Model\TypeVehiculeTable;
 use Transport\Model\VehiculeTable;
 use Transport\Model\EtapeTable;
+use Transport\Model\TrajetTable;
 
 
 /**
@@ -40,6 +41,7 @@ class DashboardControllerFactory implements FactoryInterface
     $typeVehiculeTable = $container->get(TypeVehiculeTable::class);
     $vehiculeTable     = $container->get(VehiculeTable::class);
     $etapeTable        = $container->get(EtapeTable::class);
+    $trajetTable       = $container->get(TrajetTable::class);
     
     $sessionContainer  = $container->get('DashboardSessionContainer');
     
@@ -50,6 +52,7 @@ class DashboardControllerFactory implements FactoryInterface
       $typeVehiculeTable,
       $vehiculeTable,
       $etapeTable,
+      $trajetTable,
       $sessionContainer
     );
   }

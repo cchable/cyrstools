@@ -93,7 +93,7 @@ $this->pageBreadcrumbs()->setItems([
       </div>
     </div>
     <div class="col d-flex align-items-start">
-      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"/></svg>
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#day_appointment_schedule_month_event_date_calendar"/></svg>
       <div>
         <h3 class="fw-bold mb-0 fs-4">AS &amp; Éphémérides</h3>
         <p>Gestion des années scolaires &amp; de leurs éphémérides</p>
@@ -117,15 +117,15 @@ $this->pageBreadcrumbs()->setItems([
       </div>
     </div>
     <div class="col d-flex align-items-start">
-      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#signpost-split"/></svg>
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#1-15"/></svg>
       <div>
         <h3 class="fw-bold mb-0 fs-4">Trajets</h3>
         <p>Gestion des trajets</p>
         <p>Il faut créer les étapes d'un trajet avant le trajet</p> 
         <p>Nombre d'étapes : <?= ($numberOfMarque) ? $numberOfEtape : '0' ?><br />
-           Nombre de trajets : <?= ($numberOfTypeVehicule) ? $numberOfTypeVehicule : '0' ?></p>
+           Nombre de trajets : <?= ($numberOfTrajet) ? $numberOfTrajet : '0' ?></p>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('etape', ['action'=>'index']); ?>" role="button">Étapes</a>
-        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Trajets</button>
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('trajet', ['action'=>'index']); ?>" role="button">Trajets</a>
       </div>
     </div>
   </div>
