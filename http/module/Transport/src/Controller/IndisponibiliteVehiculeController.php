@@ -3,7 +3,7 @@
  * This controleur is responsible for add/edit/delete 'IndisponibiliteVehicule'. 
  * 
  * @package   module/Transport/src/Controller/IndisponibiliteVehiculeController.php
- * @version   1.0
+ * @version   1.0.1
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
@@ -72,7 +72,7 @@ class IndisponibiliteVehiculeController extends AbstractActionController
    * 
    */
   public function __construct(
-    IndisponibiliteVehiculeTable   	$indisponibiliteVehiculeTable,
+    IndisponibiliteVehiculeTable     $indisponibiliteVehiculeTable,
     ViewIndisponibiliteVehiculeTable $viewIndisponibiliteVehiculeTable,
     IndisponibiliteVehiculeManager   $indisponibiliteVehiculeManager,
     $defaultRowPerPage,
@@ -208,7 +208,7 @@ class IndisponibiliteVehiculeController extends AbstractActionController
     } 
     
     return new ViewModel([
-      'form'       => $form,
+      'form'      => $form,
       'vehicules' => $vehicules 
     ]);   
   }  

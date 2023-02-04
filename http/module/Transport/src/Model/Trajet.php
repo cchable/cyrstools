@@ -142,7 +142,7 @@ class Trajet implements InputFilterAwareInterface
   }
   
   //NOMTRAJET
-  public function geNom() 
+  public function getNom() 
   {
     
     return $this->nom;

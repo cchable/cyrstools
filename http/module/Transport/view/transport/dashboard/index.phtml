@@ -3,7 +3,7 @@
  * Dashboard of Transport Module 
  *
  * @package   module/Transport/view/transport/dashboard/index.phtml
- * @version   1.0.1
+ * @version   1.0.3
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
@@ -128,7 +128,14 @@ $this->pageBreadcrumbs()->setItems([
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('trajet', ['action'=>'index']); ?>" role="button">Trajets</a>
       </div>
     </div>
-  </div>
+    <div class="col d-flex align-items-start">
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3-range"/></svg>
+      <div>
+        <h3 class="fw-bold mb-0 fs-4">Groupes</h3>
+        <p>Gestion des personnes transportées</p>
+        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Groupes</button>
+      </div>
+    </div>
     <div class="col d-flex align-items-start">
       <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3-range"/></svg>
       <div>

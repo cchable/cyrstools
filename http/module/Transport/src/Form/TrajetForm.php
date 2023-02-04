@@ -15,22 +15,24 @@ use DomainException;
 
 use Laminas\Form\Form;
 use Laminas\Form\Element;
-use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Time;
 
-use Laminas\Filter\Boolean;
+use Laminas\Filter\DateTimeFormatter;
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
-use Laminas\Filter\ToInt;
 use Laminas\Filter\ToFloat;
+use Laminas\Filter\ToInt;
 
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 
-use Laminas\I18n\Validator\IsInt;
-use Laminas\I18n\Validator\IsFloat;
 use Laminas\Validator\InArray;
 use Laminas\Validator\StringLength;
+
+use Laminas\I18n\Validator\DateTime;
+use Laminas\I18n\Validator\IsFloat;
+use Laminas\I18n\Validator\IsInt;
 
 use Transport\Model\Trajet;
 
@@ -39,6 +41,18 @@ use Transport\Model\Trajet;
  */
 class TrajetForm extends Form
 {
+
+  /**
+   * haystackVehicules : liste of etapesdepart
+   * @var array
+   */
+  private $haystackEtapesDepart;
+
+  /**
+   * haystackVehicules : liste of etapesarrivee
+   * @var array
+   */
+  private $haystackEtapesArrivee;
 
   /**
    * Scenario ('create' or 'update' or 'info').
@@ -50,10 +64,12 @@ class TrajetForm extends Form
   /**
    * Constructor
    */
-  public function __construct($scenario = 'create')
+  public function __construct(array $haystackEtapesDepart, array $haystackEtapesArrivee, $scenario = 'create')
   {
 
     // Save parameters for internal use
+    $this->haystackEtapesDepart  = $haystackEtapesDepart;
+    $this->haystackEtapesArrivee = $haystackEtapesArrivee;
     $this->scenario = $scenario;
       
     // Define form name
@@ -71,6 +87,26 @@ class TrajetForm extends Form
    */
   protected function addElements() 
   {
+
+    // Add "IDX_ETAPEDEPART" field
+    $this->add([
+      'name' => 'IDX_ETAPEDEPART',
+      'type' => 'select',
+      'options' => [
+        'value_options' => $this->haystackEtapesDepart,
+        'label'         => 'Etapes départ',
+      ],
+    ]);
+
+    // Add "IDX_ETAPEARRIVEE" field
+    $this->add([
+      'name' => 'IDX_ETAPEARRIVEE',
+      'type' => 'select',
+      'options' => [
+        'value_options' => $this->haystackEtapesArrivee,
+        'label'         => 'Etapes arrivée',
+      ],
+    ]);
     
     // Add "NOMTRAJET" field
     $this->add([
@@ -99,12 +135,12 @@ class TrajetForm extends Form
     // Add "KMTRAJET" field
     $this->add([
       'name'       => 'KMTRAJET',
-      'type'       => 'Number',
+      'type'       => Element\Number::class,
       'options'    => [
         'label' => 'Kms du trajet',
       ],
       'attributes' => [
-        'step'  => 0,1
+        'step'  => 0.1
       ],      
     ]);
 

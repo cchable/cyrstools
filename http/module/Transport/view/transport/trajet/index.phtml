@@ -73,13 +73,22 @@ $formSearch->prepare();
     <thead class="table-light">
       <tr>
         <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Nom</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Temps</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Km</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Depart</th>
+        <th class="col-sm-auto col-md-auto col-lg-auto col-xl-auto">Arrivée</th>
         <th class="col-sm-2 col-md-2 col-lg-2 col-xl-2">Actions</th>
       </tr>
     </thead>
     <tbody>
     <?php foreach ($this->viewTrajets as $viewTrajet) : ?>
       <tr>
-        <td><?= $this->escapeHtml($viewTrajet->getNom()) ?></td>   
+        <td><?= $this->escapeHtml($viewTrajet->getNom()) ?></td> 
+        <?php $result = $this->dateFormat($this->escapeHtml($viewTrajet->getTemps()), IntlDateFormatter::NONE, IntlDateFormatter::FULL, 'fr_FR') ?>
+        <td><?= $this->escapeHtml($viewTrajet->getTemps()) ?></td>   
+        <td><?= $this->numberFormat($this->escapeHtml($viewTrajet->getKm()), null, null, 'fr_FR', 1) ?></td>   
+        <td><?= $this->escapeHtml($viewTrajet->getNomEtapeDepart()) ?></td>   
+        <td><?= $this->escapeHtml($viewTrajet->getnomEtapeArrivee()) ?></td>   
         <td>
           <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('trajet', ['action'=>'edit', 'id'=>$viewTrajet->getId()]); ?>">
             <span class="far fa-edit" aria-hidden="true"></span>

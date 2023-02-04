@@ -215,7 +215,7 @@ return [
 					],          
 					// Define default controller and action to be called when this route is matched
 					'defaults' => [
-						'controller' => Controller\TrajetController::class,
+						'controller' => Controller\EtapeController::class,
 						'action'     => 'index',
 					],
 				],

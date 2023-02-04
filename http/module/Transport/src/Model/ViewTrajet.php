@@ -158,6 +158,6 @@ class ViewTrajet implements InputFilterAwareInterface
   public function getnomEtapeArrivee() 
   {
     
-    return $this->km;
+    return $this->nomEtapeArrivee;
   }
 }  

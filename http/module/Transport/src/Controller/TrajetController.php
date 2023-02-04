@@ -159,9 +159,13 @@ class TrajetController extends AbstractActionController
    */
   public function addAction()
   {
-       
+
+    // Get the list of all available annee scolaire (sorted)
+    $etapesDepart = $this->trajetManager->getEtapes();
+    $etapesArrivee = &$etapesDepart;
+
     // Create Form
-    $form = new TrajetForm('create');
+    $form = new TrajetForm($etapesDepart, $etapesArrivee, 'create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -181,7 +185,7 @@ class TrajetController extends AbstractActionController
         if ($result instanceof Trajet) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("L'étape '" . $data['NOMETAPE'] . "' a été ajoutée");          
+          $this->flashMessenger()->addSuccessMessage("Le trajet '" . $data['NOMTRAJET'] . "' a été ajouté");          
           // Redirect to "index" page
           return $this->redirect()->toRoute('trajet', ['action'=>'index']); 
         } else {
@@ -190,11 +194,11 @@ class TrajetController extends AbstractActionController
           switch($result){
 
             case 1:
-              $this->flashMessenger()->addErrorMessage("L'étape '" . $data['NOMETAPE'] . "' existe déjà");
+              $this->flashMessenger()->addErrorMessage("Le trajet '" . $data['NOMTRAJET'] . "' existe déjà");
               break;
             
             default:
-            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde de l'étape  '" . $data['NOMETAPE'] . "'");
+            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde de ldu trajet '" . $data['NOMETAPE'] . "'");
           }
         }
       } else {
@@ -205,7 +209,9 @@ class TrajetController extends AbstractActionController
     } 
     
     return new ViewModel([
-      'form' => $form, 
+      'form' => $form,
+      'etapesDepart'  => $etapesDepart,
+      'etapesArrivee' => $etapesArrivee,
     ]);  
   }
   
@@ -227,11 +233,15 @@ class TrajetController extends AbstractActionController
       $this->getResponse()->setStatusCode(404);
       return;
     }
+
+    // Get the list of all available annee scolaire (sorted)
+    $etapesDepart = $this->trajetManager->getEtapes();
+    $etapesArrivee = &$etapesDepart;
     
     // Create trajet form
-    $form = new TrajetForm('update');
-    
-     // Check if user has submitted the form
+    $form = new TrajetForm($etapesDepart, $etapesArrivee, 'update');
+  
+    // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
 
       // Fill in the form with POST data
@@ -248,11 +258,11 @@ class TrajetController extends AbstractActionController
         if ($this->trajetManager->updateTrajet($trajet, $data)) {
 				
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Étape modifiée');
+          $this->flashMessenger()->addSuccessMessage('Trajet modifié');
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Une étape '" . $data['NOMETAPE'] . "' existe déjà");
+          $this->flashMessenger()->addErrorMessage("Un trajet '" . $data['NOMTRAJET'] . "' existe déjà");
         }
 				
         // Redirect to "index" page
@@ -294,34 +304,9 @@ class TrajetController extends AbstractActionController
     $this->trajetManager->deleteTrajet($trajet);
 
     // Add a flash message
-    $this->flashMessenger()->addWarningMessage("Le véhicule '$nom' a été supprimé");
+    $this->flashMessenger()->addWarningMessage("Le trajet '$nom' a été supprimé");
 
     // Redirect to "index" page
     return $this->redirect()->toRoute('trajet', ['action'=>'index']);      
   }
-  
-  /**
-   * This action displays a page of an existing trajet
-   */
-  public function infoAction()
-  {
-    
-		$id = (int) $this->params()->fromRoute('id', -1);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    if ($id<1) {
-      $this->getResponse()->setStatusCode(404);
-      return;
-    }
-    
-    $trajet = $this->viewTrajetTable->getTrajet($id);
-
-    if ($trajet == null) {
-      $this->getResponse()->setStatusCode(404);
-      return;
-    }
-    
-    return new ViewModel([
-      'module'   => 'trajet',
-      'trajet' => $trajet,
-    ]);  
-  }  
 }

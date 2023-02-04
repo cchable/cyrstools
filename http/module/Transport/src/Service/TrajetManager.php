@@ -3,7 +3,7 @@
  * This service is responsible for add/edit/delete 'type trajet'. 
  *
  * @package   module/Transport/src/Service/TypeTrajetManager.php
- * @version   1.0
+ * @version   1.0.1
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
@@ -22,31 +22,31 @@ use Transport\Model\EtapeTable;
 class TrajetManager
 {
   
-  /*
+  /**
    * Trajet table manager.
    * @var Parling\Model\TrajetTable
    */
   private $trajetTable;
     
-  /*
+  /**
    * Etape table manager.
    * @var Parling\Model\EtapeTable
    */
   private $etapeTable;
   
-  /*
+  /**
    * PHP template renderer.
    * @var type 
    */
   private $viewRenderer;
 
-  /*
+  /**
    * Application config.
    * @var type 
    */
   private $config;
 
-  /*
+  /**
    * Constructs the service.
    */
   public function __construct(
@@ -62,11 +62,12 @@ class TrajetManager
     $this->config       = $config;
   }
  
-  /*
+  /**
    * This method adds a new trajet.
    */
   public function addTrajet($data) 
   {
+    
     // Create new Trajet entity.
     $trajet = new Trajet();
     $trajet->exchangeArray($data, false);
@@ -81,7 +82,7 @@ class TrajetManager
     return 1;
   }
  
-  /*
+  /**
    * This method updates data of an existing trajet.
    */
   public function updateTrajet($trajet, $data) 
@@ -99,7 +100,7 @@ class TrajetManager
     return $trajet;
   }  
  
-  /*
+  /**
    * Deletes the given trajet
    */
   public function deleteTrajet(Trajet $trajet)
@@ -108,33 +109,51 @@ class TrajetManager
     $this->trajetTable->deleteTrajet($trajet->getId());
   }
   
-  /*
+  /**
    * Checks whether an active trajet with given value already exists in the database.     
    */
   public function checkTrajetExists(Trajet $trajet, array $newData) {
 
     if(   
-      $newData['NOMETAPE']       != $trajet->getNom() 
+      $newData['IDX_ETAPEDEPART']  != $trajet->getIdEtapeDepart() 
       ||
-      $newData['ADRESSEETAPE']   != $trajet->getAdresse()
+      $newData['IDX_ETAPEARRIVEE'] != $trajet->getIdEtapeArrivee()
       ||
-      $newData['PRINTEDETAPE']   != $trajet->getPrinted()
+      $newData['NOMTRAJET']        != $trajet->getNom()
       ||
-      $newData['LATITUDEETAPE']  != $trajet->getLatitude()
+      $newData['TEMPSTRAJET']      != $trajet->getTemps()
       ||
-      $newData['LONGITUDEETAPE'] != $trajet->getLongitude()
-      ||
-      $newData['ALTITUDEETAPE']  != $trajet->getAltitude()
+      $newData['KMTRAJET']         != $trajet->getKm()
     ) {
       
+      $searh['IDX_ETAPEDEPART'] = $newData['IDX_ETAPEDEPART'];
+      $searh['IDX_ETAPEARRIVEE'] = $newData['IDX_ETAPEARRIVEE'];
+      
       //Clean $data from FROM
-      unset($newData['csrf']);
-      unset($newData['submit']);
+//      unset($newData['csrf']);
+//      unset($newData['submit']);
         
-      return ($this->trajetTable->findOneBy($newData));
+      return ($this->trajetTable->findOneBy($searh));
     }   
       
     return true;
+  }
+  
+  /**
+   * 
+   */
+  public function getEtapes() 
+  {
+    
+    $etapesList = [];
+    
+    $etapes = $this->etapeTable->fetchAll();
+
+    foreach ($etapes as $etape) {
+      $etapesList[$etape->getId()] = $etape->getNom();
+    }
+    
+    return $etapesList;
   }  
 }  
 

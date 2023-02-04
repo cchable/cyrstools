@@ -200,7 +200,7 @@ class IndisponibiliteVehiculeManager
     return (($timeStart1 > $timeStart2) && ($timeEnd1 < $timeEnd2) || ($timeStart1 < $timeStart2) && ($timeEnd1 > $timeEnd2));
   }
   
-  /*
+  /**
    * 
    */
   public function getVehicules() 
