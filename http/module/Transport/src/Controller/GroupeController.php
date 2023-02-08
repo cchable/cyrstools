@@ -1,9 +1,9 @@
 <?php
 /**
- * This controleur is responsible for add/edit/delete 'trajet'. 
+ * This controleur is responsible for add/edit/delete 'groupe'. 
  * 
- * @package   module/Transport/src/Controller/TrajetController.php
- * @version   1.0.1
+ * @package   module/Transport/src/Controller/GroupeController.php
+ * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
@@ -12,56 +12,50 @@
 namespace Transport\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
-use Laminas\View\Model\ViewModel;
 use Laminas\Mvc\Controller\Plugin\FlashMessenger;
+use Laminas\View\Model\ViewModel;
 
-use Transport\Service\TrajetManager;
+use Transport\Service\GroupeManager;
 
-use Transport\Model\Trajet;
-use Transport\Model\TrajetTable;
-use Transport\Model\ViewTrajetTable;
+use Transport\Model\Groupe;
+use Transport\Model\GroupeTable;
+use Transport\Model\ViewGroupeTable;
 
-use Transport\Form\TrajetForm;
+use Transport\Form\GroupeForm;
 use Transport\Form\SearchForm;
 
 
 /**
  * 
  */
-class TrajetController extends AbstractActionController
+class GroupeController extends AbstractActionController
 {
   
-	/*
-	 * Trajet table manager
-	 * @var Plannigtrajet\Model\TrajetTable
+	/**
+	 * Groupe table manager
+	 * @var Transport\Model\GroupeTable
 	 */
-	private $trajetTable;
-  
-	/*
-	 * Trajet table manager
-	 * @var Plannigtrajet\Model\ViewTrajetTable
-	 */
-	private $viewTrajetTable;
+	private $groupeTable;
 
-	/*
-   * Trajet manager
-   * @var Plannigtrajet\Service\TrajetManager
+	/**
+   * Groupe manager
+   * @var Transport\Service\GroupeManager
    */
-	private $trajetManager;
+	private $groupeManager;
 
-  /*
+  /**
    * Application config.
    * @var type 
    */
   private $defaultRowPerPage;
 
-  /*
+  /**
    * Application config.
    * @var type 
    */
   private $stepRowPerPage;
 
-  /*
+  /**
    * Session container.
    * @var Laminas\Session\Container
    */
@@ -71,17 +65,15 @@ class TrajetController extends AbstractActionController
    * 
    */
 	public function __construct(
-		TrajetTable $trajetTable,
-		ViewTrajetTable $viewTrajetTable,
-		TrajetManager $trajetManager,
+		GroupeTable $groupeTable,
+		GroupeManager $groupeManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
 	{
     
-		$this->trajetTable       = $trajetTable;
-		$this->viewTrajetTable   = $viewTrajetTable;
-		$this->trajetManager     = $trajetManager;
+		$this->groupeTable       = $groupeTable;
+		$this->groupeManager     = $groupeManager;
     $this->defaultRowPerPage = $defaultRowPerPage;
     $this->stepRowPerPage    = $stepRowPerPage;
     $this->sessionContainer  = $sessionContainer;
@@ -89,11 +81,11 @@ class TrajetController extends AbstractActionController
 
 	/**
    * This is the default "index" action of the controller. 
-   * It displays the list of trajet.
+   * It displays the list of groupe.
    */
 	public function indexAction()
 	{
-   
+ 
     // Getting requested page number from the query
     // or to 1 if none is set, or the page is invalid
     $pageNumber = (int) $this->params()->fromQuery('page', 1);
@@ -146,26 +138,22 @@ class TrajetController extends AbstractActionController
 
     return new ViewModel([
       'formSearch'     => $formSearch,
-      'module'         => 'trajet',
+      'module'         => 'groupe',
       'search'         => $search,
       'rowPerPage'     => $rowPerPage,
       'stepRowPerPage' => $this->stepRowPerPage,
-      'viewTrajets'    => $this->viewTrajetTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'groupes'        => $this->groupeTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]); 
   }
   
   /*
-   * This action displays a page allowing to add a new trajet
+   * This action displays a page allowing to add a new groupe
    */
   public function addAction()
   {
 
-    // Get the list of all available annee scolaire (sorted)
-    $etapesDepart = $this->trajetManager->getEtapes();
-    $etapesArrivee = &$etapesDepart;
-
     // Create Form
-    $form = new TrajetForm($etapesDepart, $etapesArrivee, 'create');
+    $form = new GroupeForm('create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -180,25 +168,25 @@ class TrajetController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
-        // Add trajet
-        $result = $this->trajetManager->addTrajet($data);
-        if ($result instanceof Trajet) {
+        // Add groupe
+        $result = $this->groupeManager->addGroupe($data);
+        if ($result instanceof Groupe) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("Le trajet '" . $data['NOMTRAJET'] . "' a été ajouté");          
+          $this->flashMessenger()->addSuccessMessage("Le groupe '" . $data['NOMGROUPE'] . "' a été ajouté");          
           // Redirect to "index" page
-          return $this->redirect()->toRoute('trajet', ['action'=>'index']); 
+          return $this->redirect()->toRoute('groupe', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
           switch($result){
 
             case 1:
-              $this->flashMessenger()->addErrorMessage("Le trajet '" . $data['NOMTRAJET'] . "' existe déjà");
+              $this->flashMessenger()->addErrorMessage("Le groupe '" . $data['NOMGROUPE'] . "' existe déjà");
               break;
             
             default:
-            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde du trajet '" . $data['NOMTRAJET'] . "'");
+            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde du groupe '" . $data['NOMGROUPE'] . "'");
           }
         }
       } else {
@@ -210,13 +198,11 @@ class TrajetController extends AbstractActionController
     
     return new ViewModel([
       'form' => $form,
-      'etapesDepart'  => $etapesDepart,
-      'etapesArrivee' => $etapesArrivee,
     ]);  
   }
   
   /**
-   * This action displays a page allowing to edit an existing trajet
+   * This action displays a page allowing to edit an existing groupe
    */
   public function editAction()
   {
@@ -227,19 +213,15 @@ class TrajetController extends AbstractActionController
       return;
     }
     
-    $trajet = $this->trajetTable->findOneById($id);
+    $groupe = $this->groupeTable->findOneById($id);
 
-    if ($trajet == null) {
+    if ($groupe == null) {
       $this->getResponse()->setStatusCode(404);
       return;
     }
-
-    // Get the list of all available annee scolaire (sorted)
-    $etapesDepart = $this->trajetManager->getEtapes();
-    $etapesArrivee = &$etapesDepart;
     
-    // Create trajet form
-    $form = new TrajetForm($etapesDepart, $etapesArrivee, 'update');
+    // Create groupe form
+    $form = new GroupeForm('update');
   
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -254,23 +236,23 @@ class TrajetController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
-        // Update trajet
-        if ($this->trajetManager->updateTrajet($trajet, $data)) {
+        // Update groupe
+        if ($this->groupeManager->updateGroupe($groupe, $data)) {
 				
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Trajet modifié');
+          $this->flashMessenger()->addSuccessMessage('Groupe modifié');
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Un trajet '" . $data['NOMTRAJET'] . "' existe déjà");
+          $this->flashMessenger()->addErrorMessage("Un groupe '" . $data['NOMGROUPE'] . "' existe déjà");
         }
 				
         // Redirect to "index" page
-        return $this->redirect()->toRoute('trajet', ['action'=>'index']);
+        return $this->redirect()->toRoute('groupe', ['action'=>'index']);
       }               
     } else {
 		
-      $form->setData($trajet->getArrayCopy());
+      $form->setData($groupe->getArrayCopy());
     }
 
     return new ViewModel([
@@ -279,7 +261,7 @@ class TrajetController extends AbstractActionController
   }
   
   /*
-   * This action delete a trajet
+   * This action delete a groupe
    */
   public function deleteAction()
   {
@@ -291,22 +273,22 @@ class TrajetController extends AbstractActionController
       return;
     }
 
-    $trajet = $this->trajetTable->findOneById($id);
-    if ($trajet == null) {
+    $groupe = $this->groupeTable->findOneById($id);
+    if ($groupe == null) {
   
 			$this->getResponse()->setStatusCode(404);
       return;
     }
 
-    $nom = $trajet->getNom();
+    $nom = $groupe->getNom();
     
     // Delete véhicule
-    $this->trajetManager->deleteTrajet($trajet);
+    $this->groupeManager->deleteGroupe($groupe);
 
     // Add a flash message
-    $this->flashMessenger()->addWarningMessage("Le trajet '$nom' a été supprimé");
+    $this->flashMessenger()->addWarningMessage("Le groupe '$nom' a été supprimé");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('trajet', ['action'=>'index']);      
+    return $this->redirect()->toRoute('groupe', ['action'=>'index']);      
   }
 }

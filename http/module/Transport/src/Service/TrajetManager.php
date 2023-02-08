@@ -1,9 +1,9 @@
 <?php
 /**
- * This service is responsible for add/edit/delete 'type trajet'. 
+ * This service is responsible for add/edit/delete 'trajet'. 
  *
  * @package   module/Transport/src/Service/TypeTrajetManager.php
- * @version   1.0.1
+ * @version   1.0.2
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt

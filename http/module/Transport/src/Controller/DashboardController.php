@@ -20,6 +20,7 @@ use Transport\Model\TypeVehiculeTable;
 use Transport\Model\VehiculeTable;
 use Transport\Model\EtapeTable;
 use Transport\Model\TrajetTable;
+use Transport\Model\GroupeTable;
 
 use Transport\Form\DashboardForm;
 
@@ -64,7 +65,13 @@ class DashboardController extends AbstractActionController
    * TrajetTable table manager
    * @var Transport\Model\TrajetTable
    */
-  private $trajetTable; 
+  private $trajetTable;
+  
+  /**
+   * GroupeTable table manager
+   * @var Transport\Model\GroupeTable
+   */
+  private $groupeTable; 
 
   /**
    * Session container.
@@ -82,6 +89,7 @@ class DashboardController extends AbstractActionController
 		VehiculeTable     $vehiculeTable,
 		EtapeTable        $etapeTable,
 		TrajetTable       $trajetTable,
+		GroupeTable       $groupeTable,
 		$sessionContainer
     )
 	{
@@ -92,6 +100,7 @@ class DashboardController extends AbstractActionController
     $this->vehiculeTable     = $vehiculeTable;
     $this->etapeTable        = $etapeTable;
     $this->trajetTable       = $trajetTable;
+    $this->groupeTable       = $groupeTable;
     $this->sessionContainer  = $sessionContainer;
 	}
 
@@ -109,6 +118,7 @@ class DashboardController extends AbstractActionController
       'numberOfVehicule'     => $this->vehiculeTable->getNumberOfRows(),
       'numberOfEtape'        => $this->etapeTable->getNumberOfRows(),
       'numberOfTrajet'       => $this->trajetTable->getNumberOfRows(),
+      'numberOfGroupe'       => $this->groupeTable->getNumberOfRows(),
     ]); 
   }
 }

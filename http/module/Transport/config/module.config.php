@@ -238,6 +238,25 @@ return [
 						'action'     => 'index',
 					],
 				],
+			],
+      
+      // Define a new route called "groupe"
+			'groupe' => [
+				// Define a "Segment" route type: 
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/groupe" as uri:
+					'route'       => '/groupe[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],          
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\GroupeController::class,
+						'action'     => 'index',
+					],
+				],
 			], 
  
 		],
@@ -279,6 +298,9 @@ return [
             
 		Controller\TrajetController::class 
 			=> Controller\Factory\TrajetControllerFactory::class,
+               
+		Controller\GroupeController::class 
+			=> Controller\Factory\GroupeControllerFactory::class,
       
     ],
   ],
@@ -367,6 +389,11 @@ return [
 				=> Model\Factory\ViewTrajetTableFactory::class,
 			Model\ViewTrajetTableGateway::class
 				=> Model\Factory\ViewTrajetTableGatewayFactory::class,           
+              
+			Model\GroupeTable::class
+				=> Model\Factory\GroupeTableFactory::class,
+			Model\GroupeTableGateway::class
+				=> Model\Factory\GroupeTableGatewayFactory::class,    
 
 			// Register Services
 			Service\ChauffeurManager::class
@@ -397,7 +424,10 @@ return [
 				=> Service\Factory\EtapeManagerFactory::class,
         
 			Service\TrajetManager::class
-				=> Service\Factory\TrajetManagerFactory::class,	
+				=> Service\Factory\TrajetManagerFactory::class,
+        
+			Service\GroupeManager::class
+				=> Service\Factory\GroupeManagerFactory::class,
 		],
 	],
 	

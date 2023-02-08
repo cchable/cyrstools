@@ -131,9 +131,10 @@ $this->pageBreadcrumbs()->setItems([
     <div class="col d-flex align-items-start">
       <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#account_group_team_user"/></svg>
       <div>
-        <h3 class="fw-bold mb-0 fs-4">Groupes</h3>
+        <h3 class="fw-bold mb-0 fs-4">Organisation & Groupes</h3>
         <p>Gestion des personnes transportées</p>
-        <button type="button" class="btn btn-outline-primary btn-sm" disabled>Groupes</button>
+        <p>Nombre de groupe : <?= ($numberOfGroupe) ? $numberOfGroupe : '0' ?><br />
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('groupe', ['action'=>'index']); ?>" role="button">Groupes</a>
       </div>
     </div>
     <div class="col d-flex align-items-start">

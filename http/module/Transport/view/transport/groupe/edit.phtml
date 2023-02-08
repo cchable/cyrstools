@@ -1,0 +1,75 @@
+<?php
+/**
+ * Edit a groupe
+ * 
+ * @package   module/Transport/view/transport/groupe/add.phtml
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+ 
+$title = "Modification d'un groupe";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId($this->module);
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'             => $this->url('home'),
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Groupe'              => $this->url($this->module), 
+  'Modification'        => $this->url($this->module, ['action'=>'edit']),
+]);
+
+$form->get('NOMGROUPE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Nom du groupe",
+]);
+
+$form->get('NOMBREGROUPE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => "Nombre",
+]);
+
+$form->get('NOMBREACCOMPAGNATEURGROUPE')->setAttributes([
+  'class'       => 'form-control', 
+  'placeholder' => 'Accompagnateur'
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true']
+	);
+
+$form->prepare();
+
+?>
+<div class="container">
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#account_group_team_user"/></svg>
+  <?= $this->escapeHtml($title) ?>
+  </h2>
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <?= $this->form()->openTag($form) . PHP_EOL; ?>   
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button>
+        <hr class="my-4">    
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('NOMGROUPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('NOMGROUPE')); ?>
+          <?= $this->formElementErrors($form->get('NOMGROUPE')); ?>              
+        </div>
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('NOMBREGROUPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('NOMBREGROUPE')); ?>
+          <?= $this->formElementErrors($form->get('NOMBREGROUPE')); ?>              
+        </div>
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('NOMBREACCOMPAGNATEURGROUPE')) . PHP_EOL; ?>
+          <?= $this->formLabel($form->get('NOMBREACCOMPAGNATEURGROUPE')); ?>
+          <?= $this->formElementErrors($form->get('NOMBREACCOMPAGNATEURGROUPE')); ?>              
+        </div>
+        <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+        <hr class="my-4">
+      <?= $this->form()->closeTag() . PHP_EOL; ?>
+    </div>    
+  </div>
+</div>

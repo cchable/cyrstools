@@ -220,6 +220,16 @@ class NavManager
       'bImageAndLabel' => true,     
       'link'   => $url('etape')
     ];
+    $transportItems[] = [
+      'divider' => 'hr',
+    ];
+    $transportItems[] = [
+      'id'     => 'groupe',
+      'label'  => 'Groupes',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#account_group_team_user"/></svg>',
+      'bImageAndLabel' => true,     
+      'link'   => $url('groupe')
+    ];
     
     //
     $userItems = [];
