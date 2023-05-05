@@ -15,7 +15,8 @@ $this->headTitle($title);
 $this->mainMenu()->setActiveItemId('anneescolaire');
 $this->pageBreadcrumbs()->setItems([
   'Accueil'                  => $this->url('home'),
-  'Transport\Annee Scolaire' => $this->url('anneescolaire'),
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Annee Scolaire' => $this->url('anneescolaire'),
 ]);
 
 $paginator = $this->paginationControl(

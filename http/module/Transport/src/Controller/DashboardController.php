@@ -112,6 +112,7 @@ class DashboardController extends AbstractActionController
 	{
     
     return new ViewModel([
+      'module'               => 'dashboard',
       'numberOfChauffeur'    => $this->chauffeurTable->getNumberOfRows(),
       'numberOfMarque'       => $this->marqueTable->getNumberOfRows(),
       'numberOfTypeVehicule' => $this->typeVehiculeTable->getNumberOfRows(),

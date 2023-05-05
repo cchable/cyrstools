@@ -14,7 +14,8 @@ $this->headTitle($title);
 $this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'              => $this->url('home'),
-  'Transport\Ephéméride' => $this->url($this->module),
+  'Transport\Dashboard' => $this->url('dashboard'),
+  'Ephéméride' => $this->url($this->module),
 ]);
 
 $paginator = $this->paginationControl(
