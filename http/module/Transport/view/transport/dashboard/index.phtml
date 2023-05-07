@@ -133,7 +133,9 @@ $this->pageBreadcrumbs()->setItems([
       <div>
         <h3 class="fw-bold mb-0 fs-4">Organisation & Groupes</h3>
         <p>Gestion des personnes transportées</p>
+        <p>Organisation des groupes transportés</p>
         <p>Nombre de groupe : <?= ($numberOfGroupe) ? $numberOfGroupe : '0' ?><br />
+          Organisation des groupes : 0<br /></p>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('groupe', ['action'=>'index']); ?>" role="button">Groupes</a>
       </div>
     </div>

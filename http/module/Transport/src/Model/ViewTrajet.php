@@ -1,7 +1,7 @@
 <?php
 /**
  * This is the ViewTrajet class for ViewTrajet service.
- * 
+ *
  * @package   module/Transport/src/Model/ViewTrajet.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
