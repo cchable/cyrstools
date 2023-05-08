@@ -51,15 +51,15 @@ class OrganisarionManager
    */
   public function __construct(
     OrganisarionTable $organisarionTable, 
-    GroupeTable $groupeTable, 
+    GroupeTable       $groupeTable, 
     $viewRenderer, 
     $config) 
   {
     
     $this->organisarionTable  = $organisarionTable;
-    $this->groupeTable  = $groupeTable;
-    $this->viewRenderer = $viewRenderer;
-    $this->config       = $config;
+    $this->groupeTable        = $groupeTable;
+    $this->viewRenderer       = $viewRenderer;
+    $this->config             = $config;
   }
  
   /**
