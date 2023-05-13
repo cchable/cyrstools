@@ -3,7 +3,7 @@
  * Dashboard of Transport Module 
  *
  * @package   module/Transport/view/transport/dashboard/index.phtml
- * @version   1.0.3
+ * @version   1.0.4
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
@@ -129,14 +129,15 @@ $this->pageBreadcrumbs()->setItems([
       </div>
     </div>
     <div class="col d-flex align-items-start">
-      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#account_group_team_user"/></svg>
+      <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar-event-636"/></svg>
       <div>
         <h3 class="fw-bold mb-0 fs-4">Organisation & Groupes</h3>
         <p>Gestion des personnes transportées</p>
         <p>Organisation des groupes transportés</p>
-        <p>Nombre de groupe : <?= ($numberOfGroupe) ? $numberOfGroupe : '0' ?><br />
-          Organisation des groupes : 0<br /></p>
+        <p>Nombre de groupes : <?= ($numberOfGroupe) ? $numberOfGroupe : '0' ?><br />
+           Nombre d'organisations : <?= ($numberOfOrganisation) ? $numberOfOrganisation : '0' ?></p>
         <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('groupe', ['action'=>'index']); ?>" role="button">Groupes</a>
+        <a class="btn btn-light btn-outline-primary btn-sm" role="button" aria-pressed="true" href="<?= $this->url('organisation', ['action'=>'index']); ?>" role="button">Organisations</a>
       </div>
     </div>
     <div class="col d-flex align-items-start">

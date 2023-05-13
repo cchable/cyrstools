@@ -222,7 +222,7 @@ class OrganisationTable
    * @return int $count
    * @access public
    */
-  public function getNumberOfRows() 
+  public function getNumberOfRows()
   {
     
     $adapter = $this->tableGateway->getAdapter();
@@ -241,5 +241,5 @@ class OrganisationTable
     $count = $row['COUNT'];
     
     return $count;
-  }  
+  }
 }

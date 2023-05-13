@@ -23,6 +23,7 @@ use Transport\Model\VehiculeTable;
 use Transport\Model\EtapeTable;
 use Transport\Model\TrajetTable;
 use Transport\Model\GroupeTable;
+use Transport\Model\OrganisationTable;
 
 
 /**
@@ -44,18 +45,20 @@ class DashboardControllerFactory implements FactoryInterface
     $etapeTable        = $container->get(EtapeTable::class);
     $trajetTable       = $container->get(TrajetTable::class);
     $groupeTable       = $container->get(GroupeTable::class);
+    $organisationTable = $container->get(OrganisationTable::class);
     
     $sessionContainer  = $container->get('DashboardSessionContainer');
     
     // Instantiate the controller and inject dependencies
     return new DashboardController(
-      $chauffeurTable, 
+      $chauffeurTable,
       $marqueTable,
       $typeVehiculeTable,
       $vehiculeTable,
       $etapeTable,
       $trajetTable,
       $groupeTable,
+      $organisationTable,
       $sessionContainer
     );
   }

@@ -21,6 +21,7 @@ use Transport\Model\VehiculeTable;
 use Transport\Model\EtapeTable;
 use Transport\Model\TrajetTable;
 use Transport\Model\GroupeTable;
+use Transport\Model\OrganisationTable;
 
 use Transport\Form\DashboardForm;
 
@@ -71,13 +72,19 @@ class DashboardController extends AbstractActionController
    * GroupeTable table manager
    * @var Transport\Model\GroupeTable
    */
-  private $groupeTable; 
+  private $groupeTable;
+  
+  /**
+   * OrganisationTable table manager
+   * @var Transport\Model\OrganisationTable
+   */
+  private $organisationTable;
 
   /**
    * Session container.
    * @var Laminas\Session\Container
    */
-  private $sessionContainer;  
+  private $sessionContainer;
 
 	/**
 	 * 
@@ -90,6 +97,7 @@ class DashboardController extends AbstractActionController
 		EtapeTable        $etapeTable,
 		TrajetTable       $trajetTable,
 		GroupeTable       $groupeTable,
+		OrganisationTable $organisationTable,
 		$sessionContainer
     )
 	{
@@ -101,11 +109,12 @@ class DashboardController extends AbstractActionController
     $this->etapeTable        = $etapeTable;
     $this->trajetTable       = $trajetTable;
     $this->groupeTable       = $groupeTable;
+    $this->organisationTable = $organisationTable;
     $this->sessionContainer  = $sessionContainer;
 	}
 
 	/**
-	 * This is the default "index" action of the controller. 
+	 * This is the default "index" action of the controller.
 	 * It displays the dashboard.
 	 */
 	public function indexAction()
@@ -120,6 +129,7 @@ class DashboardController extends AbstractActionController
       'numberOfEtape'        => $this->etapeTable->getNumberOfRows(),
       'numberOfTrajet'       => $this->trajetTable->getNumberOfRows(),
       'numberOfGroupe'       => $this->groupeTable->getNumberOfRows(),
-    ]); 
+      'numberOfOrganisation' => $this->organisationTable->getNumberOfRows(),
+    ]);
   }
 }
