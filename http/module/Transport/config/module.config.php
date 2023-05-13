@@ -16,7 +16,7 @@ use Laminas\Router\Http\Segment;
 
 
 return [
-	//Router 
+	//Router
 	'router' => [
 		'routes' => [
 			// Define a new route called "dashboard"
@@ -33,7 +33,7 @@ return [
 						'action'     => 'index',
 					],
 				],
-			],    
+			],
 			// Define a new route called "dashboard"
 			'dashboard' => [
 				'type'    => Segment::class,
@@ -52,7 +52,7 @@ return [
 
       // Define a new route called "chauffeur"
 			'chauffeur' => [
-        // Define a "Segment" route type: 
+        // Define a "Segment" route type:
 				'type'    => Segment::class,
 				'options' => [
         // Listen to "/chauffeur" as uri:
@@ -71,7 +71,7 @@ return [
 
       // Define a new route called "indisponibilitechauffeur"
 			'indisponibilitechauffeur' => [
-        // Define a "Segment" route type: 
+        // Define a "Segment" route type:
 				'type'    => Segment::class,
 				'options' => [
         // Listen to "/chauffeur" as uri:
@@ -90,7 +90,7 @@ return [
 			
 			// Define a new route called "anneescolaire"
 			'anneescolaire' => [
-				// Define a "Segment" route type: 
+				// Define a "Segment" route type:
 				'type'    => Segment::class,
 				'options' => [
 					// Listen to "/anneescolaire" as uri:
@@ -98,7 +98,7 @@ return [
 					'constraints' => [
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id'     => '[0-9]+',
-					],          
+					],
 					// Define default controller and action to be called when this route is matched
 					'defaults' => [
 						'controller' => Controller\AnneeScolaireController::class,
@@ -109,7 +109,7 @@ return [
       
 			// Define a new route called "ephemeride"
 			'ephemeride' => [
-				// Define a "Segment" route type: 
+				// Define a "Segment" route type:
 				'type'    => Segment::class,
 				'options' => [
 					// Listen to "/ephemeride" as uri:
@@ -117,7 +117,7 @@ return [
 					'constraints' => [
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id'     => '[0-9]+',
-					],          
+					],
 					// Define default controller and action to be called when this route is matched
 					'defaults' => [
 						'controller' => Controller\EphemerideController::class,
@@ -257,8 +257,27 @@ return [
 						'action'     => 'index',
 					],
 				],
-			], 
+			],
  
+      // Define a new route called "organisation"
+			'organisation' => [
+				// Define a "Segment" route type:
+				'type'    => Segment::class,
+				'options' => [
+					// Listen to "/organisation" as uri:
+					'route'       => '/organisation[/:action[/:id]]',
+					'constraints' => [
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					],
+					// Define default controller and action to be called when this route is matched
+					'defaults' => [
+						'controller' => Controller\OrganisationController::class,
+						'action'     => 'index',
+					],
+				],
+			],
+      
 		],
 	],
   
@@ -266,42 +285,45 @@ return [
   'controllers' => [
     'factories' => [
 
-		Controller\DashboardController::class 
+		Controller\DashboardController::class
 			=> Controller\Factory\DashboardControllerFactory::class,
       
-		Controller\ChauffeurController::class 
+		Controller\ChauffeurController::class
 			=> Controller\Factory\ChauffeurControllerFactory::class,
 
-    Controller\IndisponibiliteChauffeurController::class 
+    Controller\IndisponibiliteChauffeurController::class
 			=> Controller\Factory\IndisponibiliteChauffeurControllerFactory::class,
 
-    Controller\IndisponibiliteVehiculeController::class 
+    Controller\IndisponibiliteVehiculeController::class
 			=> Controller\Factory\IndisponibiliteVehiculeControllerFactory::class,
 			
-		Controller\AnneeScolaireController::class 
+		Controller\AnneeScolaireController::class
 			=> Controller\Factory\AnneeScolaireControllerFactory::class,
 			
-		Controller\EphemerideController::class 
+		Controller\EphemerideController::class
 			=> Controller\Factory\EphemerideControllerFactory::class,
       
-		Controller\MarqueController::class 
-			=> Controller\Factory\MarqueControllerFactory::class,  
+		Controller\MarqueController::class
+			=> Controller\Factory\MarqueControllerFactory::class,
       
-		Controller\TypeVehiculeController::class 
-			=> Controller\Factory\TypeVehiculeControllerFactory::class,      
+		Controller\TypeVehiculeController::class
+			=> Controller\Factory\TypeVehiculeControllerFactory::class,
 
-		Controller\VehiculeController::class 
+		Controller\VehiculeController::class
 			=> Controller\Factory\VehiculeControllerFactory::class,
       
-		Controller\EtapeController::class 
+		Controller\EtapeController::class
 			=> Controller\Factory\EtapeControllerFactory::class,
             
-		Controller\TrajetController::class 
+		Controller\TrajetController::class
 			=> Controller\Factory\TrajetControllerFactory::class,
-               
-		Controller\GroupeController::class 
+         
+		Controller\GroupeController::class
 			=> Controller\Factory\GroupeControllerFactory::class,
       
+		Controller\OrganisationController::class
+			=> Controller\Factory\OrganisationControllerFactory::class,
+
     ],
   ],
 	
@@ -322,7 +344,7 @@ return [
 			Model\ViewIndisponibiliteChauffeurTable::class
 				=> Model\Factory\ViewIndisponibiliteChauffeurTableFactory::class,
 			Model\ViewIndisponibiliteChauffeurTableGateway::class
-				=> Model\Factory\ViewIndisponibiliteChauffeurTableGatewayFactory::class,   
+				=> Model\Factory\ViewIndisponibiliteChauffeurTableGatewayFactory::class,
         
 			Model\IndisponibiliteVehiculeTable::class
 				=> Model\Factory\IndisponibiliteVehiculeTableFactory::class,
@@ -379,7 +401,7 @@ return [
 			Model\EtapeTable::class
 				=> Model\Factory\EtapeTableFactory::class,
 			Model\EtapeTableGateway::class
-				=> Model\Factory\EtapeTableGatewayFactory::class,    
+				=> Model\Factory\EtapeTableGatewayFactory::class,
         
 			Model\TrajetTable::class
 				=> Model\Factory\TrajetTableFactory::class,
@@ -388,13 +410,23 @@ return [
 			Model\ViewTrajetTable::class
 				=> Model\Factory\ViewTrajetTableFactory::class,
 			Model\ViewTrajetTableGateway::class
-				=> Model\Factory\ViewTrajetTableGatewayFactory::class,           
+				=> Model\Factory\ViewTrajetTableGatewayFactory::class,
               
 			Model\GroupeTable::class
 				=> Model\Factory\GroupeTableFactory::class,
 			Model\GroupeTableGateway::class
-				=> Model\Factory\GroupeTableGatewayFactory::class,    
+				=> Model\Factory\GroupeTableGatewayFactory::class,
 
+			Model\OrganisationTable::class
+				=> Model\Factory\OrganisationTableFactory::class,
+			Model\OrganisationTableGateway::class
+				=> Model\Factory\OrganisationTableGatewayFactory::class,
+			Model\ViewOrganisationTable::class
+				=> Model\Factory\ViewOrganisationTableFactory::class,
+			Model\ViewOrganisationTableGateway::class
+				=> Model\Factory\ViewOrganisationTableGatewayFactory::class,
+      
+      
 			// Register Services
 			Service\ChauffeurManager::class
 				=> Service\Factory\ChauffeurManagerFactory::class,
@@ -412,7 +444,7 @@ return [
 				=> Service\Factory\EphemerideManagerFactory::class,
 				
 			Service\MarqueManager::class
-				=> Service\Factory\MarqueManagerFactory::class,		
+				=> Service\Factory\MarqueManagerFactory::class,
 
 			Service\TypeVehiculeManager::class
 				=> Service\Factory\TypeVehiculeManagerFactory::class,
@@ -428,6 +460,9 @@ return [
         
 			Service\GroupeManager::class
 				=> Service\Factory\GroupeManagerFactory::class,
+        
+			Service\OrganisationManager::class
+				=> Service\Factory\OrganisationManagerFactory::class,
 		],
 	],
 	

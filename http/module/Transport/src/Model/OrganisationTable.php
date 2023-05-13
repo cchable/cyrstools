@@ -1,8 +1,8 @@
 <?php
 /**
- * This is the EtapeTable class for OrganisarionTable service.
+ * This is the EtapeTable class for OrganisationTable service.
  * 
- * @package   module/Transport/src/Model/OrganisarionTable.php
+ * @package   module/Transport/src/Model/OrganisationTable.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -27,7 +27,7 @@ use Hpb\Db\Sql\FBSelect;
 /*
  * 
  */
-class OrganisarionTable
+class OrganisationTable
 {
   
   private $tableGateway;
@@ -113,9 +113,9 @@ class OrganisarionTable
     $fbSelect = new FBSelect($this->tableGateway->getTable());
     $fbSelect->order('DATEORGANISATION ASC, TIMEORGANISATION ASC');
 
-    // Create a new result set based on the Organisarion entity:
+    // Create a new result set based on the Organisation entity:
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new Organisarion());
+    $resultSetPrototype->setArrayObjectPrototype(new Organisation());
 
     // Create a new pagination adapter object:
     $paginatorAdapter = new DbSelect(
@@ -132,7 +132,7 @@ class OrganisarionTable
   }
   
   //
-  public function getOrganisarion($id)
+  public function getOrganisation($id)
   {
     
     $id = (int) $id;
@@ -148,23 +148,23 @@ class OrganisarionTable
   }
 
   //
-  public function saveOrganisarion(Organisarion $organisarion)
+  public function saveOrganisation(Organisation $organisation)
   {
 
-    $data = $organisarion->getArrayCopy(false);
-    $id = (int) $organisarion->getId();
+    $data = $organisation->getArrayCopy(false);
+    $id = (int) $organisation->getId();
 
     if ($id === 0) {
       $result = $this->tableGateway->insert($data);
-      $record = $this->findOneByRecord($organisarion);
+      $record = $this->findOneByRecord($organisation);
       return $record;
     }
     
     try {
-      $this->getOrganisarion($id);
+      $this->getOrganisation($id);
     } catch (RuntimeException $e) {
       throw new RuntimeException(sprintf(
-        'Cannot update organisarion with identifier %d; does not exist',
+        'Cannot update organisation with identifier %d; does not exist',
         $id
       ));
     }
@@ -172,7 +172,7 @@ class OrganisarionTable
   }
 
   //
-  public function deleteOrganisarion($id)
+  public function deleteOrganisation($id)
   {
     
     $this->tableGateway->delete(['IDX_ORGANISATION' => (int) $id]);
@@ -183,37 +183,37 @@ class OrganisarionTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $organisarion = $rowset->current();
+    $organisation = $rowset->current();
     
-    return $organisarion;
+    return $organisation;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $organisarion = $this->findOneBy(['IDX_ORGANISATION' => (int) $id]);
-    return $organisarion;
+    $organisation = $this->findOneBy(['IDX_ORGANISATION' => (int) $id]);
+    return $organisation;
   }
   
   //
   public function findOneByDate($date)
   {
     
-    $organisarion = $this->findOneBy(['DATEORGANISATION' => $date]);
-    return $organisarion;
+    $organisation = $this->findOneBy(['DATEORGANISATION' => $date]);
+    return $organisation;
   }
   
   /**
    *
    */
-  public function findOneByRecord(Organisarion $record)
+  public function findOneByRecord(Organisation $record)
   {
     
     $recordArray = $record->getArrayCopy(false);
-    $organisarion = $this->findOneBy($recordArray);
+    $organisation = $this->findOneBy($recordArray);
     
-    return $organisarion;
+    return $organisation;
   }
   
   /**

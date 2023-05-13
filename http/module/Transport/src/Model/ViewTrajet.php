@@ -26,8 +26,8 @@ class ViewTrajet implements InputFilterAwareInterface
   
   private $id;
   private $idEtapeDepart;
-  private $idEtapeArrivée;
-  private $Nom;
+  private $idEtapeArrivee;
+  private $nom;
   private $temps;
   private $km;
   private $nomEtapeDepart;

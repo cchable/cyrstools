@@ -1,8 +1,8 @@
 <?php
 /**
- * This controleur is responsible for add/edit/delete 'organisarion'. 
+ * This controleur is responsible for add/edit/delete 'organisation'.
  * 
- * @package   module/Transport/src/Controller/OrganisarionController.php
+ * @package   module/Transport/src/Controller/OrganisationController.php
  * @version   1.0.1
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -15,39 +15,39 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Mvc\Controller\Plugin\FlashMessenger;
 
-use Transport\Service\OrganisarionManager;
+use Transport\Service\OrganisationManager;
 
-use Transport\Model\Organisarion;
-use Transport\Model\OrganisarionTable;
-use Transport\Model\ViewOrganisarionTable;
+use Transport\Model\Organisation;
+use Transport\Model\OrganisationTable;
+use Transport\Model\ViewOrganisationTable;
 
-use Transport\Form\OrganisarionForm;
+use Transport\Form\OrganisationForm;
 use Transport\Form\SearchForm;
 
 
 /**
  * 
  */
-class OrganisarionController extends AbstractActionController
+class OrganisationController extends AbstractActionController
 {
   
 	/*
-	 * Organisarion table manager
-	 * @var Plannigorganisarion\Model\OrganisarionTable
+	 * Organisation table manager
+	 * @var Plannigorganisation\Model\OrganisationTable
 	 */
-	private $organisarionTable;
+	private $organisationTable;
   
 	/*
-	 * Organisarion table manager
-	 * @var Plannigorganisarion\Model\ViewOrganisarionTable
+	 * Organisation table manager
+	 * @var Plannigorganisation\Model\ViewOrganisationTable
 	 */
-	private $viewOrganisarionTable;
+	private $viewOrganisationTable;
 
 	/*
-   * Organisarion manager
-   * @var Plannigorganisarion\Service\OrganisarionManager
+   * Organisation manager
+   * @var Plannigorganisation\Service\OrganisationManager
    */
-	private $organisarionManager;
+	private $organisationManager;
 
   /*
    * Application config.
@@ -71,25 +71,25 @@ class OrganisarionController extends AbstractActionController
    * 
    */
 	public function __construct(
-		OrganisarionTable $organisarionTable,
-		ViewOrganisarionTable $viewOrganisarionTable,
-		OrganisarionManager $organisarionManager,
+		OrganisationTable $organisationTable,
+		ViewOrganisationTable $viewOrganisationTable,
+		OrganisationManager $organisationManager,
     $defaultRowPerPage,
     $stepRowPerPage,
     $sessionContainer)
 	{
     
-		$this->organisarionTable       = $organisarionTable;
-		$this->viewOrganisarionTable   = $viewOrganisarionTable;
-		$this->organisarionManager     = $organisarionManager;
+		$this->organisationTable       = $organisationTable;
+		$this->viewOrganisationTable   = $viewOrganisationTable;
+		$this->organisationManager     = $organisationManager;
     $this->defaultRowPerPage = $defaultRowPerPage;
     $this->stepRowPerPage    = $stepRowPerPage;
     $this->sessionContainer  = $sessionContainer;
 	}
 
 	/**
-   * This is the default "index" action of the controller. 
-   * It displays the list of organisarion.
+   * This is the default "index" action of the controller.
+   * It displays the list of organisation.
    */
 	public function indexAction()
 	{
@@ -146,26 +146,26 @@ class OrganisarionController extends AbstractActionController
 
     return new ViewModel([
       'formSearch'        => $formSearch,
-      'module'            => 'organisarion',
+      'module'            => 'organisation',
       'search'            => $search,
       'rowPerPage'        => $rowPerPage,
       'stepRowPerPage'    => $this->stepRowPerPage,
-      'viewOrganisarions' => $this->viewOrganisarionTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
+      'viewOrganisations' => $this->viewOrganisationTable->fetchAllPaginator($pageNumber, $rowPerPage, $search),
     ]);
   }
   
   /*
-   * This action displays a page allowing to add a new organisarion
+   * This action displays a page allowing to add a new organisation
    */
   public function addAction()
   {
 
     // Get the list of all available annee scolaire (sorted)
-    $etapesDepart = $this->organisarionManager->getEtapes();
+    $etapesDepart = $this->organisationManager->getEtapes();
     $etapesArrivee = &$etapesDepart;
 
     // Create Form
-    $form = new OrganisarionForm($etapesDepart, $etapesArrivee, 'create');
+    $form = new OrganisationForm($etapesDepart, $etapesArrivee, 'create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -180,25 +180,25 @@ class OrganisarionController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
-        // Add organisarion
-        $result = $this->organisarionManager->addOrganisarion($data);
-        if ($result instanceof Organisarion) {
+        // Add organisation
+        $result = $this->organisationManager->addOrganisation($data);
+        if ($result instanceof Organisation) {
           
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage("Le organisarion '" . $data['NOMTRAJET'] . "' a été ajouté");          
+          $this->flashMessenger()->addSuccessMessage("Le organisation '" . $data['NOMTRAJET'] . "' a été ajouté");          
           // Redirect to "index" page
-          return $this->redirect()->toRoute('organisarion', ['action'=>'index']); 
+          return $this->redirect()->toRoute('organisation', ['action'=>'index']); 
         } else {
           
           // Add a flash message Error
           switch($result){
 
             case 1:
-              $this->flashMessenger()->addErrorMessage("Le organisarion '" . $data['NOMTRAJET'] . "' existe déjà");
+              $this->flashMessenger()->addErrorMessage("Le organisation '" . $data['NOMTRAJET'] . "' existe déjà");
               break;
             
             default:
-            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde du organisarion '" . $data['NOMTRAJET'] . "'");
+            $this->flashMessenger()->addErrorMessage("Erreur dans la sauvegarde du organisation '" . $data['NOMTRAJET'] . "'");
           }
         }
       } else {
@@ -216,7 +216,7 @@ class OrganisarionController extends AbstractActionController
   }
   
   /**
-   * This action displays a page allowing to edit an existing organisarion
+   * This action displays a page allowing to edit an existing organisation
    */
   public function editAction()
   {
@@ -227,19 +227,19 @@ class OrganisarionController extends AbstractActionController
       return;
     }
     
-    $organisarion = $this->organisarionTable->findOneById($id);
+    $organisation = $this->organisationTable->findOneById($id);
 
-    if ($organisarion == null) {
+    if ($organisation == null) {
       $this->getResponse()->setStatusCode(404);
       return;
     }
 
     // Get the list of all available annee scolaire (sorted)
-    $etapesDepart = $this->organisarionManager->getEtapes();
+    $etapesDepart = $this->organisationManager->getEtapes();
     $etapesArrivee = &$etapesDepart;
     
-    // Create organisarion form
-    $form = new OrganisarionForm($etapesDepart, $etapesArrivee, 'update');
+    // Create organisation form
+    $form = new OrganisationForm($etapesDepart, $etapesArrivee, 'update');
   
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -254,23 +254,23 @@ class OrganisarionController extends AbstractActionController
         // Get filtered and validated data
         $data = $form->getData();
 
-        // Update organisarion
-        if ($this->organisarionManager->updateOrganisarion($organisarion, $data)) {
+        // Update organisation
+        if ($this->organisationManager->updateOrganisation($organisation, $data)) {
 				
           // Add a flash message Success
-          $this->flashMessenger()->addSuccessMessage('Organisarion modifié');
+          $this->flashMessenger()->addSuccessMessage('Organisation modifié');
         } else {
 				
           // Add a flash message Error
-          $this->flashMessenger()->addErrorMessage("Un organisarion '" . $data['NOMTRAJET'] . "' existe déjà");
+          $this->flashMessenger()->addErrorMessage("Un organisation '" . $data['NOMTRAJET'] . "' existe déjà");
         }
 				
         // Redirect to "index" page
-        return $this->redirect()->toRoute('organisarion', ['action'=>'index']);
+        return $this->redirect()->toRoute('organisation', ['action'=>'index']);
       }               
     } else {
 		
-      $form->setData($organisarion->getArrayCopy());
+      $form->setData($organisation->getArrayCopy());
     }
 
     return new ViewModel([
@@ -279,7 +279,7 @@ class OrganisarionController extends AbstractActionController
   }
   
   /*
-   * This action delete a organisarion
+   * This action delete a organisation
    */
   public function deleteAction()
   {
@@ -291,22 +291,22 @@ class OrganisarionController extends AbstractActionController
       return;
     }
 
-    $organisarion = $this->organisarionTable->findOneById($id);
-    if ($organisarion == null) {
+    $organisation = $this->organisationTable->findOneById($id);
+    if ($organisation == null) {
   
 			$this->getResponse()->setStatusCode(404);
       return;
     }
 
-    $nom = $organisarion->getNom();
+    $nom = $organisation->getNom();
     
     // Delete véhicule
-    $this->organisarionManager->deleteOrganisarion($organisarion);
+    $this->organisationManager->deleteOrganisation($organisation);
 
     // Add a flash message
-    $this->flashMessenger()->addWarningMessage("Le organisarion '$nom' a été supprimé");
+    $this->flashMessenger()->addWarningMessage("Le organisation '$nom' a été supprimé");
 
     // Redirect to "index" page
-    return $this->redirect()->toRoute('organisarion', ['action'=>'index']);      
+    return $this->redirect()->toRoute('organisation', ['action'=>'index']);      
   }
 }

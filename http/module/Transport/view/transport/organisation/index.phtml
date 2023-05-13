@@ -1,28 +1,28 @@
 <?php
 /**
- * Display organisarions
+ * Display organisations
  *
- * @package   module/Transport/view/transport/organisarion/index.phtml
+ * @package   module/Transport/view/transport/organisation/index.phtml
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
  * @license   GNU General Public License version 2 or later; see LICENSE.txt
  **/
 
-$title = 'Liste des organisarions';
+$title = 'Liste des organisations';
 $this->headTitle($title);
 $this->mainMenu()->setActiveItemId($this->module);
 $this->pageBreadcrumbs()->setItems([
   'Accueil'             => $this->url('home'),
   'Transport\Dashboard' => $this->url('dashboard'),
-  'Organisarions'       => $this->url($this->module),
+  'Organisations'       => $this->url($this->module),
 ]);
 
 $paginator = $this->paginationControl(
-  $this->viewOrganisarions,           // Paginator
+  $this->viewOrganisations,           // Paginator
   'sliding',                          // Style 'all' | 'elastic' | 'sliding' | 'jumping'
-  'partial/paginator',                // You can add file extension but helper actually takes care about it  
-  [                                   // Parameters 
+  'partial/paginator',                // You can add file extension but helper actually takes care about it
+  [                                   // Parameters
     'rowPerPage'     => $this->rowPerPage,
     'stepRowPerPage' => $this->stepRowPerPage,
     'search'         => $this->search,
@@ -31,7 +31,7 @@ $paginator = $this->paginationControl(
 
 $formSearch->get('search')->setAttributes([
   'class'       => 'form-control',
-  'placeholder' => "Recherche d'un organisarion par sa date...",
+  'placeholder' => "Recherche d'un organisation par sa date...",
 ]);
 
 $formSearch->setAttribute('action', $this->url($this->module, ['action' => 'index']));
@@ -40,7 +40,7 @@ $formSearch->prepare();
 ?>
 
 <div class="container">
-  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#1-15"/></svg>
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#calendar-event-636"/></svg>
   <?= $this->escapeHtml($title) ?>
   </h2>
 
@@ -79,17 +79,17 @@ $formSearch->prepare();
       </tr>
     </thead>
     <tbody>
-    <?php foreach ($this->viewOrganisarions as $viewOrganisarion) : ?>
+    <?php foreach ($this->viewOrganisations as $viewOrganisation) : ?>
       <tr>
-        <td><?= $this->escapeHtml($viewOrganisarion->getNom()) ?></td> 
-        <?php $result = $this->dateFormat($this->escapeHtml($viewOrganisarion->getDate()), IntlDateFormatter::NONE, IntlDateFormatter::FULL, 'fr_FR') ?>
-        <td><?= $this->escapeHtml($viewOrganisarion->getdate()) ?></td>   
-        <td><?= $this->escapeHtml($viewOrganisarion->getheure()) ?></td>   
+        <td><?= $this->escapeHtml($viewOrganisation->getNom()) ?></td> 
+        <?php $result = $this->dateFormat($this->escapeHtml($viewOrganisation->getDate()), IntlDateFormatter::NONE, IntlDateFormatter::FULL, 'fr_FR') ?>
+        <td><?= $this->escapeHtml($viewOrganisation->getDate()) ?></td>   
+        <td><?= $this->escapeHtml($viewOrganisation->getHeure()) ?></td>   
         <td>
-          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('organisarion', ['action'=>'edit', 'id'=>$viewOrganisarion->getId()]); ?>">
+          <a class="btn btn-light btn-outline-warning" role="button" aria-pressed="true" href="<?= $this->url('organisation', ['action'=>'edit', 'id'=>$viewOrganisation->getId()]); ?>">
             <span class="far fa-edit" aria-hidden="true"></span>
           </a>
-          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('organisarion', ['action'=>'delete', 'id'=>$viewOrganisarion->getId()]); ?>">
+          <a class="btn btn-light btn-outline-danger" role="button" aria-pressed="true" href="<?= $this->url('organisation', ['action'=>'delete', 'id'=>$viewOrganisation->getId()]); ?>">
             <span class="far fa-trash-alt"></span>
           </a>
         </td>

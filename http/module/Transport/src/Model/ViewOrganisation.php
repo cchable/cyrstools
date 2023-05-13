@@ -1,8 +1,8 @@
 <?php
 /**
- * This is the ViewOrganisarion class for ViewOrganisarion service.
+ * This is the ViewOrganisation class for ViewOrganisation service.
  *
- * @package   module/Transport/src/Model/ViewOrganisarion.php
+ * @package   module/Transport/src/Model/ViewOrganisation.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -21,12 +21,12 @@ use Laminas\InputFilter\InputFilterInterface;
 /**
  * 
  */
-class ViewOrganisarion implements InputFilterAwareInterface
+class ViewOrganisation implements InputFilterAwareInterface
 {
   
   private $id;
   private $idGroupe;
-  private $nomGroupe;
+  private $nom;
   private $date;
   private $heure;
   
@@ -115,7 +115,7 @@ class ViewOrganisarion implements InputFilterAwareInterface
   public function getNom()
   {
 
-    return (int) $this->nom;
+    return $this->nom;
   }
   
   //DATEORGANISATION

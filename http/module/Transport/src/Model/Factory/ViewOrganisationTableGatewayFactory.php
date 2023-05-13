@@ -1,8 +1,8 @@
 <?php
 /**
- * @package   : module/Transport/src/Service/Factory/ViewOrganisarionTableGatewayFactory.php
+ * @package   : module/Transport/src/Service/Factory/ViewOrganisationTableGatewayFactory.php
  *
- * @purpose   : This is the factory class for ViewOrganisarionTableGateway service. The purpose of the factory
+ * @purpose   : This is the factory class for ViewOrganisationTableGateway service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
  * 
  * @copyright : Copyright (C) 2018-21 H.P.B
@@ -19,24 +19,24 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 
 use Transport\Model;
-use Transport\Model\ViewOrganisarion;
+use Transport\Model\ViewOrganisation;
 
 
 /*
  *
  */
-class ViewOrganisarionTableGatewayFactory implements FactoryInterface
+class ViewOrganisationTableGatewayFactory implements FactoryInterface
 {
 
   /*
-   * This method creates the ViewOrganisarionTableGateway service and returns its instance.
+   * This method creates the ViewOrganisationTableGateway service and returns its instance.
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
 		
     $dbAdapter = $container->get('Transport\Db\ReadWriteAdapter');
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new ViewOrganisarion());
-    return new TableGateway('IDX_ORGANISATION', $dbAdapter, null, $resultSetPrototype);
+    $resultSetPrototype->setArrayObjectPrototype(new ViewOrganisation());
+    return new TableGateway('V_ORGANISATIONS', $dbAdapter, null, $resultSetPrototype);
   }
 }

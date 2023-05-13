@@ -210,24 +210,31 @@ class NavManager
       'id'     => 'trajet',
       'label'  => 'Trajets',
       'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#1-15"/></svg>',
-      'bImageAndLabel' => true,     
+      'bImageAndLabel' => true,
       'link'   => $url('trajet')
     ];  
     $transportItems[] = [
       'id'     => 'etape',
       'label'  => 'Etapes',
       'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#location_map_pin_mark"/></svg>',
-      'bImageAndLabel' => true,     
+      'bImageAndLabel' => true,
       'link'   => $url('etape')
     ];
     $transportItems[] = [
       'divider' => 'hr',
     ];
     $transportItems[] = [
+      'id'     => 'organisation',
+      'label'  => 'Organisations',
+      'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#calendar-event-636"/></svg>',
+      'bImageAndLabel' => true,
+      'link'   => $url('organisation')
+    ];
+    $transportItems[] = [
       'id'     => 'groupe',
       'label'  => 'Groupes',
       'imgsvg' => '<svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#account_group_team_user"/></svg>',
-      'bImageAndLabel' => true,     
+      'bImageAndLabel' => true,
       'link'   => $url('groupe')
     ];
     

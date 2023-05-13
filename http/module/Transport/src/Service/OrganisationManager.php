@@ -1,8 +1,8 @@
 <?php
 /**
- * This service is responsible for add/edit/delete 'organisarion'. 
+ * This service is responsible for add/edit/delete 'organisation'. 
  *
- * @package   module/Transport/src/Service/TypeOrganisarionManager.php
+ * @package   module/Transport/src/Service/TypeOrganisationManager.php
  * @version   1.0.2
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -11,22 +11,22 @@
  
 namespace Transport\Service;
 
-use Transport\Model\Organisarion;
-use Transport\Model\OrganisarionTable;
+use Transport\Model\Organisation;
+use Transport\Model\OrganisationTable;
 use Transport\Model\GroupeTable;
 
 
 /**
  * 
  */
-class OrganisarionManager
+class OrganisationManager
 {
   
   /**
-   * Organisarion table manager.
-   * @var Parling\Model\OrganisarionTable
+   * Organisation table manager.
+   * @var Parling\Model\OrganisationTable
    */
-  private $organisarionTable;
+  private $organisationTable;
     
   /**
    * Groupe table manager.
@@ -50,32 +50,32 @@ class OrganisarionManager
    * Constructs the service.
    */
   public function __construct(
-    OrganisarionTable $organisarionTable, 
+    OrganisationTable $organisationTable, 
     GroupeTable       $groupeTable, 
     $viewRenderer, 
     $config) 
   {
     
-    $this->organisarionTable  = $organisarionTable;
+    $this->organisationTable  = $organisationTable;
     $this->groupeTable        = $groupeTable;
     $this->viewRenderer       = $viewRenderer;
     $this->config             = $config;
   }
  
   /**
-   * This method adds a new organisarion.
+   * This method adds a new organisation.
    */
-  public function addOrganisarion($data) 
+  public function addOrganisation($data) 
   {
     
-    // Create new Organisarion entity.
-    $organisarion = new Organisarion();
-    $organisarion->exchangeArray($data, false);
+    // Create new Organisation entity.
+    $organisation = new Organisation();
+    $organisation->exchangeArray($data, false);
     
     //
-    if(!$this->organisarionTable->findOneByNom($organisarion->getNom())) {
+    if(!$this->organisationTable->findOneByNom($organisation->getNom())) {
 
-      $record = $this->organisarionTable->saveOrganisarion($organisarion);
+      $record = $this->organisationTable->saveOrganisation($organisation);
       return $record;
     }
     
@@ -83,47 +83,47 @@ class OrganisarionManager
   }
  
   /**
-   * This method updates data of an existing organisarion.
+   * This method updates data of an existing organisation.
    */
-  public function updateOrganisarion($organisarion, $data) 
+  public function updateOrganisation($organisation, $data) 
   {
     
-    // Do not allow to change organisarion if another organisarion with such value already exits
-    if($this->checkOrganisarionExists($organisarion, $data)) {
+    // Do not allow to change organisation if another organisation with such value already exits
+    if($this->checkOrganisationExists($organisation, $data)) {
       
       return false;
     }
     
-    $organisarion->exchangeArray($data, false);
-    $this->organisarionTable->saveOrganisarion($organisarion);
+    $organisation->exchangeArray($data, false);
+    $this->organisationTable->saveOrganisation($organisation);
     
-    return $organisarion;
+    return $organisation;
   }  
  
   /**
-   * Deletes the given organisarion
+   * Deletes the given organisation
    */
-  public function deleteOrganisarion(Organisarion $organisarion)
+  public function deleteOrganisation(Organisation $organisation)
   {
     
-    $this->organisarionTable->deleteOrganisarion($organisarion->getId());
+    $this->organisationTable->deleteOrganisation($organisation->getId());
   }
   
   /**
-   * Checks whether an active organisarion with given value already exists in the database.     
+   * Checks whether an active organisation with given value already exists in the database.     
    */
-  public function checkOrganisarionExists(Organisarion $organisarion, array $newData) {
+  public function checkOrganisationExists(Organisation $organisation, array $newData) {
 
     if(   
-      $newData['IDX_ETAPEDEPART']  != $organisarion->getIdGroupeDepart() 
+      $newData['IDX_ETAPEDEPART']  != $organisation->getIdGroupeDepart() 
       ||
-      $newData['IDX_ETAPEARRIVEE'] != $organisarion->getIdGroupeArrivee()
+      $newData['IDX_ETAPEARRIVEE'] != $organisation->getIdGroupeArrivee()
       ||
-      $newData['NOMTRAJET']        != $organisarion->getNom()
+      $newData['NOMTRAJET']        != $organisation->getNom()
       ||
-      $newData['TEMPSTRAJET']      != $organisarion->getTemps()
+      $newData['TEMPSTRAJET']      != $organisation->getTemps()
       ||
-      $newData['KMTRAJET']         != $organisarion->getKm()
+      $newData['KMTRAJET']         != $organisation->getKm()
     ) {
       
       $searh['IDX_ETAPEDEPART'] = $newData['IDX_ETAPEDEPART'];
@@ -133,7 +133,7 @@ class OrganisarionManager
 //      unset($newData['csrf']);
 //      unset($newData['submit']);
         
-      return ($this->organisarionTable->findOneBy($searh));
+      return ($this->organisationTable->findOneBy($searh));
     }   
       
     return true;

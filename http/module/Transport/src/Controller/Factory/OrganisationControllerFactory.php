@@ -1,9 +1,9 @@
 <?php
 /**
- * This is the factory for Organisarion Controller.
+ * This is the factory for Organisation Controller.
  * Its purpose is to instantiate the controller and inject dependencies into its constructor.
  *
- * @package   module/Transport/src/Controller/Factory/OrganisarionControllerFactory.php
+ * @package   module/Transport/src/Controller/Factory/OrganisationControllerFactory.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -15,36 +15,36 @@ namespace Transport\Controller\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-use Transport\Controller\OrganisarionController;
-use Transport\Service\OrganisarionManager;
-use Transport\Model\OrganisarionTable;
-use Transport\Model\ViewOrganisarionTable;
+use Transport\Controller\OrganisationController;
+use Transport\Service\OrganisationManager;
+use Transport\Model\OrganisationTable;
+use Transport\Model\ViewOrganisationTable;
 
 
 /**
- * 
+ *
  */
-class OrganisarionControllerFactory implements FactoryInterface
+class OrganisationControllerFactory implements FactoryInterface
 {
   
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
     
-    $organisarionTable     = $container->get(OrganisarionTable::class);
-    $viewOrganisarionTable = $container->get(ViewOrganisarionTable::class);
-    $organisarionManager   = $container->get(OrganisarionManager::class);
+    $organisationTable     = $container->get(OrganisationTable::class);
+    $viewOrganisationTable = $container->get(ViewOrganisationTable::class);
+    $organisationManager   = $container->get(OrganisationManager::class);
     
     $config            = $container->get('Config');
     $defaultRowPerPage = $config['paginator']['options']['defaultRowPerPage'];
     $stepRowPerPage    = $config['paginator']['options']['stepRowPerPage'];
     
-    $sessionContainer  = $container->get('OrganisarionSessionContainer');
+    $sessionContainer  = $container->get('OrganisationSessionContainer');
     
     // Instantiate the controller and inject dependencies
-    return new OrganisarionController(
-      $organisarionTable,
-      $viewOrganisarionTable,
-      $organisarionManager,
+    return new OrganisationController(
+      $organisationTable,
+      $viewOrganisationTable,
+      $organisationManager,
       $defaultRowPerPage,
       $stepRowPerPage,
       $sessionContainer

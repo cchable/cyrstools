@@ -1,8 +1,8 @@
 <?php
 /**
- * This is the ViewOrganisarionTable class for ViewOrganisarionTable service.
+ * This is the ViewOrganisationTable class for ViewOrganisationTable service.
  * 
- * @package   module/Transport/src/Model/ViewOrganisarionTable.php
+ * @package   module/Transport/src/Model/ViewOrganisationTable.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -27,7 +27,7 @@ use Hpb\Db\Sql\FBSelect;
 /*
  * 
  */
-class ViewOrganisarionTable
+class ViewOrganisationTable
 {
   
   private $tableGateway;
@@ -86,7 +86,7 @@ class ViewOrganisarionTable
     
     /*
      * Setting item count per page if it is defined
-     * If no count specified then all records will be returned 
+     * If no count specified then all records will be returned
      */
     if ($count) {
       $paginator->setDefaultItemCountPerPage($count);
@@ -99,10 +99,10 @@ class ViewOrganisarionTable
     $paginator->setCurrentPageNumber($pageNumber);
     
     /**
-     * Paginator object consist of user entity objects 
+     * Paginator object consist of user entity objects
      * is ready to be returned
      */
-    return $paginator;  
+    return $paginator;
   }
   
   //
@@ -113,9 +113,9 @@ class ViewOrganisarionTable
     $fbSelect = new FBSelect($this->tableGateway->getTable());
     $fbSelect->order('DATEORGANISATION ASC, TIMEORGANISATION ASC');
 
-    // Create a new result set based on the ViewOrganisarion entity:
+    // Create a new result set based on the ViewOrganisation entity:
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new ViewOrganisarion());
+    $resultSetPrototype->setArrayObjectPrototype(new ViewOrganisation());
 
     // Create a new pagination adapter object:
     $paginatorAdapter = new DbSelect(
@@ -132,7 +132,7 @@ class ViewOrganisarionTable
   }
   
   //
-  public function getViewOrganisarion(int $id)
+  public function getViewOrganisation(int $id)
   {
     
     $rowset = $this->tableGateway->select(['IDX_ORGANISATION' => $id]);
@@ -151,17 +151,17 @@ class ViewOrganisarionTable
   {
     
     $rowset = $this->tableGateway->select($criteria);
-    $viewOrganisarion = $rowset->current();
+    $viewOrganisation = $rowset->current();
     
-    return $viewOrganisarion;
+    return $viewOrganisation;
   }
   
   //
   public function findOneById(int $id)
   {
     
-    $viewOrganisarion = $this->findOneBy(['IDX_ORGANISATION' => (int) $id]);
-    return $viewOrganisarion;
+    $viewOrganisation = $this->findOneBy(['IDX_ORGANISATION' => (int) $id]);
+    return $viewOrganisation;
   }
   
   //
@@ -169,8 +169,8 @@ class ViewOrganisarionTable
   {
     
     unset($data["IDX_ORGANISATION"]);
-    $viewOrganisarion = $this->findOneBy($data);
+    $viewOrganisation = $this->findOneBy($data);
     
-    return $viewOrganisarion;
+    return $viewOrganisation;
   }
 }

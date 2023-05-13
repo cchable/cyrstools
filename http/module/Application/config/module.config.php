@@ -81,6 +81,7 @@ return [
     'TypePlanningSessionContainer',
     'TypeVehiculeSessionContainer',
     'VehiculeSessionContainer',
+    'OrganisationSessionContainer',
   ],
   
 	//View Helper

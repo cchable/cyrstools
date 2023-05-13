@@ -26,7 +26,7 @@ class GroupeTableFactory implements FactoryInterface
 {
   
   /*
-   * This method creates the GroupeTable service and returns its instance. 
+   * This method creates the GroupeTable service and returns its instance.
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {        

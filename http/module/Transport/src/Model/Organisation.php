@@ -1,8 +1,8 @@
 <?php
 /**
- * This is the Organisarion class for Organisarion service.
+ * This is the Organisation class for Organisation service.
  * 
- * @package   module/Transport/src/Model/Organisarion.php
+ * @package   module/Transport/src/Model/Organisation.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -21,7 +21,7 @@ use Laminas\InputFilter\InputFilterInterface;
 /**
  * 
  */
-class Organisarion implements InputFilterAwareInterface
+class Organisation implements InputFilterAwareInterface
 {
   
   private $id;

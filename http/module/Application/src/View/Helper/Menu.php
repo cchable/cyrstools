@@ -18,7 +18,7 @@ use Laminas\View\Helper\AbstractHelper;
 /*
  * 
  */
-class Menu extends AbstractHelper 
+class Menu extends AbstractHelper
 {
 	
   /*
@@ -37,7 +37,7 @@ class Menu extends AbstractHelper
    * Constructor.
    * @param array $items Menu items.
    */
-  public function __construct($items=[]) 
+  public function __construct($items=[])
   {
     
     $this->items = $items;

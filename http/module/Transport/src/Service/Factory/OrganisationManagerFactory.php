@@ -1,9 +1,9 @@
 <?php
 /**
- * This is the factory class for OrganisarionManager service.
+ * This is the factory class for OrganisationManager service.
  * The purpose of the factory is to instantiate the service and pass it dependencies (inject dependencies).
  *
- * @package   module/Transport/src/Service/Factory/OrganisarionManagerFactory.php
+ * @package   module/Transport/src/Service/Factory/OrganisationManagerFactory.php
  * @version   1.0
  * @copyright 2018-23 H.P.B
  * @author    Marsh <cyril.chable@outlook.be>
@@ -15,30 +15,30 @@ namespace Transport\Service\Factory;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-use Transport\Service\OrganisarionManager;
-use Transport\Model\OrganisarionTable;
+use Transport\Service\OrganisationManager;
+use Transport\Model\OrganisationTable;
 use Transport\Model\GroupeTable;
 
 
 /*
  * 
  */
-class OrganisarionManagerFactory implements FactoryInterface
+class OrganisationManagerFactory implements FactoryInterface
 {
 
   /*
-   * This method creates the OrganisarionManager service and returns its instance. 
+   * This method creates the OrganisationManager service and returns its instance. 
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
     
-    $organisarionTable  = $container->get(OrganisarionTable::class);
+    $organisationTable  = $container->get(OrganisationTable::class);
     $groupeTable  = $container->get(GroupeTable::class);
     $viewRenderer = $container->get('ViewRenderer');
     $config       = $container->get('Config');
 
-    return new OrganisarionManager(
-      $organisarionTable, 
+    return new OrganisationManager(
+      $organisationTable, 
       $groupeTable,
       $viewRenderer, 
       $config

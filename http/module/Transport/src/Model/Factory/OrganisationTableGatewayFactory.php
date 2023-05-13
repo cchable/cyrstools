@@ -1,8 +1,8 @@
 <?php
 /**
- * @package   : module/Transport/src/Service/Factory/OrganisarionTableGatewayFactory.php
+ * @package   : module/Transport/src/Service/Factory/OrganisationTableGatewayFactory.php
  *
- * @purpose   : This is the factory class for OrganisarionTableGateway service. The purpose of the factory
+ * @purpose   : This is the factory class for OrganisationTableGateway service. The purpose of the factory
  *              is to instantiate the service and pass it dependencies (inject dependencies).
  * 
  * @copyright : Copyright (C) 2018-21 H.P.B
@@ -19,24 +19,24 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 
 use Transport\Model;
-use Transport\Model\Organisarion;
+use Transport\Model\Organisation;
 
 
 /*
  * 
  */
-class OrganisarionTableGatewayFactory implements FactoryInterface
+class OrganisationTableGatewayFactory implements FactoryInterface
 {
 	
   /*
-   * This method creates the OrganisarionTableGateway service and returns its instance.
+   * This method creates the OrganisationTableGateway service and returns its instance.
    */
   public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
   {
 
     $dbAdapter = $container->get('Transport\Db\ReadWriteAdapter');
     $resultSetPrototype = new ResultSet();
-    $resultSetPrototype->setArrayObjectPrototype(new Organisarion());
+    $resultSetPrototype->setArrayObjectPrototype(new Organisation());
     return new TableGateway('T_ORGANISATIONS', $dbAdapter, null, $resultSetPrototype);
   }
 }
