@@ -1,6 +1,6 @@
 <?php
 /**
- * This is the EtapeTable class for OrganisationTable service.
+ * This is the OrganisationTable class for OrganisationTable service.
  * 
  * @package   module/Transport/src/Model/OrganisationTable.php
  * @version   1.0
