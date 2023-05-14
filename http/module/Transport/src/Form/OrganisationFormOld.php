@@ -17,7 +17,6 @@ use Laminas\Form\Form;
 use Laminas\Form\Element;
 use Laminas\Form\Element\Time;
 use Laminas\Form\Element\Checkbox;
-use Laminas\Form\Element\MultiCheckbox;
 
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
@@ -143,49 +142,17 @@ class OrganisationForm extends Form
       ],
     ]);
     
-    $this->add([
-      'name' => 'multiple-dates',
-      'type' => MultiCheckbox::class,
-
-      'options' => [
-        'label' => 'Dates multiples',
-        'value_options' => [
-          [
-            'value'    => '0',
-            'label'    => '1x/semaine',
-            'selected' => true,
-//            'disabled' => false,
-            'attributes' => [
-              'id' => 'multiple-dates-onceaweek',
-            ],
-            'label_attributes' => [
-              'id' => 'onceaweek',
-            ],
-          ],
-          [
-            'value'    => '1',
-            'label'    => '1x/ 2 semaines',
-//            'selected' => false,
-          ],
-          [
-            'value'    => '2',
-            'label'    => '1x/ 3 semaines',
-          ],
-        ],
-      ],
-    ]);
-
     // Add "1x/Sem" field
     $this->add([
       'name'  => 'onceaweek',
       'type'  => Checkbox::class,
-
+        
       'attributes' => [
         'id'    => 'onceaweek',
         'class' => 'form-check-input',
         'value' => '0',
       ],
-
+        
       'options' => [
         'use_hidden_element' => true,
         'checked_value'      => '1',
@@ -194,7 +161,7 @@ class OrganisationForm extends Form
         'label_attributes'   => [
           'for' => 'oneperweek',
         ],
-      ]
+      ],
     ]);
          
     // Add "1x/2Sem" field

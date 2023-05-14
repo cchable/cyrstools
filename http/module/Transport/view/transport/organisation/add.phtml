@@ -1,0 +1,188 @@
+<?php
+/**
+ * Add a new organisation for a group
+ *
+ * @package   module/Transport/view/transport/type-vehicule/add.phtml
+ * @version   1.0
+ * @copyright 2018-23 H.P.B
+ * @author    Marsh <cyril.chable@outlook.be>
+ * @license   GNU General Public License version 2 or later; see LICENSE.txt
+ **/
+ 
+$title = "Ajout d'une organisation pour un groupe";
+$this->headTitle($title);
+$this->mainMenu()->setActiveItemId('organisation');
+$this->pageBreadcrumbs()->setItems([
+  'Accueil'                         => $this->url('home'),
+  'Transport\Dashboard'             => $this->url('dashboard'),
+  'Organisation'                    => $this->url($this->module),
+  'Ajout'                           => $this->url($this->module, ['action'=>'add']),
+]);
+
+$form->get('IDX_GROUPE')->setAttributes([
+  'class'       => 'form-control',
+  'placeholder' => 'Groupe'
+]);
+$form->get('IDX_GROUPE')->setValueOptions($groupes);
+
+$form->get('DATEORGANISATION')->setAttributes([
+  'class'       => 'form-control',
+  'placeholder' => 'Date'
+]);
+
+$form->get('TIMEORGANISATION')->setAttributes([
+  'class'       => 'form-control',
+  'placeholder' => 'Heure'
+]);
+
+$form->get('enddateorganisation')->setAttributes([
+  'class'       => 'form-control',
+  'placeholder' => 'Date fin'
+]);
+
+$form->get('multipledates')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'Dates multiples',
+  'onClick'     => 'multipleDates()',
+]);
+$form->get('multipledates')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('onceaweek')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'OnceAWeek',
+]);
+$form->get('onceaweek')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('onceeverytwoweeks')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'OnceEveryTwoWeeks',
+]);
+$form->get('onceeverytwoweeks')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('onceeverythreeweeks')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'OnceEveryThreeWeeks',
+]);
+$form->get('onceeverythreeweeks')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('multiple-dates')->setAttributes([
+  'class'       => 'form-check-input',
+  'role'        => 'switch',
+  'placeholder' => 'Multiple-Dates',
+]);
+$form->get('multiple-dates')->setOptions([
+  'class'       => 'form-check-label',
+]);
+
+$form->get('submit')->setAttributes([
+	'class'        => 'btn btn-outline-warning',
+	'role'         => 'button',
+	'aria-pressed' => 'true'
+]);
+
+$form->prepare();
+?>
+<script type="text/javascript">
+
+  //
+  function multipleDates()
+  {
+
+    if($('#multipledates').is(":checked"))
+
+      $("#HiddenElements").fadeIn('slow');
+    else
+
+      $("#HiddenElements").fadeOut('slow');
+  }
+</script>
+
+<div class="container">
+  <h2 class="pb-2 border-bottom"><svg class="bi text-muted flex-shrink-0 me-1" width="1em" height="1em"><use xlink:href="#arrow_entrance_exit_internet_log_out_security_icon"/></svg>
+    <?= $this->escapeHtml($title) ?>
+  </h2>
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <?= $this->form()->openTag($form); ?>
+        <button type="submit" class="btn btn-light btn-outline-success"><span class="far fa-save"></span></button><?= PHP_EOL; ?>    
+        <hr class="my-4">
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('IDX_GROUPE')) . "\n"; ?>
+          <?= $this->formLabel($form->get('IDX_GROUPE')); ?>
+          <?= $this->formElementErrors($form->get('IDX_GROUPE')); ?>
+        </div>
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('DATEORGANISATION')); ?>
+          <?= $this->formLabel($form->get('DATEORGANISATION')); ?>
+          <?= $this->formElementErrors($form->get('DATEORGANISATION')); ?>
+        </div>
+        <div class="form-floating my-2">
+          <?= $this->formElement($form->get('TIMEORGANISATION')); ?>
+          <?= $this->formLabel($form->get('TIMEORGANISATION')); ?>
+          <?= $this->formElementErrors($form->get('TIMEORGANISATION')); ?>
+        </div>
+        <div class="form-floating">
+          <div class="form-check form-switch">
+            <?= $this->formElement($form->get('multipledates')); ?>
+            <?= $this->formLabel($form->get('multipledates')); ?>
+            <?= $this->formElementErrors($form->get('multipledates')); ?> 
+          </div>
+        </div>
+        <div id="HiddenElements">
+          <hr class="my-4">
+          <div class="form-floating my-2">
+            <?= $this->formElement($form->get('enddateorganisation')); ?>
+            <?= $this->formLabel($form->get('enddateorganisation')); ?>
+            <?= $this->formElementErrors($form->get('enddateorganisation')); ?>              
+          </div>
+          <div class="form-floating my-2">
+            <div class="form-check form-switch">
+              <?= $this->formElement($form->get('onceaweek')); ?>
+              <?= $this->formLabel($form->get('onceaweek')); ?>
+              <?= $this->formElementErrors($form->get('onceaweek')); ?>
+            </div>
+          </div>
+          <div class="form-floating my-2">
+            <div class="form-check form-switch">
+              <?= $this->formElement($form->get('onceeverytwoweeks')); ?>
+              <?= $this->formLabel($form->get('onceeverytwoweeks')); ?>
+              <?= $this->formElementErrors($form->get('onceeverytwoweeks')); ?>
+            </div>
+          </div>
+          <div class="form-floating my-2">
+            <div class="form-check form-switch">
+              <?= $this->formElement($form->get('onceeverythreeweeks')); ?>
+              <?= $this->formLabel($form->get('onceeverythreeweeks')); ?>
+              <?= $this->formElementErrors($form->get('onceeverythreeweeks')); ?>
+            </div>
+          </div>
+          <div class="form-floating my-2">
+            <div class="form-check form-switch">
+              <?= $this->formElement($form->get('multiple-dates')); ?>
+              <?= $this->formLabel($form->get('multiple-dates')); ?>
+              <?= $this->formElementErrors($form->get('multiple-dates')); ?>
+            </div>
+          </div>
+        </div>
+        <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
+        <hr class="my-4"> 
+      <?= $this->form()->closeTag() . PHP_EOL; ?>
+    </div>    
+  </div>
+</div>
+
+<script type="text/javascript">
+  multipleDates();
+</script>

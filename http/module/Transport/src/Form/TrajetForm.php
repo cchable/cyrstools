@@ -169,7 +169,7 @@ class TrajetForm extends Form
   /**
    * This method createsinput filter (used for form filtering/validation).
    */
-  private function addInputFilter() 
+  private function addInputFilter()
   {
     
     /**

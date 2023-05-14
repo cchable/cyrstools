@@ -42,18 +42,18 @@ class OrganisationManager
 
   /**
    * Application config.
-   * @var type 
+   * @var type
    */
   private $config;
 
   /**
-   * Constructs the service.
+   * Builds the service.
    */
   public function __construct(
-    OrganisationTable $organisationTable, 
-    GroupeTable       $groupeTable, 
-    $viewRenderer, 
-    $config) 
+    OrganisationTable $organisationTable,
+    GroupeTable       $groupeTable,
+    $viewRenderer,
+    $config)
   {
     
     $this->organisationTable  = $organisationTable;
@@ -134,15 +134,15 @@ class OrganisationManager
 //      unset($newData['submit']);
         
       return ($this->organisationTable->findOneBy($searh));
-    }   
+    }
       
     return true;
   }
   
   /**
-   * 
+   *
    */
-  public function getGroupes() 
+  public function getGroupes()
   {
     
     $groupesList = [];
@@ -154,6 +154,6 @@ class OrganisationManager
     }
     
     return $groupesList;
-  }  
-}  
+  }
+}
 

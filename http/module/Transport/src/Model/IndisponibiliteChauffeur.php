@@ -126,7 +126,7 @@ class IndisponibiliteChauffeur implements InputFilterAwareInterface
             'message' => 'Invalid date format',
           ],
         ],
-      ],      
+      ],
       'filters' => [
         [
           'name' => StringTrim::class,

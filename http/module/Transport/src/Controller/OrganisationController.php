@@ -1,7 +1,7 @@
 <?php
 /**
  * This controleur is responsible for add/edit/delete 'organisation'.
- * 
+ *
  * @package   module/Transport/src/Controller/OrganisationController.php
  * @version   1.0.1
  * @copyright 2018-23 H.P.B
@@ -161,11 +161,10 @@ class OrganisationController extends AbstractActionController
   {
 
     // Get the list of all available annee scolaire (sorted)
-    $etapesDepart = $this->organisationManager->getEtapes();
-    $etapesArrivee = &$etapesDepart;
+    $groupes = $this->organisationManager->getGroupes();
 
     // Create Form
-    $form = new OrganisationForm($etapesDepart, $etapesArrivee, 'create');
+    $form = new OrganisationForm($groupes, 'create');
 
     // Check if user has submitted the form
     if ($this->getRequest()->isPost()) {
@@ -187,7 +186,7 @@ class OrganisationController extends AbstractActionController
           // Add a flash message Success
           $this->flashMessenger()->addSuccessMessage("Le organisation '" . $data['NOMTRAJET'] . "' a été ajouté");          
           // Redirect to "index" page
-          return $this->redirect()->toRoute('organisation', ['action'=>'index']); 
+          return $this->redirect()->toRoute('organisation', ['action'=>'index']);
         } else {
           
           // Add a flash message Error
@@ -206,13 +205,12 @@ class OrganisationController extends AbstractActionController
         // Add a flash message Error
         $this->flashMessenger()->addMessage("Des données dans le formulaire sont erronées", 'error', 0);
       }
-    } 
+    }
     
     return new ViewModel([
-      'form' => $form,
-      'etapesDepart'  => $etapesDepart,
-      'etapesArrivee' => $etapesArrivee,
-    ]);  
+      'form'    => $form,
+      'groupes' => $groupes,
+    ]);
   }
   
   /**
