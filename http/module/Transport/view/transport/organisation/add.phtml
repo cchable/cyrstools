@@ -50,39 +50,21 @@ $form->get('multipledates')->setOptions([
   'class'       => 'form-check-label',
 ]);
 
-$form->get('onceaweek')->setAttributes([
+$form->get('multiple_dates')->setAttributes([
   'class'       => 'form-check-input',
   'role'        => 'switch',
-  'placeholder' => 'OnceAWeek',
+  'placeholder' => 'multiple_dates',
 ]);
-$form->get('onceaweek')->setOptions([
+$form->get('multiple_dates')->setOptions([
   'class'       => 'form-check-label',
 ]);
 
-$form->get('onceeverytwoweeks')->setAttributes([
+$form->get('ephemeride')->setAttributes([
   'class'       => 'form-check-input',
   'role'        => 'switch',
-  'placeholder' => 'OnceEveryTwoWeeks',
+  'placeholder' => 'ephemeride',
 ]);
-$form->get('onceeverytwoweeks')->setOptions([
-  'class'       => 'form-check-label',
-]);
-
-$form->get('onceeverythreeweeks')->setAttributes([
-  'class'       => 'form-check-input',
-  'role'        => 'switch',
-  'placeholder' => 'OnceEveryThreeWeeks',
-]);
-$form->get('onceeverythreeweeks')->setOptions([
-  'class'       => 'form-check-label',
-]);
-
-$form->get('multiple-dates')->setAttributes([
-  'class'       => 'form-check-input',
-  'role'        => 'switch',
-  'placeholder' => 'Multiple-Dates',
-]);
-$form->get('multiple-dates')->setOptions([
+$form->get('ephemeride')->setOptions([
   'class'       => 'form-check-label',
 ]);
 
@@ -137,7 +119,7 @@ $form->prepare();
           <div class="form-check form-switch">
             <?= $this->formElement($form->get('multipledates')); ?>
             <?= $this->formLabel($form->get('multipledates')); ?>
-            <?= $this->formElementErrors($form->get('multipledates')); ?> 
+            <?= $this->formElementErrors($form->get('multipledates')); ?>
           </div>
         </div>
         <div id="HiddenElements">
@@ -145,41 +127,26 @@ $form->prepare();
           <div class="form-floating my-2">
             <?= $this->formElement($form->get('enddateorganisation')); ?>
             <?= $this->formLabel($form->get('enddateorganisation')); ?>
-            <?= $this->formElementErrors($form->get('enddateorganisation')); ?>              
+            <?= $this->formElementErrors($form->get('enddateorganisation')); ?>
           </div>
           <div class="form-floating my-2">
-            <div class="form-check form-switch">
-              <?= $this->formElement($form->get('onceaweek')); ?>
-              <?= $this->formLabel($form->get('onceaweek')); ?>
-              <?= $this->formElementErrors($form->get('onceaweek')); ?>
+            <div class="form-check">
+              <?= $this->formElement($form->get('multiple_dates')); ?>
+              <?= $this->formElementErrors($form->get('multiple_dates')); ?>
             </div>
           </div>
           <div class="form-floating my-2">
             <div class="form-check form-switch">
-              <?= $this->formElement($form->get('onceeverytwoweeks')); ?>
-              <?= $this->formLabel($form->get('onceeverytwoweeks')); ?>
-              <?= $this->formElementErrors($form->get('onceeverytwoweeks')); ?>
-            </div>
-          </div>
-          <div class="form-floating my-2">
-            <div class="form-check form-switch">
-              <?= $this->formElement($form->get('onceeverythreeweeks')); ?>
-              <?= $this->formLabel($form->get('onceeverythreeweeks')); ?>
-              <?= $this->formElementErrors($form->get('onceeverythreeweeks')); ?>
-            </div>
-          </div>
-          <div class="form-floating my-2">
-            <div class="form-check form-switch">
-              <?= $this->formElement($form->get('multiple-dates')); ?>
-              <?= $this->formLabel($form->get('multiple-dates')); ?>
-              <?= $this->formElementErrors($form->get('multiple-dates')); ?>
+              <?= $this->formElement($form->get('ephemeride')); ?>
+              <?= $this->formLabel($form->get('ephemeride')); ?>
+              <?= $this->formElementErrors($form->get('ephemeride')); ?>
             </div>
           </div>
         </div>
         <?= $this->formElement($form->get('csrf')) . PHP_EOL; ?>
-        <hr class="my-4"> 
+        <hr class="my-4">
       <?= $this->form()->closeTag() . PHP_EOL; ?>
-    </div>    
+    </div>
   </div>
 </div>
 
